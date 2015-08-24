@@ -989,6 +989,7 @@
     <Content Include="template\vendors\waves\waves.js" />
     <Content Include="template\vendors\waves\waves.min.js" />
     <Content Include="views\test.html" />
+    <Content Include="views\Users.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

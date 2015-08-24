@@ -988,6 +988,11 @@
     <Content Include="template\vendors\waves\._waves.min.js" />
     <Content Include="template\vendors\waves\waves.js" />
     <Content Include="template\vendors\waves\waves.min.js" />
+    <Content Include="views\add_permission.html" />
+    <Content Include="views\add_staff.html" />
+    <Content Include="views\admin.html" />
+    <Content Include="views\permission_staff.html" />
+    <Content Include="views\staff.html" />
     <Content Include="views\test.html" />
     <Content Include="Web.config" />
   </ItemGroup>

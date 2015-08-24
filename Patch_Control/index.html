@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<html ng-app="myApp">
 <!--[if IE 9 ]><html class="ie9"><![endif]-->
+<!--<html ng-app="patchcontrol">-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -524,7 +525,7 @@
                                     </div>
                                 </div>
                             </a>
-
+                            
                             <a class="lv-item" href="">
                                 <div class="media">
                                     <div class="pull-left p-relative">
@@ -543,10 +544,10 @@
             </aside>
             
             
-            <section id="content">
-                <div class="container" ng-app="" ng-view="views">
+            <section id="content"><a href="#/test">ooo</a>
+                <div class="container" ng-view>
            
-                    {{ 5+5 }}
+                 
                    
                     
                    
@@ -630,5 +631,6 @@
 
         <script src="js/angular.min.js"></script>
         <script src="js/angular-route.min.js"></script>
+        <script src="js/angularJS/app.js"></script>
     </body>
   </html>

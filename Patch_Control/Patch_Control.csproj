@@ -964,7 +964,6 @@
     <Content Include="views\permission_staff.html" />
     <Content Include="views\showUploads.html" />
     <Content Include="views\staff.html" />
-    <Content Include="views\staffMain.html" />
     <Content Include="views\test.html" />
     <Content Include="views\upload.html" />
     <Content Include="Web.config" />

@@ -106,6 +106,7 @@
     <Content Include="template\css\app.min.2.css" />
     <Content Include="template\css\bootstrap.css" />
     <Content Include="template\css\bootstrap.min.css" />
+    <Content Include="template\css\dropdown.css" />
     <Content Include="template\fonts\._glyphicons-halflings-regular.svg" />
     <Content Include="template\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="template\fonts\weather-icons\._weather-icons.svg" />
@@ -995,7 +996,7 @@
     <Content Include="views\permission_staff.html" />
     <Content Include="views\showUploads.html" />
     <Content Include="views\staff.html" />
-    <Content Include="views\staffMain.html" />
+    <Content Include="views\patchs.html" />
     <Content Include="views\test.html" />
     <Content Include="views\upload.html" />
     <Content Include="Web.config" />

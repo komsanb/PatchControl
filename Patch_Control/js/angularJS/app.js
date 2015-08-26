@@ -35,6 +35,10 @@ app.config(['$routeProvider',
                    templateUrl: 'views/add_permission.html',
                    // controller: 'ViewStudentsController'
                }).
+               when('/staffProfile', {
+                   templateUrl: 'views/staffProfile.html',
+                   // controller: 'ViewStudentsController'
+               }).
               otherwise({
                   redirectTo: '/index.html'
               });

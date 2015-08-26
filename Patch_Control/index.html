@@ -7,16 +7,15 @@
         <title>Material Admin</title>
 
         <!-- Vendor CSS -->
-        <link href="template/vendors/fullcalendar/fullcalendar.css" rel="stylesheet">
-        <link href="template/vendors/animate-css/animate.min.css" rel="stylesheet">
-        <link href="template/vendors/sweet-alert/sweet-alert.min.css" rel="stylesheet">
-        <link href="template/vendors/material-icons/material-design-iconic-font.min.css" rel="stylesheet">
-        <link href="template/vendors/socicon/socicon.min.css" rel="stylesheet">
+        <link href="vendors/fullcalendar/fullcalendar.css" rel="stylesheet">
+        <link href="vendors/animate-css/animate.min.css" rel="stylesheet">
+        <link href="vendors/sweet-alert/sweet-alert.min.css" rel="stylesheet">
+        <link href="vendors/material-icons/material-design-iconic-font.min.css" rel="stylesheet">
+        <link href="vendors/socicon/socicon.min.css" rel="stylesheet">
             
         <!-- CSS -->
-        <link href="template/css/app.min.1.css" rel="stylesheet">
-        <link href="template/css/app.min.2.css" rel="stylesheet">
-        <link href="template/css/dropdown.css" rel="stylesheet">
+        <link href="css/app.min.1.css" rel="stylesheet">
+        <link href="css/app.min.2.css" rel="stylesheet">
 
 
     </head>
@@ -44,7 +43,7 @@
                     </li>
                     <li>
                             <div >
-                                <img class="lv-img-sm" src="template/img/profile-pics/1.jpg" alt="">
+                                <img class="img-circle" src="/img/profile-pics/1.jpg" alt="">
                             </div>
                     </li>                       
                     
@@ -72,8 +71,9 @@
                             <li class="sub-menu">
                                 <a href=""><i class="md md-now-widgets"></i> Admintrator </a>
                                 <ul>
-                                    <li><a href="widget-templates.html">Permission Staffs</a></li>
-                                    <li><a class="active" href="widgets.html">Staffs</a></li>
+
+                                    <li><a href="#/permission_staff">Permission Staffs</a></li>
+                                    <li><a class="active" href="#/staff">Staffs</a></li>
                                 </ul>
                             </li>
                             <li class="sub-menu">
@@ -87,172 +87,43 @@
                     </div>
                 </div>
             </aside>
-            
-            <aside id="chat">
-                <ul class="tab-nav tn-justified" role="tablist">
-                    <li role="presentation" class="active"><a href="#friends" aria-controls="friends" role="tab" data-toggle="tab">Friends</a></li>
-                    <li role="presentation"><a href="#online" aria-controls="online" role="tab" data-toggle="tab">Online Now</a></li>
-                </ul>
-            
-                <div class="chat-search">
-                    <div class="fg-line">
-                        <input type="text" class="form-control" placeholder="Search People">
-                    </div>
-                </div>
-                
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade in active" id="friends">
-                        <div class="listview">
-                            <a class="lv-item" href="">
-                                <div class="media">
-                                    <div class="pull-left p-relative">
-                                        <img class="lv-img-sm" src="img/profile-pics/2.jpg" alt="">
-                                        <i class="chat-status-busy"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">Jonathan Morris</div>
-                                        <small class="lv-small">Available</small>
-                                    </div>
-                                </div>
-                            </a>
-                            
-                            <a class="lv-item" href="">
-                                <div class="media">
-                                    <div class="pull-left">
-                                        <img class="lv-img-sm" src="img/profile-pics/1.jpg" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">David Belle</div>
-                                        <small class="lv-small">Last seen 3 hours ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            
-                            <a class="lv-item" href="">
-                                <div class="media">
-                                    <div class="pull-left p-relative">
-                                        <img class="lv-img-sm" src="img/profile-pics/3.jpg" alt="">
-                                        <i class="chat-status-online"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">Fredric Mitchell Jr.</div>
-                                        <small class="lv-small">Availble</small>
-                                    </div>
-                                </div>
-                            </a>
-                            
-                            <a class="lv-item" href="">
-                                <div class="media">
-                                    <div class="pull-left p-relative">
-                                        <img class="lv-img-sm" src="img/profile-pics/4.jpg" alt="">
-                                        <i class="chat-status-online"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">Glenn Jecobs</div>
-                                        <small class="lv-small">Availble</small>
-                                    </div>
-                                </div>
-                            </a>
-                            
-                            <a class="lv-item" href="">
-                                <div class="media">
-                                    <div class="pull-left">
-                                        <img class="lv-img-sm" src="img/profile-pics/5.jpg" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">Bill Phillips</div>
-                                        <small class="lv-small">Last seen 3 days ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            
-                            <a class="lv-item" href="">
-                                <div class="media">
-                                    <div class="pull-left">
-                                        <img class="lv-img-sm" src="img/profile-pics/6.jpg" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">Wendy Mitchell</div>
-                                        <small class="lv-small">Last seen 2 minutes ago</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <a class="lv-item" href="">
-                                <div class="media">
-                                    <div class="pull-left p-relative">
-                                        <img class="lv-img-sm" src="img/profile-pics/7.jpg" alt="">
-                                        <i class="chat-status-busy"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">Teena Bell Ann</div>
-                                        <small class="lv-small">Busy</small>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade" id="online">
-                        <div class="listview">
-                            <a class="lv-item" href="">
-                                <div class="media">
-                                    <div class="pull-left p-relative">
-                                        <img class="lv-img-sm" src="img/profile-pics/2.jpg" alt="">
-                                        <i class="chat-status-busy"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">Jonathan Morris</div>
-                                        <small class="lv-small">Available</small>
-                                    </div>
-                                </div>
-                            </a>
-                            
-                            <a class="lv-item" href="">
-                                <div class="media">
-                                    <div class="pull-left p-relative">
-                                        <img class="lv-img-sm" src="img/profile-pics/3.jpg" alt="">
-                                        <i class="chat-status-online"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">Fredric Mitchell Jr.</div>
-                                        <small class="lv-small">Availble</small>
-                                    </div>
-                                </div>
-                            </a>
-                            
-                            <a class="lv-item" href="">
-                                <div class="media">
-                                    <div class="pull-left p-relative">
-                                        <img class="lv-img-sm" src="img/profile-pics/4.jpg" alt="">
-                                        <i class="chat-status-online"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">Glenn Jecobs</div>
-                                        <small class="lv-small">Availble</small>
-                                    </div>
-                                </div>
-                            </a>
-                            
-                            <a class="lv-item" href="">
-                                <div class="media">
-                                    <div class="pull-left p-relative">
-                                        <img class="lv-img-sm" src="img/profile-pics/7.jpg" alt="">
-                                        <i class="chat-status-busy"></i>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="lv-title">Teena Bell Ann</div>
-                                        <small class="lv-small">Busy</small>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </aside>         
-            
-            <section id="content">
-                <div class="container" ng-view></div>          
             </section>
+        <section id="content" ng-view>
+            <!--<a href="#/test">ooo</a>-->
+
+            <a class="lv-item" href="">
+                <div class="media">
+                    <div class="pull-left p-relative">
+                        <img class="lv-img-sm" src="img/profile-pics/4.jpg" alt="">
+                        <i class="chat-status-online"></i>
+                    </div>
+                    <div class="media-body">
+                        <div class="lv-title">Glenn Jecobs</div>
+                        <small class="lv-small">Availble</small>
+                    </div>
+                </div>
+            </a>
+
+            <a class="lv-item" href="">
+                <div class="media">
+                    <div class="pull-left p-relative">
+                        <img class="lv-img-sm" src="img/profile-pics/7.jpg" alt="">
+                        <i class="chat-status-busy"></i>
+                    </div>
+                    <div class="media-body">
+                        <div class="lv-title">Teena Bell Ann</div>
+                        <small class="lv-small">Busy</small>
+                    </div>
+                </div>
+            </a>
         </section>
+            <section id="content">
+                <div class="container" ng-view>
+         
+                    </div>
+          
+            </section>
+        
         
         <!-- Older IE warning message -->
         <!--[if lt IE 9]>
@@ -298,14 +169,14 @@
         <!-- Javascript Libraries -->
       
 
-        <script src="template/js/jquery-2.1.1.min.js"></script>
-        <script src="template/js/bootstrap.min.js"></script>
+        <script src="js/jquery-2.1.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         
-        <script src="template/vendors/flot/jquery.flot.min.js"></script>
-        <script src="template/vendors/flot/jquery.flot.resize.min.js"></script>
-        <script src="template/vendors/flot/plugins/curvedLines.js"></script>
-        <script src="template/vendors/sparklines/jquery.sparkline.min.js"></script>
-        <script src="template/vendors/easypiechart/jquery.easypiechart.min.js"></script>
+        <script src="vendors/flot/jquery.flot.min.js"></script>
+        <script src="vendors/flot/jquery.flot.resize.min.js"></script>
+        <script src="vendors/flot/plugins/curvedLines.js"></script>
+        <script src="vendors/sparklines/jquery.sparkline.min.js"></script>
+        <script src="vendors/easypiechart/jquery.easypiechart.min.js"></script>
         
         <script src="template/vendors/fullcalendar/lib/moment.min.js"></script>
         <script src="template/vendors/fullcalendar/fullcalendar.min.js"></script>
@@ -314,16 +185,14 @@
         <script src="template/vendors/nicescroll/jquery.nicescroll.min.js"></script>
         <script src="template/vendors/waves/waves.min.js"></script>
         <script src="template/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
-        <script src="template/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <script src="template/vendors/sweet-alert/sweet-alert.min.js"></script>
         
-        <script src="template/js/flot-charts/curved-line-chart.js"></script>
-        <script src="template/js/flot-charts/line-chart.js"></script>
-        <script src="template/js/charts.js"></script>
+        <script src="js/flot-charts/curved-line-chart.js"></script>
+        <script src="js/flot-charts/line-chart.js"></script>
+        <script src="js/charts.js"></script>
         
-        <script src="template/js/charts.js"></script>
-        <script src="template/js/functions.js"></script>
-        <script src="template/js/demo.js"></script>
+        <script src="js/functions.js"></script>
+        <script src="js/demo.js"></script>
 
 
         <script src="js/angular.min.js"></script>

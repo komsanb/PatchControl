@@ -3,19 +3,25 @@
 app.config(['$routeProvider',
        function ($routeProvider) {
            $routeProvider.
-              when('/upload', {
-                  templateUrl: 'views/upload.html',
+              when('/test', {
+                  templateUrl: 'views/test.html',
                 //  controller: 'AddStudentController'
               }).
-              when('/showUploads', {
-                  templateUrl: 'views/showUploads.html',
-                //  controller: 'ViewStudentsController'
+              when('/permission_staff', {
+                  templateUrl: 'views/permission_staff.html',
+                 // controller: 'ViewStudentsController'
               }).
-               when('/patchs', {
-                   templateUrl: 'views/patchs.html'
+               when('/staff', {
+                   templateUrl: 'views/staff.html',
+                   // controller: 'ViewStudentsController'
                }).
-               when('/detailsPatch', {
-                   templateUrl: 'views/detailsPatch.html'
+               when('/patchs', {
+                   templateUrl: 'views/patchs.html',
+                   // controller: 'ViewStudentsController'
+               }).
+               when('/upload', {
+                   templateUrl: 'views/upload.html',
+                   // controller: 'ViewStudentsController'
                }).
               otherwise({
                   redirectTo: '/index.html'

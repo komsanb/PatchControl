@@ -51,6 +51,10 @@ app.config(['$routeProvider',
                    templateUrl: 'views/change_password.html',
                    // controller: 'ViewStudentsController'
                }).
+               when('/editProfile', {
+                   templateUrl: 'views/editProfile.html',
+                   // controller: 'ViewStudentsController'
+               }).
               otherwise({
                   redirectTo: '/index.html'
               });

@@ -969,6 +969,7 @@
     <Content Include="template\vendors\waves\waves.min.js" />
     <Content Include="views\add_permission.html" />
     <Content Include="views\add_staff.html" />
+    <Content Include="views\change_password.html" />
     <Content Include="views\detailsPatch.html" />
     <Content Include="views\edit_staff_profile.html" />
     <Content Include="views\edit_staff_role.html" />

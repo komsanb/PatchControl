@@ -96,6 +96,7 @@
     <Content Include="js\angular-route.min.js" />
     <Content Include="js\angular.min.js" />
     <Content Include="js\angularJS\app.js" />
+    <Content Include="login.html" />
     <Content Include="template\css\app.css" />
     <Content Include="template\css\app.min.1.css" />
     <Content Include="template\css\app.min.2.css" />

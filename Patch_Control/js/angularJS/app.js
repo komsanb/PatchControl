@@ -2,7 +2,7 @@
 
 app.config(['$routeProvider',
        function ($routeProvider) {
-           $routeProvider.
+           $routeProvider.              
               when('/test', {
                   templateUrl: 'views/test.html',
                 //  controller: 'AddStudentController'

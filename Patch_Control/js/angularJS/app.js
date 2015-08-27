@@ -39,6 +39,14 @@ app.config(['$routeProvider',
                    templateUrl: 'views/staffProfile.html',
                    // controller: 'ViewStudentsController'
                }).
+               when('/edit_staff_role', {
+                   templateUrl: 'views/edit_staff_role.html',
+                   // controller: 'ViewStudentsController'
+               }).
+               when('/edit_staff_profile', {
+                   templateUrl: 'views/edit_staff_profile.html',
+                   // controller: 'ViewStudentsController'
+               }).
               otherwise({
                   redirectTo: '/index.html'
               });

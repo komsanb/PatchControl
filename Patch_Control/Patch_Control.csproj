@@ -974,6 +974,7 @@
     <Content Include="views\editProfile.html" />
     <Content Include="views\edit_staff_profile.html" />
     <Content Include="views\edit_staff_role.html" />
+    <Content Include="views\home.html" />
     <Content Include="views\patchs.html" />
     <Content Include="views\permission_staff.html" />
     <Content Include="views\showUploads.html" />

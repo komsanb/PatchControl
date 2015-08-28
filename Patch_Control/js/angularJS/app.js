@@ -2,15 +2,15 @@
 
 app.config(['$routeProvider',
        function ($routeProvider) {
-           $routeProvider.              
-              when('/test', {
-                  templateUrl: 'views/test.html',
-                //  controller: 'AddStudentController'
-              }).
-              when('/permission_staff', {
-                  templateUrl: 'views/permission_staff.html',
-                 // controller: 'ViewStudentsController'
-              }).
+           $routeProvider.
+               when('/', {
+                   templateUrl: 'views/home.html',
+                   //  controller: 'AddStudentController'
+               }).
+               when('/permission_staff', {
+                   templateUrl: 'views/permission_staff.html',
+                   // controller: 'ViewStudentsController'
+               }).
                when('/staff', {
                    templateUrl: 'views/staff.html',
                    // controller: 'ViewStudentsController'

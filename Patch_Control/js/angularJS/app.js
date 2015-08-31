@@ -5,15 +5,15 @@ app.config(['$routeProvider',
            $routeProvider.
                when('/', {
                    templateUrl: 'views/home.html',
-                   //  controller: 'AddStudentController'
+                   controller: 'homeController'
                }).
                when('/permission_staff', {
                    templateUrl: 'views/permission_staff.html',
-                   // controller: 'ViewStudentsController'
+                   controller: 'addstaffController'
                }).
                when('/staff', {
                    templateUrl: 'views/staff.html',
-                   // controller: 'ViewStudentsController'
+                   controller: 'addstaffController'
                }).
                when('/patchs', {
                    templateUrl: 'views/patchs.html',
@@ -29,11 +29,11 @@ app.config(['$routeProvider',
                }).
                when('/add_staff', {
                    templateUrl: 'views/add_staff.html',
-                   // controller: 'ViewStudentsController'
+                   controller: 'addstaffController'
                }).
                when('/add_permission', {
                    templateUrl: 'views/add_permission.html',
-                   // controller: 'ViewStudentsController'
+                   controller: 'addstaffController'
                }).
                when('/staffProfile', {
                    templateUrl: 'views/staffProfile.html',
@@ -59,3 +59,36 @@ app.config(['$routeProvider',
                   redirectTo: '/index.html'
               });
        }]);
+
+app.controller("homeController", function ($scope,$http) {
+
+    $http.get("api/staff/staffall").success(function(data) {
+
+        $scope.staff = data;
+
+    });
+
+});
+
+app.controller("addstaffController", function ($scope, $http) {
+
+    $http.get("api/staff/staffall").success(function (data) {
+    
+        $scope.staff = data;
+
+    });
+
+    $http.get("api/staff/staffrole").success(function (data) {
+
+        $scope.staffrole = data;
+
+    });
+
+});
+
+app.controller('patchInfoController', function ($scope, $http) {
+    $http.get('api/patchs/PatchInformations')
+    .success(function (response) {
+        $scope.patchs = response;
+    })
+});

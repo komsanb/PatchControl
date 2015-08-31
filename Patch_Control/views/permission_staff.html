@@ -19,37 +19,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Admin</td>
+                    <tr ng-repeat="n in staffrole">
+                        <td>{{n.StaffRoleName}}</td>
                         <td><button onclick="parent.location = '#/edit_staff_role'" class="btn btn-warning btn-icon"><i class="md md-edit"></i></button></td>
                         <td><button class="btn btn-danger btn-icon"><i class="md md-delete"></i></button></td>
                         
-                    </tr>
-                    <tr>
-                        <td>Support</td>
-                        <td><button onclick="parent.location = '#/edit_staff_role'" class="btn btn-warning btn-icon"><i class="md md-edit"></i></button></td>
-                        <td><button class="btn btn-danger btn-icon"><i class="md md-delete"></i></button></td>
-                        
-                    </tr>
-                    <tr>
-                        <td>Implementer</td>
-                        <td><button onclick="parent.location = '#/edit_staff_role'" class="btn btn-warning btn-icon"><i class="md md-edit"></i></button></td>
-                        <td><button class="btn btn-danger btn-icon"><i class="md md-delete"></i></button></td>
-                        
-                    </tr>
-                    <tr>
-                        <td>Account</td>
-                        <td><button onclick="parent.location = '#/edit_staff_role'" class="btn btn-warning btn-icon"><i class="md md-edit"></i></button></td>
-                        <td><button class="btn btn-danger btn-icon"><i class="md md-delete"></i></button></td>
-                        
-                    </tr>
-                    <tr>
-                        <td>Programmer</td>
-                        <td><button onclick="parent.location = '#/edit_staff_role'" class="btn btn-warning btn-icon"><i class="md md-edit"></i></button></td>
-                        <td><button class="btn btn-danger btn-icon"><i class="md md-delete"></i></button></td>
-                        
-                    </tr>
-          
+                    </tr>                  
                 </tbody>
             </table>
         </div>

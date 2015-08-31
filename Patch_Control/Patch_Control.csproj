@@ -42,10 +42,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>E:\OneDrive\workSynature\library\MySQL5\MySql.Data.dll</HintPath>
+      <HintPath>..\..\..\..\ClassLibrary\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="POSMySQL">
-      <HintPath>E:\OneDrive\workSynature\library\MySQL5\POSMySQL.dll</HintPath>
+      <HintPath>..\..\..\..\ClassLibrary\POSMySQL.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
@@ -989,24 +989,18 @@
     <Content Include="views\staffProfile.html" />
     <Content Include="views\test.html" />
     <Content Include="views\upload.html" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\PatchsController.cs" />
-    <Compile Include="Controllers\StaffsController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\IPatchsRepository.cs" />
-    <Compile Include="Models\IStaffsRepository.cs" />
-    <Compile Include="Models\Patchs.cs" />
-    <Compile Include="Models\PatchsRepository.cs" />
-    <Compile Include="Models\Staffs.cs" />
-    <Compile Include="Models\StaffsRepository.cs" />
+    <Compile Include="Models\IStaffRepository.cs" />
+    <Compile Include="Models\Staff.cs" />
+    <Compile Include="Models\StaffRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

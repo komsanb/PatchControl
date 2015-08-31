@@ -12,7 +12,7 @@
                     <label class="col-sm-2 control-label text-danger">Staff Code</label>
                     <div class="col-sm-6">
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Staff Code">
+                            <input type="text" id="Staff_Code" form-control input-sm" placeholder="Staff Code">
                         </div>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                     <div class="col-sm-6">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Staff Password">
+                            <input type="text" id="Staff_Password" class="form-control input-sm" placeholder="Staff Password">
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                     <div class="col-sm-6">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Staff Confirm Password">
+                            <input type="text" id="Staff_Confirm_Password" class="form-control input-sm" placeholder="Staff Confirm Password">
                         </div>
                     </div>
                 </div>
@@ -39,17 +39,11 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label text-danger">Role</label>
                     <div class="col-sm-6">
-
                         <div class="fg-line">
                             <div class="col-sm-5">
                                 <div class="fg-line select">
-                                    <select class="form-control">
-                                        <option>-- Select Role --</option>
-                                        <option>Admin</option>
-                                        <option>Account</option>
-                                        <option>Support</option>
-                                        <option>Programmer</option>
-                                        <option>Implementer</option>
+                                    <select class="form-control" ng-model="StaffID" ng-options="options.StaffRoleName as options.StaffRoleName for options in staffrole">
+                                        <option value="">-- Select Role --</option>
                                     </select>
                                 </div>
                             </div>

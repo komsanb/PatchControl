@@ -4,69 +4,42 @@
             <div class="dropdown-btn-demo pull-right">
                 <div class="btn-group">
                     <select type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-
                         <option>Software Version</option>
-
                         <option>All versions</option>
-
                         <option>3.6</option>
-
                         <option>3.5</option>
-
                     </select>
-
                 </div>
-
             </div>
-
 
             <div class="dropdown-btn-demo pull-right">
                 <div class="btn-group">
                     <select type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-
                         <option>Software Type</option>
-
                         <option>Retails</option>
-
                         <option>SPA</option>
-
                         <option>Restaurant</option>
-
                         <option>PTT</option>
-
                     </select>
                     &nbsp;&nbsp;
-
                 </div>
-
             </div>
-
 
             <div class="dropdown-btn-demo pull-right">
                 <div class="btn-group">
                     <select type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-
                         <option>Release Date</option>
-
                         <option>20/06/2015</option>
-
                         <option>19/06/2015</option>
-
                         <option>18/06/2015</option>
-
                     </select>
                     &nbsp;&nbsp;
-
                 </div>
-
             </div>
             <h2>
                 Release Versions
                 <small>All versions of patch</small>
-
             </h2>
-
-
 
         </div>
         <form class="form-horizontal" role="form">
@@ -75,29 +48,20 @@
                     <div class="btn-demo">
                         <button class="btn btn-primary waves-effect waves-button waves-float pull-right" type="button" data-toggle="collapse" data-target="#collapseExample{{ p.PatchsID }}" aria-expanded="false" aria-controls="collapseExample">
                             Release Note
-
                         </button>
                         <a href="#">{{ p.SoftwareVersionName }}</a>
                         : {{ p.SoftwareTypeName }} : {{ p.PatchsInsertDate }} : {{ p.PatchsInsertBy }}
                         <hr />
-
                     </div>
                     <div class="collapse m-t-10" id="collapseExample{{ p.PatchsID }}">
                         <p>{{ p.PatchsDescription }}</p>
                         <h5>
                             Windows: [<a href="#">installed official</a>] stable vertion
-
                         </h5>
                         <hr />
-
                     </div>
-
                 </div>
-
             </div>
-
         </form>
-
     </div>
-
 </div>

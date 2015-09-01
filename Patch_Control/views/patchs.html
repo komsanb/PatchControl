@@ -1,5 +1,5 @@
-﻿<div class="container" ng-app="app">
-    <div class="card" ng-controller="patchInfoController">
+﻿<div class="container">
+    <div class="card">
         <div class="card-header bgm-teal">
             <div class="dropdown-btn-demo pull-right">
                 <div class="btn-group">
@@ -42,26 +42,55 @@
             </h2>
 
         </div>
-        <form class="form-horizontal" role="form">
-            <div class="card-body card-padding">
-                <div ng-repeat="p in patchs">
-                    <div class="btn-demo">
-                        <button class="btn btn-primary waves-effect waves-button waves-float pull-right" type="button" data-toggle="collapse" data-target="#collapseExample{{ p.PatchsID }}" aria-expanded="false" aria-controls="collapseExample">
-                            Release Note
-                        </button>
-                        <a href="#">{{ p.SoftwareVersionName }}</a>
-                        : {{ p.SoftwareTypeName }} : {{ p.PatchsInsertDate }} : {{ p.PatchsInsertBy }}
-                        <hr />
-                    </div>
-                    <div class="collapse m-t-10" id="collapseExample{{ p.PatchsID }}">
-                        <p>{{ p.PatchsDescription }}</p>
-                        <h5>
-                            Windows: [<a href="#">installed official</a>] stable vertion
-                        </h5>
-                        <hr />
-                    </div>
-                </div>
+
+        <div class="card-body card-padding">
+            <div class="btn-demo ">
+                <button class="btn btn-primary waves-effect waves-button waves-float pull-right" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Release Note
+                </button>
+                <a href="#">3.6.6 </a>
+                : Software Type : Software Version : 18/06/2015
+                <hr />
             </div>
-        </form>
+            <div class="collapse m-t-10" id="collapseExample">
+                <p>Curabitur nisi velit, placerat id diam ac, maximus aliquet ex. Integer in laoreet nisl. Maecenas auctor porta ligula, non interdum dolor hendrerit non. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum tortor tellus, commodo suscipit cursus vitae, auctor eu massa. Aliquam nibh dolor, lobortis in molestie eget, tristique ac nunc. Aliquam fringilla aliquam est eu congue.</p>
+                <h5>
+                    Windows: [<a href="#">installed official</a>] stable vertion
+                </h5>
+                <hr />
+            </div>
+
+            <div class="btn-demo ">
+                <button class="btn btn-primary waves-effect waves-button waves-float pull-right" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+                    Release Note
+                </button>
+                <a href="#">3.5.2 </a>
+                : Software Type : Software Version : 05/06/2015
+                <hr />
+            </div>
+            <div class="collapse m-t-10" id="collapseExample2">
+                <p>Curabitur nisi velit, placerat id diam ac, maximus aliquet ex. Integer in laoreet nisl. Maecenas auctor porta ligula, non interdum dolor hendrerit non. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum tortor tellus, commodo suscipit cursus vitae, auctor eu massa. Aliquam nibh dolor, lobortis in molestie eget, tristique ac nunc. Aliquam fringilla aliquam est eu congue.</p>
+                <h5>
+                    Windows: [<a href="#">installed official</a>] stable vertion
+                </h5>
+                <hr />
+            </div>
+
+            <div class="btn-demo ">
+                <button class="btn btn-primary waves-effect waves-button waves-float pull-right" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
+                    Release Note
+                </button>
+                <a href="#">3.0.0 </a>
+                : Software Type : Software Version : 26/05/2015
+                <hr />
+            </div>
+            <div class="collapse m-t-10" id="collapseExample3">
+                <p>Curabitur nisi velit, placerat id diam ac, maximus aliquet ex. Integer in laoreet nisl. Maecenas auctor porta ligula, non interdum dolor hendrerit non. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum tortor tellus, commodo suscipit cursus vitae, auctor eu massa. Aliquam nibh dolor, lobortis in molestie eget, tristique ac nunc. Aliquam fringilla aliquam est eu congue.</p>
+                <h5>
+                    Windows: [<a href="#">installed official</a>] stable vertion
+                </h5>
+                <hr />
+            </div>
+        </div>
     </div>
 </div>

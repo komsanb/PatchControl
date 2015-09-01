@@ -14,10 +14,10 @@ namespace Patch_Control.Models
         MySqlConnection objConn = new MySqlConnection();
 
 
-        public IEnumerable <Staff> GetStaffAll()
+        public IEnumerable<Staff> GetStaffAll()
         {
             objConn = objDB.EstablishConnection();
-            List<Staff> staff = new List<Staff>();          
+            List<Staff> staff = new List<Staff>();
             string strSQL = "SELECT *, CONCAT(s.StaffsFirstname,' ', s.StaffsLastname) AS NameStaff FROM staffs s INNER JOIN StaffRole sr ON sr.StaffRoleID = s.StaffsID INNER JOIN Provinces p ON p.ProvinceID = s.StaffsID INNER JOIN Gender g ON g.GenderID = s.GenderID WHERE p.LangID = 1;";
             DataTable dt = objDB.List(strSQL, objConn);
             objConn.Close();
@@ -46,7 +46,7 @@ namespace Patch_Control.Models
                     staff.Add(staffData);
                 }
             }
-            
+
             return staff.ToArray();
 
         }
@@ -65,7 +65,7 @@ namespace Patch_Control.Models
                     StaffRole staffData = new StaffRole();
                     staffData.StaffRoleID = Convert.ToInt32(dt.Rows[i]["StaffRoleID"].ToString());
                     staffData.StaffRoleName = dt.Rows[i]["StaffRoleName"].ToString();
-                    
+
                     staff.Add(staffData);
                 }
             }

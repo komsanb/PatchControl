@@ -7,7 +7,8 @@ using System.Web.Http;
 
 namespace Patch_Control.Models
 {
-    public class Staff{
+    public class Staff
+    {
 
         public string StaffRole { get; set; }
 
@@ -43,9 +44,10 @@ namespace Patch_Control.Models
 
     }
 
-    public class StaffRole{
+    public class StaffRole
+    {
         public int StaffRoleID { get; set; }
 
         public string StaffRoleName { get; set; }
     }
-    }
+}

@@ -3,35 +3,16 @@
         <div class="card-header bgm-teal">
             <div class="dropdown-btn-demo pull-right">
                 <div class="btn-group">
-                    <select type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <option>Software Version</option>
-                        <option>All versions</option>
-                        <option>3.6</option>
-                        <option>3.5</option>
+                    <select ng-model="search.SoftwareVersionID" ng-options="sofver.SoftwareVersionID as sofver.SoftwareVersionName for sofver in softwareVersion" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <option value="">Software Version</option>
                     </select>
                 </div>
             </div>
 
             <div class="dropdown-btn-demo pull-right">
                 <div class="btn-group">
-                    <select type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <option>Software Type</option>
-                        <option>Retails</option>
-                        <option>SPA</option>
-                        <option>Restaurant</option>
-                        <option>PTT</option>
-                    </select>
-                    &nbsp;&nbsp;
-                </div>
-            </div>
-
-            <div class="dropdown-btn-demo pull-right">
-                <div class="btn-group">
-                    <select type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <option>Release Date</option>
-                        <option>20/06/2015</option>
-                        <option>19/06/2015</option>
-                        <option>18/06/2015</option>
+                    <select ng-model="search.SoftwareTypeID" ng-options="softtype.SoftwareTypeID as softtype.SoftwareTypeName for softtype in softwareType" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <option value="">Software Type</option>
                     </select>
                     &nbsp;&nbsp;
                 </div>
@@ -42,9 +23,10 @@
             </h2>
 
         </div>
+
         <form class="form-horizontal" role="form">
             <div class="card-body card-padding">
-                <div ng-repeat="p in patchs">
+                <div ng-repeat="p in patchs | filter:search">
                     <div class="btn-demo">
                         <button class="btn btn-primary waves-effect waves-button waves-float pull-right" type="button" data-toggle="collapse" data-target="#collapseExample{{ p.PatchsID }}" aria-expanded="false" aria-controls="collapseExample">
                             Release Note

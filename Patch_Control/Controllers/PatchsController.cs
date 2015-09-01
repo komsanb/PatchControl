@@ -16,10 +16,30 @@ namespace Patch_Control.Controllers
         [ActionName("PatchInformations")]
 
         // GET api/<controller>
-        public IEnumerable<Patchs> Get()
+        public IEnumerable<Patchs> GetPatchInfos()
         {
             List<Patchs> items = new List<Patchs>();
             return repository.getPatchInformations();
+        }
+
+        [HttpGet]
+        [ActionName("SoftwareType")]
+
+        // GET api/<controller>
+        public IEnumerable<SoftwareType> GetSoftwareType()
+        {
+            List<SoftwareType> items = new List<SoftwareType>();
+            return repository.getSoftwareType();
+        }
+
+        [HttpGet]
+        [ActionName("SoftwareVersion")]
+
+        // GET api/<controller>
+        public IEnumerable<SoftwareVersion> GetSoftwareVersion()
+        {
+            List<SoftwareVersion> items = new List<SoftwareVersion>();
+            return repository.getSoftwareVersion();
         }
 
         // GET api/<controller>/5

@@ -90,5 +90,17 @@ app.controller('patchInfoController', function ($scope, $http) {
     $http.get('api/patchs/PatchInformations')
     .success(function (response) {
         $scope.patchs = response;
+    });
+    $http.get('api/patchs/softwareversion')
+    .success(function (response) {
+        $scope.softwareVersion = response;
+    });
+    $http.get('api/patchs/softwareType')
+    .success(function (response) {
+        $scope.softwareType = response;
+    });
+    $http.get('api/patchs/datetimepatch')
+    .success(function (response) {
+        $scope.datetimepatch = response;
     })
 });

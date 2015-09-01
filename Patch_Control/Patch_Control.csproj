@@ -995,16 +995,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\PatchsController.cs" />
-    <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\IPatchsRepository.cs" />
-    <Compile Include="Models\IStaffRepository.cs" />
     <Compile Include="Models\Patchs.cs" />
     <Compile Include="Models\PatchsRepository.cs" />
-    <Compile Include="Models\Staff.cs" />
-    <Compile Include="Models\StaffRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

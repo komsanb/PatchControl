@@ -8,10 +8,14 @@ namespace Patch_Control.Models
     public class Patchs
     {
         public int PatchsID { get; set; }
+        public int SoftwareTypeID { get; set; }
+        public int SoftwareVersionID { get; set; }
         public string PatchsName { get; set; }
         public string PatchsDescription { get; set; }
-        public DateTime PatchsInsertDate { get; set; }
+        public string PatchsUpadateDate { get; set; }        
+        public string PatchsInsertDate { get; set; }
         public string PatchsInsertBy { get; set; }
+        public string PatchsUpdateBy { get; set; }
         public string SoftwareTypeName { get; set; }
         public string SoftwareVersionName { get; set; }
     }
@@ -25,6 +29,6 @@ namespace Patch_Control.Models
     public class SoftwareVersion
     {
         public int SoftwareVersionID { get; set; }
-        public string SoftwareVerionsName { get; set; }
+        public string SoftwareVersionName { get; set; }
     }
 }

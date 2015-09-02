@@ -87,30 +87,37 @@ app.controller("staffController", function ($scope, $http) {
     });
 
     $scope.addstaff = function () {
-        var staff = {
-            "StaffCode": $scope.StaffCode,
-            "StaffPassword": $scope.StaffPassword,
-            "StaffRoleID": $scope.StaffRoleID,
-            "GenderID": $scope.GenderID,
-            "StaffFirstname": $scope.StaffFirstname,
-            "StaffLastname": $scope.StaffLastname,
-            "Address1": $scope.Address1,
-            "Address2": $scope.Address2,
-            "City": $scope.City,
-            "ProvinceID": $scope.ProvinceID,
-            "Zipcode": $scope.Zipcode,
-            "Telephone": $scope.Telephone,
-            "Mobile": $scope.Mobile,
-            "Email": $scope.Email,
-            "Picture": $scope.Picture
-        };
-        console.log(staff);
-        $http.post("api/staff/staffall", staff).success(function (data, header, status, config) {
- 
-            $scope.staff = data;
+        if ($scope.Address2 == null) {
+            $scope.Address2 = " "
+        }
+        else {
+            var staff = {
+                "StaffCode": $scope.StaffCode,
+                "StaffPassword": $scope.StaffPassword,
+                "StaffRoleID": $scope.StaffRoleID,
+                "GenderID": $scope.GenderID,
+                "StaffFirstname": $scope.StaffFirstname,
+                "StaffLastname": $scope.StaffLastname,
+                "Address1": $scope.Address1,
+                "Address2": $scope.Address2,
+                "City": $scope.City,
+                "ProvinceID": $scope.ProvinceID,
+                "Zipcode": $scope.Zipcode,
+                "Telephone": $scope.Telephone,
+                "Mobile": $scope.Mobile,
+                "Email": $scope.Email,
+            };
+            console.log(staff);
+            $http.post("api/staff/staffall", staff).success(function (data, header, status, config) {
 
-        });
-    }
+                $scope.staff = data;
+
+            });
+            window.location = "#/staff"
+            window.location.reload(true);
+        }
+        }
+    
  
     //$http.get("api/staff/province", { params: { StaffsID: $scope.StaffsID } }).success(function (data) {
     //    alert("Deleted Successfully!!");
@@ -121,36 +128,6 @@ app.controller("staffController", function ($scope, $http) {
     //      $scope.error = "An Error has occured while loading posts!";
     //  });       
 });
-
-//app.controller("addstaffController", function ($scope, $http) {
-//    $scope.addstaff = function() {
-//        var staff = {
-//            "StaffCode": $scope.StaffCode,
-//            "StaffPassword": $scope.StaffPassword,
-//            "StaffRoleID": $scope.StaffRoleID,
-//            "GenderID": $scope.GenderID,
-//            "StaffFirstname": $scope.StaffFirstname,
-//            "StaffLastname": $scope.StaffLastname,
-//            "Address1": $scope.Address1,
-//            "Address2": $scope.Address2,
-//            "City": $scope.City,
-//            "ProvinceID": $scope.ProvinceID,
-//            "Zipcode": $scope.Zipcode,
-//            "Telephone": $scope.Telephone,
-//            "Mobile": $scope.Mobile,
-//            "Email": $scope.Email,
-//            "Picture": $scope.Picture
-//        };
-
-//        $http.post("api/staff/staffall", staff).success(function (data, header, status, config) {
-     
-//            console.log(data);
-//            $scope.staff = data;
-
-//        });
-//    }
-//});
-
 
 app.controller('patchInfoController', function ($scope, $http) {
     $http.get('api/patchs/PatchInformations')

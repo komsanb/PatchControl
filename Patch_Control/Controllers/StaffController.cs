@@ -17,14 +17,7 @@ namespace Patch_Control.Controllers
         public IEnumerable<Staff> Get()
         {
             return repository.GetStaffAll();
-        }
-        // POST api/staff/staffall
-        [HttpPost]
-        [ActionName("StaffAll")]
-        public IEnumerable<Staff> Post(Staff item)
-        {
-            return repository.PostStaffAll(item);
-        }
+        }     
         // GET api/staff/staffrole
         [HttpGet]
         [ActionName("StaffRole")]
@@ -52,6 +45,13 @@ namespace Patch_Control.Controllers
             return "value";
         }
 
+        // POST api/staff/staffall
+        [HttpPost]
+        [ActionName("StaffAll")]
+        public IEnumerable<Staff> Post(Staff item)
+        {
+            return repository.PostStaffAll(item);
+        }
         public string Post(int id)
         {
             return "value";

@@ -6,13 +6,13 @@
             <br />
         </div>
         <br />
-        <form class="form-horizontal" role="form">
+        <form ng-submit="addstaff()" class="form-horizontal" role="form">
             <div class="card-body card-padding">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Staff Code</label>
                     <div class="col-sm-5">
                         <div class="fg-line">
-                            <input type="text" id="Staff_Code" class="form-control input-sm" placeholder="Staff Code">
+                            <input type="text" ng-model="StaffCode" id="StaffCode" class="form-control input-sm" placeholder="Staff Code">
                             
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" id="Staff_Password" class="form-control input-sm" placeholder="Staff Password">
+                            <input type="text" ng-model="StaffPassword" id="StaffPassword" class="form-control input-sm" placeholder="Staff Password">
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -34,7 +34,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" id="Staff_Confirm_Password" class="form-control input-sm" placeholder="Staff Confirm Password">
+                            <input type="text" id="StaffConfirmPassword" class="form-control input-sm" placeholder="Staff Confirm Password">
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -46,7 +46,7 @@
                         <div class="fg-line">
                             <div class="col-sm-6">
                                 <div class="fg-line select">
-                                    <select class="form-control" ng-model="StaffRoleID" ng-options="options.StaffRoleID as options.StaffRoleName for options in staffrole">
+                                    <select class="form-control" id="StaffRoleID" ng-model="StaffRoleID" ng-options="options.StaffRoleID as options.StaffRoleName for options in staffrole">
                                         <option value="">-- Select Role --</option>
                                     </select>
                                 </div>
@@ -61,13 +61,18 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <label class="radio radio-inline m-r-20" ng-model="GenderID" ng-repeat="n in gender">
-                                <input type="radio" name="inlineRadioOptions" value="option1">
+                            <label class="radio radio-inline m-r-20" >
+                                <input ng-model="GenderID" value="1" type="radio" name="inlineRadioOptions">
                                 <i class="input-helper"></i>
-                                {{n.GenderName}}
+                                Male
                             </label>
-
+                            <label class="radio radio-inline m-r-20">
+                                <input ng-model="GenderID" value="2" type="radio" name="inlineRadioOptions">
+                                <i class="input-helper"></i>
+                                Female
+                            </label>
                         </div>
+
                     </div>
                     <label class="control-label text-danger">*</label>
                 </div>
@@ -77,7 +82,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="First Name">
+                            <input ng-model="StaffFirstname" id="StaffFirstname" type="text" class="form-control input-sm" placeholder="First Name">
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -88,7 +93,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Last Name">
+                            <input ng-model="StaffLastname" id="StaffLastname" type="text" class="form-control input-sm" placeholder="Last Name">
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -99,7 +104,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Address 1">
+                            <input ng-model="Address1" id="Address1" type="text" class="form-control input-sm" placeholder="Address 1">
                         </div>
                     </div>
                 </div>
@@ -109,7 +114,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Address 2">
+                            <input ng-model="Address2" id="Address2" type="text" class="form-control input-sm" placeholder="Address 2">
                         </div>
                     </div>
                 </div>
@@ -119,7 +124,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="City">
+                            <input ng-model="City" id="City" type="text" class="form-control input-sm" placeholder="City">
                         </div>
                     </div>
                 </div>
@@ -130,7 +135,7 @@
                         <div class="fg-line">
                             <div class="col-sm-7">
                                 <div class="fg-line select">
-                                    <select class="form-control" ng-model="ProvinceID" ng-options="options.ProvinceID as options.ProvinceName for options in province">
+                                    <select class="form-control" id="ProvinceID" ng-model="ProvinceID" ng-options="options.ProvinceID as options.ProvinceName for options in province">
                                         <option value="">-- Select Province --</option>
                                     </select>
                                 </div>
@@ -144,7 +149,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Zip Code">
+                            <input id="Zipcode" ng-model="Zipcode" type="text" class="form-control input-sm" placeholder="Zip Code">
                         </div>
                     </div>
                 </div>
@@ -154,7 +159,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Telephone">
+                            <input id="Telephone" ng-model="Telephone" type="text" class="form-control input-sm" placeholder="Telephone">
                         </div>
                     </div>
                 </div>
@@ -164,7 +169,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Mobile">
+                            <input id="Mobile" ng-model="Mobile" type="text" class="form-control input-sm" placeholder="Mobile">
                         </div>
                     </div>
                 </div>
@@ -174,7 +179,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Email Address">
+                            <input id="Email" ng-model="Email" type="text" class="form-control input-sm" placeholder="Email Address">
                         </div>
                     </div>
                 </div>
@@ -183,27 +188,26 @@
                     <label class="col-sm-2 control-label">Picture File</label>
                     <div class="col-sm-5">
                         
-                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <!--<div class="fileinput fileinput-new" data-provides="fileinput">
                             <div class="fileinput-preview thumbnail" data-trigger="fileinput"></div>
                             <div>
                                 <span class="btn btn-info btn-file">
                                     <span class="fileinput-new">Select image</span>
                                     <span class="fileinput-exists">Change</span>
-                                    <input type="file" name="...">
+                                    <input id="Picture" ng-model="Picture" type="file" value="ffff" name="...">
                                 </span>
                                 <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a>
                             </div>
-                        </div>
-
+                        </div>-->
+                        <input type="file" id="Picture" ng-model="Picture" >
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button onclick="parent.location = '#/staff'" type="submit" class="btn btn-primary btn-sm">Add Staff</button>
+                    <div class="col-sm-offset-2 col-sm-10 ng-controller="addstaffController"">
+                        <button type="submit" class="btn btn-primary btn-sm">Add Staff</button>
                         <button onclick="parent.location = '#/staff'" type="submit" class="btn btn-primary btn-sm">Cancle</button>                       
-                    </div>
-                    
+                    </div>          
                 </div>
             </div>
         </form>

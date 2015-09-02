@@ -16,9 +16,10 @@ namespace Patch_Control.Models
 
         public IEnumerable<Staff> GetStaffAll()
         {
+
             objConn = objDB.EstablishConnection();
             List<Staff> staff = new List<Staff>();
-            string strSQL = "SELECT *, CONCAT(s.StaffFirstname,' ', s.StaffLastname) AS NameStaff FROM staffs s INNER JOIN StaffRole sr ON sr.StaffRoleID = s.StaffID INNER JOIN Provinces p ON p.ProvinceID = s.StaffID INNER JOIN Gender g ON g.GenderID = s.GenderID WHERE p.LangID = 1;";
+            string strSQL = "SELECT *, CONCAT(s.StaffFirstname,' ', s.StaffLastname) AS NameStaff FROM staffs s INNER JOIN StaffRole sr ON sr.StaffRoleID = s.StaffRoleID INNER JOIN Provinces p ON p.ProvinceID = s.ProvinceID INNER JOIN Gender g ON g.GenderID = s.GenderID WHERE p.LangID = 1 ORDER BY StaffID;";
             DataTable dt = objDB.List(strSQL, objConn);
             objConn.Close();
             if (dt.Rows.Count > 0)
@@ -29,18 +30,20 @@ namespace Patch_Control.Models
 
                     staffData.StaffID = Convert.ToInt32(dt.Rows[i]["StaffID"].ToString());
                     staffData.StaffRole = dt.Rows[i]["StaffRoleName"].ToString();
-                    staffData.StaffRoleID = Convert.ToInt32(dt.Rows[i]["StaffRoleID"].ToString());
-                    staffData.StaffName = dt.Rows[i]["NameStaff"].ToString();
                     staffData.StaffPassword = dt.Rows[i]["StaffPassword"].ToString();
+                    staffData.StaffRoleID = Convert.ToInt32(dt.Rows[i]["StaffRoleID"].ToString());                
                     staffData.StaffFirstname = dt.Rows[i]["StaffFirstname"].ToString();
                     staffData.StaffLastname = dt.Rows[i]["StaffLastname"].ToString();
+                    staffData.StaffName = dt.Rows[i]["NameStaff"].ToString();
                     staffData.StaffCode = dt.Rows[i]["StaffCode"].ToString();
                     staffData.Gender = dt.Rows[i]["GenderName"].ToString();
+                    staffData.GenderID = Convert.ToInt32(dt.Rows[i]["GenderID"].ToString());
                     staffData.Address1 = dt.Rows[i]["StaffAddress1"].ToString();
                     staffData.Address2 = dt.Rows[i]["StaffAddress2"].ToString();
                     staffData.City = dt.Rows[i]["StaffCity"].ToString();
-                    staffData.Zipcode = dt.Rows[i]["StaffZipcode"].ToString();
                     staffData.Province = dt.Rows[i]["ProvinceName"].ToString();
+                    staffData.ProvinceID = Convert.ToInt32(dt.Rows[i]["ProvinceID"].ToString());
+                    staffData.Zipcode = dt.Rows[i]["StaffZipcode"].ToString();              
                     staffData.Telephone = dt.Rows[i]["StaffTel"].ToString();
                     staffData.Mobile = dt.Rows[i]["StaffMobile"].ToString();
                     staffData.Picture = dt.Rows[i]["StaffPictureName"].ToString();
@@ -60,13 +63,13 @@ namespace Patch_Control.Models
             try {
 
                 int rowid;
-                string strSQL = "SELECT MAX(StaffID) AS rowid FROM staffs ;";
-                DataTable dt =objDB.List(strSQL, objConn);
+                string strSQL1 = "SELECT MAX(StaffID) AS rowid FROM staffs ;";
+                DataTable dt =objDB.List(strSQL1, objConn);
                 rowid = Convert.ToInt32(dt.Rows[0]["rowid"].ToString());
                 int maxid = rowid + 1;
-                string strSQL1 = "INSERT INTO staffs(StaffID, StaffCode, StaffPassword, StaffRoleID, GenderID, StaffFirstname, StaffLastname, StaffAddress1, StaffAddress2, StaffCity, StaffZipcode, StaffTel, StaffMobile, StaffPictureName, StaffEmail, ProvinceID) ";
-                strSQL1 += "VALUES (" + maxid + ",'" + item.StaffCode.ToString() + "','" + item.StaffPassword.ToString() + "'," + Convert.ToInt32(item.StaffRoleID) + "," + Convert.ToInt32(item.GenderID) + ",'" + item.StaffFirstname.ToString() + "','" + item.StaffLastname.ToString() + "','" + item.Address1.ToString() + "','" + item.Address2.ToString() + "','" + item.City.ToString() + "','" + item.Zipcode.ToString() + "','" + item.Telephone.ToString() + "','" + item.Mobile.ToString() + "','" + item.Picture.ToString() + "','" + item.Email.ToString() + "'," + Convert.ToInt32(item.ProvinceID) + ")";
-                objDB.sqlExecute(strSQL1, objConn);
+                string strSQL2 = "INSERT INTO staffs(StaffID, StaffCode, StaffPassword, StaffRoleID, GenderID, StaffFirstname, StaffLastname, StaffAddress1, StaffAddress2, StaffCity, StaffZipcode, StaffTel, StaffMobile, StaffPictureName, StaffEmail, ProvinceID) ";
+                strSQL2 += "VALUES (" + maxid + ",'" + item.StaffCode.ToString() + "','" + item.StaffPassword.ToString() + "'," + Convert.ToInt32(item.StaffRoleID) + "," + Convert.ToInt32(item.GenderID) + ",'" + item.StaffFirstname.ToString() + "','" + item.StaffLastname.ToString() + "','" + item.Address1.ToString() + "','" + item.Address2.ToString() + "','" + item.City.ToString() + "','" + item.Zipcode.ToString() + "','" + item.Telephone.ToString() + "','" + item.Mobile.ToString() + "','" + item.Picture.ToString() + "','" + item.Email.ToString() + "'," + Convert.ToInt32(item.ProvinceID) + ")";
+                objDB.sqlExecute(strSQL2, objConn);
                 objConn.Close();
 
                 return staff.ToArray();

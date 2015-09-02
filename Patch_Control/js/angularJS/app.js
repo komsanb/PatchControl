@@ -5,15 +5,15 @@ app.config(['$routeProvider',
            $routeProvider.
                when('/', {
                    templateUrl: 'views/home.html',
-                   controller: 'homeController'
+                   //controller: 'homeController'
                }).
                when('/permission_staff', {
                    templateUrl: 'views/permission_staff.html',
-                   controller: 'addstaffController'
+                   controller: 'staffController'
                }).
                when('/staff', {
                    templateUrl: 'views/staff.html',
-                   controller: 'addstaffController'
+                   controller: 'staffController'
                }).
                when('/patchs', {
                    templateUrl: 'views/patchs.html',
@@ -29,11 +29,11 @@ app.config(['$routeProvider',
                }).
                when('/add_staff', {
                    templateUrl: 'views/add_staff.html',
-                   controller: 'addstaffController'
+                   controller: 'staffController'
                }).
                when('/add_permission', {
                    templateUrl: 'views/add_permission.html',
-                   controller: 'addstaffController'
+                   controller: 'staffController'
                }).
                when('/staffProfile', {
                    templateUrl: 'views/staffProfile.html',
@@ -60,22 +60,7 @@ app.config(['$routeProvider',
               });
        }]);
 
-app.controller("homeController", function ($scope,$http) {
-
-    $http.get("api/staff/staffall").success(function(data) {
-
-        $scope.staff = data;
-
-    });
-
-    $http.post("api/staff/staffall").success(function (data) {
-
-        $scope.staff = data;
-
-    });
-});
-
-app.controller("addstaffController", function ($scope, $http) {
+app.controller("staffController", function ($scope, $http) {
 
     $http.get("api/staff/staffall").success(function (data) {
     
@@ -101,30 +86,32 @@ app.controller("addstaffController", function ($scope, $http) {
 
     });
 
-    var staff = {
-        "StaffCode": "11111",
-        "StaffPassword": "11111",
-        "StaffRoleID": 1,
-        "GenderID": 1,
-        "StaffFirstname": "aaadda",
-        "StaffLastname": "aaadda",
-        "Address1": "43",
-        "Address2": "-",
-        "City": "London",
-        "ProvinceID": 25,
-        "Zipcode": "11111",
-        "Telephone": "11111111",
-        "Mobile": "1111111",
-        "Email": "daddsdsd@hotmail.com",
-        "Picture": "-"
-    };
-    
-    $http.post("api/staff/staffall", staff).success(function (data, header, status, config) {
-        console.log(data);
-        $scope.staff = data;
+    $scope.addstaff = function () {
+        var staff = {
+            "StaffCode": $scope.StaffCode,
+            "StaffPassword": $scope.StaffPassword,
+            "StaffRoleID": $scope.StaffRoleID,
+            "GenderID": $scope.GenderID,
+            "StaffFirstname": $scope.StaffFirstname,
+            "StaffLastname": $scope.StaffLastname,
+            "Address1": $scope.Address1,
+            "Address2": $scope.Address2,
+            "City": $scope.City,
+            "ProvinceID": $scope.ProvinceID,
+            "Zipcode": $scope.Zipcode,
+            "Telephone": $scope.Telephone,
+            "Mobile": $scope.Mobile,
+            "Email": $scope.Email,
+            "Picture": $scope.Picture
+        };
+        console.log(staff);
+        $http.post("api/staff/staffall", staff).success(function (data, header, status, config) {
+ 
+            $scope.staff = data;
 
-    });
-
+        });
+    }
+ 
     //$http.get("api/staff/province", { params: { StaffsID: $scope.StaffsID } }).success(function (data) {
     //    alert("Deleted Successfully!!");
     //    cleardetails();
@@ -134,6 +121,36 @@ app.controller("addstaffController", function ($scope, $http) {
     //      $scope.error = "An Error has occured while loading posts!";
     //  });       
 });
+
+//app.controller("addstaffController", function ($scope, $http) {
+//    $scope.addstaff = function() {
+//        var staff = {
+//            "StaffCode": $scope.StaffCode,
+//            "StaffPassword": $scope.StaffPassword,
+//            "StaffRoleID": $scope.StaffRoleID,
+//            "GenderID": $scope.GenderID,
+//            "StaffFirstname": $scope.StaffFirstname,
+//            "StaffLastname": $scope.StaffLastname,
+//            "Address1": $scope.Address1,
+//            "Address2": $scope.Address2,
+//            "City": $scope.City,
+//            "ProvinceID": $scope.ProvinceID,
+//            "Zipcode": $scope.Zipcode,
+//            "Telephone": $scope.Telephone,
+//            "Mobile": $scope.Mobile,
+//            "Email": $scope.Email,
+//            "Picture": $scope.Picture
+//        };
+
+//        $http.post("api/staff/staffall", staff).success(function (data, header, status, config) {
+     
+//            console.log(data);
+//            $scope.staff = data;
+
+//        });
+//    }
+//});
+
 
 app.controller('patchInfoController', function ($scope, $http) {
     $http.get('api/patchs/PatchInformations')

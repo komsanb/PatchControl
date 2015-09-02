@@ -68,6 +68,11 @@ app.controller("homeController", function ($scope,$http) {
 
     });
 
+    $http.post("api/staff/staffall").success(function (data) {
+
+        $scope.staff = data;
+
+    });
 });
 
 app.controller("addstaffController", function ($scope, $http) {
@@ -84,6 +89,50 @@ app.controller("addstaffController", function ($scope, $http) {
 
     });
 
+    $http.get("api/staff/province").success(function (data) {
+
+        $scope.province = data;
+
+    });
+
+    $http.get("api/staff/gender").success(function (data) {
+
+        $scope.gender = data;
+
+    });
+
+    var staff = {
+        "StaffCode": "11111",
+        "StaffPassword": "11111",
+        "StaffRoleID": 1,
+        "GenderID": 1,
+        "StaffFirstname": "aaadda",
+        "StaffLastname": "aaadda",
+        "Address1": "43",
+        "Address2": "-",
+        "City": "London",
+        "ProvinceID": 25,
+        "Zipcode": "11111",
+        "Telephone": "11111111",
+        "Mobile": "1111111",
+        "Email": "daddsdsd@hotmail.com",
+        "Picture": "-"
+    };
+    
+    $http.post("api/staff/staffall", staff).success(function (data, header, status, config) {
+        console.log(data);
+        $scope.staff = data;
+
+    });
+
+    //$http.get("api/staff/province", { params: { StaffsID: $scope.StaffsID } }).success(function (data) {
+    //    alert("Deleted Successfully!!");
+    //    cleardetails();
+    //    selectStudentDetails('', '');
+    //})
+    //  .error(function () {
+    //      $scope.error = "An Error has occured while loading posts!";
+    //  });       
 });
 
 app.controller('patchInfoController', function ($scope, $http) {
@@ -92,3 +141,4 @@ app.controller('patchInfoController', function ($scope, $http) {
         $scope.patchs = response;
     })
 });
+

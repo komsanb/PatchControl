@@ -10,7 +10,9 @@ namespace Patch_Control.Models
     {
         IEnumerable<Staff> GetStaffAll();
         IEnumerable<StaffRole> GetStaffRoleAll();
+        IEnumerable<Province> GetProvinceAll();
+        IEnumerable<Gender> GetGenderAll();
+        IEnumerable<Staff> PostStaffAll(Staff item);
     }
-
 
 }

@@ -9,91 +9,94 @@
         <form class="form-horizontal" role="form">
             <div class="card-body card-padding">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">Staff Code</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">Staff Code</label>
+                    <div class="col-sm-5">
                         <div class="fg-line">
-                            <input type="text" id="Staff_Code" form-control input-sm" placeholder="Staff Code">
+                            <input type="text" id="Staff_Code" class="form-control input-sm" placeholder="Staff Code">
+                            
                         </div>
                     </div>
+                    <label class="control-label text-danger">*</label>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">Staff Password</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">Staff Password</label>
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
                             <input type="text" id="Staff_Password" class="form-control input-sm" placeholder="Staff Password">
                         </div>
                     </div>
+                    <label class="control-label text-danger">*</label>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">Staff Confirm Password</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">Staff Confirm Password</label>
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
                             <input type="text" id="Staff_Confirm_Password" class="form-control input-sm" placeholder="Staff Confirm Password">
                         </div>
                     </div>
+                    <label class="control-label text-danger">*</label>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">Role</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">Role</label>
+                    <div class="col-sm-5">
                         <div class="fg-line">
-                            <div class="col-sm-5">
+                            <div class="col-sm-6">
                                 <div class="fg-line select">
-                                    <select class="form-control" ng-model="StaffID" ng-options="options.StaffRoleName as options.StaffRoleName for options in staffrole">
+                                    <select class="form-control" ng-model="StaffRoleID" ng-options="options.StaffRoleID as options.StaffRoleName for options in staffrole">
                                         <option value="">-- Select Role --</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <label class="control-label text-danger">*</label>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">Gender</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">Gender</label>
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <label class="radio radio-inline m-r-20">
+                            <label class="radio radio-inline m-r-20" ng-model="GenderID" ng-repeat="n in gender">
                                 <input type="radio" name="inlineRadioOptions" value="option1">
                                 <i class="input-helper"></i>
-                                Men
+                                {{n.GenderName}}
                             </label>
 
-                            <label class="radio radio-inline m-r-20">
-                                <input type="radio" name="inlineRadioOptions" value="option2">
-                                <i class="input-helper"></i>
-                                Women
-                            </label>
                         </div>
                     </div>
+                    <label class="control-label text-danger">*</label>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">First Name</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">First Name</label>
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
                             <input type="text" class="form-control input-sm" placeholder="First Name">
                         </div>
                     </div>
+                    <label class="control-label text-danger">*</label>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">Last Name</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">Last Name</label>
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
                             <input type="text" class="form-control input-sm" placeholder="Last Name">
                         </div>
                     </div>
+                    <label class="control-label text-danger">*</label>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Address 1</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
                             <input type="text" class="form-control input-sm" placeholder="Address 1">
@@ -103,7 +106,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Address 2</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
                             <input type="text" class="form-control input-sm" placeholder="Address 2">
@@ -113,33 +116,22 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">City</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
                             <input type="text" class="form-control input-sm" placeholder="City">
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Province</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <div class="col-sm-5">
+                            <div class="col-sm-7">
                                 <div class="fg-line select">
-                                    <select class="form-control">
-                                        <option>-- Select Province --</option>
-                                        <option>Bangkok</option>
-                                        <option>Chiang Rai</option>
-                                        <option>Chiang Mai</option>
-                                        <option>Nan</option>
-                                        <option>Phayao</option>
-                                        <option>Phrae</option>
-                                        <option>Mae Hong Son</option>
-                                        <option>Lampang</option>
-                                        <option>Lamphun</option>
-                                        <option>Uttaradit</option>
+                                    <select class="form-control" ng-model="ProvinceID" ng-options="options.ProvinceID as options.ProvinceName for options in province">
+                                        <option value="">-- Select Province --</option>
                                     </select>
                                 </div>
                             </div>
@@ -149,7 +141,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Zip Code</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
                             <input type="text" class="form-control input-sm" placeholder="Zip Code">
@@ -159,7 +151,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Telephone</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
                             <input type="text" class="form-control input-sm" placeholder="Telephone">
@@ -169,7 +161,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Mobile</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
                             <input type="text" class="form-control input-sm" placeholder="Mobile">
@@ -179,7 +171,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Email Address</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
                             <input type="text" class="form-control input-sm" placeholder="Email Address">
@@ -189,7 +181,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Picture File</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         
                         <div class="fileinput fileinput-new" data-provides="fileinput">
                             <div class="fileinput-preview thumbnail" data-trigger="fileinput"></div>

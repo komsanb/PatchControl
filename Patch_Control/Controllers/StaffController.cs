@@ -18,33 +18,45 @@ namespace Patch_Control.Controllers
         {
             return repository.GetStaffAll();
         }
-
+        // POST api/staff/staffall
+        [HttpPost]
+        [ActionName("StaffAll")]
+        public IEnumerable<Staff> Post(Staff item)
+        {
+            return repository.PostStaffAll(item);
+        }
+        // GET api/staff/staffrole
         [HttpGet]
         [ActionName("StaffRole")]
         public IEnumerable<StaffRole> GetStaffRole()
         {
             return repository.GetStaffRoleAll();
         }
-
+        // GET api/staff/province
+        [HttpGet]
+        [ActionName("Province")]
+        public IEnumerable<Province> GetProvince()
+        {
+            return repository.GetProvinceAll();
+        }
+        // GET api/staff/gender
+        [HttpGet]
+        [ActionName("Gender")]
+        public IEnumerable<Gender> GetGender()
+        {
+            return repository.GetGenderAll();
+        }
         // GET api/<controller>/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        public string Post(int id)
         {
+            return "value";
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+        
     }
 }

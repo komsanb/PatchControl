@@ -9,8 +9,11 @@ namespace Patch_Control.Models
 {
     public class Staff
     {
+        public int StaffID { get; set; }
 
         public string StaffRole { get; set; }
+
+        public string StaffPassword { get; set; }
 
         public int StaffRoleID { get; set; }
 
@@ -20,9 +23,11 @@ namespace Patch_Control.Models
 
         public string StaffName { get; set; }
 
-        public int StaffCode { get; set; }
+        public string StaffCode { get; set; }
 
         public string Gender { get; set; }
+
+        public int GenderID { get; set; }
 
         public string Address1 { get; set; }
 
@@ -31,6 +36,8 @@ namespace Patch_Control.Models
         public string City { get; set; }
 
         public string Province { get; set; }
+
+        public int ProvinceID { get; set; }
 
         public string Zipcode { get; set; }
 
@@ -43,11 +50,26 @@ namespace Patch_Control.Models
         public string Email { get; set; }
 
     }
-
+    
     public class StaffRole
     {
         public int StaffRoleID { get; set; }
 
         public string StaffRoleName { get; set; }
     }
+
+    public class Province
+    {
+        public int ProvinceID { get; set; }
+
+        public string ProvinceName { get; set; }
+    }
+
+    public class Gender
+    {
+        public int GenderID { get; set; }
+
+        public string GenderName { get; set; }
+    }
+
 }

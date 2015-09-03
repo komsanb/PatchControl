@@ -87,10 +87,17 @@ app.controller("staffController", function ($scope, $http) {
     });
 
     $scope.addstaff = function () {
-        if ($scope.Address2 == null) {
-            $scope.Address2 = " "
-        }
-        else {
+        if ($scope.Address1 == null, $scope.Address2 == null, $scope.City == null, $scope.Zipcode == null, $scope.Telephone == null, $scope.Mobile == null, $scope.Email == null) {
+
+            $scope.Address1 = "";
+            $scope.Address2 = "";
+            $scope.City = "";
+            $scope.Zipcode = "";
+            $scope.Telephone = "";
+            $scope.Mobile = "";
+            $scope.Email = "";
+
+        }      
             var staff = {
                 "StaffCode": $scope.StaffCode,
                 "StaffPassword": $scope.StaffPassword,
@@ -105,20 +112,23 @@ app.controller("staffController", function ($scope, $http) {
                 "Zipcode": $scope.Zipcode,
                 "Telephone": $scope.Telephone,
                 "Mobile": $scope.Mobile,
-                "Email": $scope.Email,
+                "Email": $scope.Email
             };
+        
             console.log(staff);
             $http.post("api/staff/staffall", staff).success(function (data, header, status, config) {
 
                 $scope.staff = data;
 
-            });
-            window.location = "#/staff"
-            window.location.reload(true);
-        }
-        }
+            });               
+        window.location = "#/staff"
+        window.location.reload(true);
+    }
     
- 
+    //$scope.cancel = function () {
+    //    $scope.editing = false;
+    //    $scope.data = $scope.copy;
+    //}
     //$http.get("api/staff/province", { params: { StaffsID: $scope.StaffsID } }).success(function (data) {
     //    alert("Deleted Successfully!!");
     //    cleardetails();

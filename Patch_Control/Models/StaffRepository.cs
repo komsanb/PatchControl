@@ -5,6 +5,7 @@ using System.Web;
 using POSMySQL.POSControl;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Text;
 
 namespace Patch_Control.Models
 {
@@ -13,13 +14,12 @@ namespace Patch_Control.Models
         CDBUtil objDB = new CDBUtil();
         MySqlConnection objConn = new MySqlConnection();
 
-
         public IEnumerable<Staff> GetStaffAll()
         {
 
             objConn = objDB.EstablishConnection();
             List<Staff> staff = new List<Staff>();
-            string strSQL = "SELECT *, CONCAT(s.StaffFirstname,' ', s.StaffLastname) AS NameStaff FROM staffs s INNER JOIN StaffRole sr ON sr.StaffRoleID = s.StaffRoleID INNER JOIN Provinces p ON p.ProvinceID = s.ProvinceID INNER JOIN Gender g ON g.GenderID = s.GenderID WHERE p.LangID = 1 ORDER BY StaffID;";
+            string strSQL = "SELECT *, CONCAT(s.StaffFirstname,' ', s.StaffLastname) AS NameStaff FROM staffs s INNER JOIN StaffRole sr ON sr.StaffRoleID = s.StaffRoleID INNER JOIN Provinces p ON p.ProvinceID = s.ProvinceID INNER JOIN Gender g ON g.GenderID = s.GenderID WHERE p.LangID = 1 AND s.Deleted = 0 ORDER BY StaffID;";
             DataTable dt = objDB.List(strSQL, objConn);
             objConn.Close();
             if (dt.Rows.Count > 0)
@@ -51,18 +51,17 @@ namespace Patch_Control.Models
                     staff.Add(staffData);
                 }
             }
-
-            return staff.ToArray();
-
+                return staff.ToArray();
         }
 
         public IEnumerable<Staff> PostStaffAll(Staff item)
         {
             objConn = objDB.EstablishConnection();
             List<Staff> staff = new List<Staff>();
-            try {
 
+            try {
                 int rowid;
+
                 string strSQL1 = "SELECT MAX(StaffID) AS rowid FROM staffs ;";
                 DataTable dt =objDB.List(strSQL1, objConn);
                 rowid = Convert.ToInt32(dt.Rows[0]["rowid"].ToString());
@@ -75,11 +74,30 @@ namespace Patch_Control.Models
 
                 return staff.ToArray();
             }
-            catch (Exception error){
+            catch (Exception error)
+            {
+                return staff.ToArray();
+            }
+        }
+
+        public IEnumerable<Staff> PostEdStaffAll(Staff item)
+        {
+            objConn = objDB.EstablishConnection();
+            List<Staff> staff = new List<Staff>();
+            try
+            {
+                string strSQL = "UPDATE staffs SET StaffRoleID = " + Convert.ToInt32(item.StaffRoleID) + ", StaffCode = '" + item.StaffCode.ToString() + "', StaffPassword = '" + item.StaffPassword.ToString() + "', GenderID = " + Convert.ToInt32(item.GenderID) + ", StaffFirstname = '" + item.StaffFirstname.ToString() + "', StaffLastname = '" + item.StaffLastname.ToString() + "', StaffAddress1 = '" + item.Address1.ToString() + "', StaffAddress2 = '" + item.Address2.ToString() + "', StaffCity = '" + item.City.ToString() + "', StaffZipcode = '" + item.Zipcode.ToString() + "', StaffTel = '" + item.Telephone.ToString() + "', StaffMobile = '" + item.Mobile.ToString() + "', StaffEmail = '" + item.Email.ToString() + "', ProvinceID = "+ Convert.ToInt32(item.ProvinceID) + " ";
+                strSQL += "WHERE StaffID = '" + Convert.ToInt32(item.StaffID) + "';";
+                objDB.sqlExecute(strSQL, objConn);
+                objConn.Close();
 
                 return staff.ToArray();
             }
-        } 
+            catch (Exception error)
+            {
+                return staff.ToArray();
+            }
+        }
 
         public IEnumerable<StaffRole> GetStaffRoleAll()
         {
@@ -99,11 +117,10 @@ namespace Patch_Control.Models
                     staff.Add(staffData);
                 }
             }
-
-            return staff.ToArray();
-
+                return staff.ToArray();
         }
 
+        
         public IEnumerable<Province> GetProvinceAll()
         {
             objConn = objDB.EstablishConnection();
@@ -122,9 +139,7 @@ namespace Patch_Control.Models
                     staff.Add(staffData);
                 }
             }
-
-            return staff.ToArray();
-
+                return staff.ToArray();
         }
 
         public IEnumerable<Gender> GetGenderAll()
@@ -145,10 +160,45 @@ namespace Patch_Control.Models
                     staff.Add(genderData);
                 }
             }
-
-            return staff.ToArray();
-
+                return staff.ToArray();
         }
 
+        public IEnumerable<StaffRole> PostStaffRoleAll(StaffRole staffRole, List<PermissonItemdata> permissonItemdata)
+        {
+            objConn = objDB.EstablishConnection();
+            List<StaffRole> staff = new List<StaffRole>();
+            try
+            {
+                int rowroleid;
+                int rowaccessid;
+                int i = 0;
+
+                string strSQL1 = "SELECT MAX(StaffRoleID) AS rowroleid FROM staffrole ;";
+                DataTable dt = objDB.List(strSQL1, objConn);
+                rowroleid = Convert.ToInt32(dt.Rows[0]["rowroleid"].ToString());
+                int maxroleid = rowroleid + 1;
+            
+                string strSQL2 = "SELECT MAX(StaffAccessID) AS rowaccessid FROM staffaccess ;";
+                DataTable dt1 = objDB.List(strSQL2, objConn);
+                rowaccessid = Convert.ToInt32(dt1.Rows[0]["rowaccessid"].ToString());
+                int maxaccessid = rowaccessid + 1;
+
+                StringBuilder strSQL3 = new StringBuilder();
+                strSQL3.Append("BEGIN;");
+                strSQL3.Append("INSERT INTO staffrole(StaffRoleID, StaffRoleName) VALUES (" + maxroleid + ",'" + staffRole.StaffRoleName.ToString() + ");");
+                for (i = 0; i < permissonItemdata.Count; i++) {
+                    strSQL3.Append("INSERT INTO staffaccess(StaffAccessID, StaffRoleID, PermissionItemsID) VALUES (" + maxaccessid + "," + maxroleid + ",'" + permissonItemdata[i].ToString() + ");");
+                } ; 
+                strSQL3.Append("COMMIT;");
+                objDB.sqlExecute(strSQL3.ToString(), objConn);
+                objConn.Close();
+
+                return staff.ToArray();
+            }
+            catch (Exception error)
+            {
+                return staff.ToArray();
+            }
+        }
     }
 }

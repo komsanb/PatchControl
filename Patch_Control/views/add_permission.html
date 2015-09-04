@@ -7,7 +7,7 @@
 
             </div>
         </div>
-        <form class="form-horizontal" role="form">
+        <form ng-submit="addstaffrole()" class="form-horizontal" role="form">
             <div class="card-body card-padding">
 
                 <div class="form-group">
@@ -15,12 +15,39 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Staff Role Name">
+                            <input ng-model="StaffRoleName" type="text" class="form-control input-sm" placeholder="Staff Role Name">
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
                 </div>
-
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Manage Permission</label>
+                    <div class="col-sm-6">
+                        <div class="fg-line">
+                            <div class="checkbox m-b-15">
+                                <label>
+                                    <input ng-model="PermissionItemsID" type="checkbox" value="4">
+                                    <i class="input-helper"></i>
+                                    Add StaffRole
+                                </label>
+                            </div>
+                            <div class="checkbox m-b-15">
+                                <label>
+                                    <input ng-model="PermissionItemsID" type="checkbox" value="2">
+                                    <i class="input-helper"></i>
+                                    Edit StaffRole
+                                </label>
+                            </div>
+                            <div class="checkbox m-b-15">
+                                <label>
+                                    <input ng-model="PermissionItemsID" type="checkbox" value="3">
+                                    <i class="input-helper"></i>
+                                    Delete StaffRole
+                                </label>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Manage Staff</label>
                     <div class="col-sm-6">
@@ -28,39 +55,32 @@
                         <div class="fg-line">
                             <div class="checkbox m-b-15">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input ng-model="PermissionItemsID" type="checkbox" value="6">
                                     <i class="input-helper"></i>
                                     Add Staff
                                 </label>
                             </div>
                             <div class="checkbox m-b-15">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input ng-model="PermissionItemsID" type="checkbox" value="8">
                                     <i class="input-helper"></i>
                                     Edit Staff
                                 </label>
                             </div>
                             <div class="checkbox m-b-15">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input ng-model="PermissionItemsID" type="checkbox" value="9">
                                     <i class="input-helper"></i>
                                     Delete Staff
                                 </label>
                             </div>
                             <div class="checkbox m-b-15">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input ng-model="PermissionItemsID" type="checkbox" value="7">
                                     <i class="input-helper"></i>
                                     View Profile
                                 </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="">
-                                    <i class="input-helper"></i>
-                                    Modify Password
-                                </label>
-                            </div>
+                            </div>                           
                         </div>
                     </div>
                 </div>
@@ -71,28 +91,28 @@
                         <div class="fg-line">
                             <div class="checkbox m-b-15">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input ng-model="PermissionItemsID" type="checkbox" value="13">
                                     <i class="input-helper"></i>
                                     Upload File
                                 </label>
                             </div>
                             <div class="checkbox m-b-15">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input ng-model="PermissionItemsID" type="checkbox" value="11">
                                     <i class="input-helper"></i>
                                     Download File
                                 </label>
                             </div>
                             <div class="checkbox m-b-15">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input ng-model="PermissionItemsID" type="checkbox" value="15">
                                     <i class="input-helper"></i>
                                     Edit File
                                 </label>
                             </div>
                             <div class="checkbox m-b-15">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input ng-model="PermissionItemsID" type="checkbox" value="16">
                                     <i class="input-helper"></i>
                                     Delete File
                                 </label>

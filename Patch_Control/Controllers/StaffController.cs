@@ -52,11 +52,25 @@ namespace Patch_Control.Controllers
         {
             return repository.PostStaffAll(item);
         }
+        
+        [HttpPost]
+        [ActionName("StaffAll")]
+        public IEnumerable<Staff> PostEditStaff(Staff item)
+        {
+            return repository.PostEdStaffAll(item);
+        }
+
+        [HttpPost]
+        [ActionName("StaffAll")]
+        public IEnumerable<StaffRole> PostStaffRole(StaffRole staffRole, List<PermissonItemdata> permissonItemdata)
+        {
+            return repository.PostStaffRoleAll(staffRole, permissonItemdata);
+        }
+
         public string Post(int id)
         {
             return "value";
         }
 
-        
     }
 }

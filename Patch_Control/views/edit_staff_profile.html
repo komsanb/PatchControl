@@ -6,146 +6,137 @@
             <br />
         </div>
         <br />
-        <form class="form-horizontal" role="form">
+        <form ng-submit="editstaff()" class="form-horizontal" role="form">
             <div class="card-body card-padding">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">Staff Code</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">Staff Code</label>
+                    <div class="col-sm-5">
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Staff Code">
+                            <input type="text" ng-model="StaffCode" id="StaffCode" class="form-control input-sm" placeholder="Staff Code">
+
                         </div>
                     </div>
+                    <label class="control-label text-danger">*</label>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">Staff Password</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">Staff Password</label>
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Staff Password">
+                            <input type="text" ng-model="StaffPassword" id="StaffPassword" class="form-control input-sm" placeholder="Staff Password">
                         </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">Staff Confirm Password</label>
-                    <div class="col-sm-6">
-
-                        <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Staff Confirm Password">
-                        </div>
-                    </div>
+                    <label class="control-label text-danger">*</label>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">Role</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">Staff Confirm Password</label>
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <div class="col-sm-5">
+                            <input type="text" id="StaffConfirmPassword" class="form-control input-sm" placeholder="Staff Confirm Password">
+                        </div>
+                    </div>
+                    <label class="control-label text-danger">*</label>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Role</label>
+                    <div class="col-sm-5">
+                        <div class="fg-line">
+                            <div class="col-sm-6">
                                 <div class="fg-line select">
-                                    <select class="form-control">
-                                        <option>-- Select Role --</option>
-                                        <option>Admin</option>
-                                        <option>Account</option>
-                                        <option>Support</option>
-                                        <option>Programmer</option>
-                                        <option>Implementer</option>
+                                    <select class="form-control" id="StaffRoleID" ng-model="StaffRoleID" ng-options="options.StaffRoleID as options.StaffRoleName for options in staffrole">
+                                        <option value="">-- Select Role --</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <label class="control-label text-danger">*</label>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">Gender</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">Gender</label>
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
                             <label class="radio radio-inline m-r-20">
-                                <input type="radio" name="inlineRadioOptions" value="option1">
+                                <input ng-model="GenderID" value="1" type="radio" name="inlineRadioOptions">
                                 <i class="input-helper"></i>
-                                Men
+                                Male
                             </label>
-
                             <label class="radio radio-inline m-r-20">
-                                <input type="radio" name="inlineRadioOptions" value="option2">
+                                <input ng-model="GenderID" value="2" type="radio" name="inlineRadioOptions">
                                 <i class="input-helper"></i>
-                                Women
+                                Female
                             </label>
                         </div>
+
                     </div>
+                    <label class="control-label text-danger">*</label>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">First Name</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">First Name</label>
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="First Name">
+                            <input ng-model="StaffFirstname" id="StaffFirstname" type="text" class="form-control input-sm" placeholder="First Name">
                         </div>
                     </div>
+                    <label class="control-label text-danger">*</label>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">Last Name</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">Last Name</label>
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Last Name">
+                            <input ng-model="StaffLastname" id="StaffLastname" type="text" class="form-control input-sm" placeholder="Last Name">
                         </div>
                     </div>
+                    <label class="control-label text-danger">*</label>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Address 1</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Address 1">
+                            <input ng-model="Address1" id="Address1" type="text" class="form-control input-sm" placeholder="Address 1">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Address 2</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Address 2">
+                            <input ng-model="Address2" id="Address2" type="text" class="form-control input-sm" placeholder="Address 2">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">City</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="City">
+                            <input ng-model="City" id="City" type="text" class="form-control input-sm" placeholder="City">
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Province</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <div class="col-sm-5">
+                            <div class="col-sm-7">
                                 <div class="fg-line select">
-                                    <select class="form-control">
-                                        <option>-- Select Province --</option>
-                                        <option>Bangkok</option>
-                                        <option>Chiang Rai</option>
-                                        <option>Chiang Mai</option>
-                                        <option>Nan</option>
-                                        <option>Phayao</option>
-                                        <option>Phrae</option>
-                                        <option>Mae Hong Son</option>
-                                        <option>Lampang</option>
-                                        <option>Lamphun</option>
-                                        <option>Uttaradit</option>
+                                    <select class="form-control" id="ProvinceID" ng-model="ProvinceID" ng-options="options.ProvinceID as options.ProvinceName for options in province">
+                                        <option value="">-- Select Province --</option>
                                     </select>
                                 </div>
                             </div>
@@ -155,45 +146,45 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Zip Code</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Zip Code">
+                            <input id="Zipcode" ng-model="Zipcode" type="text" class="form-control input-sm" placeholder="Zip Code">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Telephone</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Telephone">
+                            <input id="Telephone" ng-model="Telephone" type="text" class="form-control input-sm" placeholder="Telephone">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Mobile</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Mobile">
+                            <input id="Mobile" ng-model="Mobile" type="text" class="form-control input-sm" placeholder="Mobile">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Email Address</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Email Address">
+                            <input id="Email" ng-model="Email" type="text" class="form-control input-sm" placeholder="Email Address">
                         </div>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label class="col-sm-2 control-label">Picture File</label>
                     <div class="col-sm-6">
 
@@ -210,11 +201,11 @@
                         </div>
 
                     </div>
-                </div>
+                </div>-->
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button onclick="parent.location = '#/staff'" type="submit" class="btn btn-primary btn-sm">Update Staff Information</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Update Staff Information</button>
                         <button onclick="parent.location = '#/staff'" type="submit" class="btn btn-primary btn-sm">Cancle</button>
                     </div>
 

@@ -56,6 +56,24 @@ namespace Patch_Control.Models
         public int StaffRoleID { get; set; }
 
         public string StaffRoleName { get; set; }
+
+        public int StaffAccessID { get; set; }
+    }
+
+    public class PermissonItemdata
+    {
+        public int PermissionItemID { get; set; }
+
+        public int PermissionGroupID { get; set; }
+
+        public string PermissionItemUrl { get; set; }
+
+        public string PermissionItemIcon { get; set; }
+
+        public string PermissionItemName { get; set; }
+
+        public int PermissionItemParent { get; set; }
+
     }
 
     public class Province

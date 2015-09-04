@@ -33,19 +33,19 @@ app.config(['$routeProvider',
                }).
                when('/add_permission', {
                    templateUrl: 'views/add_permission.html',
-                   controller: 'staffController'
+                   controller: 'PermissionController'
                }).
                when('/staffProfile', {
                    templateUrl: 'views/staffProfile.html',
                    // controller: 'ViewStudentsController'
                }).
-               when('/edit_staff_role', {
+               when('/edit_staff_role/:id', {
                    templateUrl: 'views/edit_staff_role.html',
-                   // controller: 'ViewStudentsController'
+                   controller: 'staffController'
                }).
-               when('/edit_staff_profile', {
+               when('/edit_staff_profile/:id', {
                    templateUrl: 'views/edit_staff_profile.html',
-                   // controller: 'ViewStudentsController'
+                   controller: 'staffController'
                }).
                when('/change_password', {
                    templateUrl: 'views/change_password.html',
@@ -68,6 +68,11 @@ app.controller("staffController", function ($scope, $http) {
 
     });
 
+    $scope.go = function (data) {
+        window.location = "#/edit_staff_profile/" + data;
+
+    }
+
     $http.get("api/staff/staffrole").success(function (data) {
 
         $scope.staffrole = data;
@@ -88,7 +93,6 @@ app.controller("staffController", function ($scope, $http) {
 
     $scope.addstaff = function () {
         if ($scope.Address1 == null, $scope.Address2 == null, $scope.City == null, $scope.Zipcode == null, $scope.Telephone == null, $scope.Mobile == null, $scope.Email == null) {
-
             $scope.Address1 = "";
             $scope.Address2 = "";
             $scope.City = "";
@@ -99,20 +103,20 @@ app.controller("staffController", function ($scope, $http) {
 
         }      
             var staff = {
-                "StaffCode": $scope.StaffCode,
-                "StaffPassword": $scope.StaffPassword,
-                "StaffRoleID": $scope.StaffRoleID,
-                "GenderID": $scope.GenderID,
-                "StaffFirstname": $scope.StaffFirstname,
-                "StaffLastname": $scope.StaffLastname,
-                "Address1": $scope.Address1,
-                "Address2": $scope.Address2,
-                "City": $scope.City,
-                "ProvinceID": $scope.ProvinceID,
-                "Zipcode": $scope.Zipcode,
-                "Telephone": $scope.Telephone,
-                "Mobile": $scope.Mobile,
-                "Email": $scope.Email
+                "StaffCode" : $scope.StaffCode,
+                "StaffPassword" : $scope.StaffPassword,
+                "StaffRoleID" : $scope.StaffRoleID,
+                "GenderID" : $scope.GenderID,
+                "StaffFirstname" : $scope.StaffFirstname,
+                "StaffLastname" : $scope.StaffLastname,
+                "Address1" : $scope.Address1,
+                "Address2" : $scope.Address2,
+                "City" : $scope.City,
+                "ProvinceID" : $scope.ProvinceID,
+                "Zipcode" : $scope.Zipcode,
+                "Telephone" : $scope.Telephone,
+                "Mobile" : $scope.Mobile,
+                "Email" : $scope.Email
             };
         
             console.log(staff);
@@ -124,25 +128,63 @@ app.controller("staffController", function ($scope, $http) {
         window.location = "#/staff"
         window.location.reload(true);
     }
-    
-    //$scope.cancel = function () {
-    //    $scope.editing = false;
-    //    $scope.data = $scope.copy;
-    //}
-    //$http.get("api/staff/province", { params: { StaffsID: $scope.StaffsID } }).success(function (data) {
-    //    alert("Deleted Successfully!!");
-    //    cleardetails();
-    //    selectStudentDetails('', '');
-    //})
-    //  .error(function () {
-    //      $scope.error = "An Error has occured while loading posts!";
-    //  });       
+
+    $scope.editstaff = function () {
+        if ($scope.Address1 == null, $scope.Address2 == null, $scope.City == null, $scope.Zipcode == null, $scope.Telephone == null, $scope.Mobile == null, $scope.Email == null) {
+            $scope.Address1 = "";
+            $scope.Address2 = "";
+            $scope.City = "";
+            $scope.Zipcode = "";
+            $scope.Telephone = "";
+            $scope.Mobile = "";
+            $scope.Email = "";
+
+        }
+        var staff = {
+            "StaffID" : 2,
+            "StaffCode": $scope.StaffCode,
+            "StaffPassword": $scope.StaffPassword,
+            "StaffRoleID": $scope.StaffRoleID,
+            "GenderID": $scope.GenderID,
+            "StaffFirstname": $scope.StaffFirstname,
+            "StaffLastname": $scope.StaffLastname,
+            "Address1": $scope.Address1,
+            "Address2": $scope.Address2,
+            "City": $scope.City,
+            "ProvinceID": $scope.ProvinceID,
+            "Zipcode": $scope.Zipcode,
+            "Telephone": $scope.Telephone,
+            "Mobile": $scope.Mobile,
+            "Email": $scope.Email
+        };
+
+        console.log(staff);
+        $http.Post("api/staff/staffall", staff).success(function (data, header, status, config) {
+
+            $scope.staff = data;
+
+        });
+        window.location = "#/staff"
+        window.location.reload(true);
+    }
 });
 
-app.controller('patchInfoController', function ($scope, $http) {
-    $http.get('api/patchs/PatchInformations')
-    .success(function (response) {
-        $scope.patchs = response;
-    })
-});
+app.controller("PermissionController", function ($scope, $http) {
+    $scope.addstaffrole = function () {
+        
+        var staff = {
+            "StaffRoleName": $scope.StaffRoleName,
+            "PermissionItemsID": $scope.PermissionItemsID
+        };
 
+        console.log(staff);
+        $http.post("api/staff/staffall", staff).success(function (data, header, status, config) {
+
+            $scope.staff = data;
+
+        });
+        window.location = "#/permission_staff"
+        window.location.reload(true);
+    }
+
+});

@@ -80,24 +80,24 @@ namespace Patch_Control.Models
             }
         }
 
-        public IEnumerable<Staff> PostEdStaffAll(Staff item)
-        {
-            objConn = objDB.EstablishConnection();
-            List<Staff> staff = new List<Staff>();
-            try
-            {
-                string strSQL = "UPDATE staffs SET StaffRoleID = " + Convert.ToInt32(item.StaffRoleID) + ", StaffCode = '" + item.StaffCode.ToString() + "', StaffPassword = '" + item.StaffPassword.ToString() + "', GenderID = " + Convert.ToInt32(item.GenderID) + ", StaffFirstname = '" + item.StaffFirstname.ToString() + "', StaffLastname = '" + item.StaffLastname.ToString() + "', StaffAddress1 = '" + item.Address1.ToString() + "', StaffAddress2 = '" + item.Address2.ToString() + "', StaffCity = '" + item.City.ToString() + "', StaffZipcode = '" + item.Zipcode.ToString() + "', StaffTel = '" + item.Telephone.ToString() + "', StaffMobile = '" + item.Mobile.ToString() + "', StaffEmail = '" + item.Email.ToString() + "', ProvinceID = "+ Convert.ToInt32(item.ProvinceID) + " ";
-                strSQL += "WHERE StaffID = '" + Convert.ToInt32(item.StaffID) + "';";
-                objDB.sqlExecute(strSQL, objConn);
-                objConn.Close();
+        //public IEnumerable<Staff> PostEdStaffAll(Staff item)
+        //{
+        //    objConn = objDB.EstablishConnection();
+        //    List<Staff> staff = new List<Staff>();
+        //    try
+        //    {
+        //        string strSQL = "UPDATE staffs SET StaffRoleID = " + Convert.ToInt32(item.StaffRoleID) + ", StaffCode = '" + item.StaffCode.ToString() + "', StaffPassword = '" + item.StaffPassword.ToString() + "', GenderID = " + Convert.ToInt32(item.GenderID) + ", StaffFirstname = '" + item.StaffFirstname.ToString() + "', StaffLastname = '" + item.StaffLastname.ToString() + "', StaffAddress1 = '" + item.Address1.ToString() + "', StaffAddress2 = '" + item.Address2.ToString() + "', StaffCity = '" + item.City.ToString() + "', StaffZipcode = '" + item.Zipcode.ToString() + "', StaffTel = '" + item.Telephone.ToString() + "', StaffMobile = '" + item.Mobile.ToString() + "', StaffEmail = '" + item.Email.ToString() + "', ProvinceID = "+ Convert.ToInt32(item.ProvinceID) + " ";
+        //        strSQL += "WHERE StaffID = '" + Convert.ToInt32(item.StaffID) + "';";
+        //        objDB.sqlExecute(strSQL, objConn);
+        //        objConn.Close();
 
-                return staff.ToArray();
-            }
-            catch (Exception error)
-            {
-                return staff.ToArray();
-            }
-        }
+        //        return staff.ToArray();
+        //    }
+        //    catch (Exception error)
+        //    {
+        //        return staff.ToArray();
+        //    }
+        //}
 
         public IEnumerable<StaffRole> GetStaffRoleAll()
         {
@@ -120,7 +120,29 @@ namespace Patch_Control.Models
                 return staff.ToArray();
         }
 
-        
+        public IEnumerable<StaffAccess> GetstaffAccessAll()
+        {
+            objConn = objDB.EstablishConnection();
+            List<StaffAccess> staffaccess = new List<StaffAccess>();
+            string strSQL = "SELECT * FROM staffaccess sa INNER JOIN staffrole sr ON sr.StaffRoleID = sa.StaffRoleID ORDER BY sa.StaffAccessID";
+            DataTable dt = objDB.List(strSQL, objConn);
+            objConn.Close();
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    StaffAccess staffAccess = new StaffAccess();
+                    staffAccess.StaffAccessID = Convert.ToInt32(dt.Rows[i]["StaffAccessID"].ToString());
+                    staffAccess.StaffRoleID = Convert.ToInt32(dt.Rows[i]["StaffRoleID"].ToString());
+                    staffAccess.PermissionItemID = Convert.ToInt32(dt.Rows[i]["PermissionItemID"].ToString());
+                    staffAccess.StaffRoleName = dt.Rows[i]["StaffRoleName"].ToString();
+
+                    staffaccess.Add(staffAccess);
+                }
+            }
+            return staffaccess.ToArray();
+        }
+
         public IEnumerable<Province> GetProvinceAll()
         {
             objConn = objDB.EstablishConnection();
@@ -163,10 +185,73 @@ namespace Patch_Control.Models
                 return staff.ToArray();
         }
 
-        public IEnumerable<StaffRole> PostStaffRoleAll(StaffRole staffRole, List<PermissonItemdata> permissonItemdata)
+        public IEnumerable<PermissionItemdata> GetpermissionItemdataAll()
         {
             objConn = objDB.EstablishConnection();
-            List<StaffRole> staff = new List<StaffRole>();
+            List<PermissionItemdata> permissionItem = new List<PermissionItemdata>();
+            string strSQL = "SELECT * FROM permissionitems";
+            DataTable dt = objDB.List(strSQL, objConn);
+            objConn.Close();
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    PermissionItemdata PermissionItemdataData = new PermissionItemdata();
+                    PermissionItemdataData.PermissionItemID = Convert.ToInt32(dt.Rows[i]["PermissionItemID"].ToString());
+                    PermissionItemdataData.PermissionGroupID = Convert.ToInt32(dt.Rows[i]["PermissionGroupID"].ToString());
+                    PermissionItemdataData.PermissionItemUrl = dt.Rows[i]["PermissionItemUrl"].ToString();
+                    PermissionItemdataData.PermissionItemName = dt.Rows[i]["PermissionItemName"].ToString();
+                    PermissionItemdataData.PermissionItemParent = Convert.ToInt32(dt.Rows[i]["PermissionItemParent"].ToString());
+                    PermissionItemdataData.Deleted = Convert.ToInt32(dt.Rows[i]["Deleted"].ToString());
+
+                    permissionItem.Add(PermissionItemdataData);
+                }
+            }
+            return permissionItem.ToArray();
+        }
+
+        //public IEnumerable<StaffAccess> PostStaffAccessAll(StaffAccess staffaccess, List<PermissionItemdata> permissionItemdata)
+        //{
+        //    objConn = objDB.EstablishConnection();
+        //    List<StaffAccess> staffAccess = new List<StaffAccess>();
+        //    try
+        //    {
+        //        int rowroleid;
+        //        int rowaccessid;
+        //        int i = 0;
+
+        //        string strSQL1 = "SELECT MAX(StaffRoleID) AS rowroleid FROM staffrole ;";
+        //        DataTable dt = objDB.List(strSQL1, objConn);
+        //        rowroleid = Convert.ToInt32(dt.Rows[0]["rowroleid"].ToString());
+        //        int maxroleid = rowroleid + 1;
+            
+        //        string strSQL2 = "SELECT MAX(StaffAccessID) AS rowaccessid FROM staffaccess ;";
+        //        DataTable dt1 = objDB.List(strSQL2, objConn);
+        //        rowaccessid = Convert.ToInt32(dt1.Rows[0]["rowaccessid"].ToString());
+        //        int maxaccessid = rowaccessid + 1;
+
+        //        StringBuilder strSQL3 = new StringBuilder();
+        //        strSQL3.Append("BEGIN;");
+        //        strSQL3.Append("INSERT INTO staffrole(StaffRoleID, StaffRoleName) VALUES (" + maxroleid + ",'" + staffaccess.StaffRoleName.ToString() + ");");
+        //        for (i = 0; i < permissionItemdata.Count; i++) {
+        //            strSQL3.Append("INSERT INTO staffaccess(StaffAccessID, StaffRoleID, PermissionItemsID) VALUES (" + maxaccessid + "," + maxroleid + ",'" + permissionItemdata[i].PermissionItemID.ToString() + ");");
+        //        } ; 
+        //        strSQL3.Append("COMMIT;");
+        //        objDB.sqlExecute(strSQL3.ToString(), objConn);
+        //        objConn.Close();
+
+        //        return staffAccess.ToArray();
+        //    }
+        //    catch (Exception error)
+        //    {
+        //        return staffAccess.ToArray();
+        //    }
+        //}
+
+        public IEnumerable<StaffAccess> PostStaffAccessAll(StaffAccess staffaccess)
+        {
+            objConn = objDB.EstablishConnection();
+            List<StaffAccess> staffAccess = new List<StaffAccess>();
             try
             {
                 int rowroleid;
@@ -177,7 +262,7 @@ namespace Patch_Control.Models
                 DataTable dt = objDB.List(strSQL1, objConn);
                 rowroleid = Convert.ToInt32(dt.Rows[0]["rowroleid"].ToString());
                 int maxroleid = rowroleid + 1;
-            
+
                 string strSQL2 = "SELECT MAX(StaffAccessID) AS rowaccessid FROM staffaccess ;";
                 DataTable dt1 = objDB.List(strSQL2, objConn);
                 rowaccessid = Convert.ToInt32(dt1.Rows[0]["rowaccessid"].ToString());
@@ -185,20 +270,22 @@ namespace Patch_Control.Models
 
                 StringBuilder strSQL3 = new StringBuilder();
                 strSQL3.Append("BEGIN;");
-                strSQL3.Append("INSERT INTO staffrole(StaffRoleID, StaffRoleName) VALUES (" + maxroleid + ",'" + staffRole.StaffRoleName.ToString() + ");");
-                for (i = 0; i < permissonItemdata.Count; i++) {
-                    strSQL3.Append("INSERT INTO staffaccess(StaffAccessID, StaffRoleID, PermissionItemsID) VALUES (" + maxaccessid + "," + maxroleid + ",'" + permissonItemdata[i].ToString() + ");");
-                } ; 
+                strSQL3.Append("INSERT INTO staffrole(StaffRoleID, StaffRoleName) VALUES (" + maxroleid + ",'" + staffaccess.StaffRoleName.ToString() + "');");
+                
+                    strSQL3.Append("INSERT INTO staffaccess(StaffAccessID, StaffRoleID, PermissionItemID) VALUES (" + maxaccessid + "," + maxroleid + "," + staffaccess.PermissionItemID.ToString() + ");");
+        
                 strSQL3.Append("COMMIT;");
                 objDB.sqlExecute(strSQL3.ToString(), objConn);
                 objConn.Close();
 
-                return staff.ToArray();
+                return staffAccess.ToArray();
             }
             catch (Exception error)
             {
-                return staff.ToArray();
+                return staffAccess.ToArray();
             }
         }
+
+
     }
 }

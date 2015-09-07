@@ -12,9 +12,12 @@ namespace Patch_Control.Models
         IEnumerable<StaffRole> GetStaffRoleAll();
         IEnumerable<Province> GetProvinceAll();
         IEnumerable<Gender> GetGenderAll();
+        IEnumerable<PermissionItemdata> GetpermissionItemdataAll();
+        IEnumerable<StaffAccess> GetstaffAccessAll();
         IEnumerable<Staff> PostStaffAll(Staff item);
-        IEnumerable<Staff> PostEdStaffAll(Staff item);
-        IEnumerable<StaffRole> PostStaffRoleAll(StaffRole staffRole, List<PermissonItemdata> permissonItemdata);
+        //IEnumerable<Staff> PostEdStaffAll(Staff item);
+        IEnumerable<StaffAccess> PostStaffAccessAll(StaffAccess staffAccess);
+        //IEnumerable<StaffRole> PostStaffRoleAll(StaffRole staffRole, List<PermissionItemdata> permissionItemdata);
     }
 
 }

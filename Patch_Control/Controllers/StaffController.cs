@@ -11,6 +11,7 @@ namespace Patch_Control.Controllers
     public class StaffController : ApiController
     {
         StaffRepository repository = new StaffRepository();
+
         // GET api/staff/staffall
         [HttpGet]
         [ActionName("StaffAll")]
@@ -18,6 +19,7 @@ namespace Patch_Control.Controllers
         {
             return repository.GetStaffAll();
         }     
+
         // GET api/staff/staffrole
         [HttpGet]
         [ActionName("StaffRole")]
@@ -25,6 +27,7 @@ namespace Patch_Control.Controllers
         {
             return repository.GetStaffRoleAll();
         }
+
         // GET api/staff/province
         [HttpGet]
         [ActionName("Province")]
@@ -32,6 +35,7 @@ namespace Patch_Control.Controllers
         {
             return repository.GetProvinceAll();
         }
+
         // GET api/staff/gender
         [HttpGet]
         [ActionName("Gender")]
@@ -39,6 +43,22 @@ namespace Patch_Control.Controllers
         {
             return repository.GetGenderAll();
         }
+
+        //GET api/staff/permissonItemdata
+        [HttpGet]
+        [ActionName("PermissonItemdata")]
+        public IEnumerable<PermissionItemdata> GetpermissionItemdata()
+        {
+            return repository.GetpermissionItemdataAll();
+        }
+
+        [HttpGet]
+        [ActionName("StaffAccess")]
+        public IEnumerable<StaffAccess> GetstaffAccess()
+        {
+            return repository.GetstaffAccessAll();
+        }
+
         // GET api/<controller>/5
         public string Get(int id)
         {
@@ -52,19 +72,29 @@ namespace Patch_Control.Controllers
         {
             return repository.PostStaffAll(item);
         }
-        
-        [HttpPost]
-        [ActionName("StaffAll")]
-        public IEnumerable<Staff> PostEditStaff(Staff item)
-        {
-            return repository.PostEdStaffAll(item);
-        }
 
+        // POST api/staff/staffall
+        //[HttpPost]
+        //[ActionName("StaffEditAll")]
+        //public IEnumerable<Staff> PostEditStaff(Staff item)
+        //{
+        //    return repository.PostEdStaffAll(item);
+        //}
+
+        // POST api/staff/staffrole
+        //[HttpPost]
+        //[ActionName("StaffRole")]
+        //public IEnumerable<StaffRole> PostStaffRole(StaffRole staffRole, List<PermissionItemdata> permissionItemdata)
+        //{
+        //    return repository.PostStaffRoleAll(staffRole, permissionItemdata);
+        //}
+
+        // POST api/staff/staffaccess
         [HttpPost]
-        [ActionName("StaffAll")]
-        public IEnumerable<StaffRole> PostStaffRole(StaffRole staffRole, List<PermissonItemdata> permissonItemdata)
+        [ActionName("StaffAccess")]
+        public IEnumerable<StaffAccess> PostStaffAccess(StaffAccess staffAccess)
         {
-            return repository.PostStaffRoleAll(staffRole, permissonItemdata);
+            return repository.PostStaffAccessAll(staffAccess);
         }
 
         public string Post(int id)

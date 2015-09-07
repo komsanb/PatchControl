@@ -169,22 +169,63 @@ app.controller("staffController", function ($scope, $http) {
     }
 });
 
+
+
 app.controller("PermissionController", function ($scope, $http) {
+    $scope.inputs = []
+
+
+
+
+    $scope.permissions = [
+    { id: 2, text: 'Edit StaffRole' },
+    { id: 3, text: 'Delete StaffRole' },
+    { id: 4, text: 'Add StaffRole' }
+
+    ];
+
+    $scope.permissions2 = [
+      2 ,
+      4 
+
+    ];
+
+    // toggle selection for a given fruit by name
+    $scope.toggleSelection = function toggleSelection(PremisstionID) {
+   
+        var idx = $scope.permissions2.indexOf(PremisstionID);
+
+        // is currently selected
+        if (idx > -1) {
+            $scope.permissions2.splice(idx, 1);
+        }
+
+            // is newly selected
+        else {
+            $scope.permissions2.push(PremisstionID);
+        }
+    };
+
+
+   
     $scope.addstaffrole = function () {
-        
-        var staff = {
+   
+
+        var staffaccess = {
             "StaffRoleName": $scope.StaffRoleName,
-            "PermissionItemsID": $scope.PermissionItemsID
+            "PermissionItemID": $scope.permissions2
         };
 
-        console.log(staff);
-        $http.post("api/staff/staffall", staff).success(function (data, header, status, config) {
+        console.log(staffaccess);
+        $http.post("api/staff/staffaccess", staffaccess).success(function (data, header, status, config) {
 
-            $scope.staff = data;
+            $scope.staffaccess = data;
 
         });
-        window.location = "#/permission_staff"
-        window.location.reload(true);
-    }
+        //window.location = "#/permission_staff"
+        //window.location.reload(true);
 
+       
+    }
+ 
 });

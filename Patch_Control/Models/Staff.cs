@@ -57,10 +57,11 @@ namespace Patch_Control.Models
 
         public string StaffRoleName { get; set; }
 
-        public int StaffAccessID { get; set; }
+        public int PermissionItemsID { get; set; }    
+
     }
 
-    public class PermissonItemdata
+    public class PermissionItemdata
     {
         public int PermissionItemID { get; set; }
 
@@ -73,6 +74,8 @@ namespace Patch_Control.Models
         public string PermissionItemName { get; set; }
 
         public int PermissionItemParent { get; set; }
+
+        public int Deleted { get; set; }
 
     }
 
@@ -90,4 +93,14 @@ namespace Patch_Control.Models
         public string GenderName { get; set; }
     }
 
+    public class StaffAccess
+    {
+        public int StaffAccessID { get; set; }
+
+        public int StaffRoleID { get; set; }
+
+        public int PermissionItemID { get; set; }
+
+        public string StaffRoleName { get; set; }
+    }
 }

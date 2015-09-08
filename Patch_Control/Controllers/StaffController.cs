@@ -44,7 +44,7 @@ namespace Patch_Control.Controllers
             return repository.GetGenderAll();
         }
 
-        //GET api/staff/permissonItemdata
+        // GET api/staff/permissonItemdata
         [HttpGet]
         [ActionName("PermissonItemdata")]
         public IEnumerable<PermissionItemdata> GetpermissionItemdata()
@@ -52,12 +52,12 @@ namespace Patch_Control.Controllers
             return repository.GetpermissionItemdataAll();
         }
 
-        [HttpGet]
-        [ActionName("StaffAccess")]
-        public IEnumerable<StaffAccess> GetstaffAccess()
-        {
-            return repository.GetstaffAccessAll();
-        }
+        //[HttpGet]
+        //[ActionName("StaffAccess")]
+        //public IEnumerable<StaffAccess> GetstaffAccess()
+        //{
+        //    return repository.GetstaffAccessAll();
+        //}
 
         // GET api/<controller>/5
         public string Get(int id)
@@ -94,8 +94,18 @@ namespace Patch_Control.Controllers
         [ActionName("StaffAccess")]
         public IEnumerable<StaffAccess> PostStaffAccess(StaffAccess staffAccess)
         {
-            return repository.PostStaffAccessAll(staffAccess);
+            Console.WriteLine(staffAccess);
+
+            return repository.PostStaffAccessAll(staffAccess );
         }
+
+        // POST api/staff/permissonItemdata
+        //[HttpPost]
+        //[ActionName("PermissonItemdata")]
+        //public IEnumerable<PermissionItemdata> PostPermissonItemdata(PermissionItemdata PermissionItemdata)
+        //{
+        //    return repository.PostPermissonItemdataAll(PermissionItemdata);
+        //}
 
         public string Post(int id)
         {

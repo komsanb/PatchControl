@@ -24,83 +24,42 @@
                     <label class="col-sm-2 control-label">Manage Permission</label>
                     <div class="col-sm-6">
                         <div class="fg-line">
+                            <!--<div class="checkbox m-b-15" ng-repeat="permission in permissions">
+                                <label>
+                                    <input type="checkbox" value="{{permission.id}}" ng-checked="permissions2.indexOf(permission.id) > -1" ng-click="toggleSelection(permission.id)"> {{permission.text}}
+                                    <i class="input-helper"></i>
+                                </label>
+                            </div>-->
                             <div class="checkbox m-b-15" ng-repeat="permission in permissions">
                                 <label >
-                                    <input type="checkbox"  value="{{permission.id}}" ng-checked="permissions2.indexOf(permission.id) > -1" ng-click="toggleSelection(permission.id)"> {{permission.text}}
+                                    <input type="checkbox" value="{{permission.id}}" ng-click="toggleSelection(permission.id)"> {{permission.text}}
                                    <i class="input-helper"></i>
                                 </label>
                             </div>
-                            {{inputs}}
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Manage Staff</label>
                     <div class="col-sm-6">
-
                         <div class="fg-line">
-                            <div class="checkbox m-b-15">
+                            <div class="checkbox m-b-15" ng-repeat="staff in staffs">
                                 <label>
-                                    <input type="checkbox" ng-true-value="6">
+                                    <input type="checkbox" value="{{staff.id}}" ng-click="toggleSelection(staff.id)"> {{staff.text}}
                                     <i class="input-helper"></i>
-                                    Add Staff
                                 </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="8">
-                                    <i class="input-helper"></i>
-                                    Edit Staff
-                                </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="9">
-                                    <i class="input-helper"></i>
-                                    Delete Staff
-                                </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="7">
-                                    <i class="input-helper"></i>
-                                    View Profile
-                                </label>
-                            </div>                           
+                            </div>                        
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Manage File</label>
                     <div class="col-sm-6">
-
                         <div class="fg-line">
-                            <div class="checkbox m-b-15">
+                            <div class="checkbox m-b-15" ng-repeat="file in files">
                                 <label>
-                                    <input type="checkbox" value="13">
+                                    <input type="checkbox" value="{{file.id}}" ng-click="toggleSelection(file.id)"> {{file.text}}
                                     <i class="input-helper"></i>
-                                    Upload File
-                                </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="11">
-                                    <i class="input-helper"></i>
-                                    Download File
-                                </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="15">
-                                    <i class="input-helper"></i>
-                                    Edit File
-                                </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="16">
-                                    <i class="input-helper"></i>
-                                    Delete File
                                 </label>
                             </div>
                         </div>

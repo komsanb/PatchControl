@@ -99,7 +99,7 @@ namespace Patch_Control.Models
 
         public int StaffRoleID { get; set; }
 
-        public int PermissionItemID { get; set; }
+        public List<int> PermissionItemID { get; set; }
 
         public string StaffRoleName { get; set; }
     }

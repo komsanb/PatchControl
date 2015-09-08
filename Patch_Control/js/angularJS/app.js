@@ -172,28 +172,36 @@ app.controller("staffController", function ($scope, $http) {
 
 
 app.controller("PermissionController", function ($scope, $http) {
-    $scope.inputs = []
-
-
-
 
     $scope.permissions = [
-    { id: 2, text: 'Edit StaffRole' },
-    { id: 3, text: 'Delete StaffRole' },
-    { id: 4, text: 'Add StaffRole' }
+    { id: 2, text: 'Add StaffRole' },
+    { id: 3, text: 'Edit StaffRole' },
+    { id: 4, text: 'Delete StaffRole' }
+    ];
 
+    $scope.staffs = [
+    { id: 6, text: 'Add Staff' },
+    { id: 7, text: 'Edit Staff' },
+    { id: 8, text: 'Delete Staff' },
+    { id: 9, text: 'View Profile' }
+    ];
+
+    $scope.files = [
+    { id: 11, text: 'Download File' },
+    { id: 13, text: 'Upload File' },
+    { id: 15, text: 'Edit File' },
+    { id: 16, text: 'Delete File' }
     ];
 
     $scope.permissions2 = [
-      2 ,
-      4 
 
-    ];
+    ]
+    ;
 
     // toggle selection for a given fruit by name
-    $scope.toggleSelection = function toggleSelection(PremisstionID) {
+    $scope.toggleSelection = function toggleSelection(PermisstionID) {
    
-        var idx = $scope.permissions2.indexOf(PremisstionID);
+        var idx = $scope.permissions2.indexOf(PermisstionID);
 
         // is currently selected
         if (idx > -1) {
@@ -202,29 +210,29 @@ app.controller("PermissionController", function ($scope, $http) {
 
             // is newly selected
         else {
-            $scope.permissions2.push(PremisstionID);
+            $scope.permissions2.push(PermisstionID);
         }
     };
-
 
    
     $scope.addstaffrole = function () {
    
-
         var staffaccess = {
             "StaffRoleName": $scope.StaffRoleName,
             "PermissionItemID": $scope.permissions2
         };
 
+        //var parameters = { 'staffaccess': { 'StaffRoleName': $scope.StaffRoleName }, 'permissionItemdata': $scope.permissions2 };
+        //var parameters = {'StaffRoleName': $scope.StaffRoleName , 'permissionItemdata': $scope.permissions2 };
         console.log(staffaccess);
         $http.post("api/staff/staffaccess", staffaccess).success(function (data, header, status, config) {
 
             $scope.staffaccess = data;
 
         });
+
         //window.location = "#/permission_staff"
         //window.location.reload(true);
-
        
     }
  

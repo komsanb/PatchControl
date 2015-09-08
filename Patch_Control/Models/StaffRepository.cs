@@ -120,28 +120,29 @@ namespace Patch_Control.Models
                 return staff.ToArray();
         }
 
-        public IEnumerable<StaffAccess> GetstaffAccessAll()
-        {
-            objConn = objDB.EstablishConnection();
-            List<StaffAccess> staffaccess = new List<StaffAccess>();
-            string strSQL = "SELECT * FROM staffaccess sa INNER JOIN staffrole sr ON sr.StaffRoleID = sa.StaffRoleID ORDER BY sa.StaffAccessID";
-            DataTable dt = objDB.List(strSQL, objConn);
-            objConn.Close();
-            if (dt.Rows.Count > 0)
-            {
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    StaffAccess staffAccess = new StaffAccess();
-                    staffAccess.StaffAccessID = Convert.ToInt32(dt.Rows[i]["StaffAccessID"].ToString());
-                    staffAccess.StaffRoleID = Convert.ToInt32(dt.Rows[i]["StaffRoleID"].ToString());
-                    staffAccess.PermissionItemID = Convert.ToInt32(dt.Rows[i]["PermissionItemID"].ToString());
-                    staffAccess.StaffRoleName = dt.Rows[i]["StaffRoleName"].ToString();
+        //public IEnumerable<StaffAccess> GetstaffAccessAll()
+        //{
+        //    objConn = objDB.EstablishConnection();
+        //    List<StaffAccess> staffaccess = new List<StaffAccess>();
+        //    string strSQL = "SELECT * FROM staffaccess sa INNER JOIN staffrole sr ON sr.StaffRoleID = sa.StaffRoleID ORDER BY sa.StaffAccessID";
+        //    DataTable dt = objDB.List(strSQL, objConn);
+        //    objConn.Close();
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        for (int i = 0; i < dt.Rows.Count; i++)
+        //        {
+        //            StaffAccess staffAccess = new StaffAccess();
+        //            staffAccess.StaffAccessID = Convert.ToInt32(dt.Rows[i]["StaffAccessID"].ToString());
+        //            staffAccess.StaffRoleID = Convert.ToInt32(dt.Rows[i]["StaffRoleID"].ToString());
+                   
+        //            staffAccess.PermissionItemID = Convert.ToInt32(dt.Rows[i]["PermissionItemID"].ToString());
+        //            staffAccess.StaffRoleName = dt.Rows[i]["StaffRoleName"].ToString();
 
-                    staffaccess.Add(staffAccess);
-                }
-            }
-            return staffaccess.ToArray();
-        }
+        //            staffaccess.Add(staffAccess);
+        //        }
+        //    }
+        //    return staffaccess.ToArray();
+        //}
 
         public IEnumerable<Province> GetProvinceAll()
         {
@@ -224,7 +225,7 @@ namespace Patch_Control.Models
         //        DataTable dt = objDB.List(strSQL1, objConn);
         //        rowroleid = Convert.ToInt32(dt.Rows[0]["rowroleid"].ToString());
         //        int maxroleid = rowroleid + 1;
-            
+
         //        string strSQL2 = "SELECT MAX(StaffAccessID) AS rowaccessid FROM staffaccess ;";
         //        DataTable dt1 = objDB.List(strSQL2, objConn);
         //        rowaccessid = Convert.ToInt32(dt1.Rows[0]["rowaccessid"].ToString());
@@ -268,12 +269,20 @@ namespace Patch_Control.Models
                 rowaccessid = Convert.ToInt32(dt1.Rows[0]["rowaccessid"].ToString());
                 int maxaccessid = rowaccessid + 1;
 
+                //string strSQL2 = "SELECT MAX(StaffAccessID) AS rowaccessid FROM staffaccess ;";
+                //DataTable dt1 = objDB.List(strSQL2, objConn);
+                //rowaccessid = Convert.ToInt32(dt1.Rows[0]["rowaccessid"].ToString());
+                //int maxaccessid = rowaccessid + 1;
+
                 StringBuilder strSQL3 = new StringBuilder();
                 strSQL3.Append("BEGIN;");
                 strSQL3.Append("INSERT INTO staffrole(StaffRoleID, StaffRoleName) VALUES (" + maxroleid + ",'" + staffaccess.StaffRoleName.ToString() + "');");
                 
-                    strSQL3.Append("INSERT INTO staffaccess(StaffAccessID, StaffRoleID, PermissionItemID) VALUES (" + maxaccessid + "," + maxroleid + "," + staffaccess.PermissionItemID.ToString() + ");");
-        
+                for (i = 0; i < staffaccess.PermissionItemID.Count; i++)
+                {
+                    strSQL3.Append("INSERT INTO staffaccess(StaffAccessID, StaffRoleID, PermissionItemID) VALUES (" + (maxaccessid+i) + "," + maxroleid + "," + staffaccess.PermissionItemID[i].ToString() + ");");
+                }
+
                 strSQL3.Append("COMMIT;");
                 objDB.sqlExecute(strSQL3.ToString(), objConn);
                 objConn.Close();

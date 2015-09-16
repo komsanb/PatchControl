@@ -9,16 +9,19 @@ namespace Patch_Control.Models
     interface IStaffRepository
     {
         IEnumerable<Staff> GetStaffAll();
+        Staff GetStaff(int id);
         IEnumerable<StaffRole> GetStaffRoleAll();
         IEnumerable<Province> GetProvinceAll();
         IEnumerable<Gender> GetGenderAll();
         IEnumerable<PermissionItemdata> GetpermissionItemdataAll();
-        //IEnumerable<StaffAccess> GetstaffAccessAll();
+        StaffRole GetStaffRoleAll(int id);
+        //StaffAccess GetStaffAccessAll(int id);
+        IEnumerable<StaffRoleAccess> GetStaffRoleAccessAll(int id);
         IEnumerable<Staff> PostStaffAll(Staff item);
-        //IEnumerable<Staff> PostEdStaffAll(Staff item);
+        IEnumerable<Staff> PostStaffEditAll(Staff item);
+        IEnumerable<Staff> PostStaffDeleteAll(Staff item);
         IEnumerable<StaffAccess> PostStaffAccessAll(StaffAccess staffAccess);
-        //IEnumerable<PermissionItemdata> PostPermissonItemdataAll(PermissionItemdata permissionItemdata);
-        //IEnumerable<StaffRole> PostStaffRoleAll(StaffRole staffRole, List<PermissionItemdata> permissionItemdata);
+        IEnumerable<StaffAccess> PostStaffAccessEditAll(StaffAccess staffAccess);
     }
 
 }

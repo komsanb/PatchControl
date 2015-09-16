@@ -1,144 +1,111 @@
 ﻿<div class="container">
-    <div class="block-header">
-        <h2>Your Profile</h2>
-    </div>
 
-    <div class="card" id="profile-main">
-        <div class="pm-overview c-overflow">
-            <div class="pmo-pic">
-                <div class="p-relative">
-                    <a href="">
-                        <img class="img-responsive" src="img/profile-pics/profile-pic-2.jpg" alt="">
-                    </a>
+    <form ng-submit="" class="form-horizontal" role="form">
+        <div class="card" id="profile-main" ng-init="getstaff()">
+            <div class="pm-overview c-overflow">
+                <div class="pmo-pic">
+                    <div class="p-relative">
+                        <a href="">
+                            <img class="img-responsive" src="img/profile-pics/profile-pic-2.jpg" alt="">
+                        </a>
+
+                        <a href="" class="pmop-edit">
+                            <i class="md md-camera-alt"></i>
+                            <span class="hidden-xs">Update Profile Picture</span>
+                        </a>
+                    </div>
 
 
-
-                    <a href="" class="pmop-edit">
-                        <i class="md md-camera-alt"></i> 
-                        <span class="hidden-xs">Update Profile Picture</span>
-                    </a>
+                    <div class="pmo-stat">
+                        <h2 class="m-0 c-white">{{staffonly.StaffRoleName}}</h2><br>
+                        {{staffonly.StaffName}}
+                    </div>
                 </div>
 
+                <div class="pmo-block pmo-contact hidden-xs">
+                    <h2>Contact</h2>
 
-                <div class="pmo-stat">
-                    <h2 class="m-0 c-white">Admin</h2>
-                    Adisorn Chaitanasakul
-                </div>
-            </div>
-
-            <div class="pmo-block pmo-contact hidden-xs">
-                <h2>Contact</h2>
-
-                <ul>
-                    <li><i class="md md-phone"></i> 00971 12345678 9</li>
-                    <li><i class="md md-email"></i> malinda-h@gmail.com</li>
-                    <li><i class="socicon socicon-skype"></i> malinda.hollaway</li>
-                    <li><i class="socicon socicon-twitter"></i> @malinda (twitter.com/malinda)</li>
-                    <li>
-                        <i class="md md-location-on"></i>
-                        <address class="m-b-0">
-                            10098 ABC Towers, <br />
-                            Dubai Silicon Oasis, Dubai, <br />
-                            United Arab Emirates
-                        </address>
-                    </li>
-                </ul>
-            </div>
-
-
-        </div>
-
-        <div class="pm-body clearfix">
-            <ul class="tab-nav tn-justified">
-                <li class="active waves-effect"><a><h2>About</h2></a></li>
-            </ul>
-
-            <div class="pmb-block">
-                <div class="pmbb-header">
-                    <h2><i class="md md-person m-r-5"></i> Basic Information</h2>
-
-                    <ul class="actions">
-                        <li class="dropdown">
-                            <a href="" data-toggle="dropdown">
-                                <i class="md md-more-vert"></i>
-                            </a>
-
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li>
-                                    <a data-pmb-action="edit" href="#/editProfile">Edit</a>
-                                </li>
-                                <li>
-                                    <a data-pmb-action="edit" href="#/change_password">Change Password</a>
-                                </li>
-                            </ul>
+                    <ul>
+                        <li><i class="md md-phone"></i> {{staffonly.Mobile}}</li>
+                        <li><i class="md md-email"></i> {{staffonly.Email}}</li>
+                        <li>
+                            <i class="md md-location-on"></i>
+                            <address class="m-b-0">
+                                {{staffonly.Address1}}
+                            </address>
                         </li>
                     </ul>
                 </div>
-                <div class="pmbb-body p-l-30">
-                    <div class="pmbb-view">
-                        <dl class="dl-horizontal">
-                            <dt>Full Name</dt>
-                            <dd>Mallinda Hollaway</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>Gender</dt>
-                            <dd>Female</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>Birthday</dt>
-                            <dd>June 23, 1990</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>Martial Status</dt>
-                            <dd>Single</dd>
-                        </dl>
+            </div>
+
+            <div class="pm-body clearfix">
+                <ul class="tab-nav tn-justified">
+                    <li class="active waves-effect"><a><h2>Your Profile</h2></a></li>
+                </ul>
+
+                <div class="pmb-block">
+                    <div class="pmbb-header">
+                        <h2><i class="md md-person m-r-5"></i> Basic Information</h2>
+
+                        <ul class="actions">
+                            <li class="dropdown">
+                                <a href="" data-toggle="dropdown">
+                                    <i class="md md-more-vert"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a data-pmb-action="edit" href="#/editProfile">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a data-pmb-action="edit" href="#/change_password">Change Password</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
-
-                    <div class="pmbb-edit">
-                        <dl class="dl-horizontal">
-                            <dt class="p-t-10">Full Name</dt>
-                            <dd>
-                                <div class="fg-line">
-                                    <input type="text" class="form-control" placeholder="eg. Mallinda Hollaway">
-                                </div>
-
-                            </dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt class="p-t-10">Gender</dt>
-                            <dd>
-                                <div class="fg-line">
-                                    <select class="form-control">
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div>
-                            </dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt class="p-t-10">Birthday</dt>
-                            <dd>
-                                <div class="dtp-container dropdown fg-line">
-                                    <input type='text' class="form-control date-picker" data-toggle="dropdown" placeholder="Click here...">
-                                </div>
-                            </dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt class="p-t-10">Martial Status</dt>
-                            <dd>
-                                <div class="fg-line">
-                                    <select class="form-control">
-                                        <option>Single</option>
-                                        <option>Married</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div>
-                            </dd>
-                        </dl>
+                    <div class="pmbb-body p-l-30">
+                        <div class="pmbb-view">
+                            <dl class="dl-horizontal">
+                                <dt>Staff Code</dt>
+                                <dd>{{staffonly.StaffCode}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>Full Name</dt>
+                                <dd>{{staffonly.StaffName}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>Gender</dt>
+                                <dd>{{staffonly.Gender}}</dd>
+                            </dl>
+                            <!--<dl class="dl-horizontal">
+                                <dt>Email Address</dt>
+                                <dd>{{staffonly.Email}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>Address</dt>
+                                <dd>{{staffonly.Address1}} {{staffonly.City}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>Province</dt>
+                                <dd>{{staffonly.ProvinceName}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>Zip Code</dt>
+                                <dd>{{staffonly.Zipcode}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>Telephone</dt>
+                                <dd>{{staffonly.Telephone}}</dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt>Mobile</dt>
+                                <dd>{{staffonly.Mobile}}</dd>
+                            </dl>-->                           
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        </form>
 </div>

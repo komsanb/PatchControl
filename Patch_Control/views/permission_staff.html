@@ -21,7 +21,7 @@
                 <tbody>
                     <tr ng-repeat="n in staffrole">
                         <td>{{n.StaffRoleName}}</td>
-                        <td><button onclick="parent.location = '#/edit_staff_role'" class="btn btn-warning btn-icon"><i class="md md-edit"></i></button></td>
+                        <td><button ng-click="EDpromission(n.StaffRoleID)" class="btn btn-warning btn-icon"><i class="md md-edit"></i></button></td>
                         <td><button class="btn btn-danger btn-icon"><i class="md md-delete"></i></button></td>
                         
                     </tr>                  

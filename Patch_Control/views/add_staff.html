@@ -12,7 +12,7 @@
                     <label class="col-sm-2 control-label">Staff Code</label>
                     <div class="col-sm-5">
                         <div class="fg-line">
-                            <input type="text" ng-model="StaffCode" id="StaffCode" class="form-control input-sm" placeholder="Staff Code">
+                            <input type="text" id="StaffCode" ng-model="StaffCode" class="form-control input-sm" placeholder="Staff Code">
                             
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" ng-model="StaffPassword" id="StaffPassword" class="form-control input-sm" placeholder="Staff Password">
+                            <input type="text" id="StaffPassword" ng-model="StaffPassword" class="form-control input-sm" placeholder="Staff Password">
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -100,6 +100,17 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">Email Address</label>
+                    <div class="col-sm-5">
+
+                        <div class="fg-line">
+                            <input id="Email" ng-model="Email" type="text" class="form-control input-sm" placeholder="Email Address">
+                        </div>
+                    </div>
+                    <label class="control-label text-danger">*</label>
+                </div>
+
+                <div class="form-group">
                     <label class="col-sm-2 control-label">Address 1</label>
                     <div class="col-sm-5">
 
@@ -128,6 +139,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Province</label>
                     <div class="col-sm-5">
@@ -174,15 +186,6 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Email Address</label>
-                    <div class="col-sm-5">
-
-                        <div class="fg-line">
-                            <input id="Email" ng-model="Email" type="text" class="form-control input-sm" placeholder="Email Address">
-                        </div>
-                    </div>
-                </div>
 
                 <!--<div class="form-group">
                     <label class="col-sm-2 control-label">Picture File</label>

@@ -9,7 +9,7 @@ app.config(['$routeProvider',
                }).
                when('/permission_staff', {
                    templateUrl: 'views/permission_staff.html',
-                   controller: 'staffController'
+                   controller: 'PermissionController'
                }).
                when('/staff', {
                    templateUrl: 'views/staff.html',
@@ -35,13 +35,13 @@ app.config(['$routeProvider',
                    templateUrl: 'views/add_permission.html',
                    controller: 'PermissionController'
                }).
-               when('/staffProfile', {
+               when('/staffProfile/:id', {
                    templateUrl: 'views/staffProfile.html',
-                   // controller: 'ViewStudentsController'
+                   controller: 'staffController'
                }).
                when('/edit_staff_role/:id', {
                    templateUrl: 'views/edit_staff_role.html',
-                   controller: 'staffController'
+                   controller: 'PermissionController'
                }).
                when('/edit_staff_profile/:id', {
                    templateUrl: 'views/edit_staff_profile.html',
@@ -49,29 +49,49 @@ app.config(['$routeProvider',
                }).
                when('/change_password', {
                    templateUrl: 'views/change_password.html',
-                   // controller: 'ViewStudentsController'
+                   controller: 'staffController'
                }).
                when('/editProfile', {
                    templateUrl: 'views/editProfile.html',
-                   // controller: 'ViewStudentsController'
+                   controller: 'staffController'
                }).
               otherwise({
                   redirectTo: '/index.html'
               });
        }]);
 
-app.controller("staffController", function ($scope, $http) {
+//app.factory("editstaff", function ($http) {
+
+//    var urlBase = "api/staff/staffall";
+//    var dataFactory = [];
+
+//    dataFactory.getStaff = function (id) {
+//        return $http.get(urlBase + '/' + id)
+//    };
+//    return dataFactory;
+//});
+
+app.controller("staffController", function ($scope, $http, $routeParams) {
 
     $http.get("api/staff/staffall").success(function (data) {
     
         $scope.staff = data;
-
     });
+    
+    $scope.EDstaff = function (id) {
+        window.location = "#/edit_staff_profile/" + id;    
+    };
 
-    $scope.go = function (data) {
-        window.location = "#/edit_staff_profile/" + data;
+    $scope.profile = function (id) {
+        window.location = "#/staffProfile/" + id;
+    };
 
-    }
+    $scope.getstaff = function () {
+    $http.get("api/staff/staffall/" + $routeParams.id).success(function (data) {
+
+        $scope.staffonly = data;
+    });
+    };
 
     $http.get("api/staff/staffrole").success(function (data) {
 
@@ -124,54 +144,80 @@ app.controller("staffController", function ($scope, $http) {
 
                 $scope.staff = data;
 
-            });               
+            });
+            window.alert("Add staff successful!");
+            window.location = "#/staff"
+            window.location.reload(true);
+    }
+
+    $scope.editstaff = function () {
+        console.log();
+
+        var staff = {
+            "StaffID": $scope.staffonly.StaffID,
+            "StaffCode": $scope.staffonly.StaffCode,
+            "StaffRoleID": $scope.staffonly.StaffRoleID,
+            "GenderID": $scope.staffonly.GenderID,
+            "StaffFirstname": $scope.staffonly.StaffFirstname,
+            "StaffLastname": $scope.staffonly.StaffLastname,
+            "Address1": $scope.staffonly.Address1,
+            "Address2": $scope.staffonly.Address2,
+            "City": $scope.staffonly.City,
+            "ProvinceID": $scope.staffonly.ProvinceID,
+            "Zipcode": $scope.staffonly.Zipcode,
+            "Telephone": $scope.staffonly.Telephone,
+            "Mobile": $scope.staffonly.Mobile,
+            "Email": $scope.staffonly.Email
+        };
+
+        console.log(staff);
+        $http.post("api/staff/staffedit", staff).success(function (data, header, status, config) {
+
+            $scope.staff = data;
+            console.log(data);
+        });
         window.location = "#/staff"
         window.location.reload(true);
     }
 
-    $scope.editstaff = function () {
-        if ($scope.Address1 == null, $scope.Address2 == null, $scope.City == null, $scope.Zipcode == null, $scope.Telephone == null, $scope.Mobile == null, $scope.Email == null) {
-            $scope.Address1 = "";
-            $scope.Address2 = "";
-            $scope.City = "";
-            $scope.Zipcode = "";
-            $scope.Telephone = "";
-            $scope.Mobile = "";
-            $scope.Email = "";
+    $scope.deletestaff = function (id) {
+        console.log(id);
 
-        }
         var staff = {
-            "StaffID" : 2,
-            "StaffCode": $scope.StaffCode,
-            "StaffPassword": $scope.StaffPassword,
-            "StaffRoleID": $scope.StaffRoleID,
-            "GenderID": $scope.GenderID,
-            "StaffFirstname": $scope.StaffFirstname,
-            "StaffLastname": $scope.StaffLastname,
-            "Address1": $scope.Address1,
-            "Address2": $scope.Address2,
-            "City": $scope.City,
-            "ProvinceID": $scope.ProvinceID,
-            "Zipcode": $scope.Zipcode,
-            "Telephone": $scope.Telephone,
-            "Mobile": $scope.Mobile,
-            "Email": $scope.Email
+            "StaffID": id,
+            "Deleted": 1
         };
 
         console.log(staff);
-        $http.Post("api/staff/staffall", staff).success(function (data, header, status, config) {
+        $http.post("api/staff/staffdelete", staff).success(function (data, header, status, config) {
 
             $scope.staff = data;
-
+            console.log(data);
         });
-        window.location = "#/staff"
         window.location.reload(true);
     }
 });
 
 
+app.controller("PermissionController", function ($scope, $http, $routeParams) {
 
-app.controller("PermissionController", function ($scope, $http) {
+    $http.get("api/staff/staffrole").success(function (data) {
+
+        $scope.staffrole = data;
+
+    });
+
+    $scope.EDpromission = function (id) {
+        window.location = "#/edit_staff_role/" + id;
+    };
+
+    $scope.getstaffrole = function () {
+        $http.get("api/staff/staffroleaccess/" + $routeParams.id).success(function (data) {
+            $scope.staffroleonly = data[0];
+
+            console.log($scope.staffroleonly);
+        });
+    };
 
     $scope.permissions = [
     { id: 2, text: 'Add StaffRole' },
@@ -194,11 +240,10 @@ app.controller("PermissionController", function ($scope, $http) {
     ];
 
     $scope.permissions2 = [
+    
+    ];
 
-    ]
-    ;
-
-    // toggle selection for a given fruit by name
+    // toggle selection for a given staffrole by id
     $scope.toggleSelection = function toggleSelection(PermisstionID) {
    
         var idx = $scope.permissions2.indexOf(PermisstionID);
@@ -213,8 +258,7 @@ app.controller("PermissionController", function ($scope, $http) {
             $scope.permissions2.push(PermisstionID);
         }
     };
-
-   
+ 
     $scope.addstaffrole = function () {
    
         var staffaccess = {
@@ -228,12 +272,53 @@ app.controller("PermissionController", function ($scope, $http) {
         $http.post("api/staff/staffaccess", staffaccess).success(function (data, header, status, config) {
 
             $scope.staffaccess = data;
-
+            console.log(data);
         });
-
-        //window.location = "#/permission_staff"
-        //window.location.reload(true);
+        window.alert("Add staffrole successful!");
+        window.location = "#/permission_staff"
+        window.location.reload(true);
        
+    }
+
+    $scope.editstaffrole = function () {
+
+        var staffaccess = {
+            "StaffRoleID": $scope.staffroleonly.StaffRoleID,
+            "StaffRoleName": $scope.staffroleonly.StaffRoleName,
+            "PermissionItemID": $scope.staffroleonly.PermissionItemID
+        };
+
+        console.log(staffaccess);
+        $http.post("api/staff/staffaccessedit", staffaccess).success(function (data, header, status, config) {
+
+            $scope.staffaccess = data;
+            console.log(data);
+        });
+        window.alert("Add staffrole successful!");
+        window.location = "#/permission_staff"
+        window.location.reload(true);
+
+    }
+
+    $scope.deletestaffrole = function (id) {
+
+        var staffaccess = {
+            "StaffRoleID": id,
+            "Deleted": 1
+        };
+
+        console.log(staffaccess);
+        $http.post("api/staff/staffroledelete", staffaccess).success(function (data, header, status, config) {
+
+            $scope.staffaccess = data;
+            console.log(data);
+        });
+        window.alert("Add staffrole successful!");
+        window.location = "#/permission_staff"
+        window.location.reload(true);
+
     }
  
 });
+
+

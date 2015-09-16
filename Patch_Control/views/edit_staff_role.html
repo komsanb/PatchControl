@@ -7,57 +7,40 @@
 
             </div>
         </div>
-        <form class="form-horizontal" role="form">
-            <div class="card-body card-padding">
+        <form ng-submit="editstaffrole()" class="form-horizontal" role="form">
+            <div class="card-body card-padding" ng-init="getstaffrole()">
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label text-danger">Staff Role Name</label>
-                    <div class="col-sm-6">
+                    <label class="col-sm-2 control-label">Staff Role Name</label>
+                    <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" placeholder="Staff Role Name">
+                            <input ng-model="staffroleonly.StaffRoleName" type="text" class="form-control input-sm" placeholder="Staff Role Name">
+                        </div>
+                    </div>
+                    <label class="control-label text-danger">*</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Manage Permission</label>
+                    <div class="col-sm-6">
+                        <div class="fg-line">                           
+                            <div class="checkbox m-b-15" ng-repeat="permission in permissions">
+                                <label>
+                                    <input type="checkbox" ng-checked="staffroleonly.PermissionItemID.indexOf(permission.id) > -1" value="{{permission.id}}" ng-click="toggleSelection(permission.id)"> {{permission.text}}
+                                    <i class="input-helper"></i>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Manage Staff</label>
                     <div class="col-sm-6">
-
                         <div class="fg-line">
-                            <div class="checkbox m-b-15">
+                            <div class="checkbox m-b-15" ng-repeat="staff in staffs">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input type="checkbox" ng-checked="staffroleonly.PermissionItemID.indexOf(staff.id) > -1" value="{{staff.id}}" ng-click="toggleSelection(staff.id)"> {{staff.text}}
                                     <i class="input-helper"></i>
-                                    Add Staff
-                                </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="">
-                                    <i class="input-helper"></i>
-                                    Edit Staff
-                                </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="">
-                                    <i class="input-helper"></i>
-                                    Delete Staff
-                                </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="">
-                                    <i class="input-helper"></i>
-                                    View Profile
-                                </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="">
-                                    <i class="input-helper"></i>
-                                    Modify Password
                                 </label>
                             </div>
                         </div>
@@ -66,34 +49,11 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Manage File</label>
                     <div class="col-sm-6">
-
                         <div class="fg-line">
-                            <div class="checkbox m-b-15">
+                            <div class="checkbox m-b-15" ng-repeat="file in files">
                                 <label>
-                                    <input type="checkbox" value="">
+                                    <input type="checkbox" ng-checked="staffroleonly.PermissionItemID.indexOf(file.id) > -1" value="{{file.id}}" ng-click="toggleSelection(file.id)"> {{file.text}}
                                     <i class="input-helper"></i>
-                                    Upload File
-                                </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="">
-                                    <i class="input-helper"></i>
-                                    Download File
-                                </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="">
-                                    <i class="input-helper"></i>
-                                    Edit File
-                                </label>
-                            </div>
-                            <div class="checkbox m-b-15">
-                                <label>
-                                    <input type="checkbox" value="">
-                                    <i class="input-helper"></i>
-                                    Delete File
                                 </label>
                             </div>
                         </div>
@@ -101,7 +61,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button onclick="parent.location = '#/permission_staff'" type="submit" class="btn btn-primary btn-sm">Add Staff Role</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Update Staff Role</button>
                         <button onclick="parent.location = '#/permission_staff'" type="submit" class="btn btn-primary btn-sm">Cancle</button>
                     </div>
 
@@ -110,3 +70,6 @@
         </form>
     </div>
 </div>
+
+
+

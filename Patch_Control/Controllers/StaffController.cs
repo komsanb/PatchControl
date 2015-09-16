@@ -1,10 +1,13 @@
 ﻿using Patch_Control.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
+
 
 namespace Patch_Control.Controllers
 {
@@ -18,7 +21,15 @@ namespace Patch_Control.Controllers
         public IEnumerable<Staff> Get()
         {
             return repository.GetStaffAll();
-        }     
+        }
+
+        // GET api/<controller>/5
+        [HttpGet]
+        [ActionName("StaffAll")]
+        public Staff Get(int id)
+        {
+            return repository.GetStaff(id);
+        }
 
         // GET api/staff/staffrole
         [HttpGet]
@@ -52,17 +63,28 @@ namespace Patch_Control.Controllers
             return repository.GetpermissionItemdataAll();
         }
 
+        // GET api/staff/staffrole
+        [HttpGet]
+        [ActionName("StaffRole")]
+        public StaffRole GetStaffRole(int id)
+        {
+            return repository.GetStaffRoleAll(id);
+        }
+
+        // GET api/staff/staffaccess
         //[HttpGet]
         //[ActionName("StaffAccess")]
-        //public IEnumerable<StaffAccess> GetstaffAccess()
+        //public StaffAccess GetStaffAccess(int id)
         //{
-        //    return repository.GetstaffAccessAll();
+        //    return repository.GetStaffAccessAll(id);
         //}
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        // GET api/staff/staffroleaccess
+        [HttpGet]
+        [ActionName("StaffRoleAccess")]
+        public IEnumerable<StaffRoleAccess> GetStaffRoleAccess(int id)
         {
-            return "value";
+            return repository.GetStaffRoleAccessAll(id);
         }
 
         // POST api/staff/staffall
@@ -73,21 +95,22 @@ namespace Patch_Control.Controllers
             return repository.PostStaffAll(item);
         }
 
-        // POST api/staff/staffall
-        //[HttpPost]
-        //[ActionName("StaffEditAll")]
-        //public IEnumerable<Staff> PostEditStaff(Staff item)
-        //{
-        //    return repository.PostEdStaffAll(item);
-        //}
+        // POST api/staff/staffedit
+        [HttpPost]
+        [ActionName("StaffEdit")]
+        public IEnumerable<Staff> PostStaffEdit(Staff item)
+        {
+            Console.WriteLine(item);
+            return repository.PostStaffEditAll(item);
+        }
 
-        // POST api/staff/staffrole
-        //[HttpPost]
-        //[ActionName("StaffRole")]
-        //public IEnumerable<StaffRole> PostStaffRole(StaffRole staffRole, List<PermissionItemdata> permissionItemdata)
-        //{
-        //    return repository.PostStaffRoleAll(staffRole, permissionItemdata);
-        //}
+        // POST api/staff/staffdelete
+        [HttpPost]
+        [ActionName("StaffDelete")]
+        public IEnumerable<Staff> PostStaffDelete(Staff item)
+        {
+            return repository.PostStaffDeleteAll(item);
+        }
 
         // POST api/staff/staffaccess
         [HttpPost]
@@ -99,18 +122,13 @@ namespace Patch_Control.Controllers
             return repository.PostStaffAccessAll(staffAccess );
         }
 
-        // POST api/staff/permissonItemdata
-        //[HttpPost]
-        //[ActionName("PermissonItemdata")]
-        //public IEnumerable<PermissionItemdata> PostPermissonItemdata(PermissionItemdata PermissionItemdata)
-        //{
-        //    return repository.PostPermissonItemdataAll(PermissionItemdata);
-        //}
-
-        public string Post(int id)
+        // POST api/staff/staffaccessedit
+        [HttpPost]
+        [ActionName("StaffAccessEdit")]
+        public IEnumerable<StaffAccess> PostStaffAccessEdit(StaffAccess staffAccess)
         {
-            return "value";
-        }
 
+            return repository.PostStaffAccessEditAll(staffAccess);
+        }
     }
 }

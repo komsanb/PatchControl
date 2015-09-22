@@ -1,4 +1,4 @@
-﻿var app = angular.module('myApp', ['ngRoute']);
+﻿var app = angular.module('myApp', ['ngRoute'])
 
 app.config(['$routeProvider',
        function ($routeProvider) {
@@ -47,16 +47,16 @@ app.config(['$routeProvider',
                    templateUrl: 'views/edit_staff_profile.html',
                    controller: 'staffController'
                }).
-               when('/change_password', {
+               when('/change_password/:id', {
                    templateUrl: 'views/change_password.html',
                    controller: 'staffController'
                }).
-               when('/editProfile', {
+               when('/editProfile/:id', {
                    templateUrl: 'views/editProfile.html',
                    controller: 'staffController'
                }).
               otherwise({
-                  redirectTo: '/index.html'
+                  redirectTo: '/login.html'
               });
        }]);
 
@@ -71,26 +71,62 @@ app.config(['$routeProvider',
 //    return dataFactory;
 //});
 
+app.directive('passwordConfirm', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        scope: {
+            matchTarget: '=',
+        },
+        require: 'ngModel',
+        link: function link(scope, elem, attrs, ctrl) {
+            var validator = function (value) {
+                ctrl.$setValidity('match', value === scope.matchTarget);
+                return value;
+            }
+
+            ctrl.$parsers.unshift(validator);
+            ctrl.$formatters.push(validator);
+
+            // This is to force validator when the original password gets changed
+            scope.$watch('matchTarget', function (newval, oldval) {
+                validator(ctrl.$viewValue);
+            });
+        }
+    };
+}]);
+
+// controller staffController
 app.controller("staffController", function ($scope, $http, $routeParams) {
 
+    $scope.password = null;
+    $scope.passwordConfirmation = null;
+
     $http.get("api/staff/staffall").success(function (data) {
-    
+
         $scope.staff = data;
     });
-    
+
     $scope.EDstaff = function (id) {
-        window.location = "#/edit_staff_profile/" + id;    
+        window.location = "#/edit_staff_profile/" + id;
     };
 
     $scope.profile = function (id) {
         window.location = "#/staffProfile/" + id;
     };
 
-    $scope.getstaff = function () {
-    $http.get("api/staff/staffall/" + $routeParams.id).success(function (data) {
+    $scope.EDstaffprofile = function (id) {
+        window.location = "#/editProfile/" + id;
+    };
 
-        $scope.staffonly = data;
-    });
+    $scope.EDpassword = function (id) {
+        window.location = "#/change_password/" + id;
+    };
+
+    $scope.getstaff = function () {
+        $http.get("api/staff/staffall/" + $routeParams.id).success(function (data) {
+
+            $scope.staffonly = data;
+        });
     };
 
     $http.get("api/staff/staffrole").success(function (data) {
@@ -112,6 +148,7 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
     });
 
     $scope.addstaff = function () {
+
         if ($scope.Address1 == null, $scope.Address2 == null, $scope.City == null, $scope.Zipcode == null, $scope.Telephone == null, $scope.Mobile == null, $scope.Email == null) {
             $scope.Address1 = "";
             $scope.Address2 = "";
@@ -121,37 +158,37 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
             $scope.Mobile = "";
             $scope.Email = "";
 
-        }      
-            var staff = {
-                "StaffCode" : $scope.StaffCode,
-                "StaffPassword" : $scope.StaffPassword,
-                "StaffRoleID" : $scope.StaffRoleID,
-                "GenderID" : $scope.GenderID,
-                "StaffFirstname" : $scope.StaffFirstname,
-                "StaffLastname" : $scope.StaffLastname,
-                "Address1" : $scope.Address1,
-                "Address2" : $scope.Address2,
-                "City" : $scope.City,
-                "ProvinceID" : $scope.ProvinceID,
-                "Zipcode" : $scope.Zipcode,
-                "Telephone" : $scope.Telephone,
-                "Mobile" : $scope.Mobile,
-                "Email" : $scope.Email
-            };
-        
-            console.log(staff);
-            $http.post("api/staff/staffall", staff).success(function (data, header, status, config) {
+        }
+        var staff = {
+            "StaffCode": $scope.StaffCode,
+            "StaffPassword": $scope.StaffPassword,
+            "StaffRoleID": $scope.StaffRoleID,
+            "GenderID": $scope.GenderID,
+            "StaffFirstname": $scope.StaffFirstname,
+            "StaffLastname": $scope.StaffLastname,
+            "Address1": $scope.Address1,
+            "Address2": $scope.Address2,
+            "City": $scope.City,
+            "ProvinceID": $scope.ProvinceID,
+            "Zipcode": $scope.Zipcode,
+            "Telephone": $scope.Telephone,
+            "Mobile": $scope.Mobile,
+            "Email": $scope.Email
+        };
 
-                $scope.staff = data;
+        console.log(staff);
+        $http.post("api/staff/staffall", staff).success(function (data, header, status, config) {
 
-            });
-            window.alert("Add staff successful!");
-            window.location = "#/staff"
-            window.location.reload(true);
+            $scope.staff = data;
+
+        });
+        //swal("Good job!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat, tincidunt vitae ipsum et, pellentesque maximus enim. Mauris eleifend ex semper, lobortis purus sed, pharetra felis", "success")
+        window.alert("Add staff successful!");
+        window.location = "#/staff"
+        window.location.reload(true);
     }
 
     $scope.editstaff = function () {
-        console.log();
 
         var staff = {
             "StaffID": $scope.staffonly.StaffID,
@@ -180,21 +217,80 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
         window.location.reload(true);
     }
 
-    $scope.deletestaff = function (id) {
-        console.log(id);
+    $scope.editstaffprofile = function () {
 
         var staff = {
-            "StaffID": id,
-            "Deleted": 1
+            "StaffID": $scope.staffonly.StaffID,
+            "StaffCode": $scope.staffonly.StaffCode,
+            "StaffRoleID": $scope.staffonly.StaffRoleID,
+            "GenderID": $scope.staffonly.GenderID,
+            "StaffFirstname": $scope.staffonly.StaffFirstname,
+            "StaffLastname": $scope.staffonly.StaffLastname,
+            "Address1": $scope.staffonly.Address1,
+            "Address2": $scope.staffonly.Address2,
+            "City": $scope.staffonly.City,
+            "ProvinceID": $scope.staffonly.ProvinceID,
+            "Zipcode": $scope.staffonly.Zipcode,
+            "Telephone": $scope.staffonly.Telephone,
+            "Mobile": $scope.staffonly.Mobile,
+            "Email": $scope.staffonly.Email
         };
 
         console.log(staff);
-        $http.post("api/staff/staffdelete", staff).success(function (data, header, status, config) {
+        $http.post("api/staff/staffedit", staff).success(function (data, header, status, config) {
 
             $scope.staff = data;
             console.log(data);
         });
+        window.location = "#/staffProfile/" + $scope.staffonly.StaffID;
         window.location.reload(true);
+    }
+
+    $scope.editpasswordstaff = function (id, password) {
+        console.log(id);
+        console.log(password);
+        var staff = {
+            "StaffID": id,
+            "StaffPassword": password
+        };
+
+        console.log(staff);
+        $http.post("api/staff/editpasswordstaff", staff).success(function (data, header, status, config) {
+
+            $scope.staff = data;
+        });
+        window.location = "#/staffProfile/" + id;
+        window.location.reload(true);
+    }
+
+    $scope.deletestaff = function (id) {
+
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+
+        }, function () {
+
+            swal("Deleted!", "Your file has been deleted.", "success");
+
+            var staff = {
+                "StaffID": id,
+                "Deleted": 1
+            };
+
+            console.log(staff);
+            $http.post("api/staff/staffdelete", staff).success(function (data, header, status, config) {
+
+                $scope.staff = data;
+                console.log(data);
+            });
+            window.location.reload(true);
+        });    
     }
 });
 
@@ -214,8 +310,13 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
     $scope.getstaffrole = function () {
         $http.get("api/staff/staffroleaccess/" + $routeParams.id).success(function (data) {
             $scope.staffroleonly = data[0];
-
             console.log($scope.staffroleonly);
+
+            var staff = new Array();
+            staff = $scope.staffroleonly.PermissionItemID.split(',').map(Number);
+            $scope.permissionrole = staff;
+            console.log($scope.permissionrole);
+            
         });
     };
 
@@ -240,12 +341,12 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
     ];
 
     $scope.permissions2 = [
-    
+
     ];
 
     // toggle selection for a given staffrole by id
     $scope.toggleSelection = function toggleSelection(PermisstionID) {
-   
+
         var idx = $scope.permissions2.indexOf(PermisstionID);
 
         // is currently selected
@@ -258,12 +359,13 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
             $scope.permissions2.push(PermisstionID);
         }
     };
- 
+
     $scope.addstaffrole = function () {
-   
+        console.log($scope.permissions2)
         var staffaccess = {
             "StaffRoleName": $scope.StaffRoleName,
-            "PermissionItemID": $scope.permissions2
+            "PermissionItemID": $scope.permissions2,
+            
         };
 
         //var parameters = { 'staffaccess': { 'StaffRoleName': $scope.StaffRoleName }, 'permissionItemdata': $scope.permissions2 };
@@ -277,15 +379,31 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
         window.alert("Add staffrole successful!");
         window.location = "#/permission_staff"
         window.location.reload(true);
-       
+
     }
+
+     //toggle selection for a given staffrole by id
+    $scope.toggleEditSelection = function toggleEditSelection(PermisstionID) {
+
+        var idx = $scope.permissionrole.indexOf(PermisstionID);
+
+        // is currently selected
+        if (idx > -1) {
+            $scope.permissionrole.splice(idx, 1);
+        }
+
+            // is newly selected
+        else {
+            $scope.permissionrole.push(PermisstionID);
+        }
+    };
 
     $scope.editstaffrole = function () {
 
         var staffaccess = {
             "StaffRoleID": $scope.staffroleonly.StaffRoleID,
             "StaffRoleName": $scope.staffroleonly.StaffRoleName,
-            "PermissionItemID": $scope.staffroleonly.PermissionItemID
+            "PermissionItemID": $scope.permissionrole
         };
 
         console.log(staffaccess);
@@ -294,7 +412,7 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
             $scope.staffaccess = data;
             console.log(data);
         });
-        window.alert("Add staffrole successful!");
+        window.alert("Update staffrole successful!");
         window.location = "#/permission_staff"
         window.location.reload(true);
 
@@ -302,23 +420,45 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
 
     $scope.deletestaffrole = function (id) {
 
-        var staffaccess = {
-            "StaffRoleID": id,
-            "Deleted": 1
-        };
+        swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            closeOnConfirm: false
+        }, function () {
 
-        console.log(staffaccess);
-        $http.post("api/staff/staffroledelete", staffaccess).success(function (data, header, status, config) {
+            swal("Deleted!", "Your file has been deleted.", "success");
 
-            $scope.staffaccess = data;
-            console.log(data);
+            var staffaccess = {
+                "StaffRoleID": id,
+                "Deleted": 1
+            };
+
+            console.log(staffaccess);
+            $http.post("api/staff/staffroledelete", staffaccess).success(function (data, header, status, config) {
+
+                $scope.staffaccess = data;
+                console.log(data);
+            });
+
+            window.location.reload(true);
         });
-        window.alert("Add staffrole successful!");
-        window.location = "#/permission_staff"
-        window.location.reload(true);
-
     }
- 
+});
+
+app.controller("PermissionGroupController", function ($scope, $http, $routeParams) {
+
+    $http.get("api/staff/permissiongroup").success(function (data) {
+
+        $scope.permissiongroup = data;
+        console.log($scope.permissiongroup);
+        
+    });
+
+   
 });
 
 

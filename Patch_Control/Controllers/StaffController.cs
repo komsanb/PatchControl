@@ -56,12 +56,12 @@ namespace Patch_Control.Controllers
         }
 
         // GET api/staff/permissonItemdata
-        [HttpGet]
-        [ActionName("PermissonItemdata")]
-        public IEnumerable<PermissionItemdata> GetpermissionItemdata()
-        {
-            return repository.GetpermissionItemdataAll();
-        }
+        //[HttpGet]
+        //[ActionName("PermissonItemdata")]
+        //public IEnumerable<PermissionItemdata> GetpermissionItemdata()
+        //{
+        //    return repository.GetpermissionItemdataAll();
+        //}
 
         // GET api/staff/staffrole
         [HttpGet]
@@ -87,6 +87,14 @@ namespace Patch_Control.Controllers
             return repository.GetStaffRoleAccessAll(id);
         }
 
+        // GET api/staff/permissiongroup
+        [HttpGet]
+        [ActionName("PermissionGroup")]
+        public IEnumerable<PermissionGroup> GetPermissionGroup(List<PermissionItemdata> permissionItem)
+        {
+            return repository.GetPermissionGroupAll(permissionItem);
+        }
+
         // POST api/staff/staffall
         [HttpPost]
         [ActionName("StaffAll")]
@@ -102,6 +110,14 @@ namespace Patch_Control.Controllers
         {
             Console.WriteLine(item);
             return repository.PostStaffEditAll(item);
+        }
+
+        // POST api/staff/editpasswordstaff
+        [HttpPost]
+        [ActionName("EditPasswordStaff")]
+        public IEnumerable<Staff> PostEditPasswordStaff(Staff item)
+        {
+            return repository.PostEditPasswordStaffAll(item);
         }
 
         // POST api/staff/staffdelete
@@ -129,6 +145,14 @@ namespace Patch_Control.Controllers
         {
 
             return repository.PostStaffAccessEditAll(staffAccess);
+        }
+
+        // POST api/staff/staffroledelete
+        [HttpPost]
+        [ActionName("StaffRoleDelete")]
+        public IEnumerable<StaffRole> PostStaffRoleDelete(StaffRole item)
+        {
+            return repository.PostStaffRoleDeleteAll(item);
         }
     }
 }

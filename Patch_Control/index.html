@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="myApp">
+<html ng-app="myApp" >
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,10 +19,15 @@
     <!-- CSS -->
     <link href="template/css/app.min.1.css" rel="stylesheet">
     <link href="template/css/app.min.2.css" rel="stylesheet">
-
-
+    <style type="text/css">
+        .notifications .btn {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
-<body>
+
+<body ng-controller="PermissionGroupController">
     <header id="header">
         <ul class="header-inner ">
             <li id="menu-trigger" data-trigger="#sidebar">
@@ -39,7 +44,7 @@
             <li class="pull-right">
                 <ul class="top-menu">
                     <li class="dropdown hidden-xs profile-pic">
-                        <img class="img-circle " src="template/img/profile-pics/1.jpg" style="max-width:40px"/>
+                        <img class="img-circle " src="template/img/profile-pics/1.jpg" style="max-width:40px" />
                     </li>
                     <li class="dropdown">
                         <h5>name@synaturegroup.com</h5>
@@ -55,36 +60,36 @@
     <section id="main">
         <aside id="sidebar">
             <div class="sidebar-inner">
-                <div class="si-inner">                  
-                    <ul class="main-menu">
-                        <li class="active"><a href="#/"><i class="md md-home"></i> Home</a></li>
-                        <li class="sub-menu">
-                            <a href=""><i class="md md-now-widgets"></i> Admintrator </a>
-                            <ul>
+                <div class="si-inner">
+                    <ul class="main-menu" >
+                        <li class="active"><a href="#/"><i class="md md-home"></i>Home</a></li>
+                        <li class="sub-menu" ng-repeat="g in permissiongroup">
+                            <a href=""><i class="md md-now-widgets" ></i>{{g.PermissionGroupName}}</a>
+                            <ul >
 
-                                <li><a href="#/permission_staff">Permission Staffs</a></li>
-                                <li><a class="active" href="#/staff">Staffs</a></li>
+                                <li><a>{{g.PermissionItemName}}</a></li>
+                                <!--<li><a href="#/staff">Staffs</a></li>-->
+                                <!--<li><a class="active" href="#/staff">Staffs</a></li>-->
 
                             </ul>
                         </li>
-                        <li class="sub-menu">
+                        <!--<li class="sub-menu">
                             <a href=""><i class="md md-now-widgets"></i>Patchs</a>
                             <ul>
                                 <li><a href="#/patchs">Release Versions</a></li>
                                 <li><a class="active" href="#/upload">Upload</a></li>
                                 <li><a href="#/showUploads">Upload Lists</a></li>
                             </ul>
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
+                {{permissiongroup.PermissionGroupName}}
             </div>
         </aside>
 
 
-        <section id="content" ng-view>
-           
-        </section>
-        
+        <section id="content" ng-view></section>
+
     </section>
 
     <!-- Older IE warning message -->
@@ -128,7 +133,6 @@
         </div>
     <![endif]-->
     <!-- Javascript Libraries -->
-    <script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>
     <script src="template/js/jquery-2.1.1.min.js"></script>
     <script src="template/js/bootstrap.min.js"></script>
     <script src="template/vendors/moment/moment.min.js"></script>
@@ -149,7 +153,7 @@
     <script src="template/vendors/input-mask/input-mask.min.js"></script>
     <script src="template/vendors/summernote/summernote.min.js"></script>
     <script src="template/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
-    <script src="template/vendors/fileinput/fileinput.min.js"></script>  
+    <script src="template/vendors/fileinput/fileinput.min.js"></script>
     <script src="template/vendors/waves/waves.min.js"></script>
     <script src="template/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
     <script src="template/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>

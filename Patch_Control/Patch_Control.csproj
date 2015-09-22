@@ -103,6 +103,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="images\11830129_930384033686678_326350699_n.jpg" />
+    <Content Include="images\1456774_1015763138468723_7561643243299731833_n.jpg" />
     <Content Include="index.html" />
     <Content Include="js\angular-route.min.js" />
     <Content Include="js\angular.min.js" />
@@ -1338,7 +1340,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

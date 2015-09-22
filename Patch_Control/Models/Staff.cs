@@ -76,8 +76,6 @@ namespace Patch_Control.Models
 
         public int PermissionItemParent { get; set; }
 
-        public int Deleted { get; set; }
-
     }
 
     public class Province
@@ -113,5 +111,18 @@ namespace Patch_Control.Models
 
         public string PermissionItemID { get; set; }
 
+    }
+
+    public class PermissionGroup
+    {
+        public int PermissionGroupID { get; set; }
+
+        public string PermissionGroupName { get; set; }
+
+        //public string PermissionItemName { get; set; }
+
+        //public string PermissionItemUrl { get; set; }
+
+        //public int PermissionItemID { get; set; }
     }
 }

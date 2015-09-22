@@ -26,7 +26,7 @@
                         <div class="fg-line">                           
                             <div class="checkbox m-b-15" ng-repeat="permission in permissions">
                                 <label>
-                                    <input type="checkbox" ng-checked="staffroleonly.PermissionItemID.indexOf(permission.id) > -1" value="{{permission.id}}" ng-click="toggleSelection(permission.id)"> {{permission.text}}
+                                    <input type="checkbox" ng-checked="permissionrole.indexOf(permission.id) > -1" value="{{permission.id}}" ng-click="toggleEditSelection(permission.id)"> {{permission.text}}
                                     <i class="input-helper"></i>
                                 </label>
                             </div>
@@ -39,7 +39,7 @@
                         <div class="fg-line">
                             <div class="checkbox m-b-15" ng-repeat="staff in staffs">
                                 <label>
-                                    <input type="checkbox" ng-checked="staffroleonly.PermissionItemID.indexOf(staff.id) > -1" value="{{staff.id}}" ng-click="toggleSelection(staff.id)"> {{staff.text}}
+                                    <input type="checkbox" ng-checked="permissionrole.indexOf(staff.id) > -1" value="{{staff.id}}" ng-click="toggleEditSelection(staff.id)"> {{staff.text}}
                                     <i class="input-helper"></i>
                                 </label>
                             </div>
@@ -52,7 +52,7 @@
                         <div class="fg-line">
                             <div class="checkbox m-b-15" ng-repeat="file in files">
                                 <label>
-                                    <input type="checkbox" ng-checked="staffroleonly.PermissionItemID.indexOf(file.id) > -1" value="{{file.id}}" ng-click="toggleSelection(file.id)"> {{file.text}}
+                                    <input type="checkbox" ng-checked="permissionrole.indexOf(file.id) > -1" value="{{file.id}}" ng-click="toggleEditSelection(file.id)"> {{file.text}}
                                     <i class="input-helper"></i>
                                 </label>
                             </div>

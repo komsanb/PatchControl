@@ -6,7 +6,8 @@
                 <div class="pmo-pic">
                     <div class="p-relative">
                         <a href="">
-                            <img class="img-responsive" src="img/profile-pics/profile-pic-2.jpg" alt="">
+                            <!--<img class="img-responsive" src="img/profile-pics/profile-pic-2.jpg" alt="">-->
+                            <img class="img-responsive" src="../images/1456774_1015763138468723_7561643243299731833_n.jpg" alt=""/>
                         </a>
 
                         <a href="" class="pmop-edit">
@@ -22,7 +23,7 @@
                     </div>
                 </div>
 
-                <div class="pmo-block pmo-contact hidden-xs">
+                <!--<div class="pmo-block pmo-contact hidden-xs">
                     <h2>Contact</h2>
 
                     <ul>
@@ -35,7 +36,7 @@
                             </address>
                         </li>
                     </ul>
-                </div>
+                </div>-->
             </div>
 
             <div class="pm-body clearfix">
@@ -55,10 +56,10 @@
 
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li>
-                                        <a data-pmb-action="edit" href="#/editProfile">Edit</a>
+                                        <a data-pmb-action="edit" ng-click="EDstaffprofile(staffonly.StaffID)">Edit</a>
                                     </li>
                                     <li>
-                                        <a data-pmb-action="edit" href="#/change_password">Change Password</a>
+                                        <a data-pmb-action="edit" ng-click="EDpassword(staffonly.StaffID)">Change Password</a>
                                     </li>
                                 </ul>
                             </li>
@@ -78,18 +79,18 @@
                                 <dt>Gender</dt>
                                 <dd>{{staffonly.Gender}}</dd>
                             </dl>
-                            <!--<dl class="dl-horizontal">
+                            <dl class="dl-horizontal">
                                 <dt>Email Address</dt>
                                 <dd>{{staffonly.Email}}</dd>
                             </dl>
                             <dl class="dl-horizontal">
                                 <dt>Address</dt>
-                                <dd>{{staffonly.Address1}} {{staffonly.City}}</dd>
+                                <dd>{{staffonly.Address1}}, {{staffonly.City}}, {{staffonly.Province}}</dd>
                             </dl>
-                            <dl class="dl-horizontal">
+                            <!--<dl class="dl-horizontal">
                                 <dt>Province</dt>
                                 <dd>{{staffonly.ProvinceName}}</dd>
-                            </dl>
+                            </dl>-->
                             <dl class="dl-horizontal">
                                 <dt>Zip Code</dt>
                                 <dd>{{staffonly.Zipcode}}</dd>
@@ -101,7 +102,7 @@
                             <dl class="dl-horizontal">
                                 <dt>Mobile</dt>
                                 <dd>{{staffonly.Mobile}}</dd>
-                            </dl>-->                           
+                            </dl>                           
                         </div>
                     </div>
                 </div>

@@ -120,6 +120,19 @@ namespace Patch_Control.Models
             return staffedit;
         }
 
+        public IEnumerable<Staff> PostEditPasswordStaffAll(Staff item)
+        {
+            objConn = objDB.EstablishConnection();
+            List<Staff> editpassword = new List<Staff>();
+
+            string strSQL = "UPDATE staffs SET StaffPassword = '" + item.StaffPassword + "'";
+            strSQL += "WHERE StaffID = '" + item.StaffID + "';";
+            objDB.sqlExecute(strSQL, objConn);
+            objConn.Close();
+
+            return editpassword;
+        }
+
         public IEnumerable<Staff> PostStaffDeleteAll(Staff item)
         {
             objConn = objDB.EstablishConnection();
@@ -137,7 +150,7 @@ namespace Patch_Control.Models
         {
             objConn = objDB.EstablishConnection();
             List<StaffRole> staff = new List<StaffRole>();
-            string strSQL = "SELECT * FROM staffrole";
+            string strSQL = "SELECT * FROM staffrole WHERE Deleted = 0";
             DataTable dt = objDB.List(strSQL, objConn);
             objConn.Close();
             if (dt.Rows.Count > 0)
@@ -227,7 +240,6 @@ namespace Patch_Control.Models
                     PermissionItemdataData.PermissionItemUrl = dt.Rows[i]["PermissionItemUrl"].ToString();
                     PermissionItemdataData.PermissionItemName = dt.Rows[i]["PermissionItemName"].ToString();
                     PermissionItemdataData.PermissionItemParent = Convert.ToInt32(dt.Rows[i]["PermissionItemParent"].ToString());
-                    PermissionItemdataData.Deleted = Convert.ToInt32(dt.Rows[i]["Deleted"].ToString());
 
                     permissionItem.Add(PermissionItemdataData);
                 }
@@ -239,7 +251,6 @@ namespace Patch_Control.Models
         {
             objConn = objDB.EstablishConnection();
             List<StaffRoleAccess> staffaccess = new List<StaffRoleAccess>();
-            //List<int> permission = new List<int>();
             string strSQL = "SELECT * FROM staffrole sr INNER JOIN staffaccess sa ON sa.StaffRoleID = sr.StaffRoleID WHERE sr.StaffRoleID = '" + id + "'";
             DataTable dt = objDB.List(strSQL, objConn);
             objConn.Close();
@@ -255,12 +266,47 @@ namespace Patch_Control.Models
                     if (i == 0)
                         access.PermissionItemID += Convert.ToInt32(dt.Rows[i]["PermissionItemID"].ToString());
                     else
-                        access.PermissionItemID += ", " + Convert.ToInt32(dt.Rows[i]["PermissionItemID"].ToString());
+                        access.PermissionItemID += "," + Convert.ToInt32(dt.Rows[i]["PermissionItemID"].ToString());
                 }
             }
             staffaccess.Add(access);
 
             return staffaccess;
+        }
+
+        public IEnumerable<PermissionGroup> GetPermissionGroupAll(List<PermissionItemdata> permissionItem)
+        {
+            //objConn = objDB.EstablishConnection();
+            //List<PermissionGroup> manage = new List<PermissionGroup>();
+            //string strSQL = "SELECT sa.StaffRoleID, pg.PermissionGroupID, pg.PermissionGroupName, pt.PermissionItemUrl, pt.PermissionItemID, pt.PermissionItemName, pt.PermissionItemParent FROM permissionitems pt  ";
+            //strSQL += "INNER JOIN permissiongroup pg ON pg.PermissionGroupID = pt.PermissionGroupID ";
+            //strSQL += "LEFT JOIN staffaccess sa ON sa.PermissionItemID = pt.PermissionItemID ";
+            //strSQL += "WHERE pt.PermissionItemID IN (1, 5, 10, 12, 14) AND pt.PermissionGroupID = 1";
+            //DataTable dt1 = objDB.List(strSQL, objConn);
+            //objConn.Close();
+
+            objConn = objDB.EstablishConnection();
+            List<PermissionGroup> staff = new List<PermissionGroup>();         
+            string stringSQL = "SELECT PermissionGroupID, PermissionGroupName FROM permissiongroup";
+            DataTable dt = objDB.List(stringSQL, objConn);
+            objConn.Close();
+            List<PermissionGroup> managestaff = new List<PermissionGroup>();
+            if (dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    PermissionGroup manageStaff = new PermissionGroup();
+                    manageStaff.PermissionGroupID = Convert.ToInt32(dt.Rows[i]["PermissionGroupID"].ToString());
+                    manageStaff.PermissionGroupName = dt.Rows[i]["PermissionGroupName"].ToString();
+                    //manageStaff.PermissionItemName = dt.Rows[i]["PermissionItemName"].ToString();
+                    //manageStaff.PermissionItemUrl = dt.Rows[i]["PermissionItemUrl"].ToString();
+                    //manageStaff.PermissionItemID = Convert.ToInt32(dt.Rows[i]["PermissionItemID"].ToString());
+
+                    managestaff.Add(manageStaff);
+                }
+                
+                }
+            return managestaff.ToArray();
         }
 
         public IEnumerable<StaffAccess> PostStaffAccessAll(StaffAccess staffaccess)
@@ -303,21 +349,41 @@ namespace Patch_Control.Models
         {
             objConn = objDB.EstablishConnection();
             List<StaffAccess> staffAccess = new List<StaffAccess>();
-
+            int rowaccessid;
             int i = 0;
+
+            string strSQL2 = "SELECT MAX(StaffAccessID) AS rowaccessid FROM staffaccess ;";
+            DataTable dt1 = objDB.List(strSQL2, objConn);
+            rowaccessid = Convert.ToInt32(dt1.Rows[0]["rowaccessid"].ToString());
+            int maxaccessid = rowaccessid + 1;
 
             StringBuilder strSQL3 = new StringBuilder();
 
+            strSQL3.Append("DELETE FROM staffaccess WHERE StaffRoleID = '" + staffaccess.StaffRoleID + "';");
+           
             for (i = 0; i < staffaccess.PermissionItemID.Count; i++)
             {
-                strSQL3.Append("UPDATE staffaccess, staffrole SET StaffRoleName = '" + staffaccess.StaffRoleName + "', PermissionItemID = '" + staffaccess.PermissionItemID[i] + "'");               
+                strSQL3.Append("INSERT INTO staffaccess(StaffAccessID, StaffRoleID, PermissionItemID) VALUES (" + (maxaccessid + i) + "," + staffaccess.StaffRoleID + "," + staffaccess.PermissionItemID[i] + ");");
             }
-            strSQL3.Append("WHERE staffrole.StaffRoleID = '" + staffaccess.StaffRoleID + "' AND staffaccess.StaffRoleID = '"+ staffaccess.StaffRoleID + "';");
+
             objDB.sqlExecute(strSQL3.ToString(), objConn);
             objConn.Close();
 
 
             return staffAccess.ToArray();
+        }
+
+        public IEnumerable<StaffRole> PostStaffRoleDeleteAll(StaffRole item)
+        {
+            objConn = objDB.EstablishConnection();
+            List<StaffRole> staffroledelete = new List<StaffRole>();
+
+            string strSQL = "UPDATE staffrole SET Deleted = '" + item.Deleted + "'";
+            strSQL += "WHERE StaffRoleID = '" + item.StaffRoleID + "';";
+            objDB.sqlExecute(strSQL, objConn);
+            objConn.Close();
+
+            return staffroledelete.ToArray();
         }
 
     }

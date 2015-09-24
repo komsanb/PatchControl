@@ -399,25 +399,33 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
 
 app.controller("PermissionGroupController", function ($scope, $http, $routeParams) {
 
-    $http.get("api/staff/permissiongroup").success(function (data) {
+    //$http.get("api/staff/permissiongroup").success(function (data) {
 
-        $scope.permissiongroup = data;
-        console.log($scope.permissiongroup);
+    //    $scope.permissiongroup = data;
+    //    console.log($scope.permissiongroup);
         
-    });
+    //});
 
    
 });
 
 app.controller("LoginController", function ($scope, $location, $http, $routeParams) {
 
+    $http.get("api/staff/permissiongroup").success(function (data) {
+
+        $scope.permissiongroup = data;
+        //console.log($scope.permissiongroup);
+
+    });
+
     $scope.submit = function (username, password) {
 
-    $http.get("api/staff/staffall").success(function (data) {
+        $http.get("api/staff/staffall").success(function (data) {
 
         $scope.staff = data;
         //console.log($scope.staff)
-
+        //$scope.staffcode = $scope.staff.StaffCode[0];
+        //console.log($scope.staffcode);
         var json = $scope.staff;
         console.log(json);
 

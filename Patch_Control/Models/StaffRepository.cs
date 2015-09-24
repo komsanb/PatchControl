@@ -276,14 +276,14 @@ namespace Patch_Control.Models
 
         public IEnumerable<PermissionGroup> GetPermissionGroupAll(List<PermissionItemdata> permissionItem)
         {
-            //objConn = objDB.EstablishConnection();
-            //List<PermissionGroup> manage = new List<PermissionGroup>();
-            //string strSQL = "SELECT sa.StaffRoleID, pg.PermissionGroupID, pg.PermissionGroupName, pt.PermissionItemUrl, pt.PermissionItemID, pt.PermissionItemName, pt.PermissionItemParent FROM permissionitems pt  ";
-            //strSQL += "INNER JOIN permissiongroup pg ON pg.PermissionGroupID = pt.PermissionGroupID ";
-            //strSQL += "LEFT JOIN staffaccess sa ON sa.PermissionItemID = pt.PermissionItemID ";
-            //strSQL += "WHERE pt.PermissionItemID IN (1, 5, 10, 12, 14) AND pt.PermissionGroupID = 1";
-            //DataTable dt1 = objDB.List(strSQL, objConn);
-            //objConn.Close();
+            objConn = objDB.EstablishConnection();
+            List<PermissionItemdata> manage = new List<PermissionItemdata>();
+            string strSQL = "SELECT sa.StaffRoleID, pg.PermissionGroupID, pg.PermissionGroupName, pt.PermissionItemUrl, pt.PermissionItemID, pt.PermissionItemName, pt.PermissionItemParent FROM permissionitems pt  ";
+            strSQL += "INNER JOIN permissiongroup pg ON pg.PermissionGroupID = pt.PermissionGroupID ";
+            strSQL += "LEFT JOIN staffaccess sa ON sa.PermissionItemID = pt.PermissionItemID ";
+            strSQL += "WHERE pt.PermissionItemID IN (1, 5, 10, 12, 14) AND pt.PermissionGroupID = 1";
+            DataTable dt1 = objDB.List(strSQL, objConn);
+            objConn.Close();
 
             objConn = objDB.EstablishConnection();
             List<PermissionGroup> staff = new List<PermissionGroup>();         
@@ -298,6 +298,9 @@ namespace Patch_Control.Models
                     PermissionGroup manageStaff = new PermissionGroup();
                     manageStaff.PermissionGroupID = Convert.ToInt32(dt.Rows[i]["PermissionGroupID"].ToString());
                     manageStaff.PermissionGroupName = dt.Rows[i]["PermissionGroupName"].ToString();
+
+                    for (int j = 0; j < dt1.Rows.Count; j++)
+                       // PermissionItemdata managePermission = new PermissionItemdata();
                     //manageStaff.PermissionItemName = dt.Rows[i]["PermissionItemName"].ToString();
                     //manageStaff.PermissionItemUrl = dt.Rows[i]["PermissionItemUrl"].ToString();
                     //manageStaff.PermissionItemID = Convert.ToInt32(dt.Rows[i]["PermissionItemID"].ToString());

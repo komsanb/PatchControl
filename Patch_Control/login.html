@@ -24,33 +24,35 @@
 
 <body class="login-content" ng-controller="LoginController">
     <!-- Login -->
+
         <div class="lc-block toggled" id="l-login">
-            <div class="input-group m-b-20">
-                <span class="input-group-addon"><i class="md md-person"></i></span>
-                <div class="fg-line">
-                    <input type="text" class="form-control" id="username" ng-model="username" placeholder="Username" required>
+            <form name="form" ng-submit="submit()" role="form">
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="md md-person"></i></span>
+                    <div class="fg-line">
+                        <input type="text" class="form-control" id="username" ng-model="username" placeholder="Username" required>
+                    </div>
                 </div>
-            </div>
 
-            <div class="input-group m-b-20">
-                <span class="input-group-addon"><i class="md md-accessibility"></i></span>
-                <div class="fg-line">
-                    <input type="password" class="form-control" id="password" ng-model="password" placeholder="Password" required>
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="md md-accessibility"></i></span>
+                    <div class="fg-line">
+                        <input type="password" class="form-control" id="password" ng-model="password" placeholder="Password" required>
+                    </div>
                 </div>
-            </div>
 
-            <!--<div class="clearfix"></div>-->
-
-            <!--<div class="checkbox">
-                <label>
-                    <input type="checkbox" value="">
-                    <i class="input-helper"></i>
-                    Keep me signed in
-                </label>
-            </div>-->
-            <button type="submit" ng-click="submit(username, password)" class="btn btn-primary">Login</button>
-            <!--<a href="index.html" class="btn btn-login btn-danger btn-float"><i class="md md-arrow-forward"></i></a>-->
-        </div>
+                <!--<div class="clearfix"></div>-->
+                <!--<div class="checkbox">
+            <label>
+                <input type="checkbox" value="">
+                <i class="input-helper"></i>
+                Keep me signed in
+            </label>
+        </div>-->
+                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Login</button>
+                <!--<a href="index.html" class="btn btn-login btn-danger btn-float"><i class="md md-arrow-forward"></i></a>-->
+    </form>
+</div>
 
 
     <!-- Older IE warning message -->

@@ -1,10 +1,14 @@
 ﻿using Patch_Control.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace Patch_Control.Controllers
 {
@@ -12,55 +16,99 @@ namespace Patch_Control.Controllers
     {
         PatchsRepository repository = new PatchsRepository();
 
+        //================= Get PatchInformations ======================
+
         [HttpGet]
         [ActionName("PatchInformations")]
-
-        // GET api/<controller>
         public IEnumerable<Patchs> GetPatchInfos()
         {
-            List<Patchs> items = new List<Patchs>();
             return repository.getPatchInformations();
         }
 
+        //================= Get SoftwareType ======================
+
         [HttpGet]
         [ActionName("SoftwareType")]
-
-        // GET api/<controller>
         public IEnumerable<SoftwareType> GetSoftwareType()
-        {
-            List<SoftwareType> items = new List<SoftwareType>();
+        { 
             return repository.getSoftwareType();
         }
 
+        //================= Get SoftwareVersion ======================
+
         [HttpGet]
         [ActionName("SoftwareVersion")]
-
-        // GET api/<controller>
         public IEnumerable<SoftwareVersion> GetSoftwareVersion()
         {
-            List<SoftwareVersion> items = new List<SoftwareVersion>();
             return repository.getSoftwareVersion();
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        //================= Get MyPatch ======================
+
+        [HttpGet]
+        [ActionName("MyPatch")]
+        public IEnumerable<MyPatch> GetMyPatch()
         {
-            return "value";
+            return repository.getMyPatch();
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        //================= Get MyPatchDetails ======================
+
+       
+        [HttpGet]
+        [ActionName("MyPatchDetails")]
+        public MyPatch GetMyPatchInformationsById(int id)
         {
+            return repository.getMyPatchInformations(id);
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        //================= Post UpdateMyPatch ======================
+
+        [HttpPost]
+        [ActionName("UpdateMyPatch")]
+        public IEnumerable<Patchs> updateMyPatchInformations(Patchs update)
         {
+            return repository.postUpdatePatchInformations(update);
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
+
+        //================= Post DeletedMyPatch ======================
+
+        [HttpPost]
+        [ActionName("DeletedMyPatch")]
+        public IEnumerable<Patchs> deletedMyPatch(int id)
+        { 
+            return repository.postDeletePatchInformations(id);
+        }
+
+        //================= Post PatchInformations ======================
+
+        [HttpPost]
+        [ActionName("PatchInformations")]
+        public IEnumerable<Patchs> PostPatchInfos(Patchs items)
         {
+
+            return repository.postPatchInformations(items);
+        }
+
+        //================= Post UploadFiles ======================
+
+        [HttpPost]
+        [ActionName("UploadFiles")]
+        public IEnumerable<Files> PostFilesInfos()
+        {
+            if (HttpContext.Current.Request.Files.AllKeys.Any())
+            {
+                var httpPostedFile = HttpContext.Current.Request.Files["uploadedFile"];
+                //files.filesName = httpPostedFile.FileName;
+                if (httpPostedFile != null)
+                {
+                    var filePath = Path.Combine(HttpContext.Current.Server.MapPath("~/PatchFiles"), httpPostedFile.FileName);
+                    httpPostedFile.SaveAs(filePath);
+                }
+            }
+
+            return repository.postFilesInformations();
         }
     }
 }

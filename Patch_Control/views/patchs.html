@@ -3,7 +3,7 @@
         <div class="card-header bgm-teal">
             <div class="dropdown-btn-demo pull-right">
                 <div class="btn-group">
-                    <select ng-model="search.SoftwareVersionID" ng-options="sofver.SoftwareVersionID as sofver.SoftwareVersionName for sofver in softwareVersion" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <select ng-model="search.softwareVersionID" ng-options="sofver.softwareVersionID as sofver.softwareVersionName for sofver in softwareVersion" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <option value="">Software Version</option>
                     </select>
                 </div>
@@ -11,7 +11,7 @@
 
             <div class="dropdown-btn-demo pull-right">
                 <div class="btn-group">
-                    <select ng-model="search.SoftwareTypeID" ng-options="softtype.SoftwareTypeID as softtype.SoftwareTypeName for softtype in softwareType" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <select ng-model="search.softwareTypeID" ng-options="softtype.softwareTypeID as softtype.softwareTypeName for softtype in softwareType" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <option value="">Software Type</option>
                     </select>
                     &nbsp;&nbsp;
@@ -26,22 +26,28 @@
 
         <form class="form-horizontal" role="form">
             <div class="card-body card-padding">
-                <div ng-repeat="p in patchs | filter:search">
-                    <div class="btn-demo">
-                        <button class="btn btn-primary waves-effect waves-button waves-float pull-right" type="button" data-toggle="collapse" data-target="#collapseExample{{ p.PatchsID }}" aria-expanded="false" aria-controls="collapseExample">
-                            Release Note
-                        </button>
-                        <a href="#">{{ p.SoftwareVersionName }}</a>
-                        : {{ p.SoftwareTypeName }} : {{ p.PatchsInsertDate }} : {{ p.PatchsInsertBy }}
-                        <hr />
-                    </div>
-                    <div class="collapse m-t-10" id="collapseExample{{ p.PatchsID }}">
-                        <p>{{ p.PatchsDescription }}</p>
-                        <h5>
-                            Windows: [<a href="#">installed official</a>] stable vertion
-                        </h5>
-                        <hr />
-                    </div>
+                <div class="btn-demo">
+                    <table style="width:100%;" class="table table-striped table-vmiddle">
+                        <tbody>
+                            <tr ng-repeat="p in patchs | filter:search">
+                                <td>
+                                    <button class="btn btn-primary waves-effect waves-button waves-float pull-right" type="button" data-toggle="collapse" data-target="#collapseExample{{ p.patchsID }}" aria-expanded="false" aria-controls="collapseExample">
+                                        Release Note
+                                    </button>
+                                    <a href="#">{{ p.softwareVersionName }}</a> : {{ p.softwareTypeName }}
+                                    <br />
+                                    <small>Insert Date: {{ p.patchsInsertDate }}</small>
+                                    <div class="collapse m-t-10" id="collapseExample{{ p.patchsID }}">
+                                        <h5>Insert By: {{ p.patchsInsertBy }}</h5>
+                                        <p ng-bind-html="p.patchsDescription"></p>
+                                        <h5>
+                                            Windows: [<a href="#">installed official</a>] stable vertion
+                                        </h5>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </form>

@@ -1,4 +1,4 @@
-﻿<div class="container">
+﻿<div class="container" ng-app="app">
     <div class="card">
         <div class="card-header bgm-teal">
             <h2>
@@ -8,65 +8,111 @@
 
         </div>
 
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" ng-submit="addPatchInfos()" ng-controller="uploadController">
             <div class="card-body card-padding">
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Patch Name</label>
                     <div class="col-sm-6">
                         <div class="fg-line">
-                            <input type="text" class="form-control input-sm" id="inputEmail3" placeholder="Patch Name">
+                            <input type="text" ng-model="patchsName" class="form-control input-sm" id="inputEmail3" placeholder="Patch Name">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="fg-line">
                         <label for="inputPassword3" class="col-sm-2 control-label">Software Type</label>
-                        <div class="col-sm-6">
-
-                            <div class="select">
-                                <select class="form-control">
-                                    <option>Select an Option</option>
-                                    <option>Restaurant</option>
-                                    <option>SPA</option>
-                                    <option>PTT</option>
-                                    <option>Retail</option>
-                                </select>
-                            </div>
+                        <div class="col-sm-4">
+                            <select ng-model="softwareTypeID" ng-options="softtype.softwareTypeID as softtype.softwareTypeName for softtype in softwareType" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <option value="">Software Type</option>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="fg-line">
                         <label for="inputEmail3" class="col-sm-2 control-label">Software Version</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control input-sm" id="inputEmail3" placeholder="Software Version">
+                        <div class="col-sm-2 pull-left">
+                            <select ng-model="softwareVersionID" ng-options="sofver.softwareVersionID as sofver.softwareVersionName for sofver in softwareVersion" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <option value="">Software Version</option>
+                            </select>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="fg-line">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Choosen File</label>
-                        <div class="col-sm-6">
-                            <input type="file" class="form-control input-sm" id="inputEmail3" placeholder="Path File Name">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Sub Version</label>
+                    <div class="col-sm-2">
+                        <div class="fg-line">
+                            <input type="text" ng-model="patchsVersionNumber" class="form-control input-sm" id="inputEmail3" placeholder="Sub Version">
                         </div>
                     </div>
+                    <label for="inputEmail3" class="col-sm-1 control-label ">Result: &nbsp; </label>
+                    <label for="inputEmail3" class="col-sm control-label c-red " ng-repeat="swver in softwareVersion | filter:softwareVersionID" ng-show="softwareVersionID == swver.softwareVersionID">{{ swver.softwareVersionName + '.' + patchsVersionNumber}}</label>
                 </div>
                 <div class="form-group">
                     <div class="fg-line">
                         <label for="inputEmail3" class="col-sm-2 control-label">Description</label>
                         <div class="col-sm-8">
-                            <textarea class="form-control" rows="5" placeholder="Let us type some lorem ipsum...." name="description"></textarea>
-                            <script>CKEDITOR.replace('description');</script>
+                            <summernote id="summernote" ng-model="patchDescription" style="height:auto"></summernote>
+                            
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button onclick="parent.location = '#/showUploads'" type="submit" class="btn btn-primary btn-sm waves-effect waves-button waves-float">Upload</button>
+                <div ng-controller="ModalDemoCtrl">
+                    <div class="form-group">
+                        <div class="fg-line">
+                            <label for="inputEmail" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-8">
+                                <button type="submit" class="btn btn-info">Save Informations and Browse File</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </form>
+
+        <!-- ============================= Alert ============================= -->
+        <div ng-controller="ModalDemoCtrl" nv-file-drop="" Uploader="uploader" filters="queueLimit, customFilter">
+            <script type="text/ng-template" id="myModalContent.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Chossen Patch File</h3>
+                </div>
+                <div ng-controller="FileUploadCtrl">
+                    <div class="card-body card-padding">
+                        <div class="modal-body">
+
+                            <div id="dropbox" class="dropbox" ng-class="dropClass">
+                                <span>{{dropText}}</span>
+                            </div>
+                            <div class="row">
+                                <label for="fileToUpload">Select a File to Upload</label><br />
+                                <input type="file" ng-model-instant id="fileToUpload" multiple onchange="angular.element(this).scope().setFiles(this)" />
+                            </div>
+                            <div ng-show="files.length">
+                                <div ng-repeat="file in files.slice(0)">
+                                    <span>{{file.webkitRelativePath || file.name}}</span>
+                                    (<span ng-switch="file.size > 1024*1024">
+                                        <span ng-switch-when="true">{{file.size / 1024 / 1024 | number:2}} MB</span>
+                                        <span ng-switch-default>{{file.size / 1024 | number:2}} kB</span>
+                                    </span>)
+                                </div>
+                                <div ng-show="progressVisible">
+                                    <div class="percent">{{progress}}%</div>
+                                    <div class="progress-bar">
+                                        <div class="uploaded" ng-style="{'width': progress+'%'}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div ng-controller="FileUploadCtrl">
+                        <button class="btn btn-primary" type="button" ng-click="uploadFile()">OK</button>
+                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </script>
+        </div>
     </div>
 </div>
 

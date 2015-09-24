@@ -1,98 +1,55 @@
 ﻿<div class="container">
-    <div class="card">
+    <div class="card" ng-controller="MyPatchController">
         <div class="card-header bgm-teal">
             <div class="dropdown-btn-demo pull-right">
                 <div class="btn-group">
-                    <select type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <option>Software Version</option>
-                        <option>All versions</option>
-                        <option>3.6</option>
-                        <option>3.5</option>
+                    <select ng-model="search.softwareVersionID" ng-options="sofver.softwareVersionID as sofver.softwareVersionName for sofver in softwareVersion" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <option value="">Software Version</option>
                     </select>
                 </div>
             </div>
 
             <div class="dropdown-btn-demo pull-right">
                 <div class="btn-group">
-                    <select type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <option>Software Type</option>
-                        <option>Retails</option>
-                        <option>SPA</option>
-                        <option>Restaurant</option>
-                        <option>PTT</option>
-                    </select>
-                    &nbsp;&nbsp;
-                </div>
-            </div>
-
-            <div class="dropdown-btn-demo pull-right">
-                <div class="btn-group">
-                    <select type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <option>Release Date</option>
-                        <option>20/06/2015</option>
-                        <option>19/06/2015</option>
-                        <option>18/06/2015</option>
+                    <select ng-model="search.softwareTypeID" ng-options="softtype.softwareTypeID as softtype.softwareTypeName for softtype in softwareType" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <option value="">Software Type</option>
                     </select>
                     &nbsp;&nbsp;
                 </div>
             </div>
             <h2>
                 Upload List
-                <small>Collection of Patch uploads</small>
+                <small>Collection of Patch uploads by .....</small>
             </h2>
 
         </div>
 
         <div class="card-body card-padding">
-            <table style="width:100%;" class="table table-striped table-vmiddle">
-                <tbody>
-                    <tr>
-                        <td>
-                            <a href="#">3.6.6 </a>
-                            : Software Type : Software Version : 18/06/2015
-                        </td>
-                        <td>
-                            <button class="btn btn-success btn-icon"><i class="md md-file-download"></i></button>
-                        </td>
-                        <td>
-                            <button class="btn btn-warning btn-icon"><i class="md md-edit"></i></button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger btn-icon"><i class="md md-delete"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#">3.5.2 </a>
-                            : Software Type : Software Version : 05/06/2015
-                        </td>
-                        <td>
-                            <button class="btn btn-success btn-icon"><i class="md md-file-download"></i></button>
-                        </td>
-                        <td>
-                            <button class="btn btn-warning btn-icon"><i class="md md-edit"></i></button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger btn-icon"><i class="md md-delete"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="#">3.0.0 </a>
-                            : Software Type : Software Version : 26/05/2015
-                        </td>
-                        <td>
-                            <button class="btn btn-success btn-icon"><i class="md md-file-download"></i></button>
-                        </td>
-                        <td>
-                            <button class="btn btn-warning btn-icon"><i class="md md-edit"></i></button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger btn-icon"><i class="md md-delete"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row dialog">
+                <table style="width:100%;" class="table table-striped table-vmiddle">
+                    <tbody>
+                        <tr ng-repeat="mp in myPatch | filter:search">
+                            <td>
+                                <a href="#">{{ mp.patchsName }}</a>
+                                <br />
+                                <small>Insert Date: {{ mp.patchsInsertDate }}</small>
+                            </td>
+                            <td>
+                                {{ mp.softwareVersionName }} | {{ mp.softwareTypeName }}
+                            </td>
+                            <td>
+                                <button class="btn btn-success btn-icon"><i class="md md-file-download"></i></button>
+                            </td>
+                            <td>
+                                <button class="btn btn-warning btn-icon" ng-click="editPatch(mp.patchsID)"><i class="md md-edit"></i></button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-icon" ng-click="deletedMyPatch(mp.patchsID)"><i class="md md-delete"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

@@ -7,28 +7,54 @@ namespace Patch_Control.Models
 {
     public class Patchs
     {
-        public int PatchsID { get; set; }
-        public int SoftwareTypeID { get; set; }
-        public int SoftwareVersionID { get; set; }
-        public string PatchsName { get; set; }
-        public string PatchsDescription { get; set; }
-        public string PatchsUpadateDate { get; set; }        
-        public string PatchsInsertDate { get; set; }
-        public string PatchsInsertBy { get; set; }
-        public string PatchsUpdateBy { get; set; }
-        public string SoftwareTypeName { get; set; }
-        public string SoftwareVersionName { get; set; }
+        public int patchsID { get; set; }
+        public int softwareTypeID { get; set; }
+        public int softwareVersionID { get; set; }
+        public string patchsName { get; set; }
+        public string patchsDescription { get; set; }
+        public string patchsUpdateDate { get; set; }        
+        public string patchsInsertDate { get; set; }
+        public string patchsInsertBy { get; set; }
+        public string patchsUpdateBy { get; set; }
+        public string softwareTypeName { get; set; }
+        public string softwareVersionName { get; set; }
+        public string patchsPathName { get; set; }
+        public string patchsVersionNumber { get; set; }
+        public string deleted { get; set; }
     }
 
     public class SoftwareType
     {
-        public int SoftwareTypeID { get; set; }
-        public string SoftwareTypeName { get; set; }
+        public int softwareTypeID { get; set; }
+        public string softwareTypeName { get; set; }
     }
 
     public class SoftwareVersion
     {
-        public int SoftwareVersionID { get; set; }
-        public string SoftwareVersionName { get; set; }
+        public int softwareVersionID { get; set; }
+        public string softwareVersionName { get; set; }
+        public int softwareTypeID { get; set; }
+    }
+
+    public class Files
+    {
+        public int filesID { get; set; }
+        public HttpPostedFileBase filesName { get; set; }
+        public HttpPostedFileBase filesPath { get; set; }
+    }
+
+    public class MyPatch
+    {
+        public int staffID { get; set; }
+        public int patchsID { get; set; }
+        public string patchsName { get; set; }
+        public string patchsInsertDate { get; set; }
+        public string softwareTypeName { get; set; }
+        public string softwareVersionName { get; set; }
+        public string patchsVersionNumber { get; set; }
+        public string patchsDescription { get; set; }
+        public string staffFirtname { get; set; }
+        public int softwareTypeID { get; set; }
+        public int softwareVersionID { get; set; }
     }
 }

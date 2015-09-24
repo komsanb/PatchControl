@@ -8,13 +8,15 @@
 
     <!-- Vendor CSS -->
     <link href="template/vendors/fullcalendar/fullcalendar.css" rel="stylesheet">
+    <link href="template/vendors/animate-css/animate.css" rel="stylesheet" />
     <link href="template/vendors/animate-css/animate.min.css" rel="stylesheet">
     <link href="template/vendors/noUiSlider/jquery.nouislider.min.css" rel="stylesheet">
     <link href="template/vendors/farbtastic/farbtastic.css" rel="stylesheet">
-    <link href="template/vendors/summernote/summernote.css" rel="stylesheet">
+    <link href="template/vendors/summernote/summernote.css" rel="stylesheet" />
     <link href="template/vendors/sweet-alert/sweet-alert.min.css" rel="stylesheet">
     <link href="template/vendors/material-icons/material-design-iconic-font.min.css" rel="stylesheet">
     <link href="template/vendors/socicon/socicon.min.css" rel="stylesheet">
+    <link href="template/vendors/dropzone/dropzone.css" rel="stylesheet" />
 
     <!-- CSS -->
     <link href="template/css/app.min.1.css" rel="stylesheet">
@@ -39,7 +41,7 @@
             <li class="pull-right">
                 <ul class="top-menu">
                     <li class="dropdown hidden-xs profile-pic">
-                        <img class="img-circle " src="template/img/profile-pics/1.jpg" />
+                        <img class="img-circle " src="template/img/profile-pics/1.jpg" style="max-width:40px"/>
                     </li>
                     <li class="dropdown">
                         <h5>name@synaturegroup.com</h5>
@@ -79,11 +81,8 @@
                 </div>
             </div>
         </aside>
-
-
-        <section id="content" ng-view>
-           
-        </section>
+        
+        <section id="content" ng-view></section>
         
     </section>
 
@@ -128,7 +127,6 @@
         </div>
     <![endif]-->
     <!-- Javascript Libraries -->
-    <script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>
     <script src="template/js/jquery-2.1.1.min.js"></script>
     <script src="template/js/bootstrap.min.js"></script>
     <script src="template/vendors/moment/moment.min.js"></script>
@@ -140,6 +138,7 @@
     <script src="template/vendors/sparklines/jquery.sparkline.min.js"></script>
     <script src="template/vendors/easypiechart/jquery.easypiechart.min.js"></script>
 
+    
     <script src="template/vendors/fullcalendar/lib/moment.min.js"></script>
     <script src="template/vendors/fullcalendar/fullcalendar.min.js"></script>
     <script src="template/vendors/simpleWeather/jquery.simpleWeather.min.js"></script>
@@ -147,7 +146,6 @@
     <script src="template/vendors/bootstrap-select/bootstrap-select.min.js"></script>
     <script src="template/vendors/chosen/chosen.jquery.min.js"></script>
     <script src="template/vendors/input-mask/input-mask.min.js"></script>
-    <script src="template/vendors/summernote/summernote.min.js"></script>
     <script src="template/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
     <script src="template/vendors/fileinput/fileinput.min.js"></script>  
     <script src="template/vendors/waves/waves.min.js"></script>
@@ -155,17 +153,26 @@
     <script src="template/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
     <script src="template/vendors/sweet-alert/sweet-alert.min.js"></script>
     <script src="template/vendors/moment/moment.min.js"></script>
-
+    <script src="template/vendors/summernote/summernote.min.js"></script>
+    <script src="template/vendors/summernote/summernote.js"></script>
     <script src="template/js/flot-charts/curved-line-chart.js"></script>
     <script src="template/js/flot-charts/line-chart.js"></script>
-    <script src="template/js/charts.js"></script>
 
     <script src="template/js/charts.js"></script>
     <script src="template/js/functions.js"></script>
-    <script src="template/js/demo.js"></script>
-
+    <script src="template/js/demo.js"></script>        
+    
     <script src="js/angular.min.js"></script>
+    <script src="js/angular-file-upload.min.js"></script>
+    <script src="js/angular-animate.min.js"></script>
+    <script src="js/angular-animate.js"></script>
+    <script src="js/angular-dropzone.js"></script>
+    <script src="js/ui-bootstrap-tpls-0.10.0.min.js"></script>
+    <script src="js/ui-bootstrap-tpls-0.10.0.js"></script>
+    <script src="js/angular-summernote.js"></script>
+    <script src="js/angular-sanitize.min.js"></script>
     <script src="js/angular-route.min.js"></script>
     <script src="js/angularJS/app.js"></script>
+
 </body>
 </html>

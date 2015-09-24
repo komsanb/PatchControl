@@ -106,9 +106,24 @@
     <Content Include="images\11830129_930384033686678_326350699_n.jpg" />
     <Content Include="images\1456774_1015763138468723_7561643243299731833_n.jpg" />
     <Content Include="index.html" />
+    <Content Include="js\angular-animate.js" />
+    <Content Include="js\angular-animate.min.js" />
+    <Content Include="js\angular-dropzone.js" />
+    <Content Include="js\angular-file-upload.min.js" />
     <Content Include="js\angular-route.min.js" />
+    <Content Include="js\angular-summernote.js" />
+    <Content Include="js\angular-summernote.min.js" />
     <Content Include="js\angular.min.js" />
+    <Content Include="js\angular-sanitize.min.js" />
     <Content Include="js\angularJS\app.js" />
+    <Content Include="js\ng-file-upload-all.js" />
+    <Content Include="js\ng-file-upload-all.min.js" />
+    <Content Include="js\ng-file-upload-shim.js" />
+    <Content Include="js\ng-file-upload-shim.min.js" />
+    <Content Include="js\ng-file-upload.js" />
+    <Content Include="js\ng-file-upload.min.js" />
+    <Content Include="js\ui-bootstrap-custom-tpls-0.13.4.js" />
+    <Content Include="js\ui-bootstrap-custom-tpls-0.13.4.min.js" />
     <Content Include="login.html" />
     <Content Include="template\css\app.css" />
     <Content Include="template\css\app.min.1.css" />
@@ -1331,6 +1346,9 @@
     <Content Include="template\vendors\weather-icons\._weather-icons.less" />
     <Content Include="template\vendors\weather-icons\weather-font.less" />
     <Content Include="template\vendors\weather-icons\weather-icons.less" />
+    <Content Include="js\angular-animate.min.js.map" />
+    <Content Include="js\angular-sanitize.min.js.map" />
+    <Content Include="js\angular-file-upload.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

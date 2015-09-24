@@ -26,7 +26,7 @@
     <!-- Login -->
 
         <div class="lc-block toggled" id="l-login">
-            <form name="form" ng-submit="submit()" role="form">
+            <form name="form" role="form">
                 <div class="input-group m-b-20">
                     <span class="input-group-addon"><i class="md md-person"></i></span>
                     <div class="fg-line">
@@ -49,7 +49,7 @@
                 Keep me signed in
             </label>
         </div>-->
-                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Login</button>
+                <button type="submit" ng-click="submit(username,password)" ng-disabled="form.$invalid" class="btn btn-primary">Login</button>
                 <!--<a href="index.html" class="btn btn-login btn-danger btn-float"><i class="md md-arrow-forward"></i></a>-->
     </form>
 </div>

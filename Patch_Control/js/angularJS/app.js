@@ -409,53 +409,9 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
    
 });
 
-//app.controller("LoginController", function ($scope, $location, $http, $routeParams) {
-
-//    $scope.submit = function (username, password) {
-
-//    $http.get("api/staff/staffall").success(function (data) {
-
-//        $scope.staff = data;
-//        //console.log($scope.staff)
-
-//        var json = $scope.staff;
-//        console.log(json);
-
-//        for (var i = 0; i < json.length; i++) {
-//            Username = json[i].StaffCode;
-//            Password = json[i].StaffPassword;
-
-//            console.log(Username)
-//            console.log(Password)
-//            var user = username;
-//            var pass = password;
-
-//            if (user == Username && pass == Password) {
-
-//                parent.location = 'index.html';
-//            }
-
-//        }   
-//    });
-//    };
-//});
-
-
 app.controller("LoginController", function ($scope, $location, $http, $routeParams) {
 
-    $scope.submit = function () {
-        $scope.username
-        console.log(Username)
-        console.log(Password)
-        var user = username;
-        var pass = password;
-
-        if (user == Username && pass == Password) {
-
-            parent.location = 'index.html';
-        }
-
-    }
+    $scope.submit = function (username, password) {
 
     $http.get("api/staff/staffall").success(function (data) {
 
@@ -479,11 +435,55 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
                 parent.location = 'index.html';
             }
 
-        }
-
+        }   
     });
-
+    };
 });
+
+
+//app.controller("LoginController", function ($scope, $location, $http, $routeParams) {
+
+//    $scope.submit = function () {
+//        $scope.username
+//        console.log($scope.username)
+//        //console.log(Password)
+//        var user = username;
+//        var pass = password;
+
+//        if (user == Username && pass == Password) {
+
+//            parent.location = 'index.html';
+//        }
+
+//    }
+
+//    $http.get("api/staff/staffall").success(function (data) {
+
+//        $scope.staff = data;
+//        //console.log($scope.staff)
+
+//        var json = $scope.staff;
+//        console.log(json);
+
+//        for (var i = 0; i < json.length; i++) {
+//            Username = json[i].StaffCode;
+//            Password = json[i].StaffPassword;
+
+//            console.log(Username)
+//            console.log(Password)
+//            var user = username;
+//            var pass = password;
+
+//            if (user == Username && pass == Password) {
+
+//                parent.location = 'index.html';
+//            }
+
+//        }
+
+//    });
+
+//});
 
 
 //--------------------------------------------- PATCH ------------------------------------------------//

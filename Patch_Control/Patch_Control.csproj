@@ -147,6 +147,7 @@
     <Content Include="js\angular.min.js" />
     <Content Include="js\angular-sanitize.min.js" />
     <Content Include="js\angularJS\app.js" />
+    <Content Include="js\angularJS\appOfPatch.js" />
     <Content Include="js\ng-file-upload-all.js" />
     <Content Include="js\ng-file-upload-all.min.js" />
     <Content Include="js\ng-file-upload-shim.js" />
@@ -1030,6 +1031,7 @@
     <Content Include="views\add_staff.html" />
     <Content Include="views\change_password.html" />
     <Content Include="views\detailsPatch.html" />
+    <Content Include="views\editPatch.html" />
     <Content Include="views\editProfile.html" />
     <Content Include="views\edit_staff_profile.html" />
     <Content Include="views\edit_staff_role.html" />

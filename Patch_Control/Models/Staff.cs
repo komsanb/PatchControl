@@ -64,18 +64,20 @@ namespace Patch_Control.Models
 
     public class PermissionItemdata
     {
-        public int PermissionItemID { get; set; }
+        public String GroupName { get; set; }
 
-        public int PermissionGroupID { get; set; }
+        public List<PermissionItemParent> GroupParent { get; set; }
+    }
+
+    public class PermissionItemParent
+    {
+        public string PermissionGroupID { get; set; }
 
         public string PermissionItemUrl { get; set; }
 
-        public string PermissionItemIcon { get; set; }
+        public string PermissionItemID { get; set; }
 
         public string PermissionItemName { get; set; }
-
-        public int PermissionItemParent { get; set; }
-
     }
 
     public class Province

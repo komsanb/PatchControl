@@ -22,9 +22,16 @@
     <link href="template/css/app.min.1.css" rel="stylesheet">
     <link href="template/css/app.min.2.css" rel="stylesheet">
 
+    <style type="text/css">
+        .notifications .btn {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
 
 </head>
 <body ng-controller="LoginController" >
+    <form ng-init="submit()">
     <header id="header">
         <ul class="header-inner ">
             <li id="menu-trigger" data-trigger="#sidebar">
@@ -41,7 +48,7 @@
             <li class="pull-right">
                 <ul class="top-menu">
                     <li class="dropdown hidden-xs profile-pic">
-                        <img class="img-circle " src="template/img/profile-pics/1.jpg" style="max-width:40px"/>
+                        <img class="img-circle " src="../images/1456774_1015763138468723_7561643243299731833_n.jpg" style="max-width:40px"/>
                     </li>
                     <li class="dropdown">
                         <h5>name@synaturegroup.com</h5>
@@ -60,16 +67,15 @@
                 <div class="si-inner">                  
                     <ul class="main-menu">
                         <li class="active"><a href="#/"><i class="md md-home"></i> Home</a></li>
-                        <li class="sub-menu">
-                            <a href=""><i class="md md-now-widgets"></i> Admintrator </a>
+                        <li class="sub-menu" ng-repeat="permission in permissiongroup">
+                            <a href=""><i class="md md-now-widgets"></i> {{permission.GroupName}} </a>
                             <ul>
 
-                                <li><a href="#/permission_staff">Permission Staffs</a></li>
-                                <li><a class="active" href="#/staff">Staffs</a></li>
+                                <li ng-repeat="parent in permission.GroupParent"><a href="{{parent.PermissionItemUrl}}">{{parent.PermissionItemName}}</a></li>
 
                             </ul>
                         </li>
-                        <li class="sub-menu">
+                        <!--<li class="sub-menu">
                             <a href=""><i class="md md-now-widgets"></i>Patchs</a>
                             <ul>
                                 <li><a href="#/patchs">Release Versions</a></li>
@@ -77,7 +83,7 @@
                                 <li><a href="#/showUploads">Upload Lists</a></li>
                                 
                             </ul>
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
             </div>
@@ -86,7 +92,7 @@
         <section id="content" ng-view></section>
         
     </section>
-
+        </form>
     <!-- Older IE warning message -->
     <!--[if lt IE 9]>
         <div class="ie-warning">
@@ -148,11 +154,11 @@
     <script src="template/vendors/chosen/chosen.jquery.min.js"></script>
     <script src="template/vendors/input-mask/input-mask.min.js"></script>
     <script src="template/vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
-    <script src="template/vendors/fileinput/fileinput.min.js"></script>  
-    <script src="template/vendors/waves/waves.min.js"></script>
+    <script src="template/vendors/fileinput/fileinput.min.js"></script>    
     <script src="template/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
     <script src="template/vendors/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
     <script src="template/vendors/sweet-alert/sweet-alert.min.js"></script>
+    <script src="template/vendors/waves/waves.min.js"></script>
     <script src="template/vendors/moment/moment.min.js"></script>
     <script src="template/vendors/summernote/summernote.min.js"></script>
     <script src="template/vendors/summernote/summernote.js"></script>

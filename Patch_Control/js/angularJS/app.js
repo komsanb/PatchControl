@@ -1,4 +1,4 @@
-﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize', 'summernote', 'ngAnimate', 'ui.bootstrap', 'ngDropzone', 'angular-toArrayFilter'])
+﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize', 'ngAnimate', 'ui.bootstrap', 'ngDropzone', 'angular-toArrayFilter'])
 
 app.config(['$routeProvider',
        function ($routeProvider) {
@@ -572,7 +572,7 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
         }   
     });
 
-    $http.get("api/staff/permissiongroup/" + id).success(function (data) {
+    $http.get("api/staff/permissiongroup/" , id).success(function (data) {
 
         $scope.permissiongroup = data;
         console.log($scope.permissiongroup);

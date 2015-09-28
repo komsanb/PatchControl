@@ -1,4 +1,4 @@
-﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize', 'summernote', 'ngAnimate', 'ui.bootstrap', 'ngDropzone'])
+﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize', 'summernote', 'ngAnimate', 'ui.bootstrap', 'ngDropzone', 'angular-toArrayFilter'])
 
 app.config(['$routeProvider',
        function ($routeProvider) {
@@ -571,50 +571,15 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
 
         }   
     });
+
+    $http.get("api/staff/permissiongroup/" + id).success(function (data) {
+
+        $scope.permissiongroup = data;
+        console.log($scope.permissiongroup);
+
+    });
+
     };
+
 });
 
-
-//app.controller("LoginController", function ($scope, $location, $http, $routeParams) {
-
-//    $scope.submit = function () {
-//        $scope.username
-//        console.log($scope.username)
-//        //console.log(Password)
-//        var user = username;
-//        var pass = password;
-
-//        if (user == Username && pass == Password) {
-
-//            parent.location = 'index.html';
-//        }
-
-//    }
-
-//    $http.get("api/staff/staffall").success(function (data) {
-
-//        $scope.staff = data;
-//        //console.log($scope.staff)
-
-//        var json = $scope.staff;
-//        console.log(json);
-
-//        for (var i = 0; i < json.length; i++) {
-//            Username = json[i].StaffCode;
-//            Password = json[i].StaffPassword;
-
-//            console.log(Username)
-//            console.log(Password)
-//            var user = username;
-//            var pass = password;
-
-//            if (user == Username && pass == Password) {
-
-//                parent.location = 'index.html';
-//            }
-
-//        }
-
-//    });
-
-//});

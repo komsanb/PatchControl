@@ -155,6 +155,7 @@
     <Content Include="js\summernote.css" />
     <Content Include="js\summernote.js" />
     <Content Include="js\summernote.min.js" />
+    <Content Include="js\toArrayFilter.js" />
     <Content Include="js\ui-bootstrap-custom-tpls-0.13.4.js" />
     <Content Include="js\ui-bootstrap-custom-tpls-0.13.4.min.js" />
     <Content Include="js\validator.js" />

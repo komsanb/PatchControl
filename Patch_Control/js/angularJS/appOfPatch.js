@@ -1,11 +1,33 @@
 ﻿//--------------------------------------------- PATCH ------------------------------------------------//
 
-app.controller("patchInfoController", function ($scope, $http, $filter) {
+app.controller("patchInfoController", function ($scope, $http, $filter, $routeParams) {
 
     $http.get('api/patchs/PatchInformations')
     .success(function (response) {
-        $scope.patchs = response;
+        $scope.pages = [],
+        $scope.currentPage = 1,
+        $scope.numPerPage = 10,
+        $scope.maxSize = 5;
+
+        $scope.makeTodos = function () {
+            $scope.todos = [];
+            for (i = 0; i <= response.length ; i++) {
+                $scope.todos.push({
+                    text: response[i]
+                });
+            }
+        };
+        $scope.makeTodos();
+
+        $scope.$watch('currentPage + numPerPage', function () {
+            var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+            , end = begin + $scope.numPerPage;
+
+            $scope.pages = $scope.todos.slice(begin, end);
+            console.log($scope.pages)
+        });
     });
+
     $http.get('api/patchs/softwareversion')
     .success(function (response) {
         $scope.softwareVersion = response;
@@ -30,6 +52,7 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
 
     $scope.addPatchInfos = function () {
         //console.log(ck.getData());
+        $('summernote').summernote();
         var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');
         var stringHTML = $('#summernote').code();
         var newPatchInfos = {
@@ -43,14 +66,22 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
         }
 
         console.log(newPatchInfos)
-        $http.post('api/patchs/PatchInformations', newPatchInfos)
-            .success(function (items) {
-                $scope.patchInfos = items
-                alert('Upload Successfull!!');
-                $rootScope.open();
-            })
-
-        //window.location = '#/showUploads';
+        swal({
+            title: "Success!",
+            text: "Patch informations has been safe",
+            type: "success",
+            closeOnConfirm: true,
+        }, function () {
+            $http.post('api/patchs/PatchInformations', newPatchInfos)
+                 .success(function (items) {
+                     $scope.patchInfos = items
+                     $scope.patchsName = "";
+                     $scope.softwareVersionID = "";
+                     $scope.patchsVersionNumber = "";
+                     $scope.softwareTypeID = "";
+                 });
+            $rootScope.open();
+        });
     };
 });
 
@@ -154,7 +185,6 @@ app.controller('FileUploadCtrl', ['$scope', '$http', function (scope, $http, $ro
     }
 }]);
 
-
 //--------------------------------------- Alert Upload --------------------------------------------------
 
 app.controller('ModalDemoCtrl', function ($scope, $modal, $log, $rootScope) {
@@ -255,10 +285,6 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
         }
 
         $scope.deletedMyPatch = function (patchID) {
-            //$http.post('api/patchs/DeletedMyPatch/' + patchID, patchID)
-            //        .success(function () {
-            //            window.location.reload(true);
-            //        })
             swal({
                 title: "Are you sure?",
                 text: "You will not be able to recover this patch!",

@@ -55,14 +55,6 @@ namespace Patch_Control.Controllers
             return repository.GetGenderAll();
         }
 
-        // GET api/staff/permissonItemdata
-        //[HttpGet]
-        //[ActionName("PermissonItemdata")]
-        //public IEnumerable<PermissionItemdata> GetpermissionItemdata()
-        //{
-        //    return repository.GetpermissionItemdataAll();
-        //}
-
         // GET api/staff/staffrole
         [HttpGet]
         [ActionName("StaffRole")]
@@ -90,9 +82,17 @@ namespace Patch_Control.Controllers
         // GET api/staff/permissiongroup
         [HttpGet]
         [ActionName("PermissionGroup")]
-        public IEnumerable<PermissionGroup> GetPermissionGroup(List<PermissionItemdata> permissionItem)
+        public IEnumerable<PermissionItemdata> GetPermissionGroup()
         {
-            return repository.GetPermissionGroupAll(permissionItem);
+            return repository.GetPermissionGroupAll();
+        }
+
+        // GET api/staff/permissiongroup
+        [HttpGet]
+        [ActionName("PermissionGroup")]
+        public IEnumerable<PermissionItemdata> GetPermissionGroup(int id)
+        {
+            return repository.GetPermissionGroupAll(id);
         }
 
         // POST api/staff/staffall

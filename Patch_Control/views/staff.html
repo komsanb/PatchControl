@@ -44,8 +44,8 @@
                         <thead>
                             <tr>
                                 <th>Staff Role Name</th>
-                                <th>Name</th>
                                 <th>Staff Code</th>
+                                <th>Name</th>
                                 <th>View</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -54,8 +54,8 @@
                         <tbody>
                             <tr ng-repeat="n in staff|filter:search">
                                 <td>{{n.StaffRoleName}}</td>
-                                <td>{{n.StaffName}}</td>
                                 <td>{{n.StaffCode}}</td>
+                                <td>{{n.StaffName}}</td>                              
                                 <td><button ng-click="profile(n.StaffID)" class="btn btn-info btn-icon"><i class="md md-person"></i></button></td>
                                 <td><button ng-click="EDstaff(n.StaffID)" class="btn btn-warning btn-icon"><i class="md md-edit"></i></button></td>
                                 <!--<td>

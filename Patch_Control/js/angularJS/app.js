@@ -575,6 +575,7 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
         });
               
     };
+
     $scope.StaffRole = localStorage.getItem('StaffRoleID');
     var permission = {
         "StaffRoleID": $scope.StaffRole

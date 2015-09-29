@@ -87,14 +87,7 @@ namespace Patch_Control.Controllers
             return repository.GetPermissionGroupAll();
         }
 
-        // GET api/staff/permissiongroup
-        [HttpGet]
-        [ActionName("PermissionGroup")]
-        public IEnumerable<PermissionItemdata> GetPermissionGroup(int id)
-        {
-            return repository.GetPermissionGroupAll(id);
-        }
-
+        
         // POST api/staff/staffall
         [HttpPost]
         [ActionName("StaffAll")]
@@ -102,6 +95,23 @@ namespace Patch_Control.Controllers
         {
             return repository.PostStaffAll(item);
         }
+
+        // POST api/staff/permissiongroup
+        [HttpPost]
+        [ActionName("PermissionGroup")]
+        public IEnumerable<PermissionItemdata> PostPermissionGroup(PermissionItemdata item)
+        {
+            return repository.PostPermissionGroupAll(item);
+        }
+
+        // POST api/staff/login
+        [HttpPost]
+        [ActionName("Login")]
+        public Staff PostLogin(Staff item)
+        {
+            return repository.PostLoginAll(item);
+        }
+
 
         // POST api/staff/staffedit
         [HttpPost]

@@ -31,69 +31,77 @@
 
 </head>
 <body ng-controller="LoginController" >
-    <form ng-init="submit()">
-    <header id="header">
-        <ul class="header-inner ">
-            <li id="menu-trigger" data-trigger="#sidebar">
-                <div class="line-wrap">
-                    <div class="line top"></div>
-                    <div class="line center"></div>
-                    <div class="line bottom"></div>
-                </div>
-            </li>
+            <header id="header">
+                <ul class="header-inner ">
+                    <li id="menu-trigger" data-trigger="#sidebar">
+                        <div class="line-wrap">
+                            <div class="line top"></div>
+                            <div class="line center"></div>
+                            <div class="line bottom"></div>
+                        </div>
+                    </li>
 
-            <li class="logo hidden-xs">
-                <a href="index.html">Patch Control</a>
-            </li>
-            <li class="pull-right">
-                <ul class="top-menu">
-                    <li class="dropdown hidden-xs profile-pic">
-                        <img class="img-circle " src="../images/1456774_1015763138468723_7561643243299731833_n.jpg" style="max-width:40px"/>
+                    <li class="logo hidden-xs">
+                        <a href="index.html">Patch Control</a>
                     </li>
-                    <li class="dropdown">
-                        <h5>name@synaturegroup.com</h5>
-                    </li>
-                    <li class="hidden-xs" id="chat-trigger" data-trigger="#chat">
-                        <button onclick="parent.location = 'login.html'" type="button" class="btn btn-danger btn-sm waves-effect waves-button waves-float">Logout</button>
+                    <li class="pull-right">
+                        <ul class="top-menu">
+                            <li class="dropdown hidden-xs profile-pic">
+                                <img class="img-circle " src="../images/1456774_1015763138468723_7561643243299731833_n.jpg" style="max-width:40px" />
+                            </li>
+                            <li class="dropdown">
+                                <h5>name@synaturegroup.com</h5>
+                            </li>
+                            <li class="hidden-xs" id="chat-trigger" data-trigger="#chat">
+                                <button onclick="parent.location = 'login.html'" type="button" class="btn btn-danger btn-sm waves-effect waves-button waves-float">Logout</button>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
-            </li>
-        </ul>
-    </header>
+            </header>
 
-    <section id="main">
-        <aside id="sidebar">
-            <div class="sidebar-inner">
-                <div class="si-inner">                  
-                    <ul class="main-menu">
-                        <li class="active"><a href="#/"><i class="md md-home"></i> Home</a></li>
-                        <!--<li class="active"><a href="#/home/:id"><i class="md md-home"></i> Home</a></li>-->
-                        <li class="sub-menu" ng-repeat="permission in permissiongroup">
-                            <a href=""><i class="md md-now-widgets"></i> {{permission.GroupName}} </a>
-                            <ul>
+            <section id="main">
+                <aside id="sidebar">
+                    <div class="sidebar-inner">
+                        <div class="si-inner">
+                            <ul class="main-menu">
+                                <li class="active"><a href="#/"><i class="md md-home"></i> Home</a></li>
+                      
+                                <li class="sub-menu" ng-repeat="permission in permissiongroup">
+                                    <a href=""><i class="md md-now-widgets"></i> {{permission.GroupName}} </a>
+                                    <ul>
 
-                                <li ng-repeat="parent in permission.GroupParent"><a href="{{parent.PermissionItemUrl}}">{{parent.PermissionItemName}}</a></li>
+                                        <li ng-repeat="parent in permission.GroupParent"><a href="{{parent.PermissionItemUrl}}">{{parent.PermissionItemName}}</a></li>
 
+                                    </ul>
+                                </li>
+
+                                <!--<li class="sub-menu">
+                                    <a href=""><i class="md md-now-widgets"></i> Admintrator </a>
+                                    <ul>
+
+                                        <li><a href="#/permission_staff">Permission Staffs</a></li>
+                                        <li><a class="active" href="#/staff">Staffs</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="sub-menu">
+                                <a href=""><i class="md md-now-widgets"></i>Patchs</a>
+                                <ul>
+                                    <li><a href="#/patchs">Release Versions</a></li>
+                                    <li><a class="active" href="#/upload">Upload</a></li>
+                                    <li><a href="#/showUploads">Upload Lists</a></li>
+
+                                </ul>
+                            </li>-->
                             </ul>
-                        </li>
-                        <!--<li class="sub-menu">
-                            <a href=""><i class="md md-now-widgets"></i>Patchs</a>
-                            <ul>
-                                <li><a href="#/patchs">Release Versions</a></li>
-                                <li><a class="active" href="#/upload">Upload</a></li>
-                                <li><a href="#/showUploads">Upload Lists</a></li>
-                                
-                            </ul>
-                        </li>-->
-                    </ul>
-                </div>
-            </div>
-        </aside>
-        
-        <section id="content" ng-view></section>
-        
-    </section>
-        </form>
+                        </div>
+                    </div>
+                </aside>
+
+                <section id="content" ng-view></section>
+
+            </section>
     <!-- Older IE warning message -->
     <!--[if lt IE 9]>
         <div class="ie-warning">
@@ -171,6 +179,7 @@
     <script src="template/js/demo.js"></script>        
     
     <script src="js/angular.min.js"></script>
+    <script src="js/angular-summernote.js"></script>
     <script src="js/toArrayFilter.js"></script>
     <script src="js/angular-file-upload.min.js"></script>
     <script src="js/angular-animate.min.js"></script>

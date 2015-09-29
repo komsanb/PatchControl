@@ -292,11 +292,11 @@ namespace Patch_Control.Models
             DataTable dt = objDB.List(strSQL, objConn);
             DataTable dtitem = objDB.List(strSQLitem, objConn);
             objConn.Close();
-            
+
             if (dt.Rows.Count > 0)
             {
                 // Create Main Array
-                
+
                 // Create Object
 
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -357,19 +357,19 @@ namespace Patch_Control.Models
         }
 
 
-        public IEnumerable<PermissionItemdata> GetPermissionGroupAll(int id)
+        public IEnumerable<PermissionItemdata> PostPermissionGroupAll(PermissionItemdata item)
         {
             objConn = objDB.EstablishConnection();
             List<PermissionItemdata> manage = new List<PermissionItemdata>();
             string strSQL = "SELECT pg.PermissionGroupID, pg.PermissionGroupName FROM permissionitems pt ";
             strSQL += "INNER JOIN permissiongroup pg ON pg.PermissionGroupID = pt.PermissionGroupID ";
             strSQL += "LEFT JOIN staffaccess sa ON sa.PermissionItemID = pt.PermissionItemID ";
-            strSQL += "WHERE pt.PermissionItemParent = 0 AND pt.Deleted = 0 AND sa.StaffRoleID = 2 ";
+            strSQL += "WHERE pt.PermissionItemParent = 0 AND pt.Deleted = 0 AND sa.StaffRoleID = '" + item.StaffRoleID + "' ";
             strSQL += "GROUP BY sa.StaffRoleID, pt.PermissionGroupID ORDER BY sa.StaffRoleID, pt.PermissionGroupID, pt.PermissionItemID;";
             string strSQLitem = "SELECT pg.PermissionGroupID, pt.PermissionItemUrl, pt.PermissionItemID, pt.PermissionItemName FROM permissionitems pt ";
             strSQLitem += "INNER JOIN permissiongroup pg ON pg.PermissionGroupID = pt.PermissionGroupID ";
             strSQLitem += "LEFT JOIN staffaccess sa ON sa.PermissionItemID = pt.PermissionItemID ";
-            strSQLitem += "WHERE pt.PermissionItemParent = 0 AND pt.Deleted = 0 AND sa.StaffRoleID = '" + id + "'";
+            strSQLitem += "WHERE pt.PermissionItemParent = 0 AND pt.Deleted = 0 AND sa.StaffRoleID = '" + item.StaffRoleID + "' ";
             strSQLitem += "GROUP BY pt.PermissionItemID;";
 
             DataTable dt = objDB.List(strSQL, objConn);
@@ -420,23 +420,7 @@ namespace Patch_Control.Models
 
             }
             return manage.ToArray();
-
-            //if (dt.Rows.Count > 0)
-            //{
-            //    for (int i = 0; i < dt.Rows.Count; i++)
-            //    {
-            //        PermissionItemdata manageStaff = new PermissionItemdata();
-            //        manageStaff.PermissionGroupID = Convert.ToInt32(dt.Rows[i]["PermissionGroupID"].ToString());
-            //        manageStaff.PermissionGroupName = dt.Rows[i]["PermissionGroupName"].ToString();
-            //        manageStaff.PermissionItemName = dt.Rows[i]["PermissionItemName"].ToString();
-            //        manageStaff.PermissionItemUrl = dt.Rows[i]["PermissionItemUrl"].ToString();
-            //        manageStaff.PermissionItemID = Convert.ToInt32(dt.Rows[i]["PermissionItemID"].ToString());
-
-            //        manage.Add(manageStaff);
-            //    }
-
-            //}
-            //return manage.ToArray();
+            
         }
 
         public IEnumerable<StaffAccess> PostStaffAccessAll(StaffAccess staffaccess)
@@ -490,7 +474,7 @@ namespace Patch_Control.Models
             StringBuilder strSQL3 = new StringBuilder();
 
             strSQL3.Append("DELETE FROM staffaccess WHERE StaffRoleID = '" + staffaccess.StaffRoleID + "';");
-           
+
             for (i = 0; i < staffaccess.PermissionItemID.Count; i++)
             {
                 strSQL3.Append("INSERT INTO staffaccess(StaffAccessID, StaffRoleID, PermissionItemID) VALUES (" + (maxaccessid + i) + "," + staffaccess.StaffRoleID + "," + staffaccess.PermissionItemID[i] + ");");
@@ -516,5 +500,43 @@ namespace Patch_Control.Models
             return staffroledelete.ToArray();
         }
 
+        public Staff PostLoginAll(Staff item)
+        {
+            objConn = objDB.EstablishConnection();
+            Staff login = new Staff();
+            string strSQL = "SELECT *, CONCAT(s.StaffFirstname,' ', s.StaffLastname) AS NameStaff FROM staffs s INNER JOIN StaffRole sr ON sr.StaffRoleID = s.StaffRoleID INNER JOIN Provinces p ON p.ProvinceID = s.ProvinceID INNER JOIN Gender g ON g.GenderID = s.GenderID WHERE p.LangID = 1 AND s.Deleted = 0 AND StaffCode = '" + item.StaffCode + "' AND StaffPassword = '" + item.StaffPassword + "' ORDER BY StaffCode; ";
+            DataTable dt = objDB.List(strSQL, objConn);
+            objConn.Close();
+            if (dt.Rows.Count > 0)
+            {
+                login.StaffID = Convert.ToInt32(dt.Rows[0]["StaffID"].ToString());
+                login.StaffRoleName = dt.Rows[0]["StaffRoleName"].ToString();
+                login.StaffPassword = dt.Rows[0]["StaffPassword"].ToString();
+                login.StaffRoleID = Convert.ToInt32(dt.Rows[0]["StaffRoleID"].ToString());
+                login.StaffFirstname = dt.Rows[0]["StaffFirstname"].ToString();
+                login.StaffLastname = dt.Rows[0]["StaffLastname"].ToString();
+                login.StaffName = dt.Rows[0]["NameStaff"].ToString();
+                login.StaffCode = dt.Rows[0]["StaffCode"].ToString();
+                login.Gender = dt.Rows[0]["GenderName"].ToString();
+                login.GenderID = Convert.ToInt32(dt.Rows[0]["GenderID"].ToString());
+                login.Address1 = dt.Rows[0]["StaffAddress1"].ToString();
+                login.Address2 = dt.Rows[0]["StaffAddress2"].ToString();
+                login.City = dt.Rows[0]["StaffCity"].ToString();
+                login.Province = dt.Rows[0]["ProvinceName"].ToString();
+                login.ProvinceID = Convert.ToInt32(dt.Rows[0]["ProvinceID"].ToString());
+                login.Zipcode = dt.Rows[0]["StaffZipcode"].ToString();
+                login.Telephone = dt.Rows[0]["StaffTel"].ToString();
+                login.Mobile = dt.Rows[0]["StaffMobile"].ToString();
+                login.Picture = dt.Rows[0]["StaffPictureName"].ToString();
+                login.Email = dt.Rows[0]["StaffEmail"].ToString();
+                login.status = "true";
+                
+            }
+            else {
+                login.status = "false";
+
+            }
+            return login;
+        }
     }
 }

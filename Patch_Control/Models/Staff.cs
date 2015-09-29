@@ -50,6 +50,8 @@ namespace Patch_Control.Models
         public string Email { get; set; }
 
         public int Deleted { get; set; }
+
+        public string status { get; set; }
     }
 
     public class StaffRole
@@ -64,6 +66,8 @@ namespace Patch_Control.Models
 
     public class PermissionItemdata
     {
+        public int StaffRoleID { get; set; }
+
         public String GroupName { get; set; }
 
         public List<PermissionItemParent> GroupParent { get; set; }

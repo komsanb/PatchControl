@@ -17,8 +17,9 @@ namespace Patch_Control.Models
         StaffRole GetStaffRoleAll(int id);
         IEnumerable<StaffRoleAccess> GetStaffRoleAccessAll(int id);
         IEnumerable<PermissionItemdata> GetPermissionGroupAll();
-        IEnumerable<PermissionItemdata> GetPermissionGroupAll(int id);
+        IEnumerable<PermissionItemdata> PostPermissionGroupAll(PermissionItemdata item);
         IEnumerable<Staff> PostStaffAll(Staff item);
+        Staff PostLoginAll(Staff item);
         IEnumerable<Staff> PostStaffEditAll(Staff item);
         IEnumerable<Staff> PostEditPasswordStaffAll(Staff item);
         IEnumerable<Staff> PostStaffDeleteAll(Staff item);

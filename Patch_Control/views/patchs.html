@@ -31,16 +31,19 @@
                         <tbody>                            
                             <tr ng-repeat="page in pages">                                
                                 <td >
-                                    <div ng-repeat="text in page | toArray:false | filter:search">
+                                    <!--  -->
+                                    <div ng-repeat="text in page">
                                         <button class="btn btn-primary waves-effect waves-button waves-float pull-right" type="button" data-toggle="collapse" data-target="#collapseExample{{ text.patchsID }}" aria-expanded="false" aria-controls="collapseExample">
                                             Release Note
                                         </button>
                                         <a href="#">{{ text.softwareVersionName }}</a> : {{ text.softwareTypeName }}
                                         <br />
-                                        <small>Insert Date: {{ text.patchsInsertDate }}</small>
+                                        <small>Insert Date: {{ text.patchsUpdateDate }}</small>
                                         <div class="collapse m-t-10" id="collapseExample{{ text.patchsID }}">
-                                            <h5>Insert By: {{ text.patchsInsertBy }}</h5>
-                                            <p ng-bind-html="p.patchsDescription"></p>
+                                            <hr />
+                                            <h5>Insert By: <a>{{ text.patchsInsertBy }}</a> <b>&bull;</b> Update By: <a>{{ text.patchsUpdateBy }}</a></h5>
+                                            <small ng-bind-html="text.patchsDescription"></small>
+                                            <br />
                                             <h5>
                                                 Windows: [<a href="#">installed official</a>] stable vertion
                                             </h5>
@@ -54,7 +57,9 @@
                         <pagination ng-model="currentPage"
                                     total-items="todos.length"
                                     max-size="maxSize"
-                                    boundary-links="true">
+                                    boundary-links="true"
+                                    data-previous-text="&laquo;" 
+                                    data-next-text="&raquo;">
                         </pagination>
                     </center>
                 </div>

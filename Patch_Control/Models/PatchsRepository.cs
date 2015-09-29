@@ -124,11 +124,11 @@ namespace Patch_Control.Models
 
                 string sqlInsertPatchInfors = "BEGIN; ";
                 sqlInsertPatchInfors += "INSERT INTO patchs(PatchsID, PatchParentVersionID, PatchsName, PatchsDescription, ";
-                sqlInsertPatchInfors += "PatchsInsertDate, PatchsInsertBy,  PatchsVersionNumber) ";
+                sqlInsertPatchInfors += "PatchsInsertDate, PatchsUpdateDate, PatchsInsertBy,  PatchsVersionNumber) ";
                 sqlInsertPatchInfors += "VALUES('" + maxPatchID + "', '" + maxPatchParentVersionID 
                     + "', '" + items.patchsName.ToString() + "', '" + items.patchsDescription.ToString() 
-                    + "', '" + items.patchsInsertDate.ToString() + "', '" + items.patchsInsertBy.ToString() 
-                    + "', '" + items.patchsVersionNumber.ToString() + "');";
+                    + "', '" + items.patchsInsertDate.ToString() + "', '" + items.patchsUpdateDate.ToString()
+                    + "', '" + items.patchsInsertBy.ToString() + "', '" + items.patchsVersionNumber.ToString() + "');";
                 sqlInsertPatchInfors += "INSERT INTO patchparentversion(PatchParentVersionID, PatchsID, SoftwareVersionID, SoftwareTypeID) ";
                 sqlInsertPatchInfors += "VALUES('" + maxPatchParentVersionID + "', '" + maxPatchID + "','" + items.softwareVersionID.ToString()
                     + "','" + items.softwareTypeID.ToString() + "'); ";

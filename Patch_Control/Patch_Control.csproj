@@ -142,6 +142,8 @@
     <Content Include="js\angular-dropzone.js" />
     <Content Include="js\angular-file-upload.min.js" />
     <Content Include="js\angular-route.min.js" />
+    <Content Include="js\angular-summernote.js" />
+    <Content Include="js\angular-summernote.min.js" />
     <Content Include="js\angular.min.js" />
     <Content Include="js\angular-sanitize.min.js" />
     <Content Include="js\angularJS\app.js" />
@@ -1042,7 +1044,7 @@
     <Content Include="views\home.html" />
     <Content Include="views\patchs.html" />
     <Content Include="views\permission_staff.html" />
-    <Content Include="views\showUploads.html" />
+    <Content Include="views\uploadList.html" />
     <Content Include="views\staff.html" />
     <Content Include="views\staffProfile.html" />
     <Content Include="views\test.html" />

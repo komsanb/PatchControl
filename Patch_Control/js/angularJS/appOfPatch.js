@@ -7,13 +7,13 @@ app.controller("patchInfoController", function ($scope, $http, $filter, $routePa
         $scope.pages = [],
         $scope.currentPage = 1,
         $scope.numPerPage = 10,
-        $scope.maxSize = 5;
+        $scope.maxSize = 3;
 
         $scope.makeTodos = function () {
             $scope.todos = [];
-            for (i = 0; i <= response.length ; i++) {
+            for (i = 1; i <= response.length ; i++) {
                 $scope.todos.push({
-                    text: response[i]
+                    text: response[i - 1]
                 });
             }
         };
@@ -59,6 +59,7 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
             "patchsName": $scope.patchsName,
             "patchsDescription": stringHTML,
             "patchsInsertDate": date,
+            "patchsUpdateDate": date,
             "patchsInsertBy": 'Admin',
             "softwareVersionID": $scope.softwareVersionID,
             "patchsVersionNumber": $scope.patchsVersionNumber,
@@ -154,7 +155,15 @@ app.controller('FileUploadCtrl', ['$scope', '$http', function (scope, $http, $ro
         $http.post('api/patchs/UploadFiles', fd)
             .success(function () {
                 scope.ok();
-                window.location = '#/showUploads';
+                swal({
+                    title: "Uploaded!",
+                    text: "Patch file has been updloaded",
+                    type: "success",
+                    showConfirmButton: true
+                }, function (isConfirm) {
+                    if (isConfirm)
+                        window.location = '#/showUploads';
+                });
             })
     }
 
@@ -170,18 +179,33 @@ app.controller('FileUploadCtrl', ['$scope', '$http', function (scope, $http, $ro
 
     function uploadComplete(evt) {
         /* This event is raised when the server send back a response */
-        alert(evt.target.responseText)
+        swal({
+            title: "Message!",
+            text: evt.target.responseText,
+            type: "info",
+            showConfirmButton: true
+        });
     }
 
     function uploadFailed(evt) {
-        alert("There was an error attempting to upload the file.")
+        swal({
+            title: "Message!",
+            text: "There was an error attempting to upload the file.",
+            type: "warning",
+            showConfirmButton: true
+        });
     }
 
     function uploadCanceled(evt) {
         scope.$apply(function () {
             scope.progressVisible = false
         })
-        alert("The upload has been canceled by the user or the browser dropped the connection.")
+        swal({
+            title: "Message!",
+            text: "The upload has been canceled by the user or the browser dropped the connection.",
+            type: "error",
+            showConfirmButton: true
+        });
     }
 }]);
 
@@ -278,11 +302,21 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
                 "softwareTypeID": $scope.editSuccess.softwareTypeID
             }
             console.log(update);
+            
+
             $http.post('api/patchs/UpdateMyPatch', update)
-                .success(function () {
-                    window.location = '#/showUploads';
-                })
-        }
+                    .success(function () {
+                        swal({
+                            title: "Updated!",
+                            text: "Informations has been updated",
+                            type: "success",
+                            showConfirmButton: true
+                        }, function (isConfirm) {
+                            if (isConfirm)
+                                window.location = '#/showUploads';
+                        });                        
+                    })                
+            }
 
         $scope.deletedMyPatch = function (patchID) {
             swal({
@@ -304,7 +338,7 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
                         .success(function () {
                             setTimeout(function () {
                                 window.location.reload(true);
-                            }, 3000);
+                            }, 2500);
                         })
                 } else {
                     swal("Cancelled", "Your patch is safe :)", "error");

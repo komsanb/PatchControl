@@ -587,5 +587,15 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
 
     });
 
+    $scope.StaffId = localStorage.getItem('StaffID');
+    var staffid = {
+        'StaffID':$scope.StaffId
+    }
+    $http.post("api/staff/staffpageindex", staffid).success(function (data) {
+
+        $scope.staff = data;
+        console.log($scope.staff);
+
+    });
 
 });

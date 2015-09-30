@@ -110,21 +110,33 @@ namespace Patch_Control.Models
         public Staff PostStaffIndexAll(Staff item)
         {
             objConn = objDB.EstablishConnection();
-            List<Staff> staff = new List<Staff>();
-
-            int rowid;
-
-            string strSQL1 = "SELECT MAX(StaffID) AS rowid FROM staffs ;";
-            DataTable dt = objDB.List(strSQL1, objConn);
-            rowid = Convert.ToInt32(dt.Rows[0]["rowid"].ToString());
-            int maxid = rowid + 1;
-            string strSQL2 = "INSERT INTO staffs(StaffID, StaffCode, StaffPassword, StaffRoleID, GenderID, StaffFirstname, StaffLastname, StaffAddress1, StaffAddress2, StaffCity, StaffZipcode, StaffTel, StaffMobile, StaffEmail, ProvinceID) ";
-            strSQL2 += "VALUES ('" + maxid + "','" + item.StaffCode + "','" + item.StaffPassword + "','" + item.StaffRoleID + "','" + item.GenderID + "','" + item.StaffFirstname + "','" + item.StaffLastname + "','" + item.Address1 + "','" + item.Address2 + "','" + item.City + "','" + item.Zipcode + "','" + item.Telephone + "','" + item.Mobile + "','" + item.Email + "','" + item.ProvinceID + "')";
-            //strSQL2 += "VALUES (" + maxid + ",'" + item.StaffCode + "','" + item.StaffPassword + "'," + item.StaffRoleID + "," + item.GenderID + ",'" + item.StaffFirstname + "','" + item.StaffLastname + "','" + item.Address1 + "','" + item.Address2 + "','" + item.City + "','" + item.Zipcode + "','" + item.Telephone + "','" + item.Mobile + "','" + item.Picture + "','" + item.Email + "'," + item.ProvinceID + ")";
-            objDB.sqlExecute(strSQL2, objConn);
+            Staff staffData = new Staff();
+            string strSQL = "SELECT *, CONCAT(s.StaffFirstname,' ', s.StaffLastname) AS NameStaff FROM staffs s INNER JOIN StaffRole sr ON sr.StaffRoleID = s.StaffRoleID INNER JOIN Provinces p ON p.ProvinceID = s.ProvinceID INNER JOIN Gender g ON g.GenderID = s.GenderID WHERE p.LangID = 1 AND s.Deleted = 0 AND StaffID = " + item.StaffID + " ORDER BY StaffID;";
+            DataTable dt = objDB.List(strSQL, objConn);
             objConn.Close();
 
-            return staff;
+            staffData.StaffID = Convert.ToInt32(dt.Rows[0]["StaffID"].ToString());
+            staffData.StaffRoleName = dt.Rows[0]["StaffRoleName"].ToString();
+            staffData.StaffPassword = dt.Rows[0]["StaffPassword"].ToString();
+            staffData.StaffRoleID = Convert.ToInt32(dt.Rows[0]["StaffRoleID"].ToString());
+            staffData.StaffFirstname = dt.Rows[0]["StaffFirstname"].ToString();
+            staffData.StaffLastname = dt.Rows[0]["StaffLastname"].ToString();
+            staffData.StaffName = dt.Rows[0]["NameStaff"].ToString();
+            staffData.StaffCode = dt.Rows[0]["StaffCode"].ToString();
+            staffData.Gender = dt.Rows[0]["GenderName"].ToString();
+            staffData.GenderID = Convert.ToInt32(dt.Rows[0]["GenderID"].ToString());
+            staffData.Address1 = dt.Rows[0]["StaffAddress1"].ToString();
+            staffData.Address2 = dt.Rows[0]["StaffAddress2"].ToString();
+            staffData.City = dt.Rows[0]["StaffCity"].ToString();
+            staffData.Province = dt.Rows[0]["ProvinceName"].ToString();
+            staffData.ProvinceID = Convert.ToInt32(dt.Rows[0]["ProvinceID"].ToString());
+            staffData.Zipcode = dt.Rows[0]["StaffZipcode"].ToString();
+            staffData.Telephone = dt.Rows[0]["StaffTel"].ToString();
+            staffData.Mobile = dt.Rows[0]["StaffMobile"].ToString();
+            staffData.Picture = dt.Rows[0]["StaffPictureName"].ToString();
+            staffData.Email = dt.Rows[0]["StaffEmail"].ToString();
+
+            return staffData;
         }
 
         public IEnumerable<Staff> PostStaffEditAll(Staff item)

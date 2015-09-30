@@ -91,7 +91,7 @@ namespace Patch_Control.Controllers
         // POST api/staff/staffpageindex
         [HttpPost]
         [ActionName("StaffPageIndex")]
-        public IEnumerable<Staff> PostStaffIndex(Staff item)
+        public Staff PostStaffIndex(Staff item)
         {
             return repository.PostStaffIndexAll(item);
         }

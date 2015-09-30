@@ -557,9 +557,10 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
             console.log($scope.login)
             localStorage.setItem('StaffID', data.StaffID);
             localStorage.setItem('StaffRoleID', data.StaffRoleID);
+            localStorage.setItem('StaffFirstName', data.StaffFirstname);
             localStorage.setItem('StaffName', data.StaffName);
             localStorage.setItem('StaffPictureName', data.StaffPictureName);
-            localStorage.setItem('StaffEmail', data.StaffEmail);
+            localStorage.setItem('StaffEmail', data.Email);
             localStorage.setItem('StaffStatus', data.status);         
             $scope.status = localStorage.getItem('StaffStatus');
         //console.log($scope.status);
@@ -586,6 +587,11 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
                 console.log($scope.permissiongroup);
 
     });
+
+    $scope.logout = function () {
+        localStorage.clear();
+        window.location = 'login.html';
+    }
 
     $scope.StaffId = localStorage.getItem('StaffID');
     var staffid = {

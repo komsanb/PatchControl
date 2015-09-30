@@ -107,37 +107,36 @@ namespace Patch_Control.Models
             return staff.ToArray();
         }
 
-        public Staff PostStaffIndexAll(Staff item)
-        {
-            objConn = objDB.EstablishConnection();
-            Staff staffData = new Staff();
-            string strSQL = "SELECT *, CONCAT(s.StaffFirstname,' ', s.StaffLastname) AS NameStaff FROM staffs s INNER JOIN StaffRole sr ON sr.StaffRoleID = s.StaffRoleID INNER JOIN Provinces p ON p.ProvinceID = s.ProvinceID INNER JOIN Gender g ON g.GenderID = s.GenderID WHERE p.LangID = 1 AND s.Deleted = 0 AND StaffID = " + item.StaffID + " ORDER BY StaffID;";
-            DataTable dt = objDB.List(strSQL, objConn);
-            objConn.Close();
+        //public Staff PostStaffIndexAll(Staff item)
+        //{
+        //    objConn = objDB.EstablishConnection();
+        //    Staff staffData = new Staff();
+        //    string strSQL = "SELECT *, CONCAT(s.StaffFirstname,' ', s.StaffLastname) AS NameStaff FROM staffs s INNER JOIN StaffRole sr ON sr.StaffRoleID = s.StaffRoleID INNER JOIN Provinces p ON p.ProvinceID = s.ProvinceID INNER JOIN Gender g ON g.GenderID = s.GenderID WHERE p.LangID = 1 AND s.Deleted = 0 AND StaffID = " + item.StaffID + " ORDER BY StaffID;";
+        //    DataTable dt = objDB.List(strSQL, objConn);
+        //    objConn.Close();
 
-            staffData.StaffID = Convert.ToInt32(dt.Rows[0]["StaffID"].ToString());
-            staffData.StaffRoleName = dt.Rows[0]["StaffRoleName"].ToString();
-            staffData.StaffPassword = dt.Rows[0]["StaffPassword"].ToString();
-            staffData.StaffRoleID = Convert.ToInt32(dt.Rows[0]["StaffRoleID"].ToString());
-            staffData.StaffFirstname = dt.Rows[0]["StaffFirstname"].ToString();
-            staffData.StaffLastname = dt.Rows[0]["StaffLastname"].ToString();
-            staffData.StaffName = dt.Rows[0]["NameStaff"].ToString();
-            staffData.StaffCode = dt.Rows[0]["StaffCode"].ToString();
-            staffData.Gender = dt.Rows[0]["GenderName"].ToString();
-            staffData.GenderID = Convert.ToInt32(dt.Rows[0]["GenderID"].ToString());
-            staffData.Address1 = dt.Rows[0]["StaffAddress1"].ToString();
-            staffData.Address2 = dt.Rows[0]["StaffAddress2"].ToString();
-            staffData.City = dt.Rows[0]["StaffCity"].ToString();
-            staffData.Province = dt.Rows[0]["ProvinceName"].ToString();
-            staffData.ProvinceID = Convert.ToInt32(dt.Rows[0]["ProvinceID"].ToString());
-            staffData.Zipcode = dt.Rows[0]["StaffZipcode"].ToString();
-            staffData.Telephone = dt.Rows[0]["StaffTel"].ToString();
-            staffData.Mobile = dt.Rows[0]["StaffMobile"].ToString();
-            staffData.Picture = dt.Rows[0]["StaffPictureName"].ToString();
-            staffData.Email = dt.Rows[0]["StaffEmail"].ToString();
+        //    staffData.StaffRoleName = dt.Rows[0]["StaffRoleName"].ToString();
+        //    staffData.StaffPassword = dt.Rows[0]["StaffPassword"].ToString();
+        //    staffData.StaffRoleID = Convert.ToInt32(dt.Rows[0]["StaffRoleID"].ToString());
+        //    staffData.StaffFirstname = dt.Rows[0]["StaffFirstname"].ToString();
+        //    staffData.StaffLastname = dt.Rows[0]["StaffLastname"].ToString();
+        //    staffData.StaffName = dt.Rows[0]["NameStaff"].ToString();
+        //    staffData.StaffCode = dt.Rows[0]["StaffCode"].ToString();
+        //    staffData.Gender = dt.Rows[0]["GenderName"].ToString();
+        //    staffData.GenderID = Convert.ToInt32(dt.Rows[0]["GenderID"].ToString());
+        //    staffData.Address1 = dt.Rows[0]["StaffAddress1"].ToString();
+        //    staffData.Address2 = dt.Rows[0]["StaffAddress2"].ToString();
+        //    staffData.City = dt.Rows[0]["StaffCity"].ToString();
+        //    staffData.Province = dt.Rows[0]["ProvinceName"].ToString();
+        //    staffData.ProvinceID = Convert.ToInt32(dt.Rows[0]["ProvinceID"].ToString());
+        //    staffData.Zipcode = dt.Rows[0]["StaffZipcode"].ToString();
+        //    staffData.Telephone = dt.Rows[0]["StaffTel"].ToString();
+        //    staffData.Mobile = dt.Rows[0]["StaffMobile"].ToString();
+        //    staffData.Picture = dt.Rows[0]["StaffPictureName"].ToString();
+        //    staffData.Email = dt.Rows[0]["StaffEmail"].ToString();
 
-            return staffData;
-        }
+        //    return staffData;
+        //}
 
         public IEnumerable<Staff> PostStaffEditAll(Staff item)
         {

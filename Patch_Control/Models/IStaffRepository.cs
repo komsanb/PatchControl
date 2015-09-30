@@ -18,7 +18,7 @@ namespace Patch_Control.Models
         IEnumerable<PermissionItemdata> GetPermissionGroupAll();
         IEnumerable<PermissionItemdata> PostPermissionGroupAll(PermissionItemdata item);
         IEnumerable<Staff> PostStaffAll(Staff item);
-        Staff PostStaffIndexAll(Staff item);
+        //Staff PostStaffIndexAll(Staff item);
         Staff PostLoginAll(Staff item);
         IEnumerable<Staff> PostStaffEditAll(Staff item);
         IEnumerable<Staff> PostEditPasswordStaffAll(Staff item);

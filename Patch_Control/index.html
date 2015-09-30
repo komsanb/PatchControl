@@ -40,14 +40,17 @@
             </li>
             <li class="pull-right">
                 <ul class="top-menu">
+
                     <li class="dropdown hidden-xs profile-pic">
                         <img class="img-circle " src="../images/1456774_1015763138468723_7561643243299731833_n.jpg" style="max-width:40px" />
                     </li>
-                    <li class="dropdown">
-                        <h5>name@synaturegroup.com</h5>
+                    <li class="">
+                        <h5 class="c-white"> &nbsp;{{staff.Email}}&nbsp; </h5>
+                        
                     </li>
                     <li class="hidden-xs" id="chat-trigger" data-trigger="#chat">
-                        <button onclick="parent.location = 'login.html'" type="button" class="btn btn-danger btn-sm waves-effect waves-button waves-float">Logout</button>
+                        <!--<button onclick="parent.location = 'login.html'" type="button" class="btn btn-danger btn-sm waves-effect waves-button waves-float">Logout</button>-->
+                        <button ng-click="logout()" type="button" class="btn btn-danger btn-sm waves-effect waves-button waves-float">Logout</button>
                     </li>
                 </ul>
             </li>

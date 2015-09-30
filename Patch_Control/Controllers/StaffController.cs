@@ -89,12 +89,12 @@ namespace Patch_Control.Controllers
         }
 
         // POST api/staff/staffpageindex
-        [HttpPost]
-        [ActionName("StaffPageIndex")]
-        public Staff PostStaffIndex(Staff item)
-        {
-            return repository.PostStaffIndexAll(item);
-        }
+        //[HttpPost]
+        //[ActionName("StaffPageIndex")]
+        //public Staff PostStaffIndex(Staff item)
+        //{
+        //    return repository.PostStaffIndexAll(item);
+        //}
 
         // POST api/staff/permissiongroup
         [HttpPost]

@@ -148,6 +148,7 @@
     <Content Include="js\angular-sanitize.min.js" />
     <Content Include="js\angularJS\app.js" />
     <Content Include="js\angularJS\appOfPatch.js" />
+    <Content Include="js\dirPagination.js" />
     <Content Include="js\ng-file-upload-all.js" />
     <Content Include="js\ng-file-upload-all.min.js" />
     <Content Include="js\ng-file-upload-shim.js" />
@@ -157,6 +158,7 @@
     <Content Include="js\summernote.css" />
     <Content Include="js\summernote.js" />
     <Content Include="js\summernote.min.js" />
+    <Content Include="js\testTemplate.tpl.html" />
     <Content Include="js\toArrayFilter.js" />
     <Content Include="js\ui-bootstrap-custom-tpls-0.13.4.js" />
     <Content Include="js\ui-bootstrap-custom-tpls-0.13.4.min.js" />

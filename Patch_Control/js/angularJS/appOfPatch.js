@@ -4,28 +4,8 @@ app.controller("patchInfoController", function ($scope, $http, $filter, $routePa
 
     $http.get('api/patchs/PatchInformations')
     .success(function (response) {
-        $scope.pages = [],
-        $scope.currentPage = 1,
-        $scope.numPerPage = 10,
-        $scope.maxSize = 3;
-
-        $scope.makeTodos = function () {
-            $scope.todos = [];
-            for (i = 1; i <= response.length ; i++) {
-                $scope.todos.push({
-                    text: response[i - 1]
-                });
-            }
-        };
-        $scope.makeTodos();
-
-        $scope.$watch('currentPage + numPerPage', function () {
-            var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-            , end = begin + $scope.numPerPage;
-
-            $scope.pages = $scope.todos.slice(begin, end);
-            console.log($scope.pages)
-        });
+        $scope.patchs = response;
+        console.log($scope.patchs);
     });
 
     $http.get('api/patchs/softwareversion')

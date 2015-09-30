@@ -1,4 +1,4 @@
-﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize', 'ngAnimate', 'ui.bootstrap', 'ngDropzone', 'angular-toArrayFilter'])
+﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize', 'ngAnimate', 'summernote', 'ui.bootstrap', 'ngDropzone', 'angular-toArrayFilter'])
 
 app.config(['$routeProvider',
        function ($routeProvider) {
@@ -24,7 +24,7 @@ app.config(['$routeProvider',
                    controller: 'uploadController'
                }).
                when('/showUploads', {
-                   templateUrl: 'views/showUploads.html',
+                   templateUrl: 'views/uploadList.html',
                    controller: 'MyPatchController'
                }).
                when('/add_staff', {

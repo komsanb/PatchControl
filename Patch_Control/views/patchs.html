@@ -28,39 +28,46 @@
             <div class="card-body card-padding">
                 <div class="btn-demo">
                     <table style="width:100%;" class="table table-striped table-vmiddle">
-                        <tbody>                            
-                            <tr ng-repeat="page in pages">                                
-                                <td >
-                                    <!--  -->
-                                    <div ng-repeat="text in page">
-                                        <button class="btn btn-primary waves-effect waves-button waves-float pull-right" type="button" data-toggle="collapse" data-target="#collapseExample{{ text.patchsID }}" aria-expanded="false" aria-controls="collapseExample">
-                                            Release Note
-                                        </button>
-                                        <a href="#">{{ text.softwareVersionName }}</a> : {{ text.softwareTypeName }}
+                        <tbody>
+                            <tr dir-paginate="text in patchs | filter:search | itemsPerPage: 8">
+                                <td>
+                                    
+                                    <a>{{ text.patchsName }}</a>
+                                    <br />
+                                    <button class="btn btn-primary waves-effect waves-b+utton waves-float pull-right" type="button" data-toggle="collapse" data-target="#collapseExample{{ text.patchsID }}" aria-expanded="false" aria-controls="collapseExample">
+                                        Release Note
+                                    </button>
+                                    <b>
+                                        <small>Version: {{ text.softwareVersionName }}, {{ text.softwareTypeName}}</small>
                                         <br />
-                                        <small>Insert Date: {{ text.patchsUpdateDate }}</small>
-                                        <div class="collapse m-t-10" id="collapseExample{{ text.patchsID }}">
-                                            <hr />
-                                            <h5>Insert By: <a>{{ text.patchsInsertBy }}</a> <b>&bull;</b> Update By: <a>{{ text.patchsUpdateBy }}</a></h5>
-                                            <small ng-bind-html="text.patchsDescription"></small>
-                                            <br />
-                                            <h5>
-                                                Windows: [<a href="#">installed official</a>] stable vertion
-                                            </h5>
-                                        </div>
+                                        <small>Update Date: {{ text.patchsUpdateDate }}</small>
+                                    </b>
+                                    
+                                    <div class="collapse m-t-10" id="collapseExample{{ text.patchsID }}">
+                                        <small>
+                                            <b>
+                                                Release Date: <a>{{ text.patchsInsertDate}}</a><br />
+                                                Release By: <a>{{ text.patchsInsertBy }}</a><br />
+                                            </b>
+                                            <b ng-show="text.patchsUpdateBy != ''">
+                                                Update By: <a>{{ text.patchsUpdateBy }}</a>
+                                            </b>
+                                        </small>
+                                        <small ng-bind-html="text.patchsDescription"></small>
+                                        <hr />
+                                        <h6>
+                                           Download: [<a href="#">installed official</a>] stable version
+                                        </h6>
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
                     </table> 
                     <center>
-                        <pagination ng-model="currentPage"
-                                    total-items="todos.length"
-                                    max-size="maxSize"
-                                    boundary-links="true"
-                                    data-previous-text="&laquo;" 
-                                    data-next-text="&raquo;">
-                        </pagination>
+                        <dir-pagination-controls max-size="3"
+                                                 direction-links="true" 
+                                                 boundary-links="true">
+                        </dir-pagination-controls>
                     </center>
                 </div>
             </div>

@@ -63,14 +63,6 @@ namespace Patch_Control.Controllers
             return repository.GetStaffRoleAll(id);
         }
 
-        // GET api/staff/staffaccess
-        //[HttpGet]
-        //[ActionName("StaffAccess")]
-        //public StaffAccess GetStaffAccess(int id)
-        //{
-        //    return repository.GetStaffAccessAll(id);
-        //}
-
         // GET api/staff/staffroleaccess
         [HttpGet]
         [ActionName("StaffRoleAccess")]
@@ -87,14 +79,7 @@ namespace Patch_Control.Controllers
             return repository.GetPermissionGroupAll();
         }
 
-        // GET api/staff/permissiongroup
-        [HttpGet]
-        [ActionName("PermissionGroup")]
-        public IEnumerable<PermissionItemdata> GetPermissionGroup(int id)
-        {
-            return repository.GetPermissionGroupAll(id);
-        }
-
+        
         // POST api/staff/staffall
         [HttpPost]
         [ActionName("StaffAll")]
@@ -102,6 +87,31 @@ namespace Patch_Control.Controllers
         {
             return repository.PostStaffAll(item);
         }
+
+        // POST api/staff/staffpageindex
+        [HttpPost]
+        [ActionName("StaffPageIndex")]
+        public IEnumerable<Staff> PostStaffIndex(Staff item)
+        {
+            return repository.PostStaffIndexAll(item);
+        }
+
+        // POST api/staff/permissiongroup
+        [HttpPost]
+        [ActionName("PermissionGroup")]
+        public IEnumerable<PermissionItemdata> PostPermissionGroup(PermissionItemdata item)
+        {
+            return repository.PostPermissionGroupAll(item);
+        }
+
+        // POST api/staff/login
+        [HttpPost]
+        [ActionName("Login")]
+        public Staff PostLogin(Staff item)
+        {
+            return repository.PostLoginAll(item);
+        }
+
 
         // POST api/staff/staffedit
         [HttpPost]

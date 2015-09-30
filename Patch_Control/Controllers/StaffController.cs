@@ -63,14 +63,6 @@ namespace Patch_Control.Controllers
             return repository.GetStaffRoleAll(id);
         }
 
-        // GET api/staff/staffaccess
-        //[HttpGet]
-        //[ActionName("StaffAccess")]
-        //public StaffAccess GetStaffAccess(int id)
-        //{
-        //    return repository.GetStaffAccessAll(id);
-        //}
-
         // GET api/staff/staffroleaccess
         [HttpGet]
         [ActionName("StaffRoleAccess")]
@@ -94,6 +86,14 @@ namespace Patch_Control.Controllers
         public IEnumerable<Staff> Post(Staff item)
         {
             return repository.PostStaffAll(item);
+        }
+
+        // POST api/staff/staffpageindex
+        [HttpPost]
+        [ActionName("StaffPageIndex")]
+        public IEnumerable<Staff> PostStaffIndex(Staff item)
+        {
+            return repository.PostStaffIndexAll(item);
         }
 
         // POST api/staff/permissiongroup

@@ -107,6 +107,26 @@ namespace Patch_Control.Models
             return staff.ToArray();
         }
 
+        public Staff PostStaffIndexAll(Staff item)
+        {
+            objConn = objDB.EstablishConnection();
+            List<Staff> staff = new List<Staff>();
+
+            int rowid;
+
+            string strSQL1 = "SELECT MAX(StaffID) AS rowid FROM staffs ;";
+            DataTable dt = objDB.List(strSQL1, objConn);
+            rowid = Convert.ToInt32(dt.Rows[0]["rowid"].ToString());
+            int maxid = rowid + 1;
+            string strSQL2 = "INSERT INTO staffs(StaffID, StaffCode, StaffPassword, StaffRoleID, GenderID, StaffFirstname, StaffLastname, StaffAddress1, StaffAddress2, StaffCity, StaffZipcode, StaffTel, StaffMobile, StaffEmail, ProvinceID) ";
+            strSQL2 += "VALUES ('" + maxid + "','" + item.StaffCode + "','" + item.StaffPassword + "','" + item.StaffRoleID + "','" + item.GenderID + "','" + item.StaffFirstname + "','" + item.StaffLastname + "','" + item.Address1 + "','" + item.Address2 + "','" + item.City + "','" + item.Zipcode + "','" + item.Telephone + "','" + item.Mobile + "','" + item.Email + "','" + item.ProvinceID + "')";
+            //strSQL2 += "VALUES (" + maxid + ",'" + item.StaffCode + "','" + item.StaffPassword + "'," + item.StaffRoleID + "," + item.GenderID + ",'" + item.StaffFirstname + "','" + item.StaffLastname + "','" + item.Address1 + "','" + item.Address2 + "','" + item.City + "','" + item.Zipcode + "','" + item.Telephone + "','" + item.Mobile + "','" + item.Picture + "','" + item.Email + "'," + item.ProvinceID + ")";
+            objDB.sqlExecute(strSQL2, objConn);
+            objConn.Close();
+
+            return staff;
+        }
+
         public IEnumerable<Staff> PostStaffEditAll(Staff item)
         {
             objConn = objDB.EstablishConnection();

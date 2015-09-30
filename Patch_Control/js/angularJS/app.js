@@ -1,4 +1,4 @@
-﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize', 'ngAnimate', 'ui.bootstrap', 'ngDropzone', 'angular-toArrayFilter'])
+﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize', 'ngAnimate', 'ui.bootstrap', 'ngDropzone', 'angular-toArrayFilter', 'angularUtils.directives.dirPagination'])
 
 app.config(['$routeProvider',
        function ($routeProvider) {
@@ -24,7 +24,7 @@ app.config(['$routeProvider',
                    controller: 'uploadController'
                }).
                when('/showUploads', {
-                   templateUrl: 'views/showUploads.html',
+                   templateUrl: 'views/uploadList.html',
                    controller: 'MyPatchController'
                }).
                when('/add_staff', {
@@ -585,6 +585,7 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
                 $scope.permissiongroup = data;
                 console.log($scope.permissiongroup);
 
-            });
+    });
+
 
 });

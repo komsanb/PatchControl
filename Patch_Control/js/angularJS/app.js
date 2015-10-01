@@ -1,4 +1,4 @@
-﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize', 'ngAnimate', 'ui.bootstrap', 'ngDropzone', 'angular-toArrayFilter', 'angularUtils.directives.dirPagination'])
+﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize','summernote', 'ngAnimate', 'ui.bootstrap', 'ngDropzone', 'angular-toArrayFilter', 'angularUtils.directives.dirPagination'])
 
 app.config(['$routeProvider',
        function ($routeProvider) {

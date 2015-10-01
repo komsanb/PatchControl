@@ -530,17 +530,46 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
 });
 
 
-//app.controller("PermissionGroupController", function ($scope, $http, $routeParams) {
+app.controller("PermissionGroupController", function ($scope, $http, $routeParams) {
 
-//    $http.get("api/staff/permissiongroup").success(function (data) {
+    $scope.StaffRole = localStorage.getItem('StaffRoleID');
+    var permission = {
+        "StaffRoleID": $scope.StaffRole
+    }
+    $http.post("api/staff/permissiongroup", permission).success(function (data) {
 
-//        $scope.permissiongroup = data;
-//        console.log($scope.permissiongroup);
+        $scope.permissiongroup = data;
+        console.log($scope.permissiongroup);
 
-//    });
+    });
 
+    $scope.logout = function () {
+        //localStorage.clear();
+        window.location = 'login.html';
+    }
 
-//});
+    $scope.StaffId = localStorage.getItem('StaffID');
+    var staffid = {
+        'StaffID': $scope.StaffId
+    }
+    $http.post("api/staff/staffpageindex", staffid).success(function (data) {
+
+        $scope.staff = data;
+        console.log($scope.staff);
+
+    });
+
+    $scope.profile = function (id) {
+        window.location = "#/staffProfile/" + id;
+    };
+
+    $scope.getstaff = function () {
+        $http.get("api/staff/staffall/" + $routeParams.id).success(function (data) {
+
+            $scope.staffonly = data;
+        });
+    };
+});
 
 app.controller("LoginController", function ($scope, $location, $http, $routeParams) {
     //localStorage.clear();
@@ -563,12 +592,11 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
             localStorage.setItem('StaffEmail', data.Email);
             localStorage.setItem('StaffStatus', data.status);         
             $scope.status = localStorage.getItem('StaffStatus');
-        //console.log($scope.status);
+            //console.log($scope.status);
 
             if ($scope.status == 'true') {
                 //alert($scope.status);
                 window.location = 'index.html';
-                //alert('ssssss');
             }
             else {
                 window.location = 'login.html';
@@ -576,32 +604,4 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
         });
               
     };
-
-    $scope.StaffRole = localStorage.getItem('StaffRoleID');
-    var permission = {
-        "StaffRoleID": $scope.StaffRole
-    }
-    $http.post("api/staff/permissiongroup", permission).success(function (data) {
-
-                $scope.permissiongroup = data;
-                console.log($scope.permissiongroup);
-
-    });
-
-    $scope.logout = function () {
-        localStorage.clear();
-        window.location = 'login.html';
-    }
-
-    $scope.StaffId = localStorage.getItem('StaffID');
-    var staffid = {
-        'StaffID':$scope.StaffId
-    }
-    $http.post("api/staff/staffpageindex", staffid).success(function (data) {
-
-        $scope.staff = data;
-        console.log($scope.staff);
-
-    });
-
 });

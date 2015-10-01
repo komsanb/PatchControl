@@ -46,9 +46,9 @@ namespace Patch_Control.Controllers
 
         [HttpGet]
         [ActionName("MyPatch")]
-        public IEnumerable<MyPatch> GetMyPatch()
+        public IEnumerable<MyPatch> GetMyPatch(int id)
         {
-            return repository.getMyPatch();
+            return repository.getMyPatch(id);
         }
 
         //================= Get MyPatchDetails ======================
@@ -109,5 +109,15 @@ namespace Patch_Control.Controllers
 
             return repository.postFilesInformations();
         }
+
+        //====================== Sent E-mail ========================
+        [HttpPost]
+        [ActionName("SentEmail")]
+        public IEnumerable<Email> SentEmail(Email items)
+        {
+            return repository.sentEmail(items);
+        }
+
+        //================= Post UploadFiles ======================
     }
 }

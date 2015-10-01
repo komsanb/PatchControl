@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 
 namespace Patch_Control.Models
@@ -129,9 +131,10 @@ namespace Patch_Control.Models
                     + "', '" + items.patchsName.ToString() + "', '" + items.patchsDescription.ToString() 
                     + "', '" + items.patchsInsertDate.ToString() + "', '" + items.patchsUpdateDate.ToString()
                     + "', '" + items.patchsInsertBy.ToString() + "', '" + items.patchsVersionNumber.ToString() + "');";
-                sqlInsertPatchInfors += "INSERT INTO patchparentversion(PatchParentVersionID, PatchsID, SoftwareVersionID, SoftwareTypeID) ";
-                sqlInsertPatchInfors += "VALUES('" + maxPatchParentVersionID + "', '" + maxPatchID + "','" + items.softwareVersionID.ToString()
-                    + "','" + items.softwareTypeID.ToString() + "'); ";
+                sqlInsertPatchInfors += "INSERT INTO patchparentversion(PatchParentVersionID, PatchsID, SoftwareVersionID, SoftwareTypeID, StaffID) ";
+                sqlInsertPatchInfors += "VALUES('" + maxPatchParentVersionID + "', '" + maxPatchID 
+                    + "','" + items.softwareVersionID.ToString() + "','" + items.softwareTypeID.ToString() 
+                    + "', '" + Convert.ToInt32(items.staffID.ToString()) + "'); ";
                 //sqlInsertPatch += "INSERT INTO softwareversion(SoftwareVersionID, SoftwareVersionName)";
                 //sqlInsertPatch += "VALUES('" + maxSoftwareVersionID + "', '" + items.SoftwareVersionName.ToString() + "');";
                 sqlInsertPatchInfors += "COMMIT;";
@@ -162,7 +165,7 @@ namespace Patch_Control.Models
             return filesInfors.ToArray();
         }
 
-        public IEnumerable<MyPatch> getMyPatch()
+        public IEnumerable<MyPatch> getMyPatch(int staffID)
         {
             objConn = objDB.EstablishConnection();
             List<MyPatch> titlePatchs = new List<MyPatch>();
@@ -174,7 +177,7 @@ namespace Patch_Control.Models
             sqlMyPatch += " INNER JOIN softwaretype st ON ppv.SoftwareTypeID = st.SoftwareTypeID";
             sqlMyPatch += " INNER JOIN patchs p ON ppv.PatchsID = p.PatchsID";
             sqlMyPatch += " INNER JOIN staffs s ON ppv.StaffID = s.StaffID";
-            sqlMyPatch += " WHERE s.StaffID = '2' AND p.Deleted = 0 ";
+            sqlMyPatch += " WHERE s.StaffID = '" + staffID + "' AND p.Deleted = 0 ";
             sqlMyPatch += " ORDER BY p.PatchsInsertDate DESC";
 
             DataTable dt = objDB.List(sqlMyPatch, objConn);
@@ -273,6 +276,52 @@ namespace Patch_Control.Models
             objConn.Close();
 
             return deletePatchInfors.ToArray();
+        }
+
+        public IEnumerable<Email> sentEmail(Email items)
+        {
+            
+            objConn = objDB.EstablishConnection();
+            List<Email> sentMail = new List<Email>();
+
+            string sqlEmail = "SELECT s.StaffEmail FROM staffs s";
+            sqlEmail += " INNER JOIN staffrole sr ON sr.StaffRoleID = s.StaffRoleID";
+            sqlEmail += " WHERE sr.StaffRoleID = '" + Convert.ToInt32(items.staffRoleID.ToString()) + "'";
+            DataTable dtSentMail = objDB.List(sqlEmail, objConn);
+            objConn.Close();
+            if (dtSentMail.Rows.Count > 0)
+            {
+                for(int i = 0; i < dtSentMail.Rows.Count; i++)
+                {
+                    string staffEmail = dtSentMail.Rows[i]["StaffEmail"].ToString();
+
+                    MailMessage mailMessage = new MailMessage();                    
+                    mailMessage.To.Add(staffEmail);
+                    mailMessage.Subject = "HELLO";
+                    mailMessage.Body = "THIS IS A TEST";
+                    mailMessage.From = new MailAddress(items.myEmail.ToString());
+                    SmtpClient client = new SmtpClient();
+                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.UseDefaultCredentials = false;
+                    client.Host = "smtp.gmail.com";
+
+                    try
+                    {
+                        client.Send(mailMessage);
+                        Console.WriteLine("Message Sent");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message.ToString());
+                    }
+                    Console.ReadLine();
+                }
+            }
+
+            
+
+            return sentMail;
         }
     }
 }

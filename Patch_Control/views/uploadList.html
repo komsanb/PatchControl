@@ -28,7 +28,7 @@
             <div class="row dialog">
                 <table style="width:100%;" class="table table-striped table-vmiddle">
                     <tbody>
-                        <tr ng-repeat="mp in myPatch | filter:search">
+                        <tr dir-paginate="mp in myPatch | filter:search | itemsPerPage: 8">
                             <td>
                                 <a href="#">{{ mp.patchsName }}</a>
                                 <br />
@@ -49,6 +49,12 @@
                         </tr>
                     </tbody>
                 </table>
+                <center>
+                    <dir-pagination-controls max-size="3"
+                                             direction-links="true"
+                                             boundary-links="true">
+                    </dir-pagination-controls>
+                </center>
             </div>
         </div>
     </div>

@@ -8,6 +8,7 @@ namespace Patch_Control.Models
     public class Patchs
     {
         public int patchsID { get; set; }
+        public int staffID { get; set; }
         public int softwareTypeID { get; set; }
         public int softwareVersionID { get; set; }
         public string patchsName { get; set; }
@@ -56,5 +57,12 @@ namespace Patch_Control.Models
         public string staffFirtname { get; set; }
         public int softwareTypeID { get; set; }
         public int softwareVersionID { get; set; }
+    }
+
+    public class Email
+    {
+        public string staffRoleID { get; set; }
+        public string staffEmail { get; set; }
+        public string myEmail { get; set; }
     }
 }

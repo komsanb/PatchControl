@@ -35,12 +35,15 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
         $('summernote').summernote();
         var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');
         var stringHTML = $('#summernote').code();
+        $scope.staffName = localStorage.getItem('StaffName');
+        $scope.staffId= localStorage.getItem('StaffID');
         var newPatchInfos = {
+            "staffID": $scope.staffId,
             "patchsName": $scope.patchsName,
             "patchsDescription": stringHTML,
             "patchsInsertDate": date,
             "patchsUpdateDate": date,
-            "patchsInsertBy": 'Admin',
+            "patchsInsertBy": $scope.staffName,
             "softwareVersionID": $scope.softwareVersionID,
             "patchsVersionNumber": $scope.patchsVersionNumber,
             "softwareTypeID": $scope.softwareTypeID
@@ -128,6 +131,11 @@ app.controller('FileUploadCtrl', ['$scope', '$http', function (scope, $http, $ro
     };
 
     scope.uploadFile = function () {
+        var dataSentMail = {
+            "staffRoleID": localStorage.getItem('StaffRoleID'),
+            "myEmail": localStorage.getItem('Email')
+        }
+        console.log(dataSentMail);
         var fd = new FormData()
         for (var i in scope.files) {
             fd.append("uploadedFile", scope.files[i])
@@ -143,7 +151,9 @@ app.controller('FileUploadCtrl', ['$scope', '$http', function (scope, $http, $ro
                 }, function (isConfirm) {
                     if (isConfirm)
                         window.location = '#/showUploads';
+                    $http.post('api/patchs/SentEmail', dataSentMail)
                 });
+
             })
     }
 
@@ -253,7 +263,8 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
         .success(function (response) {
             $scope.softwareType = response;
         });
-        $http.get('api/patchs/MyPatch')
+        var staffID = localStorage.getItem('StaffID');
+        $http.get('api/patchs/MyPatch/' + staffID)
         .success(function (response) {
             $scope.myPatch = response;
         });
@@ -269,7 +280,7 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
         }
 
         $scope.updatePatchInformations = function () {
-            var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');
+            var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');            
             var stringHTML = $('#summernote').code();
             var update = {
                 "patchsID": $scope.editSuccess.patchsID,

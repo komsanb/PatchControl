@@ -6,7 +6,7 @@
 (function(){
     //Get saved layout type from LocalStorage
     var layoutStatus = localStorage.getItem('ma-layout-status');
-    if (layoutStatus == 1) {
+    if (layoutStatus == 0) {
         $('body').addClass('sw-toggled');
         $('#tw-switch').prop('checked', true);
     }
@@ -15,15 +15,8 @@
         if ($(this).is(':checked')) {
             setTimeout(function(){
                 $('body').addClass('toggled sw-toggled');
-                localStorage.setItem('ma-layout-status', 1);
-                animateMainmenu(0, 100);
-            }, 250);
-        }
-        else {
-            setTimeout(function(){
-                $('body').removeClass('toggled sw-toggled');
                 localStorage.setItem('ma-layout-status', 0);
-                $('.main-menu > li').removeClass('animated');
+                animateMainmenu(0, 100);
             }, 250);
         }
     });

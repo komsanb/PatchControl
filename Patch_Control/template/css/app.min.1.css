@@ -11590,6 +11590,7 @@ body #content {
   height: 47px;
   border-radius: 50%;
   border: 3px solid rgba(0, 0, 0, 0.14);
+  border-color: silver;
   box-sizing: content-box;
 }
 

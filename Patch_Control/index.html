@@ -24,7 +24,7 @@
     <link href="template/css/app.min.2.css" rel="stylesheet">
 
 </head>
-<body ng-controller="LoginController">
+<body ng-controller="PermissionGroupController">
     <header id="header">
         <ul class="header-inner">
             <li id="menu-trigger" data-trigger="#sidebar">
@@ -36,18 +36,13 @@
             </li>
 
             <li class="logo hidden-xs">
-                <a href="index.html">Patch Control</a>
+                <a href="index.html#/"> Patch Control</a>
             </li>
+
             <li class="pull-right">
-                <ul class="top-menu">
-                    <li class="dropdown hidden-xs profile-pic">
-                        <img class="img-circle " src="../images/1456774_1015763138468723_7561643243299731833_n.jpg" style="max-width:40px" />
-                    </li>
-                    <li class="dropdown">
-                        <h5>name@synaturegroup.com</h5>
-                    </li>
-                    <li class="hidden-xs" id="chat-trigger" data-trigger="#chat">
-                        <button onclick="parent.location = 'login.html'" type="button" class="btn btn-danger btn-sm waves-effect waves-button waves-float">Logout</button>
+                <ul class="top-menu">               
+                    <li class="hidden-xs">
+                        <button ng-click="logout()" type="button" class="btn btn-danger btn-sm waves-effect waves-button waves-float">Logout</button>
                     </li>
                 </ul>
             </li>
@@ -58,6 +53,28 @@
         <aside id="sidebar">
             <div class="sidebar-inner">
                 <div class="si-inner">
+                    <div class="profile-menu">
+                        <a href="">
+                            <div class="profile-pic">
+                                <img src="../images/1456774_1015763138468723_7561643243299731833_n.jpg" alt="">
+                            </div>
+
+                            <div class="profile-info">
+                                {{staff.StaffName}}
+
+                                <i class="md md-arrow-drop-down"></i>
+                            </div>
+                        </a>
+
+                        <ul class="main-menu">
+                            <li>
+                                <a href="" ng-click="profile(staff.StaffID)"><i class="md md-person"></i> View Profile</a>
+                            </li>
+                            <li>
+                                <a href="" ng-click="logout()"><i class="md md-history"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </div>
                     <ul class="main-menu">
                         <li class="active"><a href="#/"><i class="md md-home"></i>Home</a></li>
 
@@ -148,7 +165,6 @@
     <script src="template/vendors/flot/plugins/curvedLines.js"></script>
     <script src="template/vendors/sparklines/jquery.sparkline.min.js"></script>
     <script src="template/vendors/easypiechart/jquery.easypiechart.min.js"></script>
-
 
     <script src="template/vendors/fullcalendar/lib/moment.min.js"></script>
     <script src="template/vendors/fullcalendar/fullcalendar.min.js"></script>

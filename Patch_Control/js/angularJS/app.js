@@ -112,6 +112,7 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
     $http.get("api/staff/staffall").success(function (data) {
 
         $scope.staff = data;
+        console.log($scope.staff);
     });
 
     $scope.EDstaff = function (id) {
@@ -544,7 +545,7 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
     });
 
     $scope.logout = function () {
-        //localStorage.clear();
+        localStorage.clear();
         window.location = 'login.html';
     }
 

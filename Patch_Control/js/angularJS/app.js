@@ -166,7 +166,8 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
             showLoaderOnConfirm: true,
         }, function () {
 
-            if ($scope.Address1 == null, $scope.Address2 == null, $scope.City == null, $scope.Zipcode == null, $scope.Telephone == null, $scope.Mobile == null, $scope.Email == null) {
+            if ($scope.StaffLastname == null, $scope.Address1 == null, $scope.Address2 == null, $scope.City == null, $scope.Zipcode == null, $scope.Telephone == null, $scope.Mobile == null, $scope.Email == null) {
+                $scope.StaffLastname = "";
                 $scope.Address1 = "";
                 $scope.Address2 = "";
                 $scope.City = "";
@@ -545,7 +546,7 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
     });
 
     $scope.logout = function () {
-        //localStorage.clear();
+        localStorage.clear();
         window.location = 'login.html';
     }
 
@@ -592,7 +593,7 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
             localStorage.setItem('StaffPictureName', data.StaffPictureName);
             localStorage.setItem('StaffEmail', data.Email);
             localStorage.setItem('StaffStatus', data.status);
-            localStorage.setItem('layout-status', 1);
+            localStorage.setItem('ma-layout-status', 1);
             $scope.status = localStorage.getItem('StaffStatus');
             //console.log($scope.status);
 

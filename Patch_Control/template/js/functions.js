@@ -5,7 +5,7 @@
 
 (function(){
     //Get saved layout type from LocalStorage
-    var layoutStatus = localStorage.getItem('layout-status');
+    var layoutStatus = localStorage.getItem('ma-layout-status');
     if (layoutStatus == 1) {
         $('body').addClass('sw-toggled');
         $('#tw-switch').prop('checked', true);

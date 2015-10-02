@@ -40,7 +40,13 @@
             </li>
 
             <li class="pull-right">
-                <ul class="top-menu">               
+                <ul class="top-menu">  
+                    <!--<li id="toggle-width">
+                        <div class="toggle-switch">
+                            <input id="tw-switch" type="checkbox" hidden="hidden">
+                            <label for="tw-switch" class="ts-helper"></label>
+                        </div>
+                    </li>-->             
                     <li class="hidden-xs">
                         <button ng-click="logout()" type="button" class="btn btn-danger btn-sm waves-effect waves-button waves-float">Logout</button>
                     </li>
@@ -60,7 +66,7 @@
                             </div>
 
                             <div class="profile-info">
-                                {{staff.StaffName}}
+                                {{staffindex.StaffName}}
 
                                 <i class="md md-arrow-drop-down"></i>
                             </div>
@@ -68,7 +74,7 @@
 
                         <ul class="main-menu">
                             <li>
-                                <a href="" ng-click="profile(staff.StaffID)"><i class="md md-person"></i> View Profile</a>
+                                <a href="" ng-click="profile(staffindex.StaffID)"><i class="md md-person"></i> View Profile</a>
                             </li>
                             <li>
                                 <a href="" ng-click="logout()"><i class="md md-history"></i> Logout</a>
@@ -192,7 +198,7 @@
     <script src="js/angular.min.js"></script>
     <script src="js/dirPagination.js"></script>
     <script src="js/angular-summernote.js"></script>
-    <script src="js/toArrayFilter.js"></script>
+    
     <script src="js/angular-file-upload.min.js"></script>
     <script src="js/angular-animate.min.js"></script>
     <script src="js/angular-animate.js"></script>

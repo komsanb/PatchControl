@@ -591,7 +591,8 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
             localStorage.setItem('StaffName', data.StaffName);
             localStorage.setItem('StaffPictureName', data.StaffPictureName);
             localStorage.setItem('StaffEmail', data.Email);
-            localStorage.setItem('StaffStatus', data.status);         
+            localStorage.setItem('StaffStatus', data.status);
+            localStorage.setItem('layout-status', 1);
             $scope.status = localStorage.getItem('StaffStatus');
             //console.log($scope.status);
 

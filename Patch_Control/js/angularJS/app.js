@@ -1,4 +1,4 @@
-﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize','summernote', 'ngAnimate', 'ui.bootstrap', 'ngDropzone', 'angular-toArrayFilter', 'angularUtils.directives.dirPagination'])
+﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize','summernote', 'ngAnimate', 'ui.bootstrap', 'ngDropzone', 'angularUtils.directives.dirPagination'])
 
 app.config(['$routeProvider',
        function ($routeProvider) {
@@ -545,7 +545,7 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
     });
 
     $scope.logout = function () {
-        localStorage.clear();
+        //localStorage.clear();
         window.location = 'login.html';
     }
 
@@ -555,8 +555,8 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
     }
     $http.post("api/staff/staffpageindex", staffid).success(function (data) {
 
-        $scope.staff = data;
-        console.log($scope.staff);
+        $scope.staffindex = data;
+        console.log($scope.staffindex);
 
     });
 

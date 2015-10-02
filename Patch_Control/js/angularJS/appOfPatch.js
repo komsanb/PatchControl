@@ -32,15 +32,14 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
 
     $scope.addPatchInfos = function () {
         //console.log(ck.getData());
-        $('summernote').summernote();
-        var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');
-        var stringHTML = $('#summernote').code();
-        $scope.staffName = localStorage.getItem('StaffName');
+        var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');//get current date
+        var stringSetHTML = $('#summernote').code(); //get code from summernote
+        $scope.staffName = localStorage.getItem('StaffFirstName');
         $scope.staffId= localStorage.getItem('StaffID');
         var newPatchInfos = {
             "staffID": $scope.staffId,
             "patchsName": $scope.patchsName,
-            "patchsDescription": stringHTML,
+            "patchsDescription": stringSetHTML,
             "patchsInsertDate": date,
             "patchsUpdateDate": date,
             "patchsInsertBy": $scope.staffName,
@@ -133,7 +132,7 @@ app.controller('FileUploadCtrl', ['$scope', '$http', function (scope, $http, $ro
     scope.uploadFile = function () {
         var dataSentMail = {
             "staffRoleID": localStorage.getItem('StaffRoleID'),
-            "myEmail": localStorage.getItem('Email')
+            "myEmail": localStorage.getItem('StaffEmail')
         }
         console.log(dataSentMail);
         var fd = new FormData()

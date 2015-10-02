@@ -30,7 +30,7 @@ namespace Patch_Control.Models
             sql += "INNER JOIN softwareversion sv ON sv.SoftwareVersionID = pv.SoftwareVersionID ";
             sql += "INNER JOIN softwaretype st ON st.SoftwareTypeID = pv.SoftwareTypeID ";
             sql += "WHERE p.Deleted = 0 ";
-            sql += "ORDER BY PatchsInsertDate DESC";
+            sql += "ORDER BY PatchsUpdateDate DESC";
 
             DataTable dt = objDB.List(sql, objConn);
             objConn.Close();
@@ -300,10 +300,9 @@ namespace Patch_Control.Models
                     mailMessage.Subject = "HELLO";
                     mailMessage.Body = "THIS IS A TEST";
                     mailMessage.From = new MailAddress(items.myEmail.ToString());
-                    SmtpClient client = new SmtpClient();
-                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    client.UseDefaultCredentials = false;
-                    client.Host = "smtp.gmail.com";
+                    SmtpClient client = new SmtpClient("smtp.gmail.com", 465);
+                    client.EnableSsl = true;
+                    client.Credentials = new System.Net.NetworkCredential("tengnueng017@gmail.com", "40215881");
 
                     try
                     {

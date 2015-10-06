@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Patch_Control.Models
 {
@@ -145,8 +146,10 @@ namespace Patch_Control.Models
                 return patchInfors.ToArray();          
         }
 
-        public System.Web.Mvc.ActionResult postFilesInformations(string path, string fileName)
+        public ActionResult postFilesInformations(string path, string fileName)
         {
+            var movies = new List<object>();
+
             objConn = objDB.EstablishConnection();
             string sqlFileID = "SELECT MAX(FilesID) AS FilesID FROM files";
 
@@ -159,8 +162,13 @@ namespace Patch_Control.Models
             objDB.sqlExecute(sqlFileInfors, objConn);
             objConn.Close();
 
-            return Json(new { errMsg = "test" });
-            
+            return Json(movies, JsonRequestBehavior.AllowGet);
+
+        }
+
+        private ActionResult Json(List<object> movies, JsonRequestBehavior allowGet)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<MyPatch> getMyPatch(int staffID)

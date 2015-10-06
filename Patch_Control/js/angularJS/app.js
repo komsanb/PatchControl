@@ -1,4 +1,4 @@
-﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize', 'summernote', 'ngAnimate', 'ui.bootstrap', 'ngDropzone', 'angularUtils.directives.dirPagination'])
+﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize','summernote', 'ngAnimate', 'ui.bootstrap', 'ngDropzone','angularFileUpload', 'angularUtils.directives.dirPagination'])
 
 app.config(['$routeProvider',
        function ($routeProvider) {
@@ -114,6 +114,7 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
         $scope.staff = data;
         console.log($scope.staff);
     });
+
 
     $scope.EDstaff = function (id) {
         window.location = "#/edit_staff_profile/" + id;
@@ -569,8 +570,56 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
         $http.get("api/staff/staffall/" + $routeParams.id).success(function (data) {
 
             $scope.staffonly = data;
+            //console.log($scope.staffonly)
         });
     };
+
+    $scope.StaffroleID = localStorage.getItem('StaffRoleID');
+    var staffroleid = {
+        'StaffRoleId': $scope.StaffroleID
+    }
+    $http.post("api/staff/permissionitem", staffroleid).success(function (data) {
+
+        $scope.PermissionItem = data[0];
+        console.log($scope.PermissionItem);
+
+        var Permission = new Array();
+        Permission = $scope.PermissionItem.PermissionItemID.split(',').map(Number);
+        $scope.permissionID = Permission;
+        console.log($scope.permissionID);
+
+        var addpermission = 0, editpermission = 0, deletedpermission = 0, addstaff = 0, viewstaff = 0, editstaff = 0, deletedstaff = 0;
+
+
+        for (i = 0; i < Permission.length; i++) {
+
+            if (Permission[i] == 2)
+                addpermission = 1;
+            if (Permission[i] == 3)
+                editpermission = 1;
+            if (Permission[i] == 4)
+                deletedpermission = 1;
+
+            if (Permission[i] == 6)
+                addstaff = 1;
+            if (Permission[i] == 7)
+                editstaff = 1;
+            if (Permission[i] == 8)
+                deletedstaff = 1;
+            if (Permission[i] == 9)
+                viewstaff = 1;
+        }
+        $scope.addRole = addpermission;
+        console.log($scope.addRole)
+        $scope.editRole = editpermission;
+        $scope.deleteRole = deletedpermission;
+
+        $scope.addProfile = addstaff;
+        $scope.viewProfile = viewstaff;
+        $scope.editProfile = editstaff;
+        $scope.deleteProfile = deletedstaff;
+
+    });
 });
 
 app.controller("LoginController", function ($scope, $location, $http, $routeParams) {

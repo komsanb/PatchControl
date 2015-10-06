@@ -34,7 +34,7 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
         //console.log(ck.getData());
         var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');//get current date
         var stringSetHTML = $('#summernote').code(); //get code from summernote
-        $scope.staffName = localStorage.getItem('StaffFirstName');
+        $scope.staffFirstName = localStorage.getItem('StaffFirstName');
         $scope.staffId= localStorage.getItem('StaffID');
         var newPatchInfos = {
             "staffID": $scope.staffId,
@@ -42,7 +42,7 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
             "patchsDescription": stringSetHTML,
             "patchsInsertDate": date,
             "patchsUpdateDate": date,
-            "patchsInsertBy": $scope.staffName,
+            "patchsInsertBy": $scope.staffFirstName,
             "softwareVersionID": $scope.softwareVersionID,
             "patchsVersionNumber": $scope.patchsVersionNumber,
             "softwareTypeID": $scope.softwareTypeID
@@ -63,139 +63,64 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
                      $scope.patchsVersionNumber = "";
                      $scope.softwareTypeID = "";
                  });
-            $rootScope.open();
+            $rootScope.open('lg');
         });
     };
 });
 
 //---------------------------------- Dropzone to Upload Files ------------------------------------------
 
-app.controller('FileUploadCtrl', ['$scope', '$http', function (scope, $http, $rootScope, $modalInstance) {
-    //============== DRAG & DROP =============
-    // source for drag&drop: http://www.webappers.com/2011/09/28/drag-drop-file-upload-with-html5-javascript/
-    var dropbox = document.getElementById("dropbox")
-    scope.dropText = 'Drop files here...'
+app.controller('MyCtrl', ['$scope', 'FileUploader', function($scope, FileUploader) {
+    var uploader = $scope.uploader = new FileUploader({
+        url: ''
+    });
 
-    // init event handlers
-    function dragEnterLeave(evt) {
-        evt.stopPropagation()
-        evt.preventDefault()
-        scope.$apply(function () {
-            scope.dropText = 'Drop files here...'
-            scope.dropClass = ''
-        })
-    }
-    dropbox.addEventListener("dragenter", dragEnterLeave, false)
-    dropbox.addEventListener("dragleave", dragEnterLeave, false)
-    dropbox.addEventListener("dragover", function (evt) {
-        evt.stopPropagation()
-        evt.preventDefault()
-        var clazz = 'not-available'
-        var ok = evt.dataTransfer && evt.dataTransfer.types && evt.dataTransfer.types.indexOf('Files') >= 0
-        scope.$apply(function () {
-            scope.dropText = ok ? 'Drop files here...' : 'Only files are allowed!'
-            scope.dropClass = ok ? 'over' : 'not-available'
-        })
-    }, false)
-    dropbox.addEventListener("drop", function (evt) {
-        console.log('drop evt:', JSON.parse(JSON.stringify(evt.dataTransfer)))
-        evt.stopPropagation()
-        evt.preventDefault()
-        scope.$apply(function () {
-            scope.dropText = 'Drop files here...'
-            scope.dropClass = ''
-        })
-        var files = evt.dataTransfer.files
-        if (files.length > 0) {
-            scope.$apply(function () {
-                scope.files = []
-                for (var i = 0; i < files.length; i++) {
-                    scope.files.push(files[i])
-                }
-            })
+    // FILTERS
+
+    uploader.filters.push({
+        name: 'customFilter',
+        fn: function(item /*{File|FileLikeObject}*/, options) {
+            return this.queue.length < 10;
         }
-    }, false)
-    //============== DRAG & DROP =============
+    });
 
-    scope.setFiles = function (element) {
-        scope.$apply(function (scope) {
-            console.log('files:', element.files);
-            // Turn the FileList object into an Array
-            scope.files = []
-            for (var i = 0; i < element.files.length; i++) {
-                scope.files.push(element.files[i])
-            }
-            scope.progressVisible = false
-        });
+    // CALLBACKS
+
+    uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+        console.info('onWhenAddingFileFailed', item, filter, options);
+    };
+    uploader.onAfterAddingFile = function(fileItem) {
+        console.info('onAfterAddingFile', fileItem);
+    };
+    uploader.onAfterAddingAll = function(addedFileItems) {
+        console.info('onAfterAddingAll', addedFileItems);
+    };
+    uploader.onBeforeUploadItem = function(item) {
+        console.info('onBeforeUploadItem', item);
+    };
+    uploader.onProgressItem = function(fileItem, progress) {
+        console.info('onProgressItem', fileItem, progress);
+    };
+    uploader.onProgressAll = function(progress) {
+        console.info('onProgressAll', progress);
+    };
+    uploader.onSuccessItem = function(fileItem, response, status, headers) {
+        console.info('onSuccessItem', fileItem, response, status, headers);
+    };
+    uploader.onErrorItem = function(fileItem, response, status, headers) {
+        console.info('onErrorItem', fileItem, response, status, headers);
+    };
+    uploader.onCancelItem = function(fileItem, response, status, headers) {
+        console.info('onCancelItem', fileItem, response, status, headers);
+    };
+    uploader.onCompleteItem = function(fileItem, response, status, headers) {
+        console.info('onCompleteItem', fileItem, response, status, headers);
+    };
+    uploader.onCompleteAll = function() {
+        console.info('onCompleteAll');
     };
 
-    scope.uploadFile = function () {
-        var dataSentMail = {
-            "staffRoleID": localStorage.getItem('StaffRoleID'),
-            "myEmail": localStorage.getItem('StaffEmail')
-        }
-        console.log(dataSentMail);
-        var fd = new FormData()
-        for (var i in scope.files) {
-            fd.append("uploadedFile", scope.files[i])
-        }
-        $http.post('api/patchs/UploadFiles', fd)
-            .success(function () {
-                scope.ok();
-                swal({
-                    title: "Uploaded!",
-                    text: "Patch file has been updloaded",
-                    type: "success",
-                    showConfirmButton: true
-                }, function (isConfirm) {
-                    if (isConfirm)
-                        window.location = '#/showUploads';
-                    $http.post('api/patchs/SentEmail', dataSentMail)
-                });
-
-            })
-    }
-
-    function uploadProgress(evt) {
-        scope.$apply(function () {
-            if (evt.lengthComputable) {
-                scope.progress = Math.round(evt.loaded * 100 / evt.total)
-            } else {
-                scope.progress = 'unable to compute'
-            }
-        })
-    }
-
-    function uploadComplete(evt) {
-        /* This event is raised when the server send back a response */
-        swal({
-            title: "Message!",
-            text: evt.target.responseText,
-            type: "info",
-            showConfirmButton: true
-        });
-    }
-
-    function uploadFailed(evt) {
-        swal({
-            title: "Message!",
-            text: "There was an error attempting to upload the file.",
-            type: "warning",
-            showConfirmButton: true
-        });
-    }
-
-    function uploadCanceled(evt) {
-        scope.$apply(function () {
-            scope.progressVisible = false
-        })
-        swal({
-            title: "Message!",
-            text: "The upload has been canceled by the user or the browser dropped the connection.",
-            type: "error",
-            showConfirmButton: true
-        });
-    }
+    console.info('uploader', uploader);
 }]);
 
 //--------------------------------------- Alert Upload --------------------------------------------------
@@ -279,14 +204,15 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
         }
 
         $scope.updatePatchInformations = function () {
-            var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');            
+            var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');
+            $scope.staffFirstName = localStorage.getItem('StaffFirstName');
             var stringHTML = $('#summernote').code();
             var update = {
                 "patchsID": $scope.editSuccess.patchsID,
                 "patchsName": $scope.editSuccess.patchsName,
                 "patchsDescription": stringHTML,
                 "patchsUpdateDate": date,
-                "patchsUpdateBy": 'Mo',
+                "patchsUpdateBy": $scope.staffFirstName,
                 "softwareVersionID": $scope.editSuccess.softwareVersionID,
                 "patchsVersionNumber": $scope.editSuccess.patchsVersionNumber,
                 "softwareTypeID": $scope.editSuccess.softwareTypeID
@@ -336,69 +262,3 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
             });
         }
     }]);
-
-
-//app.controller('uploadController', ['$scope','$http', 'fileUpload', function ($scope, $http, fileUpload) {
-//    $http.get('api/patchs/PatchInformations')
-//        .success(function (response) {
-//            $scope.patchs = response;
-//            $scope.patchDes = response.patchsDescription;
-//        });
-//    $http.get('api/patchs/softwareversion')
-//    .success(function (response) {
-//        $scope.softwareVersion = response;
-//    });
-//    $http.get('api/patchs/softwareType')
-//    .success(function (response) {
-//        $scope.softwareType = response;
-//    });
-
-//    $scope.uploadFile = function () {
-//        var file = $scope.myFile;
-//        console.log('file is ');
-//        console.dir(file);
-//        var uploadUrl = "api/patchs/PatchInformations";
-//        fileUpload.uploadFileToUrl(file, uploadUrl);
-//    };
-
-//}])
-//.directive('fileModel', ['$parse', function ($parse) {
-//    return {
-//        restrict: 'A',
-//        link: function (scope, element, attrs) {
-//            var model = $parse(attrs.fileModel);
-//            var modelSetter = model.assign;
-
-//            element.bind('change', function () {
-//                scope.$apply(function () {
-//                    modelSetter(scope, element[0].files[0]);
-//                });
-//            });
-//        }
-//    };
-//}])
-//.service('fileUpload', ['$http', function ($http) {
-//    this.uploadFileToUrl = function (file, uploadUrl) {
-//        var fd = new FormData();
-//        fd.append('file', file);
-//        $http.post(uploadUrl, fd, {
-//            transformRequest: angular.identity,
-//            headers: { 'Content-Type': undefined }
-//        })
-//        .success(function () {
-//        })
-//        .error(function () {
-//        });
-//    }
-//}])
-//.directive('progressBar', [
-//        function () {
-//            return {
-//                link: function ($scope, el, attrs) {
-//                    $scope.$watch(attrs.progressBar, function (newValue) {
-//                        el.css('width', newValue + '%');
-//                    });
-//                }
-//            };
-//        }
-//]);

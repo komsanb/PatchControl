@@ -16,7 +16,7 @@ namespace Patch_Control.Models
         IEnumerable<Patchs> postUpdatePatchInformations(Patchs update);
         IEnumerable<Patchs> postDeletePatchInformations(int patchID);
         IEnumerable<Patchs> postPatchInformations(Patchs items);
-        IEnumerable<Files> postFilesInformations();
+        System.Web.Mvc.ActionResult postFilesInformations(string path, string fileName);
         IEnumerable<Email> sentEmail(Email items);
     }
 }

@@ -596,6 +596,18 @@
     <Content Include="template\media\gallery\thumbs\7.jpg" />
     <Content Include="template\media\gallery\thumbs\8.jpg" />
     <Content Include="template\media\gallery\thumbs\9.jpg" />
+    <Content Include="template\src\directives\FileDrop.js" />
+    <Content Include="template\src\directives\FileOver.js" />
+    <Content Include="template\src\directives\FileSelect.js" />
+    <Content Include="template\src\index.js" />
+    <Content Include="template\src\services\FileDirective.js" />
+    <Content Include="template\src\services\FileDrop.js" />
+    <Content Include="template\src\services\FileItem.js" />
+    <Content Include="template\src\services\FileLikeObject.js" />
+    <Content Include="template\src\services\FileOver.js" />
+    <Content Include="template\src\services\FileSelect.js" />
+    <Content Include="template\src\services\FileUploader.js" />
+    <Content Include="template\src\values\options.js" />
     <Content Include="template\vendors\animate-css\._animate.css" />
     <Content Include="template\vendors\animate-css\._animate.min.css" />
     <Content Include="template\vendors\animate-css\animate.css" />
@@ -1397,6 +1409,7 @@
     <Content Include="js\angular-animate.min.js.map" />
     <Content Include="js\angular-sanitize.min.js.map" />
     <Content Include="js\angular-file-upload.min.js.map" />
+    <Content Include="template\src\config.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1406,6 +1419,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="files\Patchs\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

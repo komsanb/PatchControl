@@ -145,24 +145,22 @@ namespace Patch_Control.Models
                 return patchInfors.ToArray();          
         }
 
-        public IEnumerable<Files> postFilesInformations()
+        public System.Web.Mvc.ActionResult postFilesInformations(string path, string fileName)
         {
-            List<Files> filesInfors = new List<Files>();
-
             objConn = objDB.EstablishConnection();
             string sqlFileID = "SELECT MAX(FilesID) AS FilesID FROM files";
 
             DataTable dtPatchID = objDB.List(sqlFileID, objConn);
             int maxFilesID = Convert.ToInt32(dtPatchID.Rows[0]["FilesID"].ToString()) + 1;
 
-            //string sqlFileInfors = "INSERT INTO files(FilesID, FilesName, FilesPath) ";
-            //sqlFileInfors += "VALUES('" + maxFilesID + "', '" + files.FileName.ToString()
-            //    + "', '" + files. +"')";
+            string sqlFileInfors = "INSERT INTO files(FilesID, FilesName, FilesPath) ";
+            sqlFileInfors += "VALUES('" + maxFilesID + "', '" + fileName + "', '" + path + "')";
 
-            //objDB.sqlExecute(sqlFileInfors, objConn);
+            objDB.sqlExecute(sqlFileInfors, objConn);
             objConn.Close();
 
-            return filesInfors.ToArray();
+            return Json(new { errMsg = "test" });
+            
         }
 
         public IEnumerable<MyPatch> getMyPatch(int staffID)
@@ -302,7 +300,7 @@ namespace Patch_Control.Models
                     mailMessage.From = new MailAddress(items.myEmail.ToString());
                     SmtpClient client = new SmtpClient("smtp.gmail.com", 465);
                     client.EnableSsl = true;
-                    client.Credentials = new System.Net.NetworkCredential("tengnueng017@gmail.com", "40215881");
+                    client.Credentials = new System.Net.NetworkCredential("synaturetest@gmail.com", "pRoMiSeSystem6");
 
                     try
                     {

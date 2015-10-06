@@ -94,20 +94,25 @@ namespace Patch_Control.Controllers
 
         [HttpPost]
         [ActionName("UploadFiles")]
-        public IEnumerable<Files> PostFilesInfos()
+        public System.Web.Mvc.ActionResult PostFilesInfos(IEnumerable<HttpPostedFileBase> files)
         {
-            if (HttpContext.Current.Request.Files.AllKeys.Any())
+            string path = "";
+            string fileName = "";
+
+            foreach (var file in files)
             {
-                var httpPostedFile = HttpContext.Current.Request.Files["uploadedFile"];
-                //files.filesName = httpPostedFile.FileName;
-                if (httpPostedFile != null)
+                if(file.ContentLength > 0)
                 {
-                    var filePath = Path.Combine(HttpContext.Current.Server.MapPath("~/PatchFiles"), httpPostedFile.FileName);
-                    httpPostedFile.SaveAs(filePath);
+                    var filename = Path.GetFileName(file.FileName);
+                    var filepath = Path.Combine(HttpContext.Current.Server.MapPath("~/files/Patchs"), filename);
+                    file.SaveAs(filepath);
+
+                    path = filepath.ToString();
+                    fileName = fileName.ToString();
                 }
             }
 
-            return repository.postFilesInformations();
+            return repository.postFilesInformations(path, fileName);
         }
 
         //====================== Sent E-mail ========================

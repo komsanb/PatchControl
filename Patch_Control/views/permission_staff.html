@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-header bgm-cyan">
             <!--<p><h2>Manage User Roles</h2></p>-->
-            <div class="pull-right"><a href="#/add_permission" class="btn bgm-indigo">Add Staff Role</a></div>
+            <div class="pull-right"><a ng-show="addRole == 1" href="#/add_permission" class="btn bgm-indigo">Add Staff Role</a></div>
             <h2>Manage Staff Roles</h2>
             <br />
 
@@ -15,15 +15,15 @@
                     <thead>
                         <tr>
                             <th>Role Name</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th ng-show="editRole == 1">Edit</th>
+                            <th ng-show="deleteRole == 1">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="n in staffrole">
                             <td>{{n.StaffRoleName}}</td>
-                            <td><button ng-click="EDpromission(n.StaffRoleID)" class="btn btn-warning btn-icon"><i class="md md-edit"></i></button></td>
-                            <td><button ng-click="deletestaffrole(n.StaffRoleID)" class="btn btn-danger btn-icon"><i class="md md-delete"></i></button></td>
+                            <td ng-show="editRole == 1"><button ng-click="EDpromission(n.StaffRoleID)" class="btn btn-warning btn-icon"><i class="md md-edit"></i></button></td>
+                            <td ng-show="deleteRole == 1"><button ng-click="deletestaffrole(n.StaffRoleID)" class="btn btn-danger btn-icon"><i class="md md-delete"></i></button></td>
                         </tr>
                     </tbody>
                 </table>

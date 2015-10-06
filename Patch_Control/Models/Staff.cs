@@ -84,6 +84,15 @@ namespace Patch_Control.Models
         public string PermissionItemName { get; set; }
     }
 
+    public class PermissionItem
+    {
+        public int StaffRoleID { get; set; }
+
+        public string PermissionItemID { get; set; }
+
+        public string PermissionItemName { get; set; }
+    }
+
     public class Province
     {
         public int ProvinceID { get; set; }
@@ -125,10 +134,5 @@ namespace Patch_Control.Models
 
         public string PermissionGroupName { get; set; }
 
-        //public string PermissionItemName { get; set; }
-
-        //public string PermissionItemUrl { get; set; }
-
-        //public int PermissionItemID { get; set; }
     }
 }

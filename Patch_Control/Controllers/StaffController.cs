@@ -72,14 +72,21 @@ namespace Patch_Control.Controllers
         }
 
         // GET api/staff/permissiongroup
-        [HttpGet]
-        [ActionName("PermissionGroup")]
-        public IEnumerable<PermissionItemdata> GetPermissionGroup()
+        //[HttpGet]
+        //[ActionName("PermissionGroup")]
+        //public IEnumerable<PermissionItemdata> GetPermissionGroup()
+        //{
+        //    return repository.GetPermissionGroupAll();
+        //}
+
+        // POST api/staff/permissionitem
+        [HttpPost]
+        [ActionName("PermissionItem")]
+        public IEnumerable<PermissionItem> PostPermissionItem(PermissionItem item)
         {
-            return repository.GetPermissionGroupAll();
+            return repository.PostPermissionItemAll(item);
         }
 
-        
         // POST api/staff/staffall
         [HttpPost]
         [ActionName("StaffAll")]

@@ -2,6 +2,7 @@
 using POSMySQL.POSControl;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Net;
@@ -201,7 +202,7 @@ namespace Patch_Control.Models
                     myPatch.softwareVersionID = Convert.ToInt32(dt.Rows[i]["SoftwareVersionID"].ToString());
                     myPatch.softwareVersionName = dt.Rows[i]["SoftwareVersionName"].ToString();
                     myPatch.patchsInsertDate = dt.Rows[i]["PatchsInsertDate"].ToString();
-                    myPatch.staffFirtname = dt.Rows[i]["StaffFirstname"].ToString();
+                    myPatch.staffFirstname = dt.Rows[i]["StaffFirstname"].ToString();
                     titlePatchs.Add(myPatch);
                 }
             }
@@ -237,7 +238,7 @@ namespace Patch_Control.Models
             myPatchsDetails.softwareVersionID = Convert.ToInt32(dt.Rows[0]["SoftwareVersionID"].ToString());
             myPatchsDetails.softwareVersionName = dt.Rows[0]["SoftwareVersionName"].ToString();
             myPatchsDetails.patchsInsertDate = dt.Rows[0]["PatchsInsertDate"].ToString();
-            myPatchsDetails.staffFirtname = dt.Rows[0]["StaffFirstname"].ToString();
+            myPatchsDetails.staffFirstname = dt.Rows[0]["StaffFirstname"].ToString();
 
             return myPatchsDetails;
         }
@@ -285,8 +286,7 @@ namespace Patch_Control.Models
         }
 
         public IEnumerable<Email> sentEmail(Email items)
-        {
-            
+        {            
             objConn = objDB.EstablishConnection();
             List<Email> sentMail = new List<Email>();
 
@@ -294,37 +294,69 @@ namespace Patch_Control.Models
             sqlEmail += " INNER JOIN staffrole sr ON sr.StaffRoleID = s.StaffRoleID";
             sqlEmail += " WHERE sr.StaffRoleID = '" + Convert.ToInt32(items.staffRoleID.ToString()) + "'";
             DataTable dtSentMail = objDB.List(sqlEmail, objConn);
+
+            string sqlPatchInfor = "SELECT p.PatchsName,";
+            sqlPatchInfor += " CONCAT(sv.SoftwareVersionName, '.', p.PatchsVersionNumber) AS SoftwareVersion,";
+            sqlPatchInfor += " st.SoftwareTypeName, p.PatchsDescription,";
+            sqlPatchInfor += " DATE_FORMAT(p.PatchsInsertDate, '%d %M %Y') AS PatchsInsertDate,";
+            sqlPatchInfor += " DATE_FORMAT(p.PatchsUpdateDate, '%d %M %Y') AS PatchsUpdateDate,";
+            sqlPatchInfor += " p.PatchsInsertBy, p.PatchsUpdateBy";
+            sqlPatchInfor += " FROM patchparentversion pv";
+            sqlPatchInfor += " INNER JOIN patchs p ON p.PatchsID = pv.PatchsID";
+            sqlPatchInfor += " INNER JOIN softwareversion sv ON sv.SoftwareVersionID = pv.SoftwareVersionID";
+            sqlPatchInfor += " INNER JOIN softwaretype st ON st.SoftwareTypeID = pv.SoftwareTypeID";
+            sqlPatchInfor += " INNER JOIN staffs s ON s.StaffID = pv.StaffID";
+            sqlPatchInfor += " INNER JOIN staffrole sr ON sr.StaffRoleID = s.StaffRoleID";
+            sqlPatchInfor += " WHERE p.PatchsID = (SELECT MAX(PatchsID) FROM patchparentversion pv";
+            sqlPatchInfor += " INNER JOIN staffs s ON s.StaffID = pv.StaffID";
+            sqlPatchInfor += " WHERE s.StaffID = '" + Convert.ToInt32(items.staffID.ToString()) + "')";
             objConn.Close();
+
             if (dtSentMail.Rows.Count > 0)
             {
+                    string hostAddr = ConfigurationManager.AppSettings["Host"].ToString();
+                    string mailAuthen = ConfigurationManager.AppSettings["MailAuthen"].ToString();
+                    string passAuthen = ConfigurationManager.AppSettings["PassAuthen"].ToString();
+
+                    MailMessage mailMessage = new MailMessage();                    
+                    mailMessage.From = new MailAddress(items.myEmail.ToString());
+                    mailMessage.Subject = "HELLO";
+                    mailMessage.Body = "THIS IS A TEST";
+                    mailMessage.IsBodyHtml = true;
+
                 for(int i = 0; i < dtSentMail.Rows.Count; i++)
                 {
                     string staffEmail = dtSentMail.Rows[i]["StaffEmail"].ToString();
+                    string[] splitRecipients = staffEmail.Split(',');
 
-                    MailMessage mailMessage = new MailMessage();                    
-                    mailMessage.To.Add(staffEmail);
-                    mailMessage.Subject = "HELLO";
-                    mailMessage.Body = "THIS IS A TEST";
-                    mailMessage.From = new MailAddress(items.myEmail.ToString());
-                    SmtpClient client = new SmtpClient("smtp.gmail.com", 465);
-                    client.EnableSsl = true;
-                    client.Credentials = new System.Net.NetworkCredential("synaturetest@gmail.com", "pRoMiSeSystem6");
-
-                    try
+                    foreach(var mailTo in splitRecipients)
                     {
-                        client.Send(mailMessage);
-                        Console.WriteLine("Message Sent");
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message.ToString());
-                    }
-                    Console.ReadLine();
+                        mailMessage.To.Add(mailTo);
+                    }                    
                 }
-            }
 
-            
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = hostAddr;
+                smtp.EnableSsl = true;
+
+                NetworkCredential networkCre = new NetworkCredential();
+                networkCre.UserName = mailAuthen;
+                networkCre.Password = passAuthen;
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = networkCre;
+                smtp.Port = 587;
+
+                try
+                {
+                    smtp.Send(mailMessage);
+                    Console.WriteLine("Message Sent");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message.ToString());
+                }
+                Console.ReadLine();
+            }
 
             return sentMail;
         }

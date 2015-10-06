@@ -84,10 +84,11 @@
                         <div class="fg-line">
                             <label for="inputEmail" class="col-sm-2 control-label"></label>
                             <div class="col-sm-8">
-                                <button type="submit" class="btn btn-primary" 
+                                <button type="submit" class="btn btn-primary"
                                         ng-disabled="myForm.patchsName.$invalid || myForm.patchsName.$error.required
-                                        || myForm.patchsVersionNumber.$invalid || myForm.patchsVersionNumber.$error.required"
-                                        >Save Informations and Browse File</button>
+                                        || myForm.patchsVersionNumber.$invalid || myForm.patchsVersionNumber.$error.required">
+                                    Save Informations and Browse File
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -189,10 +190,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <div ng-controller="FileUploadCtrl">
-                        <button class="btn btn-primary" type="button" ng-click="uploadFile()">OK</button>
-                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                    </div>
+                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
                 </div>
             </script>
         </div>

@@ -62,6 +62,7 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
                      $scope.softwareVersionID = "";
                      $scope.patchsVersionNumber = "";
                      $scope.softwareTypeID = "";
+                     $scope.patchsDescription = "";
                  });
             $rootScope.open('lg');
         });
@@ -70,7 +71,7 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
 
 //---------------------------------- Dropzone to Upload Files ------------------------------------------
 
-app.controller('MyCtrl', ['$scope', 'FileUploader', function($scope, FileUploader) {
+app.controller('MyCtrl', ['$scope', 'FileUploader', function ($scope, FileUploader, $rootScope) {
     var uploader = $scope.uploader = new FileUploader({
         url: ''
     });
@@ -119,7 +120,6 @@ app.controller('MyCtrl', ['$scope', 'FileUploader', function($scope, FileUploade
     uploader.onCompleteAll = function() {
         console.info('onCompleteAll');
     };
-
     console.info('uploader', uploader);
 }]);
 
@@ -161,7 +161,7 @@ app.controller('ModalDemoCtrl', function ($scope, $modal, $log, $rootScope) {
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
+app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, $http) {
 
     $scope.items = items;
     $scope.selected = {
@@ -170,6 +170,15 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
 
     $scope.ok = function () {
         $modalInstance.close($scope.selected.item);
+        var mailInfor = {
+            "staffID": localStorage.getItem("StaffID"),
+            "staffRoleID": localStorage.getItem("StaffRoleID"),
+            "myEmail": localStorage.getItem("StaffEmail")
+        }
+        $http.post('api/patchs/SentEmail', mailInfor)
+            .success(function () {
+                window.location = '#/showUploads'
+            });
     };
 
     $scope.cancel = function () {

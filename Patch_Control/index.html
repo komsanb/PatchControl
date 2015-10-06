@@ -40,16 +40,7 @@
             </li>
 
             <li class="pull-right">
-                <ul class="top-menu">        
-                    <!--<li class="hidden-xs">
-                        <button ng-click="logout()" type="button" class="btn btn-danger btn-sm waves-effect waves-button waves-float">Logout</button>
-                    </li>-->
-                    <!--<li class="dropdown hidden-xs profile-pic">
-                        <img class="img-circle " src="{{staffindex.Picture}}" style="max-width:40px" />
-                    </li>-->
-                    <li class="dropdown">
-                        <h5>{{staffindex.StaffName}}</h5>
-                    </li>
+                <ul class="top-menu">
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="tm-settings" href=""></a>
                         <ul class="dropdown-menu dm-icon pull-right">
@@ -57,10 +48,25 @@
                                 <a href="profile-about.html"><i class="md md-person"></i> View Profile</a>
                             </li>
                             <li>
-                                <a href=""><i class="md md-history"></i> Logout</a>
+                                <a href="login.html"><i class="md md-history"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
+                </ul>
+            </li>
+            <li class="pull-right">
+                <ul class="top-menu">
+                    <li class="dropdown">
+                        <h5 style="color:white">{{staffindex.StaffName}}</h5>
+                    </li>&nbsp;
+                </ul>
+            </li>
+            
+            <li class="pull-right">
+                <ul class="top-menu">        
+                    <li class="dropdown hidden-xs profile-pic">
+                        <img class="img-circle " src="{{staffindex.Picture}}" style="max-width:40px" />
+                    </li>&nbsp;&nbsp;                    
                 </ul>
             </li>
         </ul>

@@ -11862,10 +11862,7 @@ input:focus {
 }
 
 .dropdown-menu.dm-icon > li > a > .md {
-  line-height: 100%;
-  vertical-align: top;
-  font-size: 18px;
-  width: 28px;
+
 }
 
 .dropdown-menu:not([class*="bgm-"]) > li > a {

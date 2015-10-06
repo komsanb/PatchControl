@@ -1,4 +1,4 @@
-﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize','summernote', 'ngAnimate', 'ui.bootstrap', 'ngDropzone','angularFileUpload', 'angularUtils.directives.dirPagination'])
+﻿var app = angular.module('myApp', ['ngRoute', 'ngSanitize','summernote', 'ngAnimate', 'ui.bootstrap', 'ngDropzone', 'angularFileUpload', 'angularUtils.directives.dirPagination'])
 
 app.config(['$routeProvider',
        function ($routeProvider) {
@@ -112,7 +112,7 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
     $http.get("api/staff/staffall").success(function (data) {
 
         $scope.staff = data;
-        console.log($scope.staff);
+        //console.log($scope.staff);
     });
 
 
@@ -195,7 +195,7 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
                 "Email": $scope.Email
             };
 
-            console.log(staff);
+            //console.log(staff);
             $http.post("api/staff/staffall", staff).success(function (data, header, status, config) {
 
                 $scope.staff = data;
@@ -234,11 +234,11 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
                 "Email": $scope.staffonly.Email
             };
 
-            console.log(staff);
+            //console.log(staff);
             $http.post("api/staff/staffedit", staff).success(function (data, header, status, config) {
 
                 $scope.staff = data;
-                console.log(data);
+                //console.log(data);
             });
             window.location = "#/staff"
             window.location.reload(true);
@@ -270,11 +270,11 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
                 "Email": $scope.staffonly.Email
             };
 
-            console.log(staff);
+            //console.log(staff);
             $http.post("api/staff/staffedit", staff).success(function (data, header, status, config) {
 
                 $scope.staff = data;
-                console.log(data);
+                //console.log(data);
             });
             window.location = "#/staffProfile/" + $scope.staffonly.StaffID;
             window.location.reload(true);
@@ -296,7 +296,7 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
                 "StaffPassword": password
             };
 
-            console.log(staff);
+            //console.log(staff);
             $http.post("api/staff/editpasswordstaff", staff).success(function (data, header, status, config) {
 
                 $scope.staff = data;
@@ -326,11 +326,11 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
                 "Deleted": 1
             };
 
-            console.log(staff);
+            //console.log(staff);
             $http.post("api/staff/staffdelete", staff).success(function (data, header, status, config) {
 
                 $scope.staff = data;
-                console.log(data);
+                //console.log(data);
 
             });
 
@@ -355,12 +355,12 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
     $scope.getstaffrole = function () {
         $http.get("api/staff/staffroleaccess/" + $routeParams.id).success(function (data) {
             $scope.staffroleonly = data[0];
-            console.log($scope.staffroleonly);
+            //console.log($scope.staffroleonly);
 
             var staff = new Array();
             staff = $scope.staffroleonly.PermissionItemID.split(',').map(Number);
             $scope.permissionrole = staff;
-            console.log($scope.permissionrole);
+            //console.log($scope.permissionrole);
 
         });
     };
@@ -448,11 +448,11 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
 
             //var parameters = { 'staffaccess': { 'StaffRoleName': $scope.StaffRoleName }, 'permissionItemdata': $scope.permissions2 };
             //var parameters = {'StaffRoleName': $scope.StaffRoleName , 'permissionItemdata': $scope.permissions2 };
-            console.log(staffaccess);
+            //console.log(staffaccess);
             $http.post("api/staff/staffaccess", staffaccess).success(function (data, header, status, config) {
 
                 $scope.staffaccess = data;
-                console.log(data);
+                //console.log(data);
             });
             //window.alert("Add staffrole successful!");
             window.location = "#/permission_staff"
@@ -490,11 +490,11 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
                 "PermissionItemID": $scope.permissionrole
             };
 
-            console.log(staffaccess);
+            //console.log(staffaccess);
             $http.post("api/staff/staffaccessedit", staffaccess).success(function (data, header, status, config) {
 
                 $scope.staffaccess = data;
-                console.log(data);
+                //console.log(data);
             });
             //window.alert("Update staffrole successful!");
             window.location = "#/permission_staff"
@@ -520,11 +520,11 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
                 "Deleted": 1
             };
 
-            console.log(staffaccess);
+            //console.log(staffaccess);
             $http.post("api/staff/staffroledelete", staffaccess).success(function (data, header, status, config) {
 
                 $scope.staffaccess = data;
-                console.log(data);
+                //console.log(data);
             });
 
             window.location.reload(true);
@@ -542,7 +542,7 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
     $http.post("api/staff/permissiongroup", permission).success(function (data) {
 
         $scope.permissiongroup = data;
-        console.log($scope.permissiongroup);
+        //console.log($scope.permissiongroup);
 
     });
 
@@ -558,7 +558,7 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
     $http.post("api/staff/staffpageindex", staffid).success(function (data) {
 
         $scope.staffindex = data;
-        console.log($scope.staffindex);
+        //console.log($scope.staffindex);
 
     });
 
@@ -581,7 +581,7 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
     $http.post("api/staff/permissionitem", staffroleid).success(function (data) {
 
         $scope.PermissionItem = data[0];
-        console.log($scope.PermissionItem);
+        //console.log($scope.PermissionItem);
 
         var Permission = new Array();
         Permission = $scope.PermissionItem.PermissionItemID.split(',').map(Number);
@@ -589,7 +589,7 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
         console.log($scope.permissionID);
 
         var addpermission = 0, editpermission = 0, deletedpermission = 0, addstaff = 0, viewstaff = 0, editstaff = 0, deletedstaff = 0;
-
+        var download = 0, editupload = 0, deletedupload = 0;
 
         for (i = 0; i < Permission.length; i++) {
 
@@ -608,9 +608,15 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
                 deletedstaff = 1;
             if (Permission[i] == 9)
                 viewstaff = 1;
+
+            if (Permission[i] == 11)
+                download = 1;
+            if (Permission[i] == 15)
+                editupload = 1;
+            if (Permission[i] == 16)
+                deletedupload = 1;
         }
         $scope.addRole = addpermission;
-        console.log($scope.addRole)
         $scope.editRole = editpermission;
         $scope.deleteRole = deletedpermission;
 
@@ -619,6 +625,10 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
         $scope.editProfile = editstaff;
         $scope.deleteProfile = deletedstaff;
 
+        $scope.downloadFile = download;
+        //console.log($scope.downloadFile);
+        $scope.editFile = editupload;
+        $scope.deleteFile = deletedupload;
     });
 });
 

@@ -40,16 +40,33 @@
             </li>
 
             <li class="pull-right">
-                <ul class="top-menu">  
-                    <!--<li id="toggle-width">
-                        <div class="toggle-switch">
-                            <input id="tw-switch" type="checkbox" hidden="hidden">
-                            <label for="tw-switch" class="ts-helper"></label>
-                        </div>
-                    </li>-->             
-                    <li class="hidden-xs">
-                        <button ng-click="logout()" type="button" class="btn btn-danger btn-sm waves-effect waves-button waves-float">Logout</button>
+                <ul class="top-menu">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="tm-settings" href=""></a>
+                        <ul class="dropdown-menu dm-icon pull-right">
+                            <li>
+                                <a href="profile-about.html"><i class="md md-person"></i> View Profile</a>
+                            </li>
+                            <li>
+                                <a href="login.html"><i class="md md-history"></i> Logout</a>
+                            </li>
+                        </ul>
                     </li>
+                </ul>
+            </li>
+            <li class="pull-right">
+                <ul class="top-menu">
+                    <li class="dropdown">
+                        <h5 style="color:white">{{staffindex.StaffName}}</h5>
+                    </li>&nbsp;
+                </ul>
+            </li>
+            
+            <li class="pull-right">
+                <ul class="top-menu">        
+                    <li class="dropdown hidden-xs profile-pic">
+                        <img class="img-circle " src="{{staffindex.Picture}}" style="max-width:40px" />
+                    </li>&nbsp;&nbsp;                    
                 </ul>
             </li>
         </ul>
@@ -81,6 +98,7 @@
                             </li>
                         </ul>-->
                     </div>
+
                     <ul class="main-menu">
                         <li class="active"><a href="#/"><i class="md md-home"></i>Home</a></li>
 
@@ -190,6 +208,7 @@
     <script src="template/vendors/summernote/summernote.js"></script>
     <script src="template/js/flot-charts/curved-line-chart.js"></script>
     <script src="template/js/flot-charts/line-chart.js"></script>
+    <script src="template/js/charts.js"></script>
 
     <script src="template/js/charts.js"></script>
     <script src="template/js/functions.js"></script>

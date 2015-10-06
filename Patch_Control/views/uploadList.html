@@ -40,10 +40,10 @@
                             <td>
                                 <button class="btn btn-success btn-icon"><i class="md md-file-download"></i></button>
                             </td>
-                            <td>
+                            <td ng-show="editFile == 1">
                                 <button class="btn btn-warning btn-icon" ng-click="editPatch(mp.patchsID)"><i class="md md-edit"></i></button>
                             </td>
-                            <td>
+                            <td ng-show="deleteFile == 1">
                                 <button class="btn btn-danger btn-icon" ng-click="deletedMyPatch(mp.patchsID)"><i class="md md-delete"></i></button>
                             </td>
                         </tr>

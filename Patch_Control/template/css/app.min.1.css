@@ -11574,11 +11574,14 @@ body #content {
 
 #sidebar .profile-menu > a {
   display: block;
-  height: 129px;
+  height: 100px;
   margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
   width: 100%;
   background: url(../img/profile-menu.png) no-repeat left top;
-  background-size: 100%;
+  background-size: 95%;
 }
 
 #sidebar .profile-menu > a .profile-pic {
@@ -11859,10 +11862,7 @@ input:focus {
 }
 
 .dropdown-menu.dm-icon > li > a > .md {
-  line-height: 100%;
-  vertical-align: top;
-  font-size: 18px;
-  width: 28px;
+
 }
 
 .dropdown-menu:not([class*="bgm-"]) > li > a {

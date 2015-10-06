@@ -25,8 +25,10 @@
 <body class="login-content" ng-controller="LoginController">
     <!-- Login -->
 
+
         <div class="lc-block toggled" id="l-login">
             <form name="form" role="form" >
+                <h1 style="font-size:40px;" class="text-uppercase text-info">PATCH CONTROL</h1><br /><br />
                 <div class="input-group m-b-20">
                     <span class="input-group-addon"><i class="md md-person"></i></span>
                     <div class="fg-line">
@@ -49,7 +51,9 @@
                 Keep me signed in
             </label>
         </div>-->
-                <button type="submit" ng-click="submit(username,password)" ng-disabled="form.$invalid" class="btn btn-login btn-danger btn-float"><i class="md md-arrow-forward"></i></button>
+
+                <button style="width:100px; height:35px;" type="submit" ng-click="submit(username,password)" ng-disabled="form.$invalid" class="btn btn-success">Login</button>
+                <!--<button type="submit" ng-click="submit(username,password)" ng-disabled="form.$invalid" class="btn btn-login btn-danger btn-float"><i class="md md-arrow-forward"></i></button>-->
                 <!--<a href="" ng-click="submit(username,password)" ng-disabled="form.$invalid" class="btn btn-login btn-danger btn-float"><i class="md md-arrow-forward"></i></a>-->
     </form>
 </div>

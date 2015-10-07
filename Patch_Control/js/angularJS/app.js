@@ -115,7 +115,6 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
         //console.log($scope.staff);
     });
 
-
     $scope.EDstaff = function (id) {
         window.location = "#/edit_staff_profile/" + id;
     };
@@ -136,6 +135,16 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
         $http.get("api/staff/staffall/" + $routeParams.id).success(function (data) {
 
             $scope.staffonly = data;
+
+            $scope.StaffId = localStorage.getItem('StaffID');
+            //console.log($scope.StaffId)
+
+            var buttonedit = 0;
+            if ($scope.StaffId == $scope.staffonly.StaffID)
+                buttonedit = 1;
+
+            $scope.ButtonEdit = buttonedit;
+            //console.log($scope.ButtonEdit)
         });
     };
 
@@ -558,7 +567,7 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
     $http.post("api/staff/staffpageindex", staffid).success(function (data) {
 
         $scope.staffindex = data;
-        //console.log($scope.staffindex);
+        console.log($scope.staffindex);
 
     });
 
@@ -649,7 +658,6 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
             localStorage.setItem('StaffRoleID', data.StaffRoleID);
             localStorage.setItem('StaffFirstName', data.StaffFirstname);
             localStorage.setItem('StaffName', data.StaffName);
-            localStorage.setItem('StaffPictureName', data.StaffPictureName);
             localStorage.setItem('StaffEmail', data.Email);
             localStorage.setItem('StaffStatus', data.status);
             localStorage.setItem('ma-layout-status', 1);

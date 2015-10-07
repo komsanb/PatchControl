@@ -7,7 +7,7 @@
                     <div class="p-relative">
                         <a href="">
                             <!--<img class="img-responsive" src="img/profile-pics/profile-pic-2.jpg" alt="">-->
-                            <img class="img-responsive" src="{{staffonly.Picture}}" alt=""/>
+                            <img class="img-responsive" src="../images/{{staffonly.Picture}}" alt=""/>
                         </a>
 
                         <a href="" class="pmop-edit">
@@ -41,14 +41,14 @@
 
             <div class="pm-body clearfix">
                 <ul class="tab-nav tn-justified">
-                    <li class="active waves-effect"><a><h2>Your Profile</h2></a></li>
+                    <li class="active waves-effect"><a><h2>Profile &nbsp;{{staffonly.StaffFirstname}}</h2></a></li>
                 </ul>
 
                 <div class="pmb-block">
                     <div class="pmbb-header">
                         <h2><i class="md md-person m-r-5"></i> Basic Information</h2>
 
-                        <ul class="actions">
+                        <ul class="actions" ng-show="ButtonEdit == 1" >
                             <li class="dropdown">
                                 <a href="" data-toggle="dropdown">
                                     <i class="md md-more-vert"></i>
@@ -85,7 +85,7 @@
                             </dl>
                             <dl class="dl-horizontal">
                                 <dt>Address</dt>
-                                <dd>{{staffonly.Address1}}  {{staffonly.City}}  {{staffonly.Province}}</dd>
+                                <dd>{{staffonly.Address1}} &nbsp;{{staffonly.City}} &nbsp;{{staffonly.Province}}</dd>
                             </dl>
                             <!--<dl class="dl-horizontal">
                                 <dt>Province</dt>

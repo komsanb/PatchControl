@@ -39,7 +39,7 @@
                 <a href="index.html#/"> Patch Control</a>
             </li>
 
-            <li class="pull-right">
+            <!--<li class="pull-right">
                 <ul class="top-menu">
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="tm-settings" href=""></a>
@@ -53,21 +53,36 @@
                         </ul>
                     </li>
                 </ul>
-            </li>
+            </li>-->
+
             <li class="pull-right">
                 <ul class="top-menu">
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" href=""><img class="img-circle" src="../images/{{staffindex.Picture}}" style="max-width:42px;" alt=""></a>
+                        
+                        <ul class="dropdown-menu dm-icon pull-right">
+                            <li><a><b>{{staffindex.StaffName}}</b><br />
+                                        {{staffindex.Email}}</a></li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="" ng-click="profile(staffindex.StaffID)"><i class="md md-person"></i> View Profile</a>
+                            </li>
+                            <li>
+                                <a href="" ng-click="logout()"><i class="md md-history"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <!--<li class="dropdown hidden-xs profile-pic">
+                        <img class="img-circle " src="{{staffindex.Picture}}" style="max-width:40px" />
+                    </li>&nbsp;
+
                     <li class="dropdown">
                         <h5 style="color:white">{{staffindex.StaffName}}</h5>
-                    </li>&nbsp;
-                </ul>
-            </li>
-            
-            <li class="pull-right">
-                <ul class="top-menu">        
-                    <li class="dropdown hidden-xs profile-pic">
-                        <img class="img-circle " src="{{staffindex.Picture}}" style="max-width:40px" />
-                    </li>&nbsp;&nbsp;                    
-                </ul>
+                    </li>-->
+                </ul>                
             </li>
         </ul>
     </header>

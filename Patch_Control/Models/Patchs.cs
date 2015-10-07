@@ -54,15 +54,15 @@ namespace Patch_Control.Models
         public string softwareVersionName { get; set; }
         public string patchsVersionNumber { get; set; }
         public string patchsDescription { get; set; }
-        public string staffFirtname { get; set; }
+        public string staffFirstname { get; set; }
         public int softwareTypeID { get; set; }
         public int softwareVersionID { get; set; }
     }
 
     public class Email
     {
-        public string staffRoleID { get; set; }
-        public string staffEmail { get; set; }
+        public int staffID { get; set; }
+        public int staffRoleID { get; set; }
         public string myEmail { get; set; }
     }
 }

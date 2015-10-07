@@ -57,6 +57,7 @@ namespace Patch_Control.Models
         public string staffFirstname { get; set; }
         public int softwareTypeID { get; set; }
         public int softwareVersionID { get; set; }
+        public int activated { get; set; }
     }
 
     public class Email

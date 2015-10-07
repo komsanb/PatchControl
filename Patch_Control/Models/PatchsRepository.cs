@@ -31,7 +31,7 @@ namespace Patch_Control.Models
             sql += "INNER JOIN patchs p ON p.PatchsID = pv.PatchsID ";
             sql += "INNER JOIN softwareversion sv ON sv.SoftwareVersionID = pv.SoftwareVersionID ";
             sql += "INNER JOIN softwaretype st ON st.SoftwareTypeID = pv.SoftwareTypeID ";
-            sql += "WHERE p.Deleted = 0 ";
+            sql += "WHERE p.Deleted = 0 AND p.Activated = 0 ";
             sql += "ORDER BY PatchsUpdateDate DESC";
 
             DataTable dt = objDB.List(sql, objConn);
@@ -178,7 +178,7 @@ namespace Patch_Control.Models
             List<MyPatch> titlePatchs = new List<MyPatch>();
             string sqlMyPatch = "SELECT p.PatchsID, p.PatchsName, st.SoftwareTypeID, sv.SoftwareVersionID, ";
             sqlMyPatch += "CONCAT(sv.SoftwareVersionName, '.', p.PatchsVersionNumber) AS SoftwareVersionName, s.StaffFirstname, ";
-            sqlMyPatch += "st.SoftwareTypeName, DATE_FORMAT(p.PatchsInsertDate, '%d %M %Y') AS PatchsInsertDate";
+            sqlMyPatch += "st.SoftwareTypeName, DATE_FORMAT(p.PatchsInsertDate, '%d %M %Y') AS PatchsInsertDate, p.Activated";
             sqlMyPatch += " FROM patchparentversion ppv";
             sqlMyPatch += " INNER JOIN softwareversion sv ON ppv.SoftwareVersionID = sv.SoftwareVersionID";
             sqlMyPatch += " INNER JOIN softwaretype st ON ppv.SoftwareTypeID = st.SoftwareTypeID";
@@ -203,6 +203,7 @@ namespace Patch_Control.Models
                     myPatch.softwareVersionName = dt.Rows[i]["SoftwareVersionName"].ToString();
                     myPatch.patchsInsertDate = dt.Rows[i]["PatchsInsertDate"].ToString();
                     myPatch.staffFirstname = dt.Rows[i]["StaffFirstname"].ToString();
+                    myPatch.activated = Convert.ToInt32(dt.Rows[i]["Activated"].ToString());
                     titlePatchs.Add(myPatch);
                 }
             }
@@ -319,7 +320,7 @@ namespace Patch_Control.Models
                     string passAuthen = ConfigurationManager.AppSettings["PassAuthen"].ToString();
 
                     MailMessage mailMessage = new MailMessage();                    
-                    mailMessage.From = new MailAddress(items.myEmail.ToString());
+                    mailMessage.From = new MailAddress(mailAuthen);
                     mailMessage.Subject = "HELLO";
                     mailMessage.Body = "THIS IS A TEST";
                     mailMessage.IsBodyHtml = true;
@@ -344,7 +345,7 @@ namespace Patch_Control.Models
                 networkCre.Password = passAuthen;
                 smtp.UseDefaultCredentials = true;
                 smtp.Credentials = networkCre;
-                smtp.Port = 587;
+                smtp.Port = 465;
 
                 try
                 {
@@ -355,9 +356,7 @@ namespace Patch_Control.Models
                 {
                     Console.WriteLine(ex.Message.ToString());
                 }
-                Console.ReadLine();
             }
-
             return sentMail;
         }
     }

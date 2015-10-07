@@ -30,7 +30,11 @@
                     <tbody>
                         <tr dir-paginate="mp in myPatch | filter:search | itemsPerPage: 8">
                             <td>
-                                <a href="#">{{ mp.patchsName }}</a>
+                               <i ng-show="mp.activated == 1" class="glyphicon glyphicon-exclamation-sign btn-lg" data-toggle="tooltip" data-placement="top" title="Unactivated" style="color:orange;" />    
+                               <i ng-show="mp.activated == 0" class="glyphicon glyphicon glyphicon-ok-sign btn-lg" data-toggle="tooltip" data-placement="top" title="Activated" style="color:forestgreen;" />
+                            </td>
+                            <td>
+                                <a>{{ mp.patchsName }}</a>
                                 <br />
                                 <small>Insert Date: {{ mp.patchsInsertDate }}</small>
                             </td>

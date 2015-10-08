@@ -68,16 +68,7 @@ app.config(['$routeProvider',
               });
        }]);
 
-//app.factory("editstaff", function ($http) {
-
-//    var urlBase = "api/staff/staffall";
-//    var dataFactory = [];
-
-//    dataFactory.getStaff = function (id) {
-//        return $http.get(urlBase + '/' + id)
-//    };
-//    return dataFactory;
-//});
+//------------------------------------------------------ Confirm Password -----------------------------------------------------//
 
 app.directive('passwordConfirm', ['$parse', function ($parse) {
     return {
@@ -103,17 +94,22 @@ app.directive('passwordConfirm', ['$parse', function ($parse) {
     };
 }]);
 
-// controller staffController
+//------------------------------------------------- Controller StaffController ------------------------------------------------//
+
 app.controller("staffController", function ($scope, $http, $routeParams) {
 
     $scope.password = null;
     $scope.passwordConfirmation = null;
+
+    //------------------------------------------------------- GET STAFF -------------------------------------------------------//
 
     $http.get("api/staff/staffall").success(function (data) {
 
         $scope.staff = data;
         //console.log($scope.staff);
     });
+
+    //------------------------------------------------- Plus id in page html --------------------------------------------------//
 
     $scope.EDstaff = function (id) {
         window.location = "#/edit_staff_profile/" + id;
@@ -130,6 +126,8 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
     $scope.EDpassword = function (id) {
         window.location = "#/change_password/" + id;
     };
+
+    //---------------------------------------------------- GET ONLY STAFF -----------------------------------------------------//
 
     $scope.getstaff = function () {
         $http.get("api/staff/staffall/" + $routeParams.id).success(function (data) {
@@ -148,11 +146,15 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
         });
     };
 
+    //----------------------------------------------------- GET STAFFROLE -----------------------------------------------------//
+
     $http.get("api/staff/staffrole").success(function (data) {
 
         $scope.staffrole = data;
 
     });
+
+    //------------------------------------------------------ GET PROVINCE -----------------------------------------------------//
 
     $http.get("api/staff/province").success(function (data) {
 
@@ -160,11 +162,15 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
 
     });
 
+    //------------------------------------------------------- GET GENDER ------------------------------------------------------//
+
     $http.get("api/staff/gender").success(function (data) {
 
         $scope.gender = data;
 
     });
+
+    //------------------------------------------------------- ADD STAFF -------------------------------------------------------//
 
     $scope.addstaff = function () {
         //swal("Good job!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat, tincidunt vitae ipsum et, pellentesque maximus enim. Mauris eleifend ex semper, lobortis purus sed, pharetra felis", "success")
@@ -217,6 +223,8 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
         });
     }
 
+    //---------------------------------------- EDIT STAFF page edit_staff_profile.html ----------------------------------------//
+
     $scope.editstaff = function () {
 
         swal({
@@ -254,6 +262,8 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
         });
     }
 
+    //-------------------------------------------- EDIT STAFF page editProfile.html -------------------------------------------//
+
     $scope.editstaffprofile = function () {
 
         swal({
@@ -290,6 +300,8 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
         });
     }
 
+    //---------------------------------------------------- Change Password ----------------------------------------------------//
+
     $scope.editpasswordstaff = function (id, password) {
 
         swal({
@@ -314,6 +326,8 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
             window.location.reload(true);
         });
     }
+
+    //----------------------------------------------------- DELETE STAFF ------------------------------------------------------//
 
     $scope.deletestaff = function (id) {
 
@@ -348,8 +362,11 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
     }
 });
 
+//---------------------------------------------- Controller PermissionController ----------------------------------------------//
 
 app.controller("PermissionController", function ($scope, $http, $routeParams) {
+
+    //----------------------------------------------------- GET STAFFROLE -----------------------------------------------------//
 
     $http.get("api/staff/staffrole").success(function (data) {
 
@@ -357,9 +374,13 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
 
     });
 
+    //------------------------------------------------- Plus id in page html --------------------------------------------------//
+
     $scope.EDpromission = function (id) {
         window.location = "#/edit_staff_role/" + id;
     };
+
+    //---------------------------------------------------- GET Permission -----------------------------------------------------//
 
     $scope.getstaffrole = function () {
         $http.get("api/staff/staffroleaccess/" + $routeParams.id).success(function (data) {
@@ -373,6 +394,8 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
 
         });
     };
+
+    //--------------------------------------------- Value of checkbox permission ----------------------------------------------//
 
     $scope.headpermissions = [
         { id: 1, text: 'Manage Permission' }
@@ -424,7 +447,8 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
 
     ];
 
-    // toggle selection for a given staffrole by id
+    //------------------------------------ toggle selection for a given staffrole by id ---------------------------------------//
+
     $scope.toggleSelection = function toggleSelection(PermisstionID) {
 
         var idx = $scope.permissions2.indexOf(PermisstionID);
@@ -439,6 +463,8 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
             $scope.permissions2.push(PermisstionID);
         }
     };
+
+    //---------------------------------------------------- ADD STAFFROLE ------------------------------------------------------//
 
     $scope.addstaffrole = function () {
         //console.log($scope.permissions2)
@@ -469,7 +495,8 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
         })
     }
 
-    //toggle selection for a given staffrole by id
+    //--------------------------- toggle selection for a given staffrole by id for EDIT STAFFROLE -----------------------------//
+
     $scope.toggleEditSelection = function toggleEditSelection(PermisstionID) {
 
         var idx = $scope.permissionrole.indexOf(PermisstionID);
@@ -484,6 +511,8 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
             $scope.permissionrole.push(PermisstionID);
         }
     };
+
+    //---------------------------------------------------- EDIT STAFFROLE -----------------------------------------------------//
 
     $scope.editstaffrole = function () {
 
@@ -510,6 +539,8 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
             window.location.reload(true);
         })
     }
+
+    //--------------------------------------------------- DELETE STAFFROLE ----------------------------------------------------//
 
     $scope.deletestaffrole = function (id) {
 
@@ -541,8 +572,11 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
     }
 });
 
+//------------------------------------------ Controller PermissionGroupController ---------------------------------------------//
 
 app.controller("PermissionGroupController", function ($scope, $http, $routeParams) {
+
+    //-------------------------------------------- GET permissiongroup by id --------------------------------------------------//
 
     $scope.StaffRole = localStorage.getItem('StaffRoleID');
     var permission = {
@@ -555,10 +589,14 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
 
     });
 
+    //------------------------------------------------------- Log out ---------------------------------------------------------//
+
     $scope.logout = function () {
         localStorage.clear();
         window.location = 'login.html';
     }
+
+    //--------------------------------------------- GET Staff on page index.html ----------------------------------------------//
 
     $scope.StaffId = localStorage.getItem('StaffID');
     var staffid = {
@@ -569,9 +607,42 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
         $scope.staffindex = data;
         console.log($scope.staffindex);
 
+        $(document).ready(function () {
+            //Welcome Message (not for login page)
+            function notify(message, type) {
+                $.growl({
+                    message: message
+                }, {
+                    type: type,
+                    allow_dismiss: false,
+                    label: 'Cancel',
+                    className: 'btn-xs btn-inverse',
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    },
+                    delay: 2500,
+                    animate: {
+                        enter: 'animated bounceIn',
+                        exit: 'animated bounceOut'
+                    },
+                    offset: {
+                        x: 20,
+                        y: 85
+                    }
+                });
+            };
+
+            if (!$('.login-content')[0]) {
+                notify('Welcome back ' + $scope.staffindex.StaffFirstname, 'inverse');
+            }
+        });
     });
 
+    //--------------------------------------- GET Profile onClick dropdown view profile ---------------------------------------//
+
     $scope.profile = function (id) {
+        window.location.reload(true);
         window.location = "#/staffProfile/" + id;
     };
 
@@ -583,10 +654,13 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
         });
     };
 
+    //------------------------------------------- GET permission hide/show button ---------------------------------------------//
+
     $scope.StaffroleID = localStorage.getItem('StaffRoleID');
     var staffroleid = {
         'StaffRoleId': $scope.StaffroleID
     }
+
     $http.post("api/staff/permissionitem", staffroleid).success(function (data) {
 
         $scope.PermissionItem = data[0];
@@ -635,14 +709,17 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
         $scope.deleteProfile = deletedstaff;
 
         $scope.downloadFile = download;
-        //console.log($scope.downloadFile);
         $scope.editFile = editupload;
         $scope.deleteFile = deletedupload;
     });
 });
 
+//------------------------------------------------ Controller LoginController -------------------------------------------------//
+
 app.controller("LoginController", function ($scope, $location, $http, $routeParams) {
-    //localStorage.clear();
+
+    //--------------------------------------------- Check password at Log in --------------------------------------------------//
+
     $scope.submit = function (username, password) {
 
         var login = {

@@ -7,14 +7,14 @@
 
             </div>
         </div>
-        <form ng-submit="addstaffrole()" class="form-horizontal" role="form">
+        <form name="FormAddPermission" ng-submit="addstaffrole()" class="form-horizontal" role="form">
             <div class="card-body card-padding">
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Staff Role Name</label>
                     <div class="col-sm-5">
                         <div class="fg-line">
-                            <input ng-model="StaffRoleName" type="text" class="form-control input-sm" placeholder="Staff Role Name">
+                            <input ng-model="StaffRoleName" type="text" class="form-control input-sm" placeholder="Staff Role Name" required>
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -135,7 +135,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary btn-sm">Add Staff Role</button>
+                        <button ng-disabled="!FormAddPermission.$valid" type="submit" class="btn btn-primary btn-sm">Add Staff Role</button>
                         <button onclick="parent.location = '#/permission_staff'" type="submit" class="btn btn-primary btn-sm">Cancle</button>
                     </div>
 

@@ -28,7 +28,7 @@ namespace Patch_Control.Models
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Staff staffData = new Staff();
-
+                    
                     staffData.StaffID = Convert.ToInt32(dt.Rows[i]["StaffID"].ToString());
                     staffData.StaffRoleName = dt.Rows[i]["StaffRoleName"].ToString();
                     staffData.StaffPassword = dt.Rows[i]["StaffPassword"].ToString();
@@ -217,7 +217,7 @@ namespace Patch_Control.Models
         {
             objConn = objDB.EstablishConnection();
             List<Province> staff = new List<Province>();
-            string strSQL = "SELECT * FROM provinces WHERE LangID = 1";
+            string strSQL = "SELECT * FROM provinces WHERE LangID = 1 ORDER BY ProvinceName";
             DataTable dt = objDB.List(strSQL, objConn);
             objConn.Close();
             if (dt.Rows.Count > 0)

@@ -6,14 +6,15 @@
             <br />
         </div>
         <br />
-        <form ng-submit="editstaffprofile()" class="form-horizontal" role="form">
+
+        <form name="FormEditProfile" ng-submit="editstaffprofile()" class="form-horizontal" role="form">
             <div class="card-body card-padding" ng-init="getstaff()">
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Staff Code</label>
                     <div class="col-sm-5">
                         <div class="fg-line">
-                            <input type="text" ng-model="staffonly.StaffCode" id="StaffCode" class="form-control input-sm">
+                            <input type="text" ng-model="staffonly.StaffCode" id="StaffCode" class="form-control input-sm" required>
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -25,7 +26,7 @@
                         <div class="fg-line">
                             <div class="col-sm-6">
                                 <div class="fg-line select">
-                                    <select class="form-control" id="StaffRoleID" ng-model="staffonly.StaffRoleID" ng-options="options.StaffRoleID as options.StaffRoleName for options in staffrole">
+                                    <select class="form-control" id="StaffRoleID" ng-model="staffonly.StaffRoleID" ng-options="options.StaffRoleID as options.StaffRoleName for options in staffrole" required>
                                         <!--<option value="">{{staffonly.StaffRoleName}}</option>-->
                                     </select>
                                 </div>
@@ -41,12 +42,12 @@
 
                         <div class="fg-line">
                             <label class="radio radio-inline m-r-20">
-                                <input ng-model="staffonly.GenderID" value="1" type="radio" name="inlineRadioOptions">
+                                <input ng-model="staffonly.GenderID" value="1" type="radio" name="inlineRadioOptions" required>
                                 <i class="input-helper"></i>
                                 Male
                             </label>
                             <label class="radio radio-inline m-r-20">
-                                <input ng-model="staffonly.GenderID" value="2" type="radio" name="inlineRadioOptions">
+                                <input ng-model="staffonly.GenderID" value="2" type="radio" name="inlineRadioOptions" required>
                                 <i class="input-helper"></i>
                                 Female
                             </label>
@@ -61,7 +62,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input ng-model="staffonly.StaffFirstname" id="StaffFirstname" type="text" class="form-control input-sm" placeholder="First Name {{e.StaffCode}}">
+                            <input ng-model="staffonly.StaffFirstname" id="StaffFirstname" type="text" class="form-control input-sm" placeholder="First Name" required>
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -72,7 +73,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input ng-model="staffonly.StaffLastname" id="StaffLastname" type="text" class="form-control input-sm" placeholder="Last Name">
+                            <input ng-model="staffonly.StaffLastname" id="StaffLastname" type="text" class="form-control input-sm" placeholder="Last Name" required>
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -83,7 +84,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input id="Email" ng-model="staffonly.Email" type="text" class="form-control input-sm" placeholder="Email Address">
+                            <input id="Email" ng-model="staffonly.Email" type="text" class="form-control input-sm" placeholder="Email Address" required>
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -185,7 +186,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary btn-sm">Update Staff Information</button>
+                        <button ng-disabled="!FormEditProfile.$valid" type="submit" class="btn btn-primary btn-sm">Update Staff Information</button>
                         <button ng-click="profile(staffonly.StaffID)" type="submit" class="btn btn-primary btn-sm">Cancle</button>
                     </div>
 

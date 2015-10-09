@@ -605,7 +605,7 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
     $http.post("api/staff/staffpageindex", staffid).success(function (data) {
 
         $scope.staffindex = data;
-        console.log($scope.staffindex);
+        //console.log($scope.staffindex);
 
         $(document).ready(function () {
             //Welcome Message (not for login page)
@@ -650,7 +650,7 @@ app.controller("PermissionGroupController", function ($scope, $http, $routeParam
         $http.get("api/staff/staffall/" + $routeParams.id).success(function (data) {
 
             $scope.staffonly = data;
-            //console.log($scope.staffonly)
+            console.log($scope.staffonly)
         });
     };
 
@@ -736,6 +736,7 @@ app.controller("LoginController", function ($scope, $location, $http, $routePara
             localStorage.setItem('StaffFirstName', data.StaffFirstname);
             localStorage.setItem('StaffName', data.StaffName);
             localStorage.setItem('StaffEmail', data.Email);
+            localStorage.setItem('Picture', data.Picture);
             localStorage.setItem('StaffStatus', data.status);
             localStorage.setItem('ma-layout-status', 1);
             $scope.status = localStorage.getItem('StaffStatus');

@@ -6,13 +6,13 @@
             <br />
         </div>
         <br />
-        <form ng-submit="addstaff()" class="form-horizontal" role="form">
+        <form name="FormAddStaff" ng-submit="addstaff()" class="form-horizontal" role="form">
             <div class="card-body card-padding">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Staff Code</label>
                     <div class="col-sm-5">
                         <div class="fg-line">
-                            <input type="text" id="StaffCode" ng-model="StaffCode" class="form-control input-sm" placeholder="Staff Code">
+                            <input type="text" id="StaffCode" ng-model="StaffCode" class="form-control input-sm" placeholder="Staff Code" required>
                             
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" id="StaffPassword" ng-model="StaffPassword" class="form-control input-sm" placeholder="Staff Password">
+                            <input type="text" id="StaffPassword" ng-model="StaffPassword" class="form-control input-sm" placeholder="Staff Password" required>
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -34,7 +34,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input type="text" id="StaffConfirmPassword" class="form-control input-sm" placeholder="Staff Confirm Password">
+                            <input type="text" id="StaffConfirmPassword" class="form-control input-sm" placeholder="Staff Confirm Password" required>
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -46,7 +46,7 @@
                         <div class="fg-line">
                             <div class="col-sm-6">
                                 <div class="fg-line select">
-                                    <select class="form-control" id="StaffRoleID" ng-model="StaffRoleID" ng-options="options.StaffRoleID as options.StaffRoleName for options in staffrole">
+                                    <select class="form-control" id="StaffRoleID" ng-model="StaffRoleID" ng-options="options.StaffRoleID as options.StaffRoleName for options in staffrole" required>
                                         <option value="">-- Select Role --</option>
                                     </select>
                                 </div>
@@ -62,12 +62,12 @@
 
                         <div class="fg-line">
                             <label class="radio radio-inline m-r-20" >
-                                <input ng-model="GenderID" value="1" type="radio" name="inlineRadioOptions">
+                                <input ng-model="GenderID" value="1" type="radio" name="inlineRadioOptions" required>
                                 <i class="input-helper"></i>
                                 Male
                             </label>
                             <label class="radio radio-inline m-r-20">
-                                <input ng-model="GenderID" value="2" type="radio" name="inlineRadioOptions">
+                                <input ng-model="GenderID" value="2" type="radio" name="inlineRadioOptions" required>
                                 <i class="input-helper"></i>
                                 Female
                             </label>
@@ -82,7 +82,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input ng-model="StaffFirstname" id="StaffFirstname" type="text" class="form-control input-sm" placeholder="First Name">
+                            <input ng-model="StaffFirstname" id="StaffFirstname" type="text" class="form-control input-sm" placeholder="First Name" required>
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -93,7 +93,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input ng-model="StaffLastname" id="StaffLastname" type="text" class="form-control input-sm" placeholder="Last Name">
+                            <input ng-model="StaffLastname" id="StaffLastname" type="text" class="form-control input-sm" placeholder="Last Name" required>
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -104,7 +104,7 @@
                     <div class="col-sm-5">
 
                         <div class="fg-line">
-                            <input id="Email" ng-model="Email" type="text" class="form-control input-sm" placeholder="Email Address">
+                            <input id="Email" ng-model="Email" type="text" class="form-control input-sm" placeholder="Email Address" required>
                         </div>
                     </div>
                     <label class="control-label text-danger">*</label>
@@ -209,7 +209,7 @@
                 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10 row dialog">
-                        <button type="submit" class="btn btn-primary btn-sm">Add Staff</button>
+                        <button ng-disabled="!FormAddStaff.$valid" type="submit" class="btn btn-primary btn-sm">Add Staff</button>
                         <button onclick="parent.location = '#/staff'" type="submit" class="btn btn-primary btn-sm">Cancle</button>                       
                     </div>          
                 </div>

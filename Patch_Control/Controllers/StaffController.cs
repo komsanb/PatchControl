@@ -69,15 +69,7 @@ namespace Patch_Control.Controllers
         public IEnumerable<StaffRoleAccess> GetStaffRoleAccess(int id)
         {
             return repository.GetStaffRoleAccessAll(id);
-        }
-
-        // GET api/staff/permissiongroup
-        //[HttpGet]
-        //[ActionName("PermissionGroup")]
-        //public IEnumerable<PermissionItemdata> GetPermissionGroup()
-        //{
-        //    return repository.GetPermissionGroupAll();
-        //}
+        }       
 
         // POST api/staff/permissionitem
         [HttpPost]

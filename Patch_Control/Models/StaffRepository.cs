@@ -99,8 +99,8 @@ namespace Patch_Control.Models
             rowid = Convert.ToInt32(dt.Rows[0]["rowid"].ToString());
             int maxid = rowid + 1;
             string strSQL2 = "INSERT INTO staffs(StaffID, StaffCode, StaffPassword, StaffRoleID, GenderID, StaffFirstname, StaffLastname, StaffAddress1, StaffAddress2, StaffCity, StaffZipcode, StaffTel, StaffMobile, StaffEmail, ProvinceID) ";
-            strSQL2 += "VALUES ('" + maxid + "','" + item.StaffCode + "','" + item.StaffPassword + "','" + item.StaffRoleID + "','" + item.GenderID + "','" + item.StaffFirstname + "','" + item.StaffLastname + "','" + item.Address1 + "','" + item.Address2 + "','" + item.City + "','" + item.Zipcode + "','" + item.Telephone + "','" + item.Mobile + "','" + item.Email + "','" + item.ProvinceID + "')";
-            //strSQL2 += "VALUES (" + maxid + ",'" + item.StaffCode + "','" + item.StaffPassword + "'," + item.StaffRoleID + "," + item.GenderID + ",'" + item.StaffFirstname + "','" + item.StaffLastname + "','" + item.Address1 + "','" + item.Address2 + "','" + item.City + "','" + item.Zipcode + "','" + item.Telephone + "','" + item.Mobile + "','" + item.Picture + "','" + item.Email + "'," + item.ProvinceID + ")";
+            //strSQL2 += "VALUES ('" + maxid + "','" + item.StaffCode + "','" + item.StaffPassword + "','" + item.StaffRoleID + "','" + item.GenderID + "','" + item.StaffFirstname + "','" + item.StaffLastname + "','" + item.Address1 + "','" + item.Address2 + "','" + item.City + "','" + item.Zipcode + "','" + item.Telephone + "','" + item.Mobile + "','" + item.Email + "','" + item.ProvinceID + "')";
+            strSQL2 += "VALUES ('" + maxid + "','" + item.StaffCode + "','" + item.StaffPassword + "','" + item.StaffRoleID + "','" + item.GenderID + "','" + item.StaffFirstname + "','" + item.StaffLastname + "','" + item.Address1 + "','" + item.Address2 + "','" + item.City + "','" + item.Zipcode + "','" + item.Telephone + "','" + item.Mobile + "','" + item.Picture + "','" + item.Email + "','" + item.ProvinceID + "')";
             objDB.sqlExecute(strSQL2, objConn);
             objConn.Close();
 
@@ -308,89 +308,6 @@ namespace Patch_Control.Models
             return staffaccess;
         }
 
-        //public IEnumerable<PermissionItemdata> GetPermissionGroupAll()
-        //{
-        //    objConn = objDB.EstablishConnection();
-        //    List<PermissionItemdata> manage = new List<PermissionItemdata>();
-        //    string strSQL = "SELECT pg.PermissionGroupID, pg.PermissionGroupName FROM permissionitems pt ";
-        //    strSQL += "INNER JOIN permissiongroup pg ON pg.PermissionGroupID = pt.PermissionGroupID ";
-        //    strSQL += "LEFT JOIN staffaccess sa ON sa.PermissionItemID = pt.PermissionItemID ";
-        //    strSQL += "WHERE pt.PermissionItemParent = 0 AND pt.Deleted = 0 AND sa.StaffRoleID = 2 ";
-        //    strSQL += "GROUP BY sa.StaffRoleID, pt.PermissionGroupID ORDER BY sa.StaffRoleID, pt.PermissionGroupID, pt.PermissionItemID;";
-        //    string strSQLitem = "SELECT pg.PermissionGroupID, pt.PermissionItemUrl, pt.PermissionItemID, pt.PermissionItemName FROM permissionitems pt ";
-        //    strSQLitem += "INNER JOIN permissiongroup pg ON pg.PermissionGroupID = pt.PermissionGroupID ";
-        //    strSQLitem += "LEFT JOIN staffaccess sa ON sa.PermissionItemID = pt.PermissionItemID ";
-        //    strSQLitem += "WHERE pt.PermissionItemParent = 0 AND pt.Deleted = 0 AND sa.StaffRoleID = 2 ";
-        //    strSQLitem += "GROUP BY pt.PermissionItemID;";
-
-        //    DataTable dt = objDB.List(strSQL, objConn);
-        //    DataTable dtitem = objDB.List(strSQLitem, objConn);
-        //    objConn.Close();
-
-        //    if (dt.Rows.Count > 0)
-        //    {
-        //        // Create Main Array
-
-        //        // Create Object
-
-        //        for (int i = 0; i < dt.Rows.Count; i++)
-        //        {
-        //            PermissionItemdata manageStaff = new PermissionItemdata();
-        //            manageStaff.GroupName = Convert.ToString(dt.Rows[i]["PermissionGroupName"]);
-        //            // Add Group Name AS String
-
-        //            DataRow[] dr = dtitem.Select(" PermissionGroupID = " + dt.Rows[i]["PermissionGroupID"].ToString());
-
-        //            // Add Group Parent AS Array
-        //            List<PermissionItemParent> manageParent = new List<PermissionItemParent>();
-
-        //            if (dr.Length > 0)
-        //            {
-        //                for (int j = 0; j < dr.Length; j++)
-        //                {
-        //                    PermissionItemParent manageStaffparent = new PermissionItemParent();
-        //                    // Add Object PermissionGroupID
-        //                    manageStaffparent.PermissionGroupID = Convert.ToString(dr[j]["PermissionGroupID"]);
-        //                    // Add Object PermissionItemUrl
-        //                    manageStaffparent.PermissionItemUrl = Convert.ToString(dr[j]["PermissionItemUrl"]);
-        //                    // Add Object PermissionItemID
-        //                    manageStaffparent.PermissionItemID = Convert.ToString(dr[j]["PermissionItemID"]);
-        //                    // Add Object PermissionItemName
-        //                    manageStaffparent.PermissionItemName = Convert.ToString(dr[j]["PermissionItemName"]);
-
-
-        //                    manageParent.Add(manageStaffparent);
-        //                }
-
-        //            }
-
-        //            manageStaff.GroupParent = manageParent;
-
-        //            manage.Add(manageStaff);
-        //        }
-
-        //    }
-        //    return manage.ToArray();
-
-        //    //if (dt.Rows.Count > 0)
-        //    //{
-        //    //    for (int i = 0; i < dt.Rows.Count; i++)
-        //    //    {
-        //    //        PermissionItemdata manageStaff = new PermissionItemdata();
-        //    //        manageStaff.PermissionGroupID = Convert.ToInt32(dt.Rows[i]["PermissionGroupID"].ToString());
-        //    //        manageStaff.PermissionGroupName = dt.Rows[i]["PermissionGroupName"].ToString();
-        //    //        manageStaff.PermissionItemName = dt.Rows[i]["PermissionItemName"].ToString();
-        //    //        manageStaff.PermissionItemUrl = dt.Rows[i]["PermissionItemUrl"].ToString();
-        //    //        manageStaff.PermissionItemID = Convert.ToInt32(dt.Rows[i]["PermissionItemID"].ToString());
-
-        //    //        manage.Add(manageStaff);
-        //    //    }
-
-        //    //}
-        //    //return manage.ToArray();
-        //}
-
-
         public IEnumerable<PermissionItemdata> PostPermissionGroupAll(PermissionItemdata item)
         {
             objConn = objDB.EstablishConnection();
@@ -441,20 +358,14 @@ namespace Patch_Control.Models
                             // Add Object PermissionItemName
                             manageStaffparent.PermissionItemName = Convert.ToString(dr[j]["PermissionItemName"]);
 
-
                             manageParent.Add(manageStaffparent);
                         }
-
                     }
-
                     manageStaff.GroupParent = manageParent;
-
                     manage.Add(manageStaff);
                 }
-
             }
-            return manage.ToArray();
-            
+            return manage.ToArray();           
         }
 
         public IEnumerable<StaffAccess> PostStaffAccessAll(StaffAccess staffaccess)
@@ -572,5 +483,20 @@ namespace Patch_Control.Models
             }
             return login;
         }
+
+        public Staff PostStaffImageAll(string imageName, int staffid)
+        {
+            objConn = objDB.EstablishConnection();
+            Staff staffdelete = new Staff();
+
+            string strSQL = "UPDATE staffs SET StaffPictureName = '" + imageName + "'";
+            //strSQL += "WHERE StaffID = '" + StaffID + "';";
+            strSQL += "WHERE StaffID = '" + staffid + "';";
+            objDB.sqlExecute(strSQL, objConn);
+            objConn.Close();
+
+            return staffdelete;
+        }
+
     }
 }

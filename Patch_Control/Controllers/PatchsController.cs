@@ -90,29 +90,50 @@ namespace Patch_Control.Controllers
             return repository.postPatchInformations(items);
         }
 
-        //================= Post UploadFiles ======================
-
+        //================== Upload File ===================
         [HttpPost]
-        [ActionName("UploadFiles")]
-        public System.Web.Mvc.ActionResult PostFilesInfos(IEnumerable<HttpPostedFileBase> files)
-        {
-            string path = "";
-            string fileName = "";
-
-            foreach (var file in files)
+        [ActionName("FileUpload")]
+        public HttpResponseMessage PostFile()
             {
-                if(file.ContentLength > 0)
+            HttpResponseMessage result = null;
+            string fileName = "";
+            string pathName = "";
+            int staffID = 0;
+            var httpRequest = HttpContext.Current.Request;
+            var getStaffID = httpRequest.Form[0];
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
                 {
-                    var filename = Path.GetFileName(file.FileName);
-                    var filepath = Path.Combine(HttpContext.Current.Server.MapPath("~/files/Patchs"), filename);
-                    file.SaveAs(filepath);
+                    try
+                    {
+                        var postedFile = httpRequest.Files[file];
+                        var filePath = HttpContext.Current.Server.MapPath("~/Patchs/" + postedFile.FileName);
+                        postedFile.SaveAs(filePath);
+                        docfiles.Add(filePath);
 
-                    path = filepath.ToString();
-                    fileName = fileName.ToString();
+                        //convert filename and pathname to string
+                        fileName = postedFile.FileName.ToString();
+                        pathName = filePath.ToString();
+
+                    }catch(Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    
                 }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            return repository.postFilesInformations(path, fileName);
+            staffID = Convert.ToInt32(getStaffID);
+            repository.postFilesInformations(pathName, fileName, staffID);
+            return result;
         }
 
         //====================== Sent E-mail ========================

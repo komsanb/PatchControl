@@ -31,7 +31,6 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
     });
 
     $scope.addPatchInfos = function () {
-        //console.log(ck.getData());
         var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');//get current date
         var stringSetHTML = $('#summernote').code(); //get code from summernote
         $scope.staffFirstName = localStorage.getItem('StaffFirstName');
@@ -62,20 +61,22 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
                      $scope.softwareVersionID = "";
                      $scope.patchsVersionNumber = "";
                      $scope.softwareTypeID = "";
-                     $scope.patchsDescription = "";
+                     $('#summernote').code(stringSetHTML);
                  });
             $rootScope.open('lg');
         });
-    };
+    };    
 });
 
 //---------------------------------- Dropzone to Upload Files ------------------------------------------
 
 app.controller('MyCtrl', ['$scope', 'FileUploader', function ($scope, FileUploader, $rootScope) {
     var uploader = $scope.uploader = new FileUploader({
-        url: ''
+        url: 'api/patchs/FileUpload',
+        formData: {
+            'staffID': localStorage.getItem('StaffID')
+        }        
     });
-
     // FILTERS
 
     uploader.filters.push({
@@ -123,7 +124,7 @@ app.controller('MyCtrl', ['$scope', 'FileUploader', function ($scope, FileUpload
     console.info('uploader', uploader);
 }]);
 
-//--------------------------------------- Alert Upload --------------------------------------------------
+//--------------------------------------- Dialog Upload file --------------------------------------------------
 
 app.controller('ModalDemoCtrl', function ($scope, $modal, $log, $rootScope) {
 
@@ -175,10 +176,10 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, $ht
             "staffRoleID": localStorage.getItem("StaffRoleID"),
             "myEmail": localStorage.getItem("StaffEmail")
         }
-        $http.post('api/patchs/SentEmail', mailInfor)
-            .success(function () {
+        //$http.post('api/patchs/SentEmail', mailInfor)
+        //    .then(function () {
                 window.location = '#/showUploads'
-            });
+        //    });
     };
 
     $scope.cancel = function () {
@@ -186,8 +187,10 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, $ht
     };
 });
 
-app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter',
-    function ($http, $scope, $routeParams, $filter) {
+//-------------------------------------- Alert
+
+app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter', '$rootScope',
+    function ($http, $scope, $routeParams, $filter, $rootScope) {
         $http.get('api/patchs/softwareversion')
         .success(function (response) {
             $scope.softwareVersion = response;
@@ -208,9 +211,47 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
                     console.log($scope.editSuccess)
                 });
         }
+        
         $scope.editPatch = function (patchID) {
-            window.location = '#/editPatch/' + patchID;
+            
+            swal({   
+                title: "Select the part to Edit.",   
+                text: "<div ng-controller='MyPatchController'>" +
+                        "<button id='patch' type='button'" +
+                            "onclick=''" +
+                                "style='"+
+                                    "height:50px;"+
+                                    "width:180px;"+
+                                    "font-size: 14px;" +
+                                    "color:white;" +
+                                    "background-color:#00BFFF'>" +
+                            "Patch informations </button>" +
+                        "&nbsp;&nbsp;&nbsp;" +
+                        "<button id='file' type='button'"+
+                            "style='"+
+                               "height:50px;"+
+                               "width:180px;"+
+                               "font-size: 14px;"+
+                               "color:white;"+
+                               "background-color:#00BFFF'>" +
+                        "Patch file</button>"+
+                     "</div>",
+                html: true,                
+                showConfirmButton: false,
+                showCancelButton: true
+            });
+
+            document.getElementById("patch").onclick = function () {
+                window.location = '#/editPatch/' + patchID;
+                swal.close();
+            };
+            
+            document.getElementById("file").onclick = function () {
+                $rootScope.open('lg');
+                swal.close();
+            };
         }
+
 
         $scope.updatePatchInformations = function () {
             var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');
@@ -241,7 +282,11 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
                                 window.location = '#/showUploads';
                         });                        
                     })                
-            }
+        }
+
+        $scope.btnCancel = function () {
+            window.location = '#/showUploads'
+        }
 
         $scope.deletedMyPatch = function (patchID) {
             swal({
@@ -257,7 +302,7 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
             }, function (isConfirm) {
                 if (isConfirm) {
                     swal("Deleted!",
-                        "Your patch has been deleted. And, auto update in 3 minutes.",
+                        "Your patch has been deleted. And, auto close and update in 3 secconds.",
                         "success");
                     $http.post('api/patchs/DeletedMyPatch/' + patchID, patchID)
                         .success(function () {

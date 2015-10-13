@@ -173,8 +173,7 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
     //------------------------------------------------------- ADD STAFF -------------------------------------------------------//
 
     $scope.addstaff = function () {
-        //swal("Good job!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat, tincidunt vitae ipsum et, pellentesque maximus enim. Mauris eleifend ex semper, lobortis purus sed, pharetra felis", "success")
-
+        
         swal({
             title: "Do you want to add staff",
             type: "info", showCancelButton: true,
@@ -310,8 +309,6 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
             closeOnConfirm: false,
             showLoaderOnConfirm: true,
         }, function () {
-            //console.log(id);
-            //console.log(password);
             var staff = {
                 "StaffID": id,
                 "StaffPassword": password

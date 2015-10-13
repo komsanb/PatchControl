@@ -84,6 +84,7 @@ namespace Patch_Control.Controllers
         [ActionName("StaffAll")]
         public IEnumerable<Staff> Post(Staff item)
         {
+
             return repository.PostStaffAll(item);
         }
 
@@ -162,6 +163,39 @@ namespace Patch_Control.Controllers
         public IEnumerable<StaffRole> PostStaffRoleDelete(StaffRole item)
         {
             return repository.PostStaffRoleDeleteAll(item);
+        }
+
+        // POST api/staff/image
+        [HttpPost]
+        [ActionName("Image")]
+        public HttpResponseMessage Post()
+        {
+            HttpResponseMessage result = null;
+            string imageName = "";
+            var httpRequest = HttpContext.Current.Request;
+            var staffid = httpRequest.Form[0];
+            
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filePath = HttpContext.Current.Server.MapPath("~/images/" + postedFile.FileName);
+                    postedFile.SaveAs(filePath);
+
+                    docfiles.Add(filePath);
+                    imageName = postedFile.FileName.ToString();
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            
+            repository.PostStaffImageAll(imageName, Convert.ToInt32(staffid));
+            return result;
         }
     }
 }

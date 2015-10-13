@@ -79,7 +79,7 @@
                         </div>
                     </div>
                 </div>
-                <div ng-controller="ModalDemoCtrl">
+                <div ng-controller="ModalPatchController">
                     <div class="form-group">
                         <div class="fg-line">
                             <label for="inputEmail" class="col-sm-2 control-label"></label>
@@ -97,8 +97,8 @@
         </form>
 
         <!-- ============================= Alert ============================= -->
-        <div ng-controller="ModalDemoCtrl">
-            <script type="text/ng-template" id="myModalContent.html">
+        <div ng-controller="ModalPatchController">
+            <script type="text/ng-template" id="modelPatchContent.html">
                 <div class="modal-header">
                     <h3 class="modal-title">Choosen Patch File</h3>
                 </div>
@@ -170,7 +170,7 @@
                                                 <div class="progress-bar progress-bar-info active" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
                                             </div>
                                         </div>
-                                        <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                                        <!--<button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
                                             <span class="glyphicon glyphicon-upload"></span> Upload all
                                         </button>
                                         <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
@@ -178,7 +178,7 @@
                                         </button>
                                         <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
                                             <span class="glyphicon glyphicon-trash"></span> Remove all
-                                        </button>
+                                        </button>-->
                                     </div>
                                 </div>
                             </div>

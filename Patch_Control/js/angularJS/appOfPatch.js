@@ -126,7 +126,7 @@ app.controller('MyCtrl', ['$scope', 'FileUploader', function ($scope, FileUpload
 
 //--------------------------------------- Dialog Upload file --------------------------------------------------
 
-app.controller('ModalDemoCtrl', function ($scope, $modal, $log, $rootScope) {
+app.controller('ModalPatchController', function ($scope, $modal, $log, $rootScope) {
 
     $scope.items = ['item1', 'item2', 'item3'];
 
@@ -136,8 +136,8 @@ app.controller('ModalDemoCtrl', function ($scope, $modal, $log, $rootScope) {
 
         var modalInstance = $modal.open({
             animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
+            templateUrl: 'modelPatchContent.html',
+            controller: 'ModalInstancePatchController',
             size: size,
             resolve: {
                 items: function () {
@@ -162,7 +162,7 @@ app.controller('ModalDemoCtrl', function ($scope, $modal, $log, $rootScope) {
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, $http) {
+app.controller('ModalInstancePatchController', function ($scope, $modalInstance, items, $http) {
 
     $scope.items = items;
     $scope.selected = {
@@ -184,10 +184,69 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, $ht
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
+        window.location = '#/showUploads'
     };
 });
 
-//-------------------------------------- Alert
+app.controller('ModelEditController', function ($scope, $modal, $log, $rootScope) {
+
+    $scope.items = ['item1', 'item2', 'item3'];
+
+    $scope.animationsEnabled = true;
+
+    $rootScope.openEdit = function (size) {
+
+        var modalInstance = $modal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'modalEditPatchContent.html',
+            controller: 'ModalInstanceEditPatchController',
+            size: size,
+            resolve: {
+                items: function () {
+                    return $scope.items;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    $scope.toggleAnimation = function () {
+        $scope.animationsEnabled = !$scope.animationsEnabled;
+    };
+
+});
+
+app.controller('ModalInstanceEditPatchController', function ($scope, $modalInstance, items, $http) {
+
+    $scope.items = items;
+    $scope.selected = {
+        item: $scope.items[0]
+    };
+
+    $scope.ok = function () {
+        $modalInstance.close($scope.selected.item);
+        var mailInfor = {
+            "staffID": localStorage.getItem("StaffID"),
+            "staffRoleID": localStorage.getItem("StaffRoleID"),
+            "myEmail": localStorage.getItem("StaffEmail")
+        }
+        //$http.post('api/patchs/SentEmail', mailInfor)
+        //    .then(function () {
+        window.location.reload(true);
+        //    });
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+        window.location.reload(true);
+    };
+});
+//-------------------------------------- Alert ------------
 
 app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter', '$rootScope',
     function ($http, $scope, $routeParams, $filter, $rootScope) {
@@ -247,7 +306,7 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
             };
             
             document.getElementById("file").onclick = function () {
-                $rootScope.open('lg');
+                $rootScope.openEdit('lg');
                 swal.close();
             };
         }

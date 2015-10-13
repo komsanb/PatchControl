@@ -31,7 +31,7 @@ namespace Patch_Control.Models
             sql += "INNER JOIN patchs p ON p.PatchsID = pv.PatchsID ";
             sql += "INNER JOIN softwareversion sv ON sv.SoftwareVersionID = pv.SoftwareVersionID ";
             sql += "INNER JOIN softwaretype st ON st.SoftwareTypeID = pv.SoftwareTypeID ";
-            sql += "WHERE p.Deleted = 0 AND p.Activated = 0 ";
+            sql += "WHERE p.Deleted = 0 AND p.Activated = 1 ";
             sql += "ORDER BY PatchsUpdateDate DESC";
 
             DataTable dt = objDB.List(sql, objConn);
@@ -128,11 +128,11 @@ namespace Patch_Control.Models
 
                 string sqlInsertPatchInfors = "BEGIN; ";
                 sqlInsertPatchInfors += "INSERT INTO patchs(PatchsID, PatchParentVersionID, PatchsName, PatchsDescription, ";
-                sqlInsertPatchInfors += "PatchsInsertDate, PatchsUpdateDate, PatchsInsertBy,  PatchsVersionNumber) ";
+                sqlInsertPatchInfors += "PatchsInsertDate, PatchsUpdateDate, PatchsInsertBy,  PatchsVersionNumber, Activated) ";
                 sqlInsertPatchInfors += "VALUES('" + maxPatchID + "', '" + maxPatchParentVersionID 
                     + "', '" + items.patchsName.ToString() + "', '" + items.patchsDescription.ToString() 
                     + "', '" + items.patchsInsertDate.ToString() + "', '" + items.patchsUpdateDate.ToString()
-                    + "', '" + items.patchsInsertBy.ToString() + "', '" + items.patchsVersionNumber.ToString() + "');";
+                    + "', '" + items.patchsInsertBy.ToString() + "', '" + items.patchsVersionNumber.ToString() + "', '0');";
                 sqlInsertPatchInfors += "INSERT INTO patchparentversion(PatchParentVersionID, PatchsID, SoftwareVersionID, SoftwareTypeID, StaffID) ";
                 sqlInsertPatchInfors += "VALUES('" + maxPatchParentVersionID + "', '" + maxPatchID 
                     + "','" + items.softwareVersionID.ToString() + "','" + items.softwareTypeID.ToString() 
@@ -147,29 +147,36 @@ namespace Patch_Control.Models
                 return patchInfors.ToArray();          
         }
 
-        public ActionResult postFilesInformations(string path, string fileName)
+        public Files postFilesInformations(string path, string fileName, int staffID)
         {
-            var movies = new List<object>();
+            Files files = new Files();
 
             objConn = objDB.EstablishConnection();
             string sqlFileID = "SELECT MAX(FilesID) AS FilesID FROM files";
 
-            DataTable dtPatchID = objDB.List(sqlFileID, objConn);
-            int maxFilesID = Convert.ToInt32(dtPatchID.Rows[0]["FilesID"].ToString()) + 1;
+            DataTable dtFileID = objDB.List(sqlFileID, objConn);
+            int maxFilesID = Convert.ToInt32(dtFileID.Rows[0]["FilesID"].ToString()) + 1;
 
-            string sqlFileInfors = "INSERT INTO files(FilesID, FilesName, FilesPath) ";
-            sqlFileInfors += "VALUES('" + maxFilesID + "', '" + fileName + "', '" + path + "')";
+            string sqlPatchsID = "SELECT MAX(p.PatchsID) AS PatchsID FROM patchs p";
+            sqlPatchsID += " INNER JOIN patchparentversion ppv ON p.PatchsID = ppv.PatchsID";
+            sqlPatchsID += " INNER JOIN staffs s ON ppv.StaffID = s.StaffID";
+            sqlPatchsID += " WHERE s.StaffID = '" + staffID + "'";
+
+            DataTable dtPatchsID = objDB.List(sqlPatchsID, objConn);
+            int maxPatchsID = Convert.ToInt32(dtPatchsID.Rows[0]["PatchsID"].ToString());
+
+            string sqlFileInfors = "BEGIN;";
+            sqlFileInfors += " INSERT INTO files(FilesID, FilesName, FilesPath)";
+            sqlFileInfors += " VALUES('" + maxFilesID + "', '" + fileName + "', '" + path + "');";
+            sqlFileInfors += " UPDATE patchparentversion SET FilesID = '" + maxFilesID + "' WHERE PatchsID = '" + maxPatchsID + "';";
+            sqlFileInfors += " UPDATE patchs SET Activated = 1 WHERE PatchsID = '" + maxPatchsID + "';";
+            sqlFileInfors += " COMMIT;";
 
             objDB.sqlExecute(sqlFileInfors, objConn);
             objConn.Close();
 
-            return Json(movies, JsonRequestBehavior.AllowGet);
+            return files;
 
-        }
-
-        private ActionResult Json(List<object> movies, JsonRequestBehavior allowGet)
-        {
-            throw new NotImplementedException();
         }
 
         public IEnumerable<MyPatch> getMyPatch(int staffID)
@@ -332,7 +339,7 @@ namespace Patch_Control.Models
 
                     foreach(var mailTo in splitRecipients)
                     {
-                        mailMessage.To.Add(mailTo);
+                        mailMessage.To.Add(mailTo); 
                     }                    
                 }
 
@@ -349,7 +356,7 @@ namespace Patch_Control.Models
 
                 try
                 {
-                    smtp.Send(mailMessage);
+                    smtp.Send(mailMessage);//ON ERROR
                     Console.WriteLine("Message Sent");
                 }
                 catch (Exception ex)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,7 +17,7 @@ namespace Patch_Control.Models
         IEnumerable<Patchs> postUpdatePatchInformations(Patchs update);
         IEnumerable<Patchs> postDeletePatchInformations(int patchID);
         IEnumerable<Patchs> postPatchInformations(Patchs items);
-        System.Web.Mvc.ActionResult postFilesInformations(string path, string fileName);
+        Files postFilesInformations(string path, string fileName, int staffID);        
         IEnumerable<Email> sentEmail(Email items);
     }
 }

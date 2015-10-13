@@ -40,8 +40,8 @@ namespace Patch_Control.Models
     public class Files
     {
         public int filesID { get; set; }
-        public HttpPostedFileBase filesName { get; set; }
-        public HttpPostedFileBase filesPath { get; set; }
+        public string filesName { get; set; }
+        public string filesPath { get; set; }
     }
 
     public class MyPatch

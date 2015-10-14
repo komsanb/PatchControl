@@ -546,24 +546,25 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
     ];
 
     $scope.patchs = [
-    { id: 11, text: 'Download File' }
+    { id: 11, text: 'Download File' },
+    { id: 12, text: 'Uploads File' }
     ];
 
-    $scope.headuploads = [
-        { id: 12, text: 'Manage Uploads' }
-    ];
+    //$scope.headuploads = [
+    //    { id: 12, text: 'Uploads File' }
+    //];
 
     //$scope.uploads = [
     //{ id: 13, text: 'Upload File' }
     //];
 
     $scope.headfiles = [
-        { id: 14, text: 'Manage File' }
+        { id: 13, text: 'Manage File' }
     ];
 
     $scope.files = [
-    { id: 15, text: 'Edit File' },
-    { id: 16, text: 'Delete File' }
+    { id: 14, text: 'Edit File' },
+    { id: 15, text: 'Delete File' }
     ];
 
     $scope.permissions2 = [

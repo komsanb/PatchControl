@@ -553,9 +553,9 @@ app.controller("PermissionController", function ($scope, $http, $routeParams) {
         { id: 12, text: 'Manage Uploads' }
     ];
 
-    $scope.uploads = [
-    { id: 13, text: 'Upload File' }
-    ];
+    //$scope.uploads = [
+    //{ id: 13, text: 'Upload File' }
+    //];
 
     $scope.headfiles = [
         { id: 14, text: 'Manage File' }

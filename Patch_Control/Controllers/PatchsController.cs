@@ -115,7 +115,7 @@ namespace Patch_Control.Controllers
 
                         //convert filename and pathname to string
                         fileName = postedFile.FileName.ToString();
-                        pathName = filePath.ToString().Replace(@"\\", @"\"); // bug
+                        pathName = filePath.ToString();
 
                     }
                     catch(Exception e)

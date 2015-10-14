@@ -140,6 +140,7 @@
     <Content Include="images\12006376_1042977912393762_588026198553335308_n.jpg" />
     <Content Include="images\1456774_1015763138468723_7561643243299731833_n.jpg" />
     <Content Include="images\Admin-icon.png" />
+    <Content Include="images\default-user-icon-profile.png" />
     <Content Include="index.html" />
     <Content Include="js\angular-animate.js" />
     <Content Include="js\angular-animate.min.js" />

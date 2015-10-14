@@ -375,3 +375,7 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
             });
         }
     }]);
+
+app.controller('DownloadPatch'['$http', function ($http) {
+    $http.get()
+}]);

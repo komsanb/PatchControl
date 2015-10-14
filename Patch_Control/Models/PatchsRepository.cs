@@ -26,11 +26,12 @@ namespace Patch_Control.Models
             sql += "st.SoftwareTypeID, st.SoftwareTypeName, p.PatchsDescription, ";
             sql += "DATE_FORMAT(p.PatchsInsertDate, '%d %M %Y') AS PatchsInsertDate, ";
             sql += "DATE_FORMAT(p.PatchsUpdateDate, '%d %M %Y') AS PatchsUpdateDate, ";
-            sql += "p.PatchsInsertBy, p.PatchsUpdateBy ";
+            sql += "p.PatchsInsertBy, p.PatchsUpdateBy, f.FilesName ";
             sql += "FROM patchparentversion pv ";
             sql += "INNER JOIN patchs p ON p.PatchsID = pv.PatchsID ";
             sql += "INNER JOIN softwareversion sv ON sv.SoftwareVersionID = pv.SoftwareVersionID ";
             sql += "INNER JOIN softwaretype st ON st.SoftwareTypeID = pv.SoftwareTypeID ";
+            sql += "INNER JOIN files f ON f.FilesID = pv.FilesID ";
             sql += "WHERE p.Deleted = 0 AND p.Activated = 1 ";
             sql += "ORDER BY PatchsUpdateDate DESC";
 
@@ -54,6 +55,7 @@ namespace Patch_Control.Models
                     patchInfo.patchsUpdateDate = dt.Rows[i]["PatchsUpdateDate"].ToString();                   
                     patchInfo.patchsInsertBy = dt.Rows[i]["PatchsInsertBy"].ToString();
                     patchInfo.patchsUpdateBy = dt.Rows[i]["PatchsUpdateBy"].ToString();
+                    patchInfo.filesName = dt.Rows[i]["FilesName"].ToString();
 
                     patchs.Add(patchInfo);
                 }
@@ -167,7 +169,7 @@ namespace Patch_Control.Models
 
             string sqlFileInfors = "BEGIN;";
             sqlFileInfors += " INSERT INTO files(FilesID, FilesName, FilesPath)";
-            sqlFileInfors += " VALUES('" + maxFilesID + "', '" + fileName + "', '" + path + "');";
+            sqlFileInfors += " VALUES('" + maxFilesID + "', '" + fileName + "', '" + path.Replace(@"\\", @"\") + "');";
             sqlFileInfors += " UPDATE patchparentversion SET FilesID = '" + maxFilesID + "' WHERE PatchsID = '" + maxPatchsID + "';";
             sqlFileInfors += " UPDATE patchs SET Activated = 1 WHERE PatchsID = '" + maxPatchsID + "';";
             sqlFileInfors += " COMMIT;";

@@ -13,7 +13,7 @@ namespace Patch_Control.Models
         public int softwareVersionID { get; set; }
         public string patchsName { get; set; }
         public string patchsDescription { get; set; }
-        public string patchsUpdateDate { get; set; }        
+        public string patchsUpdateDate { get; set; }
         public string patchsInsertDate { get; set; }
         public string patchsInsertBy { get; set; }
         public string patchsUpdateBy { get; set; }
@@ -22,6 +22,7 @@ namespace Patch_Control.Models
         public string patchsPathName { get; set; }
         public string patchsVersionNumber { get; set; }
         public string deleted { get; set; }
+        public string filesName { get; set; }
     }
 
     public class SoftwareType

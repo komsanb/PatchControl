@@ -227,12 +227,13 @@ namespace Patch_Control.Models
             string sqlMyPatchDetails = "SELECT s.StaffID, p.PatchsID, p.PatchsName, st.SoftwareTypeID, sv.SoftwareVersionID, p.PatchsVersionNumber, ";
             sqlMyPatchDetails += "CONCAT(sv.SoftwareVersionName, '.', p.PatchsVersionNumber) AS SoftwareVersionName, s.StaffFirstname, ";
             sqlMyPatchDetails += "st.SoftwareTypeName, DATE_FORMAT(p.PatchsInsertDate, '%d %M %Y') AS PatchsInsertDate, ";
-            sqlMyPatchDetails += "p.PatchsDescription ";
+            sqlMyPatchDetails += "p.PatchsDescription, f.FilesName ";
             sqlMyPatchDetails += " FROM patchparentversion ppv";
             sqlMyPatchDetails += " INNER JOIN softwareversion sv ON ppv.SoftwareVersionID = sv.SoftwareVersionID";
             sqlMyPatchDetails += " INNER JOIN softwaretype st ON ppv.SoftwareTypeID = st.SoftwareTypeID";
             sqlMyPatchDetails += " INNER JOIN patchs p ON ppv.PatchsID = p.PatchsID";
             sqlMyPatchDetails += " INNER JOIN staffs s ON ppv.StaffID = s.StaffID";
+            sqlMyPatchDetails += " INNER JOIN files f ON  ppv.FilesID = f.FilesID"; 
             sqlMyPatchDetails += " WHERE p.PatchsID = '" + patchID + "' AND p.Deleted = 0 ";
             sqlMyPatchDetails += " ORDER BY p.PatchsInsertDate DESC";
 
@@ -248,7 +249,7 @@ namespace Patch_Control.Models
             myPatchsDetails.softwareVersionID = Convert.ToInt32(dt.Rows[0]["SoftwareVersionID"].ToString());
             myPatchsDetails.softwareVersionName = dt.Rows[0]["SoftwareVersionName"].ToString();
             myPatchsDetails.patchsInsertDate = dt.Rows[0]["PatchsInsertDate"].ToString();
-            myPatchsDetails.staffFirstname = dt.Rows[0]["StaffFirstname"].ToString();
+            myPatchsDetails.filesName = dt.Rows[0]["FilesName"].ToString();
 
             return myPatchsDetails;
         }

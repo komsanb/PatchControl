@@ -30,8 +30,8 @@
                     <tbody>
                         <tr dir-paginate="mp in myPatch | filter:search | itemsPerPage: 8">
                             <td>
-                               <i ng-show="mp.activated == 0" class="glyphicon glyphicon-exclamation-sign btn-lg" data-toggle="tooltip" data-placement="top" title="Unactivated" style="color:orange;" />    
-                               <i ng-show="mp.activated == 1" class="glyphicon glyphicon glyphicon-ok-sign btn-lg" data-toggle="tooltip" data-placement="top" title="Activated" style="color:forestgreen;" />
+                               <i ng-show="mp.activated == 0" class="glyphicon glyphicon-exclamation-sign btn-lg" tooltip-placement="right" uib-tooltip="Unactivated" style="color:orange;" />    
+                               <i ng-show="mp.activated == 1" class="glyphicon glyphicon glyphicon-ok-sign btn-lg" tooltip-placement="right" uib-tooltip="Activated" style="color:forestgreen;" />
                             </td>
                             <td>
                                 <a>{{ mp.patchsName }}</a>
@@ -41,9 +41,9 @@
                             <td>
                                 <a>{{ mp.softwareVersionName }}</a> | {{ mp.softwareTypeName }}
                             </td>
-                            <td>
-                                <button class="btn btn-success btn-icon"><i class="md md-file-download"></i></button>
-                            </td>
+                            <!--<td>
+                                <a href="../Patchs/{{ mp.filesName }}" class="btn btn-success btn-icon"><i class="md md-file-download"></i></a>
+                            </td>-->
                             <td ng-show="editFile == 1">
                                 <button class="btn btn-warning btn-icon" ng-click="editPatch(mp.patchsID)"><i class="md md-edit"></i></button>
                             </td>

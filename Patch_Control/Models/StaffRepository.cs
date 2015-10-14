@@ -98,7 +98,7 @@ namespace Patch_Control.Models
             DataTable dt = objDB.List(strSQL1, objConn);
             rowid = Convert.ToInt32(dt.Rows[0]["rowid"].ToString());
             int maxid = rowid + 1;
-            string strSQL2 = "INSERT INTO staffs(StaffID, StaffCode, StaffPassword, StaffRoleID, GenderID, StaffFirstname, StaffLastname, StaffAddress1, StaffAddress2, StaffCity, StaffZipcode, StaffTel, StaffMobile, StaffEmail, ProvinceID) ";
+            string strSQL2 = "INSERT INTO staffs(StaffID, StaffCode, StaffPassword, StaffRoleID, GenderID, StaffFirstname, StaffLastname, StaffAddress1, StaffAddress2, StaffCity, StaffZipcode, StaffTel, StaffMobile, StaffPictureName, StaffEmail, ProvinceID) ";
             //strSQL2 += "VALUES ('" + maxid + "','" + item.StaffCode + "','" + item.StaffPassword + "','" + item.StaffRoleID + "','" + item.GenderID + "','" + item.StaffFirstname + "','" + item.StaffLastname + "','" + item.Address1 + "','" + item.Address2 + "','" + item.City + "','" + item.Zipcode + "','" + item.Telephone + "','" + item.Mobile + "','" + item.Email + "','" + item.ProvinceID + "')";
             strSQL2 += "VALUES ('" + maxid + "','" + item.StaffCode + "','" + item.StaffPassword + "','" + item.StaffRoleID + "','" + item.GenderID + "','" + item.StaffFirstname + "','" + item.StaffLastname + "','" + item.Address1 + "','" + item.Address2 + "','" + item.City + "','" + item.Zipcode + "','" + item.Telephone + "','" + item.Mobile + "','" + item.Picture + "','" + item.Email + "','" + item.ProvinceID + "')";
             objDB.sqlExecute(strSQL2, objConn);

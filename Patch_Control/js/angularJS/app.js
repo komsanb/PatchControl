@@ -308,8 +308,9 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
                 $scope.Telephone = "";
                 $scope.Mobile = "";
                 $scope.Email = "";
-
+                
             }
+            $scope.Picture = "default-user-icon-profile.png";
             var staff = {
 
                 "StaffCode": $scope.StaffCode,
@@ -325,7 +326,8 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
                 "Zipcode": $scope.Zipcode,
                 "Telephone": $scope.Telephone,
                 "Mobile": $scope.Mobile,
-                "Email": $scope.Email
+                "Email": $scope.Email,
+                "Picture": $scope.Picture
             };
 
             //console.log(staff);
@@ -337,8 +339,8 @@ app.controller("staffController", function ($scope, $http, $routeParams) {
 
             //window.alert("Add staff successful!");
 
-            //window.location = "#/staff"
-            //window.location.reload(true);
+            window.location = "#/staff"
+            window.location.reload(true);
         });
     }
 

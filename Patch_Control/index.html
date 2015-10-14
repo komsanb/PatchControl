@@ -39,27 +39,12 @@
                 <a href="index.html#/"> Patch Control</a>
             </li>
 
-            <!--<li class="pull-right">
-                <ul class="top-menu">
-                    <li class="dropdown">
-                        <a data-toggle="dropdown" class="tm-settings" href=""></a>
-                        <ul class="dropdown-menu dm-icon pull-right">
-                            <li>
-                                <a href="profile-about.html"><i class="md md-person"></i> View Profile</a>
-                            </li>
-                            <li>
-                                <a href="login.html"><i class="md md-history"></i> Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>-->
 
             <li class="pull-right">
                 <ul class="top-menu">
 
                     <li class="dropdown">
-                        <a data-toggle="dropdown" href=""><img class="img-circle" src="../images/{{staffindex.Picture}}" style="max-width:42px;" alt=""></a>
+                        <a data-toggle="dropdown" href=""><img class="img-circle" src="../images/{{staffindex.Picture}}" style="width:42px; height:42px;" alt=""></a>
                         
                         <ul class="dropdown-menu dm-icon pull-right">
                             <li><a><b>{{staffindex.StaffName}}</b><br />
@@ -77,13 +62,23 @@
 
                     <!--<li class="dropdown hidden-xs profile-pic">
                         <img class="img-circle " src="{{staffindex.Picture}}" style="max-width:40px" />
-                    </li>&nbsp;
+                    </li>&nbsp;-->
 
-                    <li class="dropdown">
+                    <!--<li class="dropdown">
                         <h5 style="color:white">{{staffindex.StaffName}}</h5>
                     </li>-->
                 </ul>                
             </li>
+
+
+            <li class="pull-right">
+                <ul class="top-menu">
+                    <li class="dropdown">
+                        <h5 style="color:white">{{staffindex.StaffCode}}</h5>
+                    </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                </ul>
+            </li>
+
         </ul>
     </header>
 

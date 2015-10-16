@@ -106,6 +106,9 @@ app.controller('ModalPatchController', function ($scope, $modal, $log, $rootScop
 
 });
 
+// Please note that $modalInstance represents a modal window (instance) dependency.
+// It is not the same as the $modal service used above.
+
 app.controller('ModalInstancePatchController', function ($scope, $modalInstance, items, $http) {
 
     $scope.items = items;

@@ -98,13 +98,9 @@ namespace Patch_Control.Controllers
             HttpResponseMessage result = null;
             string fileName = "";
             string pathName = "";
-            string staffName = "";
             int staffID = 0;
-            int patchID = 0;
             var httpRequest = HttpContext.Current.Request;
             var getStaffID = httpRequest.Form[0];
-            var getPatchID = httpRequest.Form[1];
-            var getStaffName = httpRequest.Form[2];
             if (httpRequest.Files.Count > 0)
             {
                 var docfiles = new List<string>();
@@ -120,13 +116,16 @@ namespace Patch_Control.Controllers
                         //convert filename and pathname to string
                         fileName = postedFile.FileName.ToString();
                         pathName = filePath.ToString();
+
                     }
                     catch(Exception e)
                     {
                         Console.WriteLine(e);
-                    }                    
+                    }
+                    
                 }
                 result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+
             }
             else
             {
@@ -134,10 +133,7 @@ namespace Patch_Control.Controllers
             }
 
             staffID = Convert.ToInt32(getStaffID);
-            patchID = Convert.ToInt32(getPatchID);
-            staffName = getStaffName.ToString();
-
-            repository.postFilesInformations(pathName, fileName, staffID, patchID, staffName);
+            repository.postFilesInformations(pathName, fileName, staffID);
             return result;
         }
 

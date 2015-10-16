@@ -149,54 +149,36 @@ namespace Patch_Control.Models
                 return patchInfors.ToArray();          
         }
 
-        public Files postFilesInformations(string path, string fileName, int staffID, int patchID, string staffName)
+        public Files postFilesInformations(string path, string fileName, int staffID)
         {
             Files files = new Files();
 
             objConn = objDB.EstablishConnection();
             string sqlFileID = "SELECT MAX(FilesID) AS FilesID FROM files";
+
             DataTable dtFileID = objDB.List(sqlFileID, objConn);
             int maxFilesID = Convert.ToInt32(dtFileID.Rows[0]["FilesID"].ToString()) + 1;
 
-            string sqlPatchsID = "SELECT MAX(p.PatchsID) AS PatchsID FROM patchs patchparentversion";
+            string sqlPatchsID = "SELECT MAX(p.PatchsID) AS PatchsID FROM patchs p";
+            sqlPatchsID += " INNER JOIN patchparentversion ppv ON p.PatchsID = ppv.PatchsID";
+            sqlPatchsID += " INNER JOIN staffs s ON ppv.StaffID = s.StaffID";
             sqlPatchsID += " WHERE s.StaffID = '" + staffID + "'";
+
             DataTable dtPatchsID = objDB.List(sqlPatchsID, objConn);
             int maxPatchsID = Convert.ToInt32(dtPatchsID.Rows[0]["PatchsID"].ToString());
 
-            if (patchID == 0 && staffName.Equals(""))
-            {
-                string sqlFileInfors = "BEGIN;";
-                sqlFileInfors += " INSERT INTO files(FilesID, FilesName, FilesPath)";
-                sqlFileInfors += " VALUES('" + maxFilesID + "', '" + fileName + "', '" + path.Replace(@"\\", @"\") + "');";
-                sqlFileInfors += " UPDATE patchparentversion SET FilesID = '" + maxFilesID + "' WHERE PatchsID = '" + maxPatchsID + "';";
-                sqlFileInfors += " UPDATE patchs SET Activated = 1 WHERE PatchsID = '" + maxPatchsID + "';";
-                sqlFileInfors += " COMMIT;";
+            string sqlFileInfors = "BEGIN;";
+            sqlFileInfors += " INSERT INTO files(FilesID, FilesName, FilesPath)";
+            sqlFileInfors += " VALUES('" + maxFilesID + "', '" + fileName + "', '" + path.Replace(@"\\", @"\") + "');";
+            sqlFileInfors += " UPDATE patchparentversion SET FilesID = '" + maxFilesID + "' WHERE PatchsID = '" + maxPatchsID + "';";
+            sqlFileInfors += " UPDATE patchs SET Activated = 1 WHERE PatchsID = '" + maxPatchsID + "';";
+            sqlFileInfors += " COMMIT;";
 
-                objDB.sqlExecute(sqlFileInfors, objConn);
-                objConn.Close();
-            }
-            else
-            {
-                string checkStaffID = "SELECT StaffID, FilesID FROM patchparentversion WHERE PatchsID = '" + patchID + "'";
-                DataTable dtCheckPatchID = objDB.List(checkStaffID, objConn);
-                int oldStaffID = Convert.ToInt32(dtCheckPatchID.Rows[0]["StaffID"].ToString());
-                int fileID = Convert.ToInt32(dtCheckPatchID.Rows[0]["FilesID"].ToString());
-                
-                string sqlUpdateFileInfors = "BEGIN;";
-                sqlUpdateFileInfors += " UPDATE files SET FilesID = '" + fileID 
-                    + "', FilesName = '" + fileName 
-                    + "', FilesPath = '" + path.Replace(@"\\", @"\") + "');";
-                sqlUpdateFileInfors += " UPDATE patchparentversion SET FilesID = '" + fileID 
-                    + "', StaffID = '" + staffID + "' WHERE PatchsID = '" + patchID + "';";
-                sqlUpdateFileInfors += " UPDATE patchs SET PatchsUpdateBy = '" + staffName 
-                    + "', PatchsUpdatedate = '" + DateTime.Now + "' WHERE PatchsID = '" + patchID + "'";
-                sqlUpdateFileInfors += " COMMIT;";
-
-                objDB.sqlExecute(sqlUpdateFileInfors, objConn);
-                objConn.Close();
-            }
+            objDB.sqlExecute(sqlFileInfors, objConn);
+            objConn.Close();
 
             return files;
+
         }
 
         public IEnumerable<MyPatch> getMyPatch(int staffID)

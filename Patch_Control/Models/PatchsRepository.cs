@@ -270,7 +270,7 @@ namespace Patch_Control.Models
             myPatchsDetails.softwareVersionID = Convert.ToInt32(dt.Rows[0]["SoftwareVersionID"].ToString());
             myPatchsDetails.softwareVersionName = dt.Rows[0]["SoftwareVersionName"].ToString();
             myPatchsDetails.patchsInsertDate = dt.Rows[0]["PatchsInsertDate"].ToString();
-            myPatchsDetails.filesName = dt.Rows[0]["FilesName"].ToString();
+            myPatchsDetails.fileName = dt.Rows[0]["FilesName"].ToString();
 
             return myPatchsDetails;
         }

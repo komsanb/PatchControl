@@ -34,7 +34,7 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
         var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');//get current date
         var stringSetHTML = $('#summernote').code(); //get code from summernote
         $scope.staffFirstName = localStorage.getItem('StaffFirstName');
-        $scope.staffId = localStorage.getItem('StaffID');
+        $scope.staffId= localStorage.getItem('StaffID');
         var newPatchInfos = {
             "staffID": $scope.staffId,
             "patchsName": $scope.patchsName,
@@ -65,7 +65,7 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
                  });
             $rootScope.open('lg');
         });
-    };
+    };    
 });
 
 //---------------------------------- Dropzone to Upload Files ------------------------------------------
@@ -125,7 +125,7 @@ app.controller('ModalInstancePatchController', function ($scope, $modalInstance,
         }
         //$http.post('api/patchs/SentEmail', mailInfor)
         //    .then(function () {
-        window.location = '#/showUploads'
+                window.location = '#/showUploads'
         //    });
     };
 
@@ -275,7 +275,7 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
                     console.log($scope.editSuccess)
                 });
         }
-
+        
         $scope.editPatch = function (patchID) {
             swal({
                 title: "Select the part to Edit.",
@@ -316,7 +316,7 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
 
             localStorage.setItem('PatchID', patchID);
 
-        }
+        }        
 
         $scope.updatePatchInformations = function () {
             var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');
@@ -333,7 +333,7 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
                 "softwareTypeID": $scope.editSuccess.softwareTypeID
             }
             console.log(update);
-
+            
 
             $http.post('api/patchs/UpdateMyPatch', update)
                     .success(function () {
@@ -345,8 +345,8 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
                         }, function (isConfirm) {
                             if (isConfirm)
                                 window.location = '#/showUploads';
-                        });
-                    })
+                        });                        
+                    })                
         }
 
         $scope.btnCancel = function () {

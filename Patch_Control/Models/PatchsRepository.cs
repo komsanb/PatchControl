@@ -52,7 +52,7 @@ namespace Patch_Control.Models
                     patchInfo.softwareTypeName = dt.Rows[i]["SoftwareTypeName"].ToString();
                     patchInfo.patchsDescription = dt.Rows[i]["PatchsDescription"].ToString();
                     patchInfo.patchsInsertDate = dt.Rows[i]["PatchsInsertDate"].ToString();
-                    patchInfo.patchsUpdateDate = dt.Rows[i]["PatchsUpdateDate"].ToString();
+                    patchInfo.patchsUpdateDate = dt.Rows[i]["PatchsUpdateDate"].ToString();                   
                     patchInfo.patchsInsertBy = dt.Rows[i]["PatchsInsertBy"].ToString();
                     patchInfo.patchsUpdateBy = dt.Rows[i]["PatchsUpdateBy"].ToString();
                     patchInfo.filesName = dt.Rows[i]["FilesName"].ToString();
@@ -111,42 +111,42 @@ namespace Patch_Control.Models
         {
             List<Patchs> patchInfors = new List<Patchs>();
 
-            objConn = objDB.EstablishConnection();
-            string sqlPatchID = "SELECT MAX(p.PatchsID) AS PatchsID, ";
-            sqlPatchID += "MAX(pv.PatchParentVersionID) AS PatchParentVersionID, ";
-            sqlPatchID += "MAX(sv.SoftwareVersionID) AS SoftwareVersionID ";
-            sqlPatchID += "FROM patchparentversion pv ";
-            sqlPatchID += "INNER JOIN patchs p ON p.PatchsID = pv.PatchsID ";
-            sqlPatchID += "INNER JOIN softwareversion sv ON sv.SoftwareVersionID = pv.SoftwareVersionID";
+                objConn = objDB.EstablishConnection();
+                string sqlPatchID = "SELECT MAX(p.PatchsID) AS PatchsID, ";
+                sqlPatchID += "MAX(pv.PatchParentVersionID) AS PatchParentVersionID, ";
+                sqlPatchID += "MAX(sv.SoftwareVersionID) AS SoftwareVersionID ";
+                sqlPatchID += "FROM patchparentversion pv ";
+                sqlPatchID += "INNER JOIN patchs p ON p.PatchsID = pv.PatchsID ";
+                sqlPatchID += "INNER JOIN softwareversion sv ON sv.SoftwareVersionID = pv.SoftwareVersionID";
 
-            DataTable dtPatchID = objDB.List(sqlPatchID, objConn);
-            int maxPatchID = Convert.ToInt32(dtPatchID.Rows[0]["PatchsID"].ToString()) + 1;
+                DataTable dtPatchID = objDB.List(sqlPatchID, objConn);
+                int maxPatchID = Convert.ToInt32(dtPatchID.Rows[0]["PatchsID"].ToString()) + 1;
 
-            DataTable dtPatchParentVersionID = objDB.List(sqlPatchID, objConn);
-            int maxPatchParentVersionID = Convert.ToInt32(dtPatchParentVersionID.Rows[0]["PatchParentVersionID"].ToString()) + 1;
+                DataTable dtPatchParentVersionID = objDB.List(sqlPatchID, objConn);
+                int maxPatchParentVersionID = Convert.ToInt32(dtPatchParentVersionID.Rows[0]["PatchParentVersionID"].ToString()) + 1;
 
-            DataTable dtSoftwareVersionID = objDB.List(sqlPatchID, objConn);
-            int maxSoftwareVersionID = Convert.ToInt32(dtSoftwareVersionID.Rows[0]["SoftwareVersionID"].ToString()) + 1;
+                DataTable dtSoftwareVersionID = objDB.List(sqlPatchID, objConn);
+                int maxSoftwareVersionID = Convert.ToInt32(dtSoftwareVersionID.Rows[0]["SoftwareVersionID"].ToString()) + 1;
 
-            string sqlInsertPatchInfors = "BEGIN; ";
-            sqlInsertPatchInfors += "INSERT INTO patchs(PatchsID, PatchParentVersionID, PatchsName, PatchsDescription, ";
-            sqlInsertPatchInfors += "PatchsInsertDate, PatchsUpdateDate, PatchsInsertBy,  PatchsVersionNumber, Activated) ";
-            sqlInsertPatchInfors += "VALUES('" + maxPatchID + "', '" + maxPatchParentVersionID
-                + "', '" + items.patchsName.ToString() + "', '" + items.patchsDescription.ToString()
-                + "', '" + items.patchsInsertDate.ToString() + "', '" + items.patchsUpdateDate.ToString()
-                + "', '" + items.patchsInsertBy.ToString() + "', '" + items.patchsVersionNumber.ToString() + "', '0');";
-            sqlInsertPatchInfors += "INSERT INTO patchparentversion(PatchParentVersionID, PatchsID, SoftwareVersionID, SoftwareTypeID, StaffID) ";
-            sqlInsertPatchInfors += "VALUES('" + maxPatchParentVersionID + "', '" + maxPatchID
-                + "','" + items.softwareVersionID.ToString() + "','" + items.softwareTypeID.ToString()
-                + "', '" + Convert.ToInt32(items.staffID.ToString()) + "'); ";
-            //sqlInsertPatch += "INSERT INTO softwareversion(SoftwareVersionID, SoftwareVersionName)";
-            //sqlInsertPatch += "VALUES('" + maxSoftwareVersionID + "', '" + items.SoftwareVersionName.ToString() + "');";
-            sqlInsertPatchInfors += "COMMIT;";
+                string sqlInsertPatchInfors = "BEGIN; ";
+                sqlInsertPatchInfors += "INSERT INTO patchs(PatchsID, PatchParentVersionID, PatchsName, PatchsDescription, ";
+                sqlInsertPatchInfors += "PatchsInsertDate, PatchsUpdateDate, PatchsInsertBy,  PatchsVersionNumber, Activated) ";
+                sqlInsertPatchInfors += "VALUES('" + maxPatchID + "', '" + maxPatchParentVersionID 
+                    + "', '" + items.patchsName.ToString() + "', '" + items.patchsDescription.ToString() 
+                    + "', '" + items.patchsInsertDate.ToString() + "', '" + items.patchsUpdateDate.ToString()
+                    + "', '" + items.patchsInsertBy.ToString() + "', '" + items.patchsVersionNumber.ToString() + "', '0');";
+                sqlInsertPatchInfors += "INSERT INTO patchparentversion(PatchParentVersionID, PatchsID, SoftwareVersionID, SoftwareTypeID, StaffID) ";
+                sqlInsertPatchInfors += "VALUES('" + maxPatchParentVersionID + "', '" + maxPatchID 
+                    + "','" + items.softwareVersionID.ToString() + "','" + items.softwareTypeID.ToString() 
+                    + "', '" + Convert.ToInt32(items.staffID.ToString()) + "'); ";
+                //sqlInsertPatch += "INSERT INTO softwareversion(SoftwareVersionID, SoftwareVersionName)";
+                //sqlInsertPatch += "VALUES('" + maxSoftwareVersionID + "', '" + items.SoftwareVersionName.ToString() + "');";
+                sqlInsertPatchInfors += "COMMIT;";
 
-            objDB.sqlExecute(sqlInsertPatchInfors, objConn);
-            objConn.Close();
+                objDB.sqlExecute(sqlInsertPatchInfors, objConn);
+                objConn.Close();
 
-            return patchInfors.ToArray();
+                return patchInfors.ToArray();          
         }
 
         public Files postFilesInformations(string path, string fileName, int staffID, int patchID, string staffName)
@@ -181,15 +181,15 @@ namespace Patch_Control.Models
                 DataTable dtCheckPatchID = objDB.List(checkStaffID, objConn);
                 int oldStaffID = Convert.ToInt32(dtCheckPatchID.Rows[0]["StaffID"].ToString());
                 int fileID = Convert.ToInt32(dtCheckPatchID.Rows[0]["FilesID"].ToString());
-
+                
                 string sqlUpdateFileInfors = "BEGIN;";
-                sqlUpdateFileInfors += " UPDATE files SET FilesID = '" + fileID
-                    + "', FilesName = '" + fileName
+                sqlUpdateFileInfors += " UPDATE files SET FilesID = '" + fileID 
+                    + "', FilesName = '" + fileName 
                     + "', FilesPath = '" + path.Replace(@"\\", @"\") + "' WHERE FilesID = '" + fileID + "';";
-                sqlUpdateFileInfors += " UPDATE patchparentversion SET FilesID = '" + fileID
+                sqlUpdateFileInfors += " UPDATE patchparentversion SET FilesID = '" + fileID 
                     + "', StaffID = '" + staffID + "' WHERE PatchsID = '" + patchID + "';";
-                sqlUpdateFileInfors += " UPDATE patchs SET PatchsUpdateBy = '" + staffName
-                    + "', PatchsUpdatedate = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                sqlUpdateFileInfors += " UPDATE patchs SET PatchsUpdateBy = '" + staffName 
+                    + "', PatchsUpdatedate = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") 
                     + "', Activated = 1 WHERE PatchsID = '" + patchID + "';";
                 sqlUpdateFileInfors += " COMMIT;";
 
@@ -254,13 +254,13 @@ namespace Patch_Control.Models
             sqlMyPatchDetails += " INNER JOIN softwaretype st ON ppv.SoftwareTypeID = st.SoftwareTypeID";
             sqlMyPatchDetails += " INNER JOIN patchs p ON ppv.PatchsID = p.PatchsID";
             sqlMyPatchDetails += " INNER JOIN staffs s ON ppv.StaffID = s.StaffID";
-            sqlMyPatchDetails += " INNER JOIN files f ON  ppv.FilesID = f.FilesID";
+            sqlMyPatchDetails += " INNER JOIN files f ON  ppv.FilesID = f.FilesID"; 
             sqlMyPatchDetails += " WHERE p.PatchsID = '" + patchID + "' AND p.Deleted = 0 ";
             sqlMyPatchDetails += " ORDER BY p.PatchsInsertDate DESC";
 
             DataTable dt = objDB.List(sqlMyPatchDetails, objConn);
             objConn.Close();
-
+            
             myPatchsDetails.patchsID = Convert.ToInt32(dt.Rows[0]["PatchsID"].ToString());
             myPatchsDetails.patchsName = dt.Rows[0]["PatchsName"].ToString();
             myPatchsDetails.softwareTypeName = dt.Rows[0]["SoftwareTypeName"].ToString();
@@ -270,7 +270,7 @@ namespace Patch_Control.Models
             myPatchsDetails.softwareVersionID = Convert.ToInt32(dt.Rows[0]["SoftwareVersionID"].ToString());
             myPatchsDetails.softwareVersionName = dt.Rows[0]["SoftwareVersionName"].ToString();
             myPatchsDetails.patchsInsertDate = dt.Rows[0]["PatchsInsertDate"].ToString();
-            myPatchsDetails.filesName = dt.Rows[0]["FilesName"].ToString();
+            myPatchsDetails.fileName = dt.Rows[0]["FilesName"].ToString();
 
             return myPatchsDetails;
         }
@@ -318,7 +318,7 @@ namespace Patch_Control.Models
         }
 
         public IEnumerable<Email> sentEmail(Email items)
-        {
+        {            
             objConn = objDB.EstablishConnection();
             List<Email> sentMail = new List<Email>();
 
@@ -346,25 +346,25 @@ namespace Patch_Control.Models
 
             if (dtSentMail.Rows.Count > 0)
             {
-                string hostAddr = ConfigurationManager.AppSettings["Host"].ToString();
-                string mailAuthen = ConfigurationManager.AppSettings["MailAuthen"].ToString();
-                string passAuthen = ConfigurationManager.AppSettings["PassAuthen"].ToString();
+                    string hostAddr = ConfigurationManager.AppSettings["Host"].ToString();
+                    string mailAuthen = ConfigurationManager.AppSettings["MailAuthen"].ToString();
+                    string passAuthen = ConfigurationManager.AppSettings["PassAuthen"].ToString();
 
-                MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress(mailAuthen);
-                mailMessage.Subject = "HELLO";
-                mailMessage.Body = "THIS IS A TEST";
-                mailMessage.IsBodyHtml = true;
+                    MailMessage mailMessage = new MailMessage();                    
+                    mailMessage.From = new MailAddress(mailAuthen);
+                    mailMessage.Subject = "HELLO";
+                    mailMessage.Body = "THIS IS A TEST";
+                    mailMessage.IsBodyHtml = true;
 
-                for (int i = 0; i < dtSentMail.Rows.Count; i++)
+                for(int i = 0; i < dtSentMail.Rows.Count; i++)
                 {
                     string staffEmail = dtSentMail.Rows[i]["StaffEmail"].ToString();
                     string[] splitRecipients = staffEmail.Split(',');
 
-                    foreach (var mailTo in splitRecipients)
+                    foreach(var mailTo in splitRecipients)
                     {
-                        mailMessage.To.Add(mailTo);
-                    }
+                        mailMessage.To.Add(mailTo); 
+                    }                    
                 }
 
                 SmtpClient smtp = new SmtpClient();

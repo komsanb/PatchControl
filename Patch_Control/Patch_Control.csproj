@@ -133,18 +133,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\font-awesome.css" />
-    <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\ui-bootstrap-csp.css" />
-    <Content Include="fonts\._glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\weather-icons\._weather-icons.svg" />
-    <Content Include="fonts\weather-icons\weather-icons.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\11008553_10200514864671999_8997177132134327975_n.jpg" />
     <Content Include="images\11846691_857835574293900_1912157039940159570_n.jpg" />
@@ -176,38 +164,10 @@
     <Content Include="js\summernote.js" />
     <Content Include="js\summernote.min.js" />
     <Content Include="js\toArrayFilter.js" />
+    <Content Include="js\ui-bootstrap-custom-tpls-0.13.4.js" />
     <Content Include="js\validator.js" />
     <Content Include="js\validator.min.js" />
     <Content Include="login.html" />
-    <Content Include="fonts\._glyphicons-halflings-regular.eot" />
-    <Content Include="fonts\._glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\._glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\._weather-icons" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\weather-icons\._weather-icons.eot" />
-    <Content Include="fonts\weather-icons\._weather-icons.ttf" />
-    <Content Include="fonts\weather-icons\._weather-icons.woff" />
-    <Content Include="fonts\weather-icons\weather-icons.eot" />
-    <Content Include="fonts\weather-icons\weather-icons.ttf" />
-    <Content Include="fonts\weather-icons\weather-icons.woff" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="template\css\app.css" />
     <Content Include="template\css\app.min.1.css" />
     <Content Include="template\css\app.min.2.css" />
@@ -1450,7 +1410,6 @@
     <Content Include="js\angular-sanitize.min.js.map" />
     <Content Include="js\angular-file-upload.min.js.map" />
     <Content Include="template\src\config.json" />
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -30,14 +30,13 @@
                     <tbody>
                         <tr dir-paginate="mp in myPatch | filter:search | itemsPerPage: 8">
                             <td>
-                                {{ mp.patchsID }}
                                <i ng-show="mp.activated == 0" class="glyphicon glyphicon-exclamation-sign btn-lg" tooltip-placement="right" uib-tooltip="Unactivated" style="color:orange;" />    
                                <i ng-show="mp.activated == 1" class="glyphicon glyphicon-ok btn-lg" tooltip-placement="right" uib-tooltip="Activated" style="color:forestgreen;" />
                             </td>
                             <td>
                                 <a>{{ mp.patchsName }}</a>
                                 <br />
-                                <small>Insert Date: {{ mp.patchsInsertDate }}</small>
+                                <small>Update Date: <a>{{ mp.patchsUpdatedate }}</a>, Insert Date: <a>{{ mp.patchsInsertDate }}</a></small>
                             </td>
                             <td>
                                 <a>{{ mp.softwareVersionName }}</a> | {{ mp.softwareTypeName }}
@@ -71,7 +70,7 @@
             </div>
             <div class="modal-body">
                 <div class="card">
-                    <div class="card-body card-padding">
+                    <div class="card-body card-padding" ng-controller="UploadFilecontroller">
                         <div class="row">
                             <div class="col-md-3">
                                 <h3>Select files</h3>

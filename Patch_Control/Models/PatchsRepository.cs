@@ -158,8 +158,8 @@ namespace Patch_Control.Models
             DataTable dtFileID = objDB.List(sqlFileID, objConn);
             int maxFilesID = Convert.ToInt32(dtFileID.Rows[0]["FilesID"].ToString()) + 1;
 
-            string sqlPatchsID = "SELECT MAX(p.PatchsID) AS PatchsID FROM patchs patchparentversion";
-            sqlPatchsID += " WHERE s.StaffID = '" + staffID + "'";
+            string sqlPatchsID = "SELECT MAX(PatchsID) AS PatchsID FROM patchparentversion";
+            sqlPatchsID += " WHERE StaffID = '" + staffID + "'";
             DataTable dtPatchsID = objDB.List(sqlPatchsID, objConn);
             int maxPatchsID = Convert.ToInt32(dtPatchsID.Rows[0]["PatchsID"].ToString());
 
@@ -185,11 +185,12 @@ namespace Patch_Control.Models
                 string sqlUpdateFileInfors = "BEGIN;";
                 sqlUpdateFileInfors += " UPDATE files SET FilesID = '" + fileID 
                     + "', FilesName = '" + fileName 
-                    + "', FilesPath = '" + path.Replace(@"\\", @"\") + "');";
+                    + "', FilesPath = '" + path.Replace(@"\\", @"\") + "' WHERE FilesID = '" + fileID + "';";
                 sqlUpdateFileInfors += " UPDATE patchparentversion SET FilesID = '" + fileID 
                     + "', StaffID = '" + staffID + "' WHERE PatchsID = '" + patchID + "';";
                 sqlUpdateFileInfors += " UPDATE patchs SET PatchsUpdateBy = '" + staffName 
-                    + "', PatchsUpdatedate = '" + DateTime.Now + "' WHERE PatchsID = '" + patchID + "'";
+                    + "', PatchsUpdatedate = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") 
+                    + "', Activated = 1 WHERE PatchsID = '" + patchID + "';";
                 sqlUpdateFileInfors += " COMMIT;";
 
                 objDB.sqlExecute(sqlUpdateFileInfors, objConn);
@@ -205,14 +206,15 @@ namespace Patch_Control.Models
             List<MyPatch> titlePatchs = new List<MyPatch>();
             string sqlMyPatch = "SELECT p.PatchsID, p.PatchsName, st.SoftwareTypeID, sv.SoftwareVersionID, ";
             sqlMyPatch += "CONCAT(sv.SoftwareVersionName, '.', p.PatchsVersionNumber) AS SoftwareVersionName, s.StaffFirstname, ";
-            sqlMyPatch += "st.SoftwareTypeName, DATE_FORMAT(p.PatchsInsertDate, '%d %M %Y') AS PatchsInsertDate, p.Activated";
+            sqlMyPatch += " st.SoftwareTypeName, DATE_FORMAT(p.PatchsInsertDate, '%d %M %Y') AS PatchsInsertDate,";
+            sqlMyPatch += " DATE_FORMAT(p.PatchsUpdateDate, '%d %M %Y') AS PatchsUpdateDate, p.Activated";
             sqlMyPatch += " FROM patchparentversion ppv";
             sqlMyPatch += " INNER JOIN softwareversion sv ON ppv.SoftwareVersionID = sv.SoftwareVersionID";
             sqlMyPatch += " INNER JOIN softwaretype st ON ppv.SoftwareTypeID = st.SoftwareTypeID";
             sqlMyPatch += " INNER JOIN patchs p ON ppv.PatchsID = p.PatchsID";
             sqlMyPatch += " INNER JOIN staffs s ON ppv.StaffID = s.StaffID";
             sqlMyPatch += " WHERE s.StaffID = '" + staffID + "' AND p.Deleted = 0 ";
-            sqlMyPatch += " ORDER BY p.PatchsInsertDate DESC";
+            sqlMyPatch += " ORDER BY p.PatchsUpdateDate DESC";
 
             DataTable dt = objDB.List(sqlMyPatch, objConn);
             objConn.Close();
@@ -229,6 +231,7 @@ namespace Patch_Control.Models
                     myPatch.softwareVersionID = Convert.ToInt32(dt.Rows[i]["SoftwareVersionID"].ToString());
                     myPatch.softwareVersionName = dt.Rows[i]["SoftwareVersionName"].ToString();
                     myPatch.patchsInsertDate = dt.Rows[i]["PatchsInsertDate"].ToString();
+                    myPatch.patchsUpdatedate = dt.Rows[i]["PatchsUpdateDate"].ToString();
                     myPatch.staffFirstname = dt.Rows[i]["StaffFirstname"].ToString();
                     myPatch.activated = Convert.ToInt32(dt.Rows[i]["Activated"].ToString());
                     titlePatchs.Add(myPatch);

@@ -51,6 +51,7 @@ namespace Patch_Control.Models
         public int patchsID { get; set; }
         public string patchsName { get; set; }
         public string patchsInsertDate { get; set; }
+        public string patchsUpdatedate { get; set; }
         public string softwareTypeName { get; set; }
         public string softwareVersionName { get; set; }
         public string patchsVersionNumber { get; set; }

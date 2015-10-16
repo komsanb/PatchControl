@@ -29,7 +29,7 @@ namespace Patch_Control.Controllers
         [HttpGet]
         [ActionName("SoftwareType")]
         public IEnumerable<SoftwareType> GetSoftwareType()
-        { 
+        {
             return repository.getSoftwareType();
         }
 
@@ -53,7 +53,7 @@ namespace Patch_Control.Controllers
 
         //================= Get MyPatchDetails ======================
 
-       
+
         [HttpGet]
         [ActionName("MyPatchDetails")]
         public MyPatch GetMyPatchInformationsById(int id)
@@ -76,7 +76,7 @@ namespace Patch_Control.Controllers
         [HttpPost]
         [ActionName("DeletedMyPatch")]
         public IEnumerable<Patchs> deletedMyPatch(int id)
-        { 
+        {
             return repository.postDeletePatchInformations(id);
         }
 
@@ -94,13 +94,17 @@ namespace Patch_Control.Controllers
         [HttpPost]
         [ActionName("FileUpload")]
         public HttpResponseMessage PostFile()
-            {
+        {
             HttpResponseMessage result = null;
             string fileName = "";
             string pathName = "";
+            string staffName = "";
             int staffID = 0;
+            int patchID = 0;
             var httpRequest = HttpContext.Current.Request;
             var getStaffID = httpRequest.Form[0];
+            var getPatchID = httpRequest.Form[1];
+            var getStaffName = httpRequest.Form[2];
             if (httpRequest.Files.Count > 0)
             {
                 var docfiles = new List<string>();
@@ -116,16 +120,13 @@ namespace Patch_Control.Controllers
                         //convert filename and pathname to string
                         fileName = postedFile.FileName.ToString();
                         pathName = filePath.ToString();
-
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         Console.WriteLine(e);
                     }
-                    
                 }
                 result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
-
             }
             else
             {
@@ -133,7 +134,10 @@ namespace Patch_Control.Controllers
             }
 
             staffID = Convert.ToInt32(getStaffID);
-            repository.postFilesInformations(pathName, fileName, staffID);
+            patchID = Convert.ToInt32(getPatchID);
+            staffName = getStaffName.ToString();
+
+            repository.postFilesInformations(pathName, fileName, staffID, patchID, staffName);
             return result;
         }
 

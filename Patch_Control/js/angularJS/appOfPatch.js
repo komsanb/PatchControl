@@ -34,7 +34,7 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
         var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');//get current date
         var stringSetHTML = $('#summernote').code(); //get code from summernote
         $scope.staffFirstName = localStorage.getItem('StaffFirstName');
-        $scope.staffId= localStorage.getItem('StaffID');
+        $scope.staffId = localStorage.getItem('StaffID');
         var newPatchInfos = {
             "staffID": $scope.staffId,
             "patchsName": $scope.patchsName,
@@ -65,64 +65,11 @@ app.controller('uploadController', function ($scope, $modal, $log, $http, $rootS
                  });
             $rootScope.open('lg');
         });
-    };    
+    };
 });
 
 //---------------------------------- Dropzone to Upload Files ------------------------------------------
 
-app.controller('MyCtrl', ['$scope', 'FileUploader', function ($scope, FileUploader, $rootScope) {
-    var uploader = $scope.uploader = new FileUploader({
-        url: 'api/patchs/FileUpload',
-        formData: {
-            'staffID': localStorage.getItem('StaffID')
-        }        
-    });
-    // FILTERS
-
-    uploader.filters.push({
-        name: 'customFilter',
-        fn: function(item /*{File|FileLikeObject}*/, options) {
-            return this.queue.length < 10;
-        }
-    });
-
-    // CALLBACKS
-
-    uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
-        console.info('onWhenAddingFileFailed', item, filter, options);
-    };
-    uploader.onAfterAddingFile = function(fileItem) {
-        console.info('onAfterAddingFile', fileItem);
-    };
-    uploader.onAfterAddingAll = function(addedFileItems) {
-        console.info('onAfterAddingAll', addedFileItems);
-    };
-    uploader.onBeforeUploadItem = function(item) {
-        console.info('onBeforeUploadItem', item);
-    };
-    uploader.onProgressItem = function(fileItem, progress) {
-        console.info('onProgressItem', fileItem, progress);
-    };
-    uploader.onProgressAll = function(progress) {
-        console.info('onProgressAll', progress);
-    };
-    uploader.onSuccessItem = function(fileItem, response, status, headers) {
-        console.info('onSuccessItem', fileItem, response, status, headers);
-    };
-    uploader.onErrorItem = function(fileItem, response, status, headers) {
-        console.info('onErrorItem', fileItem, response, status, headers);
-    };
-    uploader.onCancelItem = function(fileItem, response, status, headers) {
-        console.info('onCancelItem', fileItem, response, status, headers);
-    };
-    uploader.onCompleteItem = function(fileItem, response, status, headers) {
-        console.info('onCompleteItem', fileItem, response, status, headers);
-    };
-    uploader.onCompleteAll = function() {
-        console.info('onCompleteAll');
-    };
-    console.info('uploader', uploader);
-}]);
 
 //--------------------------------------- Dialog Upload file --------------------------------------------------
 
@@ -178,7 +125,7 @@ app.controller('ModalInstancePatchController', function ($scope, $modalInstance,
         }
         //$http.post('api/patchs/SentEmail', mailInfor)
         //    .then(function () {
-                window.location = '#/showUploads'
+        window.location = '#/showUploads'
         //    });
     };
 
@@ -246,10 +193,68 @@ app.controller('ModalInstanceEditPatchController', function ($scope, $modalInsta
         window.location.reload(true);
     };
 });
-//-------------------------------------- Alert ------------
+//------------------------------------ Upload File --------------------------------------------------
+app.controller('UploadFilecontroller', ['$scope', 'FileUploader', function ($scope, FileUploader) {
+    $scope.data = [
+            localStorage.getItem('StaffID'),
+            localStorage.getItem('PatchID'),
+            localStorage.getItem('StaffFirstName')
+    ]
 
-app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter', '$rootScope',
-    function ($http, $scope, $routeParams, $filter, $rootScope) {
+    var uploader = $scope.uploader = new FileUploader({
+        url: 'api/patchs/FileUpload',
+        formData: { 'data': $scope.data }
+    });
+    // FILTERS
+
+    uploader.filters.push({
+        name: 'customFilter',
+        fn: function (item /*{File|FileLikeObject}*/, options) {
+            return this.queue.length < 10;
+        }
+    });
+
+    // CALLBACKS
+
+    uploader.onWhenAddingFileFailed = function (item /*{File|FileLikeObject}*/, filter, options) {
+        console.info('onWhenAddingFileFailed', item, filter, options);
+    };
+    uploader.onAfterAddingFile = function (fileItem) {
+        console.info('onAfterAddingFile', fileItem);
+    };
+    uploader.onAfterAddingAll = function (addedFileItems) {
+        console.info('onAfterAddingAll', addedFileItems);
+    };
+    uploader.onBeforeUploadItem = function (item) {
+        console.info('onBeforeUploadItem', item);
+    };
+    uploader.onProgressItem = function (fileItem, progress) {
+        console.info('onProgressItem', fileItem, progress);
+    };
+    uploader.onProgressAll = function (progress) {
+        console.info('onProgressAll', progress);
+    };
+    uploader.onSuccessItem = function (fileItem, response, status, headers) {
+        console.info('onSuccessItem', fileItem, response, status, headers);
+    };
+    uploader.onErrorItem = function (fileItem, response, status, headers) {
+        console.info('onErrorItem', fileItem, response, status, headers);
+    };
+    uploader.onCancelItem = function (fileItem, response, status, headers) {
+        console.info('onCancelItem', fileItem, response, status, headers);
+    };
+    uploader.onCompleteItem = function (fileItem, response, status, headers) {
+        console.info('onCompleteItem', fileItem, response, status, headers);
+    };
+    uploader.onCompleteAll = function () {
+        console.info('onCompleteAll');
+    };
+    console.info('uploader', uploader);
+}]);
+//-------------------------------------- Alert --------------------------------------------------
+
+app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter', '$rootScope', 'FileUploader',
+    function ($http, $scope, $routeParams, $filter, $rootScope, FileUploader) {
         $http.get('api/patchs/softwareversion')
         .success(function (response) {
             $scope.softwareVersion = response;
@@ -270,32 +275,31 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
                     console.log($scope.editSuccess)
                 });
         }
-        
+
         $scope.editPatch = function (patchID) {
-            
-            swal({   
-                title: "Select the part to Edit.",   
+            swal({
+                title: "Select the part to Edit.",
                 text: "<div ng-controller='MyPatchController'>" +
                         "<button id='patch' type='button'" +
                             "onclick=''" +
-                                "style='"+
-                                    "height:50px;"+
-                                    "width:180px;"+
+                                "style='" +
+                                    "height:50px;" +
+                                    "width:180px;" +
                                     "font-size: 14px;" +
                                     "color:white;" +
                                     "background-color:#00BFFF'>" +
                             "Patch informations </button>" +
                         "&nbsp;&nbsp;&nbsp;" +
-                        "<button id='file' type='button'"+
-                            "style='"+
-                               "height:50px;"+
-                               "width:180px;"+
-                               "font-size: 14px;"+
-                               "color:white;"+
+                        "<button id='file' type='button'" +
+                            "style='" +
+                               "height:50px;" +
+                               "width:180px;" +
+                               "font-size: 14px;" +
+                               "color:white;" +
                                "background-color:#00BFFF'>" +
-                        "Patch file</button>"+
+                        "Patch file</button>" +
                      "</div>",
-                html: true,                
+                html: true,
                 showConfirmButton: false,
                 showCancelButton: true
             });
@@ -304,13 +308,15 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
                 window.location = '#/editPatch/' + patchID;
                 swal.close();
             };
-            
+
             document.getElementById("file").onclick = function () {
                 $rootScope.openEdit('lg');
                 swal.close();
             };
-        }
 
+            localStorage.setItem('PatchID', patchID);
+
+        }
 
         $scope.updatePatchInformations = function () {
             var date = $filter('date')(new Date(), 'yyyy-MM-d HH:mm:ss');
@@ -327,7 +333,7 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
                 "softwareTypeID": $scope.editSuccess.softwareTypeID
             }
             console.log(update);
-            
+
 
             $http.post('api/patchs/UpdateMyPatch', update)
                     .success(function () {
@@ -339,8 +345,8 @@ app.controller('MyPatchController', ['$http', '$scope', '$routeParams', '$filter
                         }, function (isConfirm) {
                             if (isConfirm)
                                 window.location = '#/showUploads';
-                        });                        
-                    })                
+                        });
+                    })
         }
 
         $scope.btnCancel = function () {

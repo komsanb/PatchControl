@@ -31,7 +31,7 @@
                         <tbody>
                             <tr dir-paginate="text in patchs | filter:search | itemsPerPage: 8">
                                 <td>
-                                    
+
                                     <a>{{ text.patchsName }}</a>
                                     <br />
                                     <button class="btn btn-primary waves-effect waves-b+utton waves-float pull-right" type="button" data-toggle="collapse" data-target="#collapseExample{{ text.patchsID }}" aria-expanded="false" aria-controls="collapseExample">
@@ -42,7 +42,7 @@
                                         <br />
                                         <small>Update Date: {{ text.patchsUpdateDate }}</small>
                                     </b>
-                                    
+
                                     <div class="collapse m-t-10" id="collapseExample{{ text.patchsID }}">
                                         <small>
                                             <b>
@@ -55,17 +55,17 @@
                                         </small>
                                         <small ng-bind-html="text.patchsDescription"></small>
                                         <hr />
-                                        <h6 ng-show="downloadFile == 1">
-                                           Download: [<a href="../Patchs/{{text.filesName}}">installed official</a>] stable version <br />
-                                        </h6>
+                                        <h5 ng-show="downloadFile == 1">
+                                            Download: [<a href="../Patchs/{{text.filesName}}">installed official</a>] stable version <br />
+                                        </h5>
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
-                    </table> 
+                    </table>
                     <center>
                         <dir-pagination-controls max-size="3"
-                                                 direction-links="true" 
+                                                 direction-links="true"
                                                  boundary-links="true">
                         </dir-pagination-controls>
                     </center>

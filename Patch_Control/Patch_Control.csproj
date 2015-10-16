@@ -164,7 +164,8 @@
     <Content Include="js\summernote.js" />
     <Content Include="js\summernote.min.js" />
     <Content Include="js\toArrayFilter.js" />
-    <Content Include="js\ui-bootstrap-tpls-0.14.2.js" />
+    <Content Include="js\ui-bootstrap-custom-tpls-0.13.4.js" />
+    <Content Include="js\ui-bootstrap-custom-tpls-0.13.4.min.js" />
     <Content Include="js\validator.js" />
     <Content Include="js\validator.min.js" />
     <Content Include="login.html" />
